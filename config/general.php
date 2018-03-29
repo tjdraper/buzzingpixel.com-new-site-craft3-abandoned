@@ -5,48 +5,32 @@
  * All of your system's general configuration settings go in here. You can see a
  * list of the available settings in vendor/craftcms/cms/src/config/GeneralConfig.php.
  *
- * @see craft\config\GeneralConfig
+ * @see \craft\config\GeneralConfig
  */
 
 return [
-    // Global settings
     '*' => [
-        'useEmailAsUsername' => true,
-
-        // Default Week Start Day (0 = Sunday, 1 = Monday...)
-        'defaultWeekStartDay' => 0,
-
-        // Enable CSRF Protection (recommended)
-        'enableCsrfProtection' => true,
-
-        // Whether "index.php" should be visible in URLs
-        'omitScriptNameInUrls' => true,
-
-        // Control Panel trigger word
+        'allowUpdates' => false,
+        'basePath' => realpath(dirname(__DIR__, 1)) . '/public',
         'cpTrigger' => 'cms',
-
-        // The secure key Craft will use for hashing and encrypting data
+        'defaultWeekStartDay' => 0,
+        'devMode' => getenv('DEV_MODE') === 'true',
+        'enableCsrfProtection' => true,
+        'errorTemplatePrefix' => '_errors/',
+        'generateTransformsBeforePageLoad' => true,
+        'isSystemOn' => true,
+        'maxUploadFileSize' => 512000000,
+        'omitScriptNameInUrls' => true,
+        'postCpLoginRedirect' => 'entries',
+        'rememberedUserSessionDuration' => 631139040, // 20 years
         'securityKey' => getenv('SECURITY_KEY'),
-    ],
-
-    // Dev environment settings
-    'dev' => [
-        // Base site URL
-        'siteUrl' => null,
-
-        // Dev Mode (see https://craftcms.com/support/dev-mode)
-        'devMode' => true,
-    ],
-
-    // Staging environment settings
-    'staging' => [
-        // Base site URL
-        'siteUrl' => null,
-    ],
-
-    // Production environment settings
-    'production' => [
-        // Base site URL
-        'siteUrl' => null,
+        'sendPoweredByHeader' => false,
+        'siteName' => 'BuzzingPixel',
+        'siteUrl' => getenv('SITE_URL'),
+        'suppressTemplateErrors' => getenv('DEV_MODE') !== 'true',
+        'timezone' => 'America/Chicago',
+        'useEmailAsUsername' => true,
+        'userSessionDuration' => 0,
+        'staticAssetCacheTime' => '',
     ],
 ];
