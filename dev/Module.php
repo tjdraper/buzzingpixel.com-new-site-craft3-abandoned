@@ -5,6 +5,7 @@ namespace dev;
 use Craft;
 use dev\services\CacheService;
 use yii\base\Module as ModuleBase;
+use craft\console\Application as ConsoleApplication;
 
 /**
  * Custom module class for this project.
@@ -29,6 +30,11 @@ class Module extends ModuleBase
     public function init()
     {
         $this->setUp();
+
+        // Add in our console commands
+        if (Craft::$app instanceof ConsoleApplication) {
+            $this->controllerNamespace = 'dev\commands';
+        }
 
         parent::init();
     }
