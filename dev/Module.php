@@ -3,8 +3,12 @@
 namespace dev;
 
 use Craft;
+use yii\base\Event;
+use craft\elements\Entry;
 use dev\services\CacheService;
 use yii\base\Module as ModuleBase;
+use dev\services\EntryRoutingService;
+use craft\events\SetElementRouteEvent;
 use craft\console\Application as ConsoleApplication;
 
 /**
@@ -30,6 +34,7 @@ class Module extends ModuleBase
     public function init()
     {
         $this->setUp();
+        $this->setEvents();
 
         // Add in our console commands
         if (Craft::$app instanceof ConsoleApplication) {
@@ -50,5 +55,21 @@ class Module extends ModuleBase
         if (getenv('CLEAR_TEMPLATE_CACHE_ON_LOAD') === 'true') {
             (new CacheService())->clearTemplateCache();
         }
+    }
+
+    /**
+     * Sets events
+     * @throws \Exception
+     */
+    private function setEvents()
+    {
+        Event::on(
+            Entry::class,
+            Entry::EVENT_SET_ROUTE,
+            function (SetElementRouteEvent $eventModel) {
+                $entryRoutingService = new EntryRoutingService();
+                $entryRoutingService->entryControllerRouting($eventModel);
+            }
+        );
     }
 }
