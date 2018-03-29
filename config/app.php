@@ -17,9 +17,13 @@
  * your config/ folder, alongside this one.
  */
 
+use dev\Module;
+
 return [
     'modules' => [
-        'my-module' => \modules\Module::class,
+        'dev' => Module::class,
     ],
-    //'bootstrap' => ['my-module'],
+    'bootstrap' => [
+        'dev'
+    ],
 ];
