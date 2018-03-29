@@ -2,6 +2,8 @@
 
 namespace dev;
 
+use Craft;
+use dev\services\CacheService;
 use yii\base\Module as ModuleBase;
 
 /**
@@ -26,6 +28,21 @@ class Module extends ModuleBase
      */
     public function init()
     {
+        $this->setUp();
+
         parent::init();
+    }
+
+    /**
+     * Sets up the module
+     * @throws \Exception
+     */
+    private function setUp()
+    {
+        Craft::setAlias('@dev', __DIR__);
+
+        if (getenv('CLEAR_TEMPLATE_CACHE_ON_LOAD') === 'true') {
+            (new CacheService())->clearTemplateCache();
+        }
     }
 }

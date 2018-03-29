@@ -4,8 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "463fda8d2805588feb15e8cffe1f41f8",
+    "content-hash": "7730c2bdfbf3baff455a590b17b54519",
     "packages": [
+        {
+            "name": "buzzingpixel/craft-static",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/buzzingpixel/craft-static.git",
+                "reference": "243342c40c39f9945a08806f6e7986abd4b109f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/buzzingpixel/craft-static/zipball/243342c40c39f9945a08806f6e7986abd4b109f7",
+                "reference": "243342c40c39f9945a08806f6e7986abd4b109f7",
+                "shasum": ""
+            },
+            "require": {
+                "craftcms/cms": "^3.0.0-beta.29",
+                "php": ">=7.0.0"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "name": "Craft Static",
+                "handle": "craft-static",
+                "developer": "TJ Draper",
+                "developerUrl": "https://buzzingpixel.com",
+                "schemaVersion": "1.0.0",
+                "hasCpSettings": false,
+                "hasCpSection": false,
+                "class": "buzzingpixel\\craftstatic\\Craftstatic"
+            },
+            "autoload": {
+                "psr-4": {
+                    "buzzingpixel\\craftstatic\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "TJ Draper",
+                    "email": "tj@buzzingpixel.com",
+                    "homepage": "https://buzzingpixel.com"
+                }
+            ],
+            "description": "Static file caching for Craft 3",
+            "keywords": [
+                "Craft",
+                "cms",
+                "craft-plugin",
+                "craft-static",
+                "craftcms"
+            ],
+            "time": "2018-03-29T23:43:21+00:00"
+        },
         {
             "name": "cebe/markdown",
             "version": "1.1.2",
