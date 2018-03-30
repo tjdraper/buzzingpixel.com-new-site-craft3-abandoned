@@ -15,7 +15,7 @@
                 </div>
             </a>
         </div>
-        <ul class="NavBar__StandardNav">
+        <ul class="NavBar__StandardNav JSNavList">
             {% for navSlug,navItem in nav %}
                 {% set navParentLink = '/' ~ navSlug %}
                 {% set navLink = navParentLink %}
@@ -28,7 +28,7 @@
                 <li class="NavBar__StandardNavItem" data-sub-nav-active-class="NavBar__StandardNavItem--SubNavIsActive">
                     <a
                         href="{{ navLink }}"
-                        class="NavBar__StandardNavLink{% if craft.app.request.getSegment(1) == navSlug %} NavBar__StandardNavLink--IsActive{% endif %}"
+                        class="NavBar__StandardNavLink{% if craft.app.request.getSegment(1) == navSlug %} NavBar__StandardNavLink--IsActive{% endif %}{% if not hasChildren %} JSMobileMenuCloseAction{% endif %}"
                     >
                         {{ navParentTitle }}
                         {% if hasChildren %}
@@ -43,7 +43,7 @@
                                 <li class="NavBar__StandardSubNavItem">
                                     <a
                                         href="{{ navParentLink }}/{{ childSlug }}"
-                                        class="NavBar__StandardSubNavLink{% if craft.app.request.getSegment(1) == navSlug and craft.app.request.getSegment(2) == childSlug %} NavBar__StandardSubNavLink--IsActive{% endif %}"
+                                        class="NavBar__StandardSubNavLink{% if craft.app.request.getSegment(1) == navSlug and craft.app.request.getSegment(2) == childSlug %} NavBar__StandardSubNavLink--IsActive{% endif %} JSMobileMenuCloseAction"
                                     >
                                         {{ childTitle }}
                                     </a>
@@ -80,7 +80,7 @@
                 </a>
             </li>
         </ul>
-        <a href="#" class="NavBar__Hamburger" data-active-class="NavBar__Hamburger--IsActive">
+        <a href="#" class="NavBar__Hamburger JSMobileMenuActivator" data-active-class="NavBar__Hamburger--IsActive">
             <span class="NavBar__HamburgerInner"></span>
             <span class="HideElement">
                 Open Mobile Menu
