@@ -1,3 +1,7 @@
+.NavBar {
+    position: fixed;
+}
+
 .NavBar__StandardNav {
     background-color: transparent;
     box-shadow: none;
@@ -95,4 +99,70 @@
 
 .NavBar__Hamburger {
     display: none;
+}
+
+
+
+
+
+/**
+ * Scrolled page nav bar
+ */
+
+.NavBar--IsScrolled,
+.NavBar__HomeBanner,
+.NavBar__HomeBannerImage,
+.NavBar__StandardNavLink,
+.NavBar__RightHandControls,
+.NavBar__StandardNavLink--IsActive:after {
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.NavBar__HomeBanner {
+    height: 61px;
+    width: 166px;
+}
+
+.NavBar__HomeBannerImage {
+    height: 45px;
+    width: 150px;
+}
+
+.NavBar--IsScrolled {
+    height: 40px;
+}
+
+.NavBar--IsScrolled .NavBar__StandardNavLink {
+    padding-bottom: 4px;
+    padding-top: 4px;
+}
+
+.NavBar--IsScrolled .NavBar__RightHandControls {
+    top: -3px;
+}
+
+.NavBar--IsScrolled .NavBar__HomeBanner {
+    height: 34px;
+    overflow: hidden;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    width: 48px;
+}
+
+.NavBar--IsScrolled .NavBar__HomeBannerImage {
+    height: 22px;
+    width: 76px;
+}
+
+.NavBar--IsScrolled .NavBar__StandardNavItem--SubNavIsActive:after {
+    top: calc(100% - 0);
+}
+
+.NavBar--IsScrolled .NavBar__StandardSubNav {
+    top: calc(100% + 14px);
+}
+
+.NavBar--IsScrolled .NavBar__StandardNavLink:hover:not(.NavBar__StandardNavItem--IsTwitterIcon):after,
+.NavBar--IsScrolled .NavBar__StandardNavLink--IsActive:after {
+    bottom: 6px;
 }

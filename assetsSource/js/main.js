@@ -26,6 +26,12 @@ function runMain(F) {
             el: this
         });
     });
+
+    $('.JSNavBar').each(function() {
+        F.controller.construct('NavScroll', {
+            el: this
+        });
+    });
 }
 
 runMain(window.FAB);
