@@ -1,0 +1,78 @@
+<header class="SiteHeader">
+    <nav class="NavBar">
+        <div class="NavBar__HomeBanner">
+            <a href="/" class="NavBar__HomeBannerLink" rel="home" title="BuzzingPixel Home Page" tabindex="1">
+                <span class="HideElement">BuzzingPixel Home Page</span>
+                <div class="NavBar__HomeBannerImage">
+                    <img
+                        src="/assets/img/nav/logo-horizontal-150w.png"
+                        srcset="/assets/img/nav/logo-horizontal-150w.png 1x,
+                                /assets/img/nav/logo-horizontal-150w-2x.png 2x"
+                        alt="BuzzingPixel Home Page"
+                    >
+                </div>
+            </a>
+        </div>
+        <ul class="NavBar__StandardNav">
+            {% for navLink,navItem in nav %}
+                {% set navParentLink = '/' ~ navLink %}
+                {% set navLink = navParentLink %}
+                {% set navParentTitle = navItem %}
+                {% set hasChildren = navItem is iterable %}
+                {% if hasChildren %}
+                    {% set navLink = '#' %}
+                    {% set navParentTitle = navItem.title %}
+                {% endif %}
+                <li class="NavBar__StandardNavItem">
+                    <a href="{{ navLink }}" class="NavBar__StandardNavLink">
+                        {{ navParentTitle }}
+                    </a>
+                    {% if hasChildren %}
+                        <ul class="NavBar__StandardSubNav">
+                            {% for childLink,childTitle in navItem.children %}
+                                <li class="NavBar__StandardSubnavItem">
+                                    <a href="{{ navParentLink }}/{{ childLink }}" class="NavBar__StandardSubNavLink">
+                                        {{ childTitle }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            <li class="NavBar__StandardNavItem">
+                <a href="https://twitter.com/{{ general.twitterHandle }}" class="NavBar__StandardNavLink" title="BuzzingPixel On Twitter">
+                    <span class="HideElement">BuzzingPixel On Twitter</span>
+                    <span class="NavBar__Icon">
+                        {% include '_icons/icon-twitter.svg' %}
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <ul class="NavBar__RightHandControls">
+            <li class="NavBar__RightHandControlItem">
+                <a href="/account" class="NavBar__RightHandControlLink" title="Your BuzzingPixel Account">
+                    <span class="HideElement">Your BuzzingPixel Account</span>
+                    <span class="NavBar__Icon">
+                        {% include '_icons/icon-user.svg' %}
+                    </span>
+                </a>
+            </li>
+            <li class="NavBar__RightHandControlItem">
+                <a href="/cart" class="NavBar__RightHandControlLink" title="Cart">
+                    <span class="HideElement">Cart</span>
+                    <span class="NavBar__Icon">
+                        {% include '_icons/icon-cart.svg' %}
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <a href="#" class="NavBar__Hamburger" data-active-class="NavBar__Hamburger--IsActive">
+            <span class="NavBar__HamburgerInner"></span>
+            <span class="HideElement">
+                Open Mobile Menu
+            </span>
+        </a>
+    </nav>
+    <div class="SiteHeader__Content"></div>
+</header>
