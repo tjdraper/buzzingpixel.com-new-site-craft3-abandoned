@@ -10,6 +10,7 @@
 
 .NavBar__StandardNavItem {
     display: inline-block;
+    position: relative;
     vertical-align: middle;
 }
 
@@ -31,7 +32,7 @@
 .NavBar__StandardNavLink:hover:not(.NavBar__StandardNavItem--IsTwitterIcon):after,
 .NavBar__StandardNavLink--IsActive:after {
     background-color: #fff;
-    bottom: 10px;
+    bottom: 15px;
     content: ' ';
     display: block;
     height: 2px;
@@ -42,8 +43,46 @@
 
 .NavBar__LinkCaret {
     float: none;
-    margin-bottom: -4px;
+    position: relative;
+    top: 2px;
+    transition: all 0.3s;
     width: 10px;
+}
+
+.NavBar__StandardNavItem--SubNavIsActive .NavBar__LinkCaret {
+    top: -2px;
+}
+
+.NavBar__StandardNavItem--SubNavIsActive:after {
+    position: absolute;
+    right: calc(50% - 16px);
+    top: calc(100% - 14px);
+
+    @mixin caretUp var(--lightGray), 14px, 16px;
+}
+
+.NavBar__StandardSubNav {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+    display: block;
+    min-width: 100%;
+    position: absolute;
+    right: 50%;
+    text-align: center;
+    top: 100%;
+    transform: translate(50%);
+}
+
+.NavBar__StandardSubNavItem {
+    white-space: nowrap;
+}
+
+.NavBar__StandardSubNavLink {
+    padding-left: 16px;
+}
+
+.NavBar__StandardSubNavLink:before,
+.NavBar__StandardSubNavLink:after {
+    display: none;
 }
 
 .NavBar__RightHandControls {
