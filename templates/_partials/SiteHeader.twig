@@ -31,7 +31,7 @@
                 >
                     <a
                         href="{{ navLink }}"
-                        class="NavBar__StandardNavLink{% if craft.app.request.getSegment(1) == navSlug %} NavBar__StandardNavLink--IsActive{% endif %}{% if hasChildren %} JSSubNav__Activator{% endif %}{% if not hasChildren %} JSMobileMenuCloseAction{% endif %}"
+                        class="NavBar__StandardNavLink{% if craft.app.request.getSegment(1) == navSlug %} NavBar__StandardNavLink--IsActive{% endif %}{% if hasChildren %} JSSubNav__Activator{% endif %}{% if not hasChildren %} JSSubNav__HasNoSubMenu JSMobileMenuCloseAction{% endif %}"
                     >
                         {{ navParentTitle }}
                         {% if hasChildren %}

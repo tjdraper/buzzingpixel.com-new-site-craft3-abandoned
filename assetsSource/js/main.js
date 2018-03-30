@@ -22,6 +22,9 @@ function runMain(F) {
         F.controller.construct('MobileSubMenu', {
             el: this
         });
+        F.controller.construct('SubMenu', {
+            el: this
+        });
     });
 }
 
