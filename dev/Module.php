@@ -3,6 +3,7 @@
 namespace dev;
 
 use Craft;
+use dev\services\GlobalsService;
 use yii\base\Event;
 use craft\elements\Entry;
 use dev\services\CacheService;
@@ -10,6 +11,8 @@ use yii\base\Module as ModuleBase;
 use dev\services\FileContentService;
 use dev\services\EntryRoutingService;
 use craft\events\SetElementRouteEvent;
+use dev\services\FileOperationsService;
+use dev\twigextensions\FileTimeTwigExtension;
 use craft\console\Application as ConsoleApplication;
 
 /**
@@ -30,6 +33,8 @@ class Module extends ModuleBase
     public function init()
     {
         $this->setUp();
+        $this->registerTwigExtensions();
+        $this->registerGlobals();
         $this->setEvents();
 
         // Add in our console commands
@@ -51,6 +56,22 @@ class Module extends ModuleBase
         if (getenv('CLEAR_TEMPLATE_CACHE_ON_LOAD') === 'true') {
             (new CacheService())->clearTemplateCache();
         }
+    }
+
+    /**
+     * Registers twig extensions
+     */
+    private function registerTwigExtensions()
+    {
+        $view = Craft::$app->view;
+        $view->registerTwigExtension(new FileTimeTwigExtension());
+    }
+
+    private function registerGlobals()
+    {
+        static::globalsService()->registerGlobalsFromDir(
+            \dirname(__DIR__) . '/content/Globals'
+        );
     }
 
     /**
@@ -79,10 +100,30 @@ class Module extends ModuleBase
      * Gets the File Content Service
      * @return FileContentService
      */
-    public static function fileContentService() : FileContentService
+    public static function fileContentService(): FileContentService
     {
         return new FileContentService(
             Craft::$app->getConfig()->getGeneral()->contentPath
         );
+    }
+
+    /**
+     * Gets the File Operations Service
+     * @return FileOperationsService
+     */
+    public static function fileOperationsService(): FileOperationsService
+    {
+        return new FileOperationsService(
+            Craft::$app->getConfig()->general->basePath
+        );
+    }
+
+    /**
+     * Gets the Globals Service
+     * @return GlobalsService
+     */
+    public static function globalsService(): GlobalsService
+    {
+        return new GlobalsService(Craft::$app->view->getTwig());
     }
 }
