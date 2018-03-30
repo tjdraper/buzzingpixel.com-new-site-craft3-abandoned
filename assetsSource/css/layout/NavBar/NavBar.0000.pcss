@@ -3,7 +3,6 @@
     border-top: 6px solid var(--orange);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     height: 65px;
-    padding: 8px;
     position: absolute;
     top: 0;
     width: 100%;
@@ -12,15 +11,75 @@
 
 .NavBar__HomeBanner {
     display: inline-block;
+    padding: 8px;
 }
 
 .NavBar__StandardNav {
+    box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.NavBar__StandardNav,
+.NavBar__StandardSubNav {
+    background-color: #fff;
+    color: var(--darkGray);
+    margin: -2px 0 0 0;
+}
+
+.NavBar__StandardNavItem:nth-child(even),
+.NavBar__StandardSubNavItem:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.NavBar__StandardNavItem--IsTwitterIcon {
+    display: none;
+}
+
+.NavBar__StandardNavLink,
+.NavBar__StandardSubNavLink {
+    color: var(--darkGray);
+    display: block;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.NavBar__StandardSubNavLink {
+    padding-left: 40px;
+}
+
+.NavBar__LinkCaret {
+    display: inline-block;
+    float: right;
+    width: 20px;
+    transform: rotate(180deg);
+    transition: transform 0.3s;
+}
+
+.NavBar__StandardNavItem--SubNavIsActive .NavBar__LinkCaret {
+    transform: rotate(0);
+}
+
+.NavBar__StandardNavLink:hover,
+.NavBar__StandardSubNavLink:hover {
+    background-color: var(--lighterGreen);
+    color: #fff;
+    text-decoration: none;
+}
+
+.NavBar__StandardNavLink--IsActive,
+.NavBar__StandardSubNavLink--IsActive {
+    background-color: var(--green);
+    color: #fff;
+}
+
+.NavBar__StandardSubNav {
     display: none;
 }
 
 .NavBar__RightHandControls {
-    float: right;
-    margin: 0 44px 0 0;
+    position: absolute;
+    right: 48px;
+    top: 8px;
 }
 
 .NavBar__RightHandControlItem,

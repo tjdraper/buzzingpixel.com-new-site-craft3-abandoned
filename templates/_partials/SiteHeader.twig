@@ -1,3 +1,5 @@
+{# @var \craft\web\twig\variables\CraftVariable craft #}
+
 <header class="SiteHeader">
     <nav class="NavBar">
         <div class="NavBar__HomeBanner">
@@ -14,8 +16,8 @@
             </a>
         </div>
         <ul class="NavBar__StandardNav">
-            {% for navLink,navItem in nav %}
-                {% set navParentLink = '/' ~ navLink %}
+            {% for navSlug,navItem in nav %}
+                {% set navParentLink = '/' ~ navSlug %}
                 {% set navLink = navParentLink %}
                 {% set navParentTitle = navItem %}
                 {% set hasChildren = navItem is iterable %}
@@ -23,15 +25,26 @@
                     {% set navLink = '#' %}
                     {% set navParentTitle = navItem.title %}
                 {% endif %}
-                <li class="NavBar__StandardNavItem">
-                    <a href="{{ navLink }}" class="NavBar__StandardNavLink">
+                <li class="NavBar__StandardNavItem" data-sub-nav-active-class="NavBar__StandardNavItem--SubNavIsActive">
+                    <a
+                        href="{{ navLink }}"
+                        class="NavBar__StandardNavLink{% if craft.app.request.getSegment(1) == navSlug %} NavBar__StandardNavLink--IsActive{% endif %}"
+                    >
                         {{ navParentTitle }}
+                        {% if hasChildren %}
+                            <span class="NavBar__LinkCaret">
+                                {% include '_icons/icon-caret.svg' %}
+                            </span>
+                        {% endif %}
                     </a>
                     {% if hasChildren %}
                         <ul class="NavBar__StandardSubNav">
-                            {% for childLink,childTitle in navItem.children %}
+                            {% for childSlug,childTitle in navItem.children %}
                                 <li class="NavBar__StandardSubNavItem">
-                                    <a href="{{ navParentLink }}/{{ childLink }}" class="NavBar__StandardSubNavLink">
+                                    <a
+                                        href="{{ navParentLink }}/{{ childSlug }}"
+                                        class="NavBar__StandardSubNavLink{% if craft.app.request.getSegment(1) == navSlug and craft.app.request.getSegment(2) == childSlug %} NavBar__StandardSubNavLink--IsActive{% endif %}"
+                                    >
                                         {{ childTitle }}
                                     </a>
                                 </li>
@@ -40,7 +53,7 @@
                     {% endif %}
                 </li>
             {% endfor %}
-            <li class="NavBar__StandardNavItem">
+            <li class="NavBar__StandardNavItem NavBar__StandardNavItem--IsTwitterIcon">
                 <a href="https://twitter.com/{{ general.twitterHandle }}" class="NavBar__StandardNavLink NavBar__IconParentHover" title="BuzzingPixel On Twitter">
                     <span class="HideElement">BuzzingPixel On Twitter</span>
                     <span class="NavBar__Icon">
