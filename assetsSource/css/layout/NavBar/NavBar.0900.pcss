@@ -1,0 +1,24 @@
+.NavBar__StandardNavLink {
+    font-size: 20px;
+    padding: 16px;
+}
+
+.NavBar__StandardNavLink:hover:not(.NavBar__StandardNavItem--IsTwitterIcon):after,
+.NavBar__StandardNavLink--IsActive:after {
+    left: 16px;
+    width: calc(100% - 32px);
+}
+
+.NavBar__RightHandControlItem .NavBar__RightHandControlLink {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.NavBar__RightHandControlItem:first-child .NavBar__RightHandControlLink {
+    padding-left: 0;
+}
+
+.NavBar__RightHandControlItem:last-child .NavBar__RightHandControlLink {
+    padding-right: 0;
+}
+
