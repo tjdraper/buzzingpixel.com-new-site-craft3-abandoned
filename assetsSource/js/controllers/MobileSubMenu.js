@@ -4,8 +4,6 @@ window.FAB = window.FAB || {};
 function runMobileSubMenu(F, W) {
     'use strict';
 
-    var desktopBreakPoint = 1000;
-
     if (! window.jQuery || ! F.controller) {
         setTimeout(function() {
             runMobileSubMenu(F, W);
@@ -46,7 +44,7 @@ function runMobileSubMenu(F, W) {
 
         resizeResponder: function() {
             var self = this;
-            var windowIsDesktop = W.innerWidth >= desktopBreakPoint;
+            var windowIsDesktop = W.innerWidth >= F.menuBreakPoint;
             var modeIsMobile = self.isMobile;
 
             if (windowIsDesktop && modeIsMobile) {
@@ -61,7 +59,7 @@ function runMobileSubMenu(F, W) {
             var self = this;
             var state = self.model.get('isActive');
 
-            if (W.innerWidth >= desktopBreakPoint) {
+            if (W.innerWidth >= F.menuBreakPoint) {
                 if (self.model.get('isActive')) {
                     self.deactivateMenu();
                 }

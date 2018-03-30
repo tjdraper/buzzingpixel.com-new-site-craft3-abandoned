@@ -1,0 +1,55 @@
+.NavBar__StandardNav {
+    background-color: transparent;
+    box-shadow: none;
+    color: #fff;
+    display: inline-block;
+    position: absolute;
+    right: 86px;
+    top: 0;
+}
+
+.NavBar__StandardNavItem {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.NavBar__StandardNavItem:nth-child(even) {
+    background-color: transparent;
+}
+
+.NavBar__StandardNavLink {
+    color: #fff;
+    padding: 16px 10px;
+    position: relative;
+}
+
+.NavBar__StandardNavLink:hover,
+.NavBar__StandardNavLink--IsActive {
+    background-color: transparent;
+}
+
+.NavBar__StandardNavLink:hover:not(.NavBar__StandardNavItem--IsTwitterIcon):after,
+.NavBar__StandardNavLink--IsActive:after {
+    background-color: #fff;
+    bottom: 10px;
+    content: ' ';
+    display: block;
+    height: 2px;
+    left: 10px;
+    position: absolute;
+    width: calc(100% - 20px);
+}
+
+.NavBar__LinkCaret {
+    float: none;
+    margin-bottom: -4px;
+    width: 10px;
+}
+
+.NavBar__RightHandControls {
+    right: 8px;
+}
+
+.NavBar__Hamburger {
+    display: none;
+}

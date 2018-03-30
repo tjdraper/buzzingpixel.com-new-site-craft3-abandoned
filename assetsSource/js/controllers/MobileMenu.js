@@ -4,8 +4,6 @@ window.FAB = window.FAB || {};
 function runMobileMenu(F, W) {
     'use strict';
 
-    var desktopBreakPoint = 1000;
-
     if (! window.jQuery || ! F.controller) {
         setTimeout(function() {
             runMobileMenu(F, W);
@@ -51,7 +49,7 @@ function runMobileMenu(F, W) {
 
         resizeResponder: function() {
             var self = this;
-            var windowIsDesktop = W.innerWidth >= desktopBreakPoint;
+            var windowIsDesktop = W.innerWidth >= F.menuBreakPoint;
             var modeIsMobile = self.isMobile;
 
             if (windowIsDesktop && modeIsMobile) {
@@ -66,7 +64,7 @@ function runMobileMenu(F, W) {
             var self = this;
             var state = self.model.get('isActive');
 
-            if (W.innerWidth >= desktopBreakPoint) {
+            if (W.innerWidth >= F.menuBreakPoint) {
                 if (self.model.get('isActive')) {
                     self.deactivateMenu();
                 }
