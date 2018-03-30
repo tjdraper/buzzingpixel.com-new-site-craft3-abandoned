@@ -57,7 +57,11 @@
                 </li>
             {% endfor %}
             <li class="NavBar__StandardNavItem NavBar__StandardNavItem--IsTwitterIcon">
-                <a href="https://twitter.com/{{ general.twitterHandle }}" class="NavBar__StandardNavLink NavBar__IconParentHover" title="BuzzingPixel On Twitter">
+                <a
+                    href="https://twitter.com/{{ general.twitterHandle }}"
+                    class="NavBar__StandardNavLink NavBar__IconParentHover NavBar__StandardNavItem--IsTwitterIcon"
+                    title="BuzzingPixel On Twitter"
+                >
                     <span class="HideElement">BuzzingPixel On Twitter</span>
                     <span class="NavBar__Icon">
                         {% include '_icons/icon-twitter.svg' %}
