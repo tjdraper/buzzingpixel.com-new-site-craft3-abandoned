@@ -1,0 +1,11 @@
+{% extends '_layouts/HtmlWrapper.twig' %}
+
+{% block layoutContent %}
+    {% include '_partials/SiteHeader.twig' %}
+
+    <main class="SiteMain">
+        {{ block('content') }}
+    </main>
+
+    {% include '_partials/SiteFooter.twig' %}
+{% endblock %}
