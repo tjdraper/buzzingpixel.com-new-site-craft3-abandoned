@@ -1,0 +1,8 @@
+{
+    "proxy": "http://buzzingpixel.test",
+    "watch": [
+        "config/**",
+        "dev/**",
+        "templates/**"
+    ]
+}
