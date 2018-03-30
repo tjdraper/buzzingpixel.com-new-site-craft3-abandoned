@@ -102,12 +102,12 @@
                 <header class="SiteHeader__ContentHeader">
                     {% if header['meta']['heading'] is defined %}
                         <h1 class="SiteHeader__Heading">
-                            {{ header['meta']['heading'] }}
+                            {{ header['meta']['heading']|typeset }}
                         </h1>
                     {% endif %}
                     {% if header['meta']['subHeading'] is defined %}
                         <h2 class="SiteHeader__SubHeading">
-                            {{ header['meta']['subHeading'] }}
+                            {{ header['meta']['subHeading']|typeset }}
                         </h2>
                     {% endif %}
                 </header>

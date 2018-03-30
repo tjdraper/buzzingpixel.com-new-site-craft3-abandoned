@@ -10,7 +10,9 @@
         "buzzingpixel/craft-static": "^1.0.3",
         "mrclay/minify": "^3.0",
         "felicity-php/felicity-datamodel": "^1.0.1",
-        "hyn/frontmatter": "^1.1"
+        "hyn/frontmatter": "^1.1",
+        "michelf/php-smartypants": "^1.8",
+        "timostamm/text-truncation": "dev-master"
     },
     "config": {
         "platform": {

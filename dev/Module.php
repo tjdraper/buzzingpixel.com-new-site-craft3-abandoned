@@ -3,15 +3,18 @@
 namespace dev;
 
 use Craft;
-use dev\services\GlobalsService;
 use yii\base\Event;
+use Michelf\SmartyPants;
 use craft\elements\Entry;
 use dev\services\CacheService;
+use dev\services\GlobalsService;
+use dev\services\TypesetService;
 use yii\base\Module as ModuleBase;
 use dev\services\FileContentService;
 use dev\services\EntryRoutingService;
 use craft\events\SetElementRouteEvent;
 use dev\services\FileOperationsService;
+use dev\twigextensions\TypesetTwigExtension;
 use dev\twigextensions\FileTimeTwigExtension;
 use craft\console\Application as ConsoleApplication;
 
@@ -65,6 +68,7 @@ class Module extends ModuleBase
     {
         $view = Craft::$app->view;
         $view->registerTwigExtension(new FileTimeTwigExtension());
+        $view->registerTwigExtension(new TypesetTwigExtension());
     }
 
     private function registerGlobals()
@@ -125,5 +129,14 @@ class Module extends ModuleBase
     public static function globalsService(): GlobalsService
     {
         return new GlobalsService(Craft::$app->view->getTwig());
+    }
+
+    /**
+     * Gets the Typeset Service
+     * @return TypesetService
+     */
+    public static function typesetService(): TypesetService
+    {
+        return new TypesetService(new SmartyPants());
     }
 }
