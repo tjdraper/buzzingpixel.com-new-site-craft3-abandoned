@@ -25,10 +25,13 @@
                     {% set navLink = '#' %}
                     {% set navParentTitle = navItem.title %}
                 {% endif %}
-                <li class="NavBar__StandardNavItem" data-sub-nav-active-class="NavBar__StandardNavItem--SubNavIsActive">
+                <li
+                    class="NavBar__StandardNavItem{% if hasChildren %} JSSubNav{% endif %}"
+                    data-sub-nav-active-class="NavBar__StandardNavItem--SubNavIsActive"
+                >
                     <a
                         href="{{ navLink }}"
-                        class="NavBar__StandardNavLink{% if craft.app.request.getSegment(1) == navSlug %} NavBar__StandardNavLink--IsActive{% endif %}{% if not hasChildren %} JSMobileMenuCloseAction{% endif %}"
+                        class="NavBar__StandardNavLink{% if craft.app.request.getSegment(1) == navSlug %} NavBar__StandardNavLink--IsActive{% endif %}{% if hasChildren %} JSSubNav__Activator{% endif %}{% if not hasChildren %} JSMobileMenuCloseAction{% endif %}"
                     >
                         {{ navParentTitle }}
                         {% if hasChildren %}
@@ -38,7 +41,7 @@
                         {% endif %}
                     </a>
                     {% if hasChildren %}
-                        <ul class="NavBar__StandardSubNav">
+                        <ul class="NavBar__StandardSubNav JSSubNav__List">
                             {% for childSlug,childTitle in navItem.children %}
                                 <li class="NavBar__StandardSubNavItem">
                                     <a

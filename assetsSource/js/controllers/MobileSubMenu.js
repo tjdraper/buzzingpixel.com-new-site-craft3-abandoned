@@ -1,19 +1,19 @@
 // Make sure FAB is defined
 window.FAB = window.FAB || {};
 
-function runMobileMenu(F, W) {
+function runMobileSubMenu(F, W) {
     'use strict';
 
     var desktopBreakPoint = 1000;
 
     if (! window.jQuery || ! F.controller) {
         setTimeout(function() {
-            runMobileMenu(F, W);
+            runMobileSubMenu(F, W);
         }, 10);
         return;
     }
 
-    F.controller.make('MobileMenu', {
+    F.controller.make('MobileSubMenu', {
         model: {
             isActive: 'bool'
         },
@@ -21,17 +21,12 @@ function runMobileMenu(F, W) {
         isMobile: true,
 
         events: {
-            'click .JSMobileMenuActivator': function(e) {
+            'click .JSSubNav__Activator': function(e) {
                 var self = this;
 
                 e.preventDefault();
 
                 self.model.set('isActive', ! self.model.get('isActive'));
-            },
-            'click .JSMobileMenuCloseAction': function() {
-                var self = this;
-
-                self.model.set('isActive', false);
             }
         },
 
@@ -44,7 +39,7 @@ function runMobileMenu(F, W) {
 
             self.resizeResponder();
 
-            $(W).on('resize.MobileMenuWatch', function() {
+            $(W).on('resize.MobileSubMenuWatch', function() {
                 self.resizeResponder();
             });
         },
@@ -84,56 +79,20 @@ function runMobileMenu(F, W) {
 
         activateMenu: function() {
             var self = this;
-            // var $siteHeader = $('.JSSiteHeader');
 
-            // $siteHeader.addClass($siteHeader.data('mobileMenuOpenClass'));
+            self.$el.addClass(self.$el.data('subNavActiveClass'));
 
-            $('.JSNavList').slideDown(150);
-
-            $('.JSMobileMenuActivator').each(function() {
-                var $el = $(this);
-                var activeClass = $el.data('activeClass');
-
-                if (! activeClass) {
-                    return;
-                }
-
-                $el.addClass(activeClass);
-            });
-
-            $('body').on('click.MobileMenuOff', function(e) {
-                if ($(e.target).closest('.JSNavList').length) {
-                    return;
-                }
-
-                self.model.set('isActive', false);
-            });
+            self.$el.find('.JSSubNav__List').slideDown(150);
         },
 
         deactivateMenu: function() {
-            var $navList = $('.JSNavList');
-            // var $siteHeader = $('.JSSiteHeader');
+            var self = this;
 
-            // $siteHeader.removeClass($siteHeader.data('mobileMenuOpenClass'));
+            self.$el.removeClass(self.$el.data('subNavActiveClass'));
 
-            $navList.slideUp(150, null, function() {
-                $navList.attr('style', null);
-            });
-
-            $('.JSMobileMenuActivator').each(function() {
-                var $el = $(this);
-                var activeClass = $el.data('activeClass');
-
-                if (! activeClass) {
-                    return;
-                }
-
-                $el.removeClass(activeClass);
-            });
-
-            $('body').off('click.MobileMenuOff');
+            self.$el.find('.JSSubNav__List').slideUp(150);
         }
     });
 }
 
-runMobileMenu(window.FAB, window);
+runMobileSubMenu(window.FAB, window);

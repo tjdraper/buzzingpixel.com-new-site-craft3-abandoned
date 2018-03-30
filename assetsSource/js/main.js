@@ -17,6 +17,12 @@ function runMain(F) {
     F.controller.construct('MobileMenu', {
         el: 'body'
     });
+
+    $('.JSSubNav').each(function() {
+        F.controller.construct('MobileSubMenu', {
+            el: this
+        });
+    });
 }
 
 runMain(window.FAB);
