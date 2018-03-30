@@ -76,6 +76,9 @@
     {# Include custom styles #}
     <link rel="stylesheet" href="/assets/css/style.min{% if staticAssetCacheTime %}.{{ staticAssetCacheTime }}{% endif %}.css{% if not staticAssetCacheTime %}?v={{ fileTime('/assets/css/style.min.css') }}{% endif %}">
 
+    {# Google Site Verification #}
+    <meta name="google-site-verification" content="6_XCI-JG8AHkWWkA4CI0GSjLHbVdXuVRXwWpC5bmaPI">
+
     {# Get any queued up scripts and styles for head #}
     {{ block('head') ?? '' }}
     {{ head() }}
