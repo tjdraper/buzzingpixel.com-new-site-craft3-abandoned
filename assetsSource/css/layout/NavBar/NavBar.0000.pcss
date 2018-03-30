@@ -78,6 +78,39 @@
     color: #fff;
 }
 
+.NavBar__StandardSubNavItem {
+    position: relative;
+}
+
+.NavBar__StandardSubNavLink:before,
+.NavBar__StandardSubNavLink:after {
+    background-color: #e2e2e2;
+    content: ' ';
+    display: inline-block;
+}
+
+.NavBar__StandardSubNavLink:before {
+    height: 1px;
+    left: -20px;
+    margin-right: -15px;
+    margin-top: -2px;
+    position: relative;
+    width: 35px;
+    vertical-align: middle;
+}
+
+.NavBar__StandardSubNavLink:after {
+    height: 100%;
+    left: 20px;
+    top: 0;
+    width: 1px;
+    position: absolute;
+}
+
+.NavBar__StandardSubNavItem:last-child .NavBar__StandardSubNavLink:after {
+    height: 50%;
+}
+
 .NavBar__StandardSubNav {
     display: none;
 }
