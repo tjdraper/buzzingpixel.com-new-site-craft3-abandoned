@@ -2,6 +2,7 @@
     "proxy": "http://buzzingpixel.test",
     "watch": [
         "config/**",
+        "content/**",
         "dev/**",
         "templates/**"
     ]

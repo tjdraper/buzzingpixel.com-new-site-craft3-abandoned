@@ -37,11 +37,14 @@ class PagesController extends BaseController
 
         $metaTitle = $contentMeta['metaTitle'] ?? $contentMeta['title'] ?? null;
 
+        $header = $contentModel->getVarsAtIndex('Header');
+
         return $this->renderTemplate('_core/PageStandard.twig', compact(
             'contentModel',
             'content',
             'contentMeta',
-            'metaTitle'
+            'metaTitle',
+            'header'
         ));
     }
 }
