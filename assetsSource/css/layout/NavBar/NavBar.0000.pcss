@@ -1,0 +1,91 @@
+.NavBar {
+    background-color: rgba(var(--green), 0.9);
+    border-top: 6px solid var(--orange);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    height: 65px;
+    padding: 8px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 999999999;
+}
+
+.NavBar__HomeBanner {
+    display: inline-block;
+}
+
+.NavBar__StandardNav {
+    display: none;
+}
+
+.NavBar__RightHandControls {
+    float: right;
+    margin: 0 44px 0 0;
+}
+
+.NavBar__RightHandControlItem,
+.NavBar__RightHandControlLink {
+    display: inline-block;
+    margin: 0;
+}
+
+.NavBar__RightHandControlLink {
+    padding: 6px;
+}
+
+.NavBar__Icon {
+    color: #fff;
+    display: inline-block;
+    height: 26px;
+    width: 26px;
+}
+
+.NavBar__IconParentHover:hover .NavBar__Icon {
+    color: var(--lighterGreen);
+}
+
+.NavBar__Hamburger {
+    display: inline-block;
+    height: 50px;
+    margin-right: 8px;
+    padding-top: 18px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    vertical-align: middle;
+    width: 45px;
+}
+
+.NavBar__Hamburger:before,
+.NavBar__HamburgerInner,
+.NavBar__Hamburger:after {
+    background-color: var(--white);
+    border-radius: 2px;
+    content: ' ';
+    display: block;
+    height: 4px;
+    margin-left: auto;
+    margin-right: 0;
+    position: relative;
+    transition: all .2s;
+    width: 30px;
+}
+
+.NavBar__HamburgerInner {
+    margin-bottom: 4px;
+    margin-top: 4px;
+}
+
+.NavBar__Hamburger--IsActive .NavBar__HamburgerInner {
+    opacity: 0;
+}
+
+.NavBar__Hamburger--IsActive:before {
+    top: 8px;
+    transform: rotate(-45deg);
+}
+
+.NavBar__Hamburger--IsActive:after {
+    bottom: 8px;
+    transform: rotate(45deg);
+}
