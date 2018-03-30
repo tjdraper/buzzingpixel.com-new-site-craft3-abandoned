@@ -97,6 +97,30 @@
     {# Include minified JS #}
     <script async src="/assets/js/script.min{% if staticAssetCacheTime %}.{{ staticAssetCacheTime }}{% endif %}.js{% if not staticAssetCacheTime %}?v={{ fileTime('/assets/css/script.min.js') }}{% endif %}"></script>
 
+    {# Include TypeKit #}
+    <script async src="https://use.typekit.net/txd0vvo.js"></script>
+    <script>
+        (function() {
+            'use strict';
+            function run() {
+                if (window.Typekit === undefined) {
+                    setTimeout(function() {
+                        run();
+                    }, 10);
+                    return;
+                }
+                try {
+                    window.Typekit.load({
+                        async: true
+                    });
+                } catch (e){
+                    console.error(e);
+                }
+            }
+            run();
+        })();
+    </script>
+
     {# Get any queued up body items #}
     {{ block('endBody') ?? '' }}
     {{ endBody() }}
