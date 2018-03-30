@@ -37,7 +37,7 @@ class PagesController extends BaseController
 
         $metaTitle = $contentMeta['metaTitle'] ?? $contentMeta['title'] ?? null;
 
-        return $this->renderTemplate('PageStandard.twig', compact(
+        return $this->renderTemplate('_core/PageStandard.twig', compact(
             'contentModel',
             'content',
             'contentMeta',
