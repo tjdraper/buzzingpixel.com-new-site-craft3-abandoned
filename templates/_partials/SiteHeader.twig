@@ -96,5 +96,22 @@
             </span>
         </a>
     </nav>
-    <div class="SiteHeader__Content"></div>
+    <div class="SiteHeader__Content">
+        <div class="SiteHeader__ContentInner">
+            <div class="SiteHeader__ContentPrimary">
+                <header class="SiteHeader__ContentHeader">
+                    {% if header['meta']['heading'] is defined %}
+                        <h1 class="SiteHeader__Heading">
+                            {{ header['meta']['heading'] }}
+                        </h1>
+                    {% endif %}
+                    {% if header['meta']['subHeading'] is defined %}
+                        <h2 class="SiteHeader__SubHeading">
+                            {{ header['meta']['subHeading'] }}
+                        </h2>
+                    {% endif %}
+                </header>
+            </div>
+        </div>
+    </div>
 </header>

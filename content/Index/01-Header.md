@@ -1,4 +1,5 @@
 {
     "backgroundImage": "/uploads-static/news/typewriter.jpg",
-    "heading": "Ansel"
+    "heading": "Ansel",
+    "subHeading": "for Craft CMS and ExpressionEngine"
 }
