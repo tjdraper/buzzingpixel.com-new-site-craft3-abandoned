@@ -7,10 +7,12 @@
     "require": {
         "craftcms/cms": "^3.0.0-RC1",
         "vlucas/phpdotenv": "^2.4.0",
-        "buzzingpixel/craft-static": "^1.0.3"
+        "buzzingpixel/craft-static": "^1.0.3",
+        "mrclay/minify": "^3.0",
+        "felicity-php/felicity-datamodel": "^1.0.1",
+        "hyn/frontmatter": "^1.1"
     },
     "config": {
-        "optimize-autoloader": true,
         "platform": {
             "php": "7.0"
         }

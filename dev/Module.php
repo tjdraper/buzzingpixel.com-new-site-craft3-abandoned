@@ -7,6 +7,7 @@ use yii\base\Event;
 use craft\elements\Entry;
 use dev\services\CacheService;
 use yii\base\Module as ModuleBase;
+use dev\services\FileContentService;
 use dev\services\EntryRoutingService;
 use craft\events\SetElementRouteEvent;
 use craft\console\Application as ConsoleApplication;
@@ -16,11 +17,6 @@ use craft\console\Application as ConsoleApplication;
  *
  * This class will be available throughout the system via:
  * `Craft::$app->getModule('dev')`.
- *
- * If you want the module to get loaded on every request, uncomment this line
- * in config/app.php:
- *
- *     'bootstrap' => ['dev']
  *
  * Learn more about Yii module development in Yii's documentation:
  * http://www.yiiframework.com/doc-2.0/guide-structure-modules.html
@@ -70,6 +66,23 @@ class Module extends ModuleBase
                 $entryRoutingService = new EntryRoutingService();
                 $entryRoutingService->entryControllerRouting($eventModel);
             }
+        );
+    }
+
+
+
+    /**************************************************************************/
+    /* Dependency injection */
+    /**************************************************************************/
+
+    /**
+     * Gets the File Content Service
+     * @return FileContentService
+     */
+    public static function fileContentService() : FileContentService
+    {
+        return new FileContentService(
+            Craft::$app->getConfig()->getGeneral()->contentPath
         );
     }
 }

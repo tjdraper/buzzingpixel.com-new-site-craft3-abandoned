@@ -8,10 +8,14 @@
  * @see \craft\config\GeneralConfig
  */
 
+$projectPath = dirname(__DIR__, 1);
+
 return [
     '*' => [
         'allowUpdates' => false,
-        'basePath' => realpath(dirname(__DIR__, 1)) . '/public',
+        'projectPath' => $projectPath,
+        'basePath' => "{$projectPath}/public",
+        'contentPath' => "{$projectPath}/content",
         'cpTrigger' => 'cms',
         'defaultWeekStartDay' => 0,
         'devMode' => getenv('DEV_MODE') === 'true',
