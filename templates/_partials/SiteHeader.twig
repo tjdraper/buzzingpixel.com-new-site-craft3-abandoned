@@ -110,6 +110,11 @@
                             {{ header['meta']['subHeading']|typeset }}
                         </h2>
                     {% endif %}
+                    {% if header['html'] is defined %}
+                        <div class="SiteHeader__ContentBody">
+                            {{ header['html']|typeset }}
+                        </div>
+                    {% endif %}
                 </header>
             </div>
         </div>
