@@ -1,6 +1,11 @@
 {# @var \craft\web\twig\variables\CraftVariable craft #}
 
 {% set header = header|default(null) %}
+{% set hasFeaturedImage = header['meta']['featuredImage']['primary'] is defined %}
+{% set featuredImages = null %}
+{% if hasFeaturedImage %}
+    {% set featuredImages = header.meta.featuredImage %}
+{% endif %}
 
 <header class="SiteHeader"{% if header['meta']['backgroundImage'] is defined %} style="background-image: url('{{ header['meta']['backgroundImage'] }}');"{% endif %}>
     <nav class="NavBar JSNavBar" data-scrolled-class="NavBar--IsScrolled">
@@ -97,8 +102,8 @@
         </a>
     </nav>
     <div class="SiteHeader__Content">
-        <div class="SiteHeader__ContentInner">
-            <div class="SiteHeader__ContentPrimary">
+        <div class="SiteHeader__ContentInner{% if hasFeaturedImage %} SiteHeader__ContentInner--HasFeaturedImage{% endif %}">
+            <div class="SiteHeader__ContentPrimary{% if hasFeaturedImage %} SiteHeader__ContentPrimary--HasFeaturedImage{% endif %}">
                 <header class="SiteHeader__ContentHeader">
                     {% if header['meta']['heading'] is defined %}
                         <h1 class="SiteHeader__Heading">
@@ -140,6 +145,36 @@
                     {% endif %}
                 </header>
             </div>
+            {% if hasFeaturedImage %}
+                <div
+                    class="SiteHeader__FeaturedImage{% if featuredImages['hasShadow'] is defined and featuredImages.hasShadow %} SiteHeader__FeaturedImage--HasShadow{% endif %}"
+                >
+                    <picture>
+                        {% if featuredImages['mobile'] is defined %}
+                            <source
+                                srcset="{{ featuredImages.mobile }} 1x{% if featuredImages['mobile2x'] is defined %},
+                                        {{ featuredImages.mobile2x }} 2x{% endif %}"
+                                media="(min-width: 1px) and (max-width: 649px)"
+                            >
+                        {% endif %}
+                        {% if featuredImages['tablet'] is defined %}
+                            <source
+                                srcset="{{ featuredImages.tablet }} 1x{% if featuredImages['tablet2x'] is defined %},
+                                        {{ featuredImages.tablet2x }} 2x{% endif %}"
+                                media="(min-width: 650px) and (max-width: 1350px)"
+                            >
+                        {% endif %}
+                        <img
+                            src="{{ featuredImages.primary }}"
+                            {% if featuredImages['primary2x'] is defined %}
+                            srcset="{{ featuredImages.primary }} 1x,
+                                    {{ featuredImages.primary2x }} 2x"
+                            {% endif %}
+                            alt="{% if header['meta']['heading'] is defined %}{{ header['meta']['heading'] }}{% endif %}"
+                        >
+                    </picture>
+                </div>
+            {% endif %}
         </div>
     </div>
 </header>

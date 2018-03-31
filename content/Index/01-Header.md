@@ -1,8 +1,27 @@
 {
-    "backgroundImage": "/uploads-static/news/typewriter.jpg",
+    "backgroundImage-disabled": "/uploads-static/news/typewriter.jpg",
     "heading": "Ansel",
     "subHeading": "for Craft CMS and ExpressionEngine",
+    "featuredImage": {
+        "hasShadow": true,
+        "mobile": "/uploads-static/software/ansel-craft/ansel2-craft-mobile.png",
+        "mobile2x": "/uploads-static/software/ansel-craft/ansel2-craft-mobile-2x.png",
+        "primary": "/uploads-static/software/ansel-craft/ansel2-craft-desktop.png",
+        "primary2x": "/uploads-static/software/ansel-craft/ansel2-craft-desktop-2x.png"
+    },
     "ctaGroup": [
+        {
+            "style": "orange",
+            "content": "Ansel for EE &raquo;",
+            "link": "/software/ansel-ee"
+        },
+        {
+            "style": "orange",
+            "content": "Ansel for Craft &raquo;",
+            "link": "//software/ansel-craft"
+        }
+    ],
+    "ctaGroup-disabled": [
         {
             "style": "green",
             "content": "Button Content &raquo;",
@@ -26,6 +45,4 @@
     ]
 }
 
-This is a test.
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto asperiores aut beatae commodi corporis delectus dignissimos doloribus enim illo ipsam nihil nostrum optio, pariatur quos sed temporibus veniam vero? Asperiores.
+Ansel puts the power of image manipulation in your hands. You can define constraints, widths, heights, aspect ratios, and more for each field so that anyone can edit images in entries with confidence all while using the manipulation tools to bring out the best in your site’s images!
