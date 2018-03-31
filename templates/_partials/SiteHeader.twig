@@ -115,6 +115,29 @@
                             {{ header['html']|typeset }}
                         </div>
                     {% endif %}
+                    {% if header['meta']['ctaGroup'] is defined %}
+                        <div class="SiteHeader__CTAGroup">
+                            <div class="CTAGroup">
+                                {% for cta in header['meta']['ctaGroup'] %}
+                                    {% set style = cta['style']|default('orange') %}
+                                    {% set ctaClass = 'button--colored' %}
+                                    {% if style == 'green' %}
+                                        {% set ctaClass = '' %}
+                                    {% elseif style == 'greenOutline' %}
+                                        {% set ctaClass = 'button--outlined' %}
+                                    {% elseif style == 'orangeOutline' %}
+                                        {% set ctaClass = 'button--colored button--outlined' %}
+                                    {% endif %}
+                                    <a
+                                        href="{{ cta.link|raw }}"
+                                        class="button {{ ctaClass }} CTAGroup__button"
+                                    >
+                                        {{ cta.content|raw|typeset }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
                 </header>
             </div>
         </div>

@@ -1,7 +1,29 @@
 {
     "backgroundImage": "/uploads-static/news/typewriter.jpg",
     "heading": "Ansel",
-    "subHeading": "for Craft CMS and ExpressionEngine"
+    "subHeading": "for Craft CMS and ExpressionEngine",
+    "ctaGroup": [
+        {
+            "style": "green",
+            "content": "Button Content &raquo;",
+            "link": "/links/somewhere"
+        },
+        {
+            "style": "greenOutline",
+            "content": "Button Thing &raquo;",
+            "link": "/links/somewhere/else"
+        },
+        {
+            "style": "orange",
+            "content": "Button Stuff &raquo;",
+            "link": "/links"
+        },
+        {
+            "style": "orangeOutline",
+            "content": "Something &raquo;",
+            "link": "#"
+        }
+    ]
 }
 
 This is a test.
