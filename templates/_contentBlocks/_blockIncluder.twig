@@ -1,0 +1,9 @@
+{# @var array block #}
+
+<section class="ContentBlock{% if block['meta']['bgColor'] is defined and block.meta.bgColor %} ContentBlock--HasBgColor-{{ block.meta.bgColor }}{% endif %}">
+    <div class="ContentBlock__Inner">
+        {% include '_contentBlocks/' ~ block.meta.blockType with {
+            block: block
+        } only %}
+    </div>
+</section>

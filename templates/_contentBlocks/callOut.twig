@@ -1,0 +1,37 @@
+{# @var array block #}
+
+<div class="BlockCallOut">
+    <div class="BlockCallOut__Inner">
+        <div class="BlockCallOut__Items">
+            {% for item in block.meta.items %}
+                <div class="BlockCallOut__Item">
+                    {% if item['image'] is defined and item.image %}
+                        <div class="BlockCallOut__Left">
+                            <img
+                                src="{{ item.image }}"
+                                {% if item['image2x'] is defined and item.image2x %}
+                                srcset="{{ item.image }} 1x,
+                                        {{ item.image2x }} 2x"
+                                {% endif %}
+                                alt="{% if item['imageAlt'] is defined %}{{ item.imageAlt }}{% endif %}"
+                                class="BlockCallOut__LeftImage"
+                            >
+                        </div>
+                    {% endif %}
+                    <div class="BlockCallOut__Body{% if item['image'] is defined and item.image %} BlockCallOut__Body--HasLeft{% endif %}">
+                        <blockquote class="BlockCallOut__Content">
+                            {{ item.content|typeset }}
+                            {% if item['cite'] is defined %}
+                                <footer class="BlockCallOut__QuoteFooter">
+                                    <cite class="BlockCallOut__QuoteCite">
+                                        {{ item.cite|typeset }}
+                                    </cite>
+                                </footer>
+                            {% endif %}
+                        </blockquote>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

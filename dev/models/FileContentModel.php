@@ -108,9 +108,26 @@ class FileContentModel extends Model
     }
 
     /**
+     * Gets array of all vars
+     * @return array
+     */
+    public function getVars(): array
+    {
+        $keys = $this->getKeys();
+
+        $vars = [];
+
+        foreach ($keys as $key) {
+            $vars[] = $this->getVarsAtIndex($key);
+        }
+
+        return $vars;
+    }
+
+    /**
      * Gets content at index
      * @param string $index
-     * @return mixed
+     * @return array|null
      */
     public function getVarsAtIndex(string $index)
     {
@@ -130,7 +147,7 @@ class FileContentModel extends Model
     /**
      * Gets child at index
      * @param $index
-     * @return mixed
+     * @return FileContentModel|null
      */
     public function getChildAtIndex(string $index)
     {

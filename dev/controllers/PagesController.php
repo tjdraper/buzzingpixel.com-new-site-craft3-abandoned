@@ -39,12 +39,21 @@ class PagesController extends BaseController
 
         $header = $contentModel->getVarsAtIndex('Header');
 
+        $contentBlocks = [];
+
+        $contentBlocksModel = $contentModel->getChildAtIndex('ContentBlocks');
+
+        if ($contentBlocksModel) {
+            $contentBlocks = $contentBlocksModel->getVars();
+        }
+
         return $this->renderTemplate('_core/PageStandard.twig', compact(
             'contentModel',
             'content',
             'contentMeta',
             'metaTitle',
-            'header'
+            'header',
+            'contentBlocks'
         ));
     }
 }
