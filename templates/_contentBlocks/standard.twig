@@ -57,7 +57,7 @@
         </div>
         {% if hasFeaturedImage %}
             <div
-                class="BlockStandard__FeaturedImage{% if featuredImages['hasShadow'] is defined and featuredImages.hasShadow %} BlockStandard__FeaturedImage--HasShadow{% endif %}"
+                class="BlockStandard__FeaturedImage{% if featuredImages['hasShadow'] is defined and featuredImages.hasShadow %} BlockStandard__FeaturedImage--HasShadow{% endif %} BlockStandard__FeaturedImage--FeaturedImageStyle-{{ featuredImageStyle }}"
             >
                 <picture>
                     {% if featuredImages['mobile'] is defined %}
