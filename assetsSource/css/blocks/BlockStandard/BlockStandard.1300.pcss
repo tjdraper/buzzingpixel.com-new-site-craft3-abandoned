@@ -1,18 +1,34 @@
-.BlockStandard__Inner--HasFeaturedImage.BlockStandard__Inner--FeaturedImageStyle-ImageRight {
+/*.BlockStandard__Inner--HasFeaturedImage.BlockStandard__Inner--FeaturedImageStyle-ImageRight*/
+.BlockStandard__Inner {
     margin-top: 66px;
 }
 
 .BlockStandard__ContentPrimary--HasFeaturedImage.BlockStandard__ContentPrimary--FeaturedImageStyle-ImageRight,
-.BlockStandard__FeaturedImage--FeaturedImageStyle-ImageRight {
+.BlockStandard__ContentPrimary--HasFeaturedImage.BlockStandard__ContentPrimary--FeaturedImageStyle-ImageLeft,
+.BlockStandard__FeaturedImage--FeaturedImageStyle-ImageRight,
+.BlockStandard__FeaturedImage--FeaturedImageStyle-ImageLeft {
     display: inline-block;
     vertical-align: top;
 }
 
-.BlockStandard__FeaturedImage--FeaturedImageStyle-ImageRight {
+.BlockStandard__FeaturedImage--FeaturedImageStyle-ImageRight,
+.BlockStandard__FeaturedImage--FeaturedImageStyle-ImageLeft {
     width: 900px;
 }
 
-.BlockStandard__ContentPrimary--HasFeaturedImage.BlockStandard__ContentPrimary--FeaturedImageStyle-ImageRight {
+.BlockStandard__FeaturedImage--FeaturedImageStyle-ImageLeft {
+    right: calc(100% - 900px);
+    position: relative;
+}
+
+.BlockStandard__ContentPrimary--HasFeaturedImage.BlockStandard__ContentPrimary--FeaturedImageStyle-ImageRight,
+.BlockStandard__ContentPrimary--HasFeaturedImage.BlockStandard__ContentPrimary--FeaturedImageStyle-ImageLeft {
     margin-top: 0;
     width: calc(100% - 928px);
+}
+
+.BlockStandard__ContentPrimary--HasFeaturedImage.BlockStandard__ContentPrimary--FeaturedImageStyle-ImageLeft {
+    left: 900px;
+    padding-left: 20px;
+    position: relative;
 }
