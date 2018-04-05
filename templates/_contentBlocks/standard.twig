@@ -12,8 +12,8 @@
 {% endif %}
 
 <div class="BlockStandard">
-    <div class="BlockStandard__Inner{% if hasFeaturedImage %} BlockStandard__Inner--HasFeaturedImage{% endif %}">
-        <div class="BlockStandard__ContentPrimary{% if hasFeaturedImage %} BlockStandard__ContentPrimary--HasFeaturedImage{% endif %}">
+    <div class="BlockStandard__Inner{% if hasFeaturedImage %} BlockStandard__Inner--HasFeaturedImage{% endif %} BlockStandard__Inner--FeaturedImageStyle-{{ featuredImageStyle }}">
+        <div class="BlockStandard__ContentPrimary{% if hasFeaturedImage %} BlockStandard__ContentPrimary--HasFeaturedImage{% endif %} BlockStandard__ContentPrimary--FeaturedImageStyle-{{ featuredImageStyle }}">
             <div class="BlockStandard__ContentPrimaryInner">
                 {% if block['meta']['heading'] is defined %}
                     <h1 class="BlockStandard__Heading">
@@ -32,7 +32,7 @@
                 {% endif %}
                 {% if block['meta']['ctaGroup'] is defined %}
                     <div class="BlockStandard__CTAGroup">
-                        <div class="CTAGroup">
+                        <div class="CTAGroup CTAGroup--IsFlushLeft">
                             {% for cta in block.meta.ctaGroup %}
                                 {% set style = cta.style|default('orange') %}
                                 {% set ctaClass = 'button--colored' %}
