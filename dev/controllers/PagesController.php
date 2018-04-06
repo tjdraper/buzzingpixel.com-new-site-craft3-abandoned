@@ -46,6 +46,9 @@ class PagesController extends BaseController
         $contentMeta = $content['meta'];
 
         $metaTitle = $contentMeta['metaTitle'] ?? $contentMeta['title'] ?? null;
+        $metaDescription = $contentMeta['metaDescription'] ??
+            $contentMeta['description'] ??
+            null;
 
         $header = $contentModel->getVarsAtIndex('Header');
 
@@ -62,6 +65,7 @@ class PagesController extends BaseController
             'content',
             'contentMeta',
             'metaTitle',
+            'metaDescription',
             'header',
             'contentBlocks'
         ));
