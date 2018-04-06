@@ -11,13 +11,23 @@ use yii\web\Response;
 class PagesController extends BaseController
 {
     /**
-     * Displays the index page
+     * Displays the Index page
      * @return Response
      * @throws \Exception
      */
     public function actionIndex(): Response
     {
         return $this->parsePage('Index');
+    }
+
+    /**
+     * Displays Custom Websites page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionCustomWebsites(): Response
+    {
+        return $this->parsePage('CustomWebsites');
     }
 
     /**

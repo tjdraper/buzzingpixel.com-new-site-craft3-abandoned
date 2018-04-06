@@ -30,4 +30,11 @@ return [
      */
     'GET /' => 'dev/pages/index',
 
+
+    /**
+     * Custom Websites page
+     * @see \dev\controllers\PagesController::actionCustomWebsites()
+     */
+    'GET /work-with-me/custom-websites' => 'dev/pages/custom-websites',
+
 ];
