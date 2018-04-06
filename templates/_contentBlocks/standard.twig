@@ -11,9 +11,14 @@
     {% set featuredImageStyle = block.meta.featuredImageStyle %}
 {% endif %}
 
+{% set featuredImageSmallPullLeft = false %}
+{% if block['meta']['featuredImageSmallPullLeft'] is defined and block.meta.featuredImageSmallPullLeft == true %}
+    {% set featuredImageSmallPullLeft = true %}
+{% endif %}
+
 <div class="BlockStandard">
-    <div class="BlockStandard__Inner{% if hasFeaturedImage %} BlockStandard__Inner--HasFeaturedImage{% endif %} BlockStandard__Inner--FeaturedImageStyle-{{ featuredImageStyle }}">
-        <div class="BlockStandard__ContentPrimary{% if hasFeaturedImage %} BlockStandard__ContentPrimary--HasFeaturedImage{% endif %} BlockStandard__ContentPrimary--FeaturedImageStyle-{{ featuredImageStyle }}">
+    <div class="BlockStandard__Inner{% if hasFeaturedImage %} BlockStandard__Inner--HasFeaturedImage{% else %} BlockStandard__Inner--HasNoFeaturedImage{% endif %} BlockStandard__Inner--FeaturedImageStyle-{{ featuredImageStyle }}{% if featuredImageSmallPullLeft %} BlockStandard__Inner--FeaturedImageSmallPullLeft{% endif %}">
+        <div class="BlockStandard__ContentPrimary{% if hasFeaturedImage %} BlockStandard__ContentPrimary--HasFeaturedImage{% endif %} BlockStandard__ContentPrimary--FeaturedImageStyle-{{ featuredImageStyle }}{% if featuredImageSmallPullLeft %} BlockStandard__ContentPrimary--FeaturedImageSmallPullLeft{% endif %}">
             <div class="BlockStandard__ContentPrimaryInner">
                 {% if block['meta']['heading'] is defined %}
                     <h1 class="BlockStandard__Heading">
@@ -57,7 +62,7 @@
         </div>
         {% if hasFeaturedImage %}
             <div
-                class="BlockStandard__FeaturedImage{% if featuredImages['hasShadow'] is defined and featuredImages.hasShadow %} BlockStandard__FeaturedImage--HasShadow{% endif %} BlockStandard__FeaturedImage--FeaturedImageStyle-{{ featuredImageStyle }}"
+                class="BlockStandard__FeaturedImage{% if featuredImages['hasShadow'] is defined and featuredImages.hasShadow %} BlockStandard__FeaturedImage--HasShadow{% endif %} BlockStandard__FeaturedImage--FeaturedImageStyle-{{ featuredImageStyle }}{% if featuredImageSmallPullLeft %} BlockStandard__FeaturedImage--SmallPullLeft{% endif %}"
             >
                 <picture>
                     {% if featuredImages['mobile'] is defined %}
