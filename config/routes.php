@@ -37,4 +37,11 @@ return [
      */
     'GET /work-with-me/custom-websites' => 'dev/pages/custom-websites',
 
+
+    /**
+     * Custom Add-ons page
+     * @see \dev\controllers\PagesController::actionCustomAddons()
+     */
+    'GET /work-with-me/custom-add-ons' => 'dev/pages/custom-addons',
+
 ];

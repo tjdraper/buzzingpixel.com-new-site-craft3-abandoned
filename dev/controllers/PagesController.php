@@ -31,6 +31,16 @@ class PagesController extends BaseController
     }
 
     /**
+     * Displays Custom Add-ons page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionCustomAddons(): Response
+    {
+        return $this->parsePage('CustomAddons');
+    }
+
+    /**
      * Parses a page
      * @param string directory
      * @return Response
