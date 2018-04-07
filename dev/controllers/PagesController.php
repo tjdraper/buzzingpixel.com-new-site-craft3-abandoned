@@ -35,6 +35,16 @@ class PagesController extends BaseController
      * @return Response
      * @throws \Exception
      */
+    public function actionHosting(): Response
+    {
+        return $this->parsePage('Hosting');
+    }
+
+    /**
+     * Displays Custom Add-ons page
+     * @return Response
+     * @throws \Exception
+     */
     public function actionCustomAddons(): Response
     {
         return $this->parsePage('CustomAddons');

@@ -147,7 +147,7 @@
             </div>
             {% if hasFeaturedImage %}
                 <div
-                    class="SiteHeader__FeaturedImage{% if featuredImages['hasShadow'] is defined and featuredImages.hasShadow %} SiteHeader__FeaturedImage--HasShadow{% endif %}"
+                    class="SiteHeader__FeaturedImage{% if featuredImages['hasShadow'] is defined and featuredImages.hasShadow %} SiteHeader__FeaturedImage--HasShadow{% endif %}{% if featuredImages['size'] is defined %} SiteHeader__FeaturedImage--HasSize-{{ featuredImages.size }}{% endif %}"
                 >
                     <picture>
                         {% if featuredImages['mobile'] is defined %}

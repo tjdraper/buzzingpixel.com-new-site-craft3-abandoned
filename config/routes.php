@@ -44,4 +44,11 @@ return [
      */
     'GET /work-with-me/custom-add-ons' => 'dev/pages/custom-addons',
 
+
+    /**
+     * Managed Hosting page
+     * @see \dev\controllers\PagesController::actionCustomAddons()
+     */
+    'GET /work-with-me/hosting' => 'dev/pages/hosting',
+
 ];
