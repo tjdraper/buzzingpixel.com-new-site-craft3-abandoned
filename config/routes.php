@@ -47,8 +47,15 @@ return [
 
     /**
      * Managed Hosting page
-     * @see \dev\controllers\PagesController::actionCustomAddons()
+     * @see \dev\controllers\PagesController::actionHosting()
      */
     'GET /work-with-me/hosting' => 'dev/pages/hosting',
+
+
+    /**
+     * Portfolio page
+     * @see \dev\controllers\PagesController::actionHosting()
+     */
+    'GET /work-with-me/portfolio' => 'dev/pages/portfolio',
 
 ];

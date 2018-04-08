@@ -35,9 +35,9 @@ class PagesController extends BaseController
      * @return Response
      * @throws \Exception
      */
-    public function actionHosting(): Response
+    public function actionCustomAddons(): Response
     {
-        return $this->parsePage('Hosting');
+        return $this->parsePage('CustomAddons');
     }
 
     /**
@@ -45,9 +45,19 @@ class PagesController extends BaseController
      * @return Response
      * @throws \Exception
      */
-    public function actionCustomAddons(): Response
+    public function actionHosting(): Response
     {
-        return $this->parsePage('CustomAddons');
+        return $this->parsePage('Hosting');
+    }
+
+    /**
+     * Displays Portfolio page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionPortfolio(): Response
+    {
+        return $this->parsePage('Portfolio');
     }
 
     /**
