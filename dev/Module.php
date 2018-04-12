@@ -6,7 +6,11 @@ use Craft;
 use yii\base\Event;
 use Michelf\SmartyPants;
 use craft\elements\Entry;
+use Hyn\Frontmatter\Parser;
+use cebe\markdown\Markdown;
+use dev\models\ListingsModel;
 use dev\services\CacheService;
+use dev\models\ListingMetaModel;
 use dev\services\GlobalsService;
 use dev\services\TypesetService;
 use yii\base\Module as ModuleBase;
@@ -103,11 +107,15 @@ class Module extends ModuleBase
     /**
      * Gets the File Content Service
      * @return FileContentService
+     * @throws \Exception
      */
     public static function fileContentService(): FileContentService
     {
         return new FileContentService(
-            Craft::$app->getConfig()->getGeneral()->contentPath
+            Craft::$app->getConfig()->getGeneral()->contentPath,
+            new Parser(new Markdown()),
+            new ListingMetaModel(),
+            new ListingsModel()
         );
     }
 
