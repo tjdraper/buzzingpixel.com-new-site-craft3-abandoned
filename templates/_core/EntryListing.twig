@@ -10,6 +10,7 @@
 {# @var string metaDescription #}
 {# @var array header #}
 {# @var string listingBase #}
+{# @var array pagination #}
 
 {% extends '_layouts/Master.twig' %}
 
@@ -43,6 +44,13 @@
                         </a>
                     {% endfor %}
                 </div>
+                {% if pagination %}
+                    <div class="PaginationWrapper">
+                        {% include '_partials/Pagination.twig' with {
+                            pagination: pagination
+                        } %}
+                    </div>
+                {% endif %}
             {% endif %}
         </div>
     </div>

@@ -4,6 +4,7 @@ namespace dev\controllers;
 
 use Craft;
 use dev\Module;
+use dev\services\PaginationGeneratorService;
 use yii\web\Response;
 use yii\web\HttpException;
 
@@ -73,6 +74,13 @@ class ListingController extends BaseController
 
         $listingBase = '/' . implode('/', $segmentsArray);
 
+        $pagination = PaginationGeneratorService::getPagination([
+            'currentPage' => $pageNum,
+            'perPage' => $limit,
+            'totalResults' => $entriesTotal,
+            'base' => $listingBase,
+        ]);
+
         return $this->renderTemplate('_core/EntryListing.twig', compact(
             'pageNum',
             'limit',
@@ -84,7 +92,8 @@ class ListingController extends BaseController
             'metaTitle',
             'metaDescription',
             'header',
-            'listingBase'
+            'listingBase',
+            'pagination'
         ));
     }
 }
