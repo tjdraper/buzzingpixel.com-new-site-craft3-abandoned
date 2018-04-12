@@ -1,0 +1,49 @@
+{# @var \craft\web\twig\variables\CraftVariable craft #}
+{# @var int pageNum #}
+{# @var int limit #}
+{# @var int entriesTotal #}
+{# @var int offset #}
+{# @var int maxPages #}
+{# @var \dev\models\ListingMetaModel[] entries #}
+{# @var array contentMeta #}
+{# @var string metaTitle #}
+{# @var string metaDescription #}
+{# @var array header #}
+{# @var string listingBase #}
+
+{% extends '_layouts/Master.twig' %}
+
+{% block content %}
+    <div class="Listings">
+        <div class="Listings__Inner">
+            {% if not entriesTotal %}
+                <div class="Listings__NoResults">
+                    <p>There are currently no entries available. Please check back soon.</p>
+                </div>
+            {% else %}
+                <div class="Listings__Container">
+                    {% for entry in entries %}
+                        <a href="{{ listingBase }}/{{ entry.slug }}" class="Listings__Item">
+                            <div class="Listings__ItemBody">
+                                <header class="Listings__ItemHeader">
+                                    <div class="Listings__ItemBodyTitle">
+                                        {{ entry.title|typeset }}
+                                    </div>
+                                    <div class="Listings__ItemBodyDate">
+                                        {{ entry.date.format('l, F jS, Y') }}
+                                    </div>
+                                </header>
+                                <div class="Listings__ItemBodyContent">
+                                    <p>{{ entry.html|striptags|truncate(200)|typeset }}</p>
+                                </div>
+                            </div>
+                            <div class="Listings__ItemFooter">
+                                Read More &raquo;
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

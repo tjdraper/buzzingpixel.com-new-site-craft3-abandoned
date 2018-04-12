@@ -30,13 +30,11 @@ return [
      */
     'GET /' => 'dev/pages/index',
 
-
     /**
      * Custom Websites page
      * @see \dev\controllers\PagesController::actionCustomWebsites()
      */
     'GET /work-with-me/custom-websites' => 'dev/pages/custom-websites',
-
 
     /**
      * Custom Add-ons page
@@ -44,18 +42,23 @@ return [
      */
     'GET /work-with-me/custom-add-ons' => 'dev/pages/custom-addons',
 
-
     /**
      * Managed Hosting page
      * @see \dev\controllers\PagesController::actionHosting()
      */
     'GET /work-with-me/hosting' => 'dev/pages/hosting',
 
-
     /**
      * Portfolio page
      * @see \dev\controllers\PagesController::actionHosting()
      */
     'GET /work-with-me/portfolio' => 'dev/pages/portfolio',
+
+    /**
+     * News page (paginated)
+     * @see \dev\controllers\ListingController::actionNews()
+     */
+    'GET /news' => 'dev/listing/news',
+    'GET /news/page/<pageNum:\d+>' => 'dev/listing/news',
 
 ];
