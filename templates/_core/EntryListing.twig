@@ -12,9 +12,16 @@
 {# @var string listingBase #}
 {# @var array pagination #}
 
+{% set breadcrumbs = breadcrumbs|default(false) %}
+
 {% extends '_layouts/Master.twig' %}
 
 {% block content %}
+    {% if breadcrumbs is iterable %}
+        {% include '_partials/Breadcrumbs.twig' with {
+            breadcrumbs: breadcrumbs
+        } %}
+    {% endif %}
     <div class="Listings">
         <div class="Listings__Inner">
             {% if not entriesTotal %}

@@ -1,0 +1,22 @@
+{# @var array breadcrumbs #}
+
+<div class="Breadcrumbs">
+    <div class="Breadcrumbs__Inner">
+        <ul class="Breadcrumbs__List">
+            {% for breadcrumb in breadcrumbs %}
+                <li class="Breadcrumbs__ListItem">
+                    {% if breadcrumb['link'] is defined and breadcrumb.link %}
+                        <a href="{{ breadcrumb.link }}" class="Breadcrumbs__Link">
+                            {% if not loop.first %}<span class="Breadcrumbs__DisplayHelper"></span>{% endif %}
+                            {{ breadcrumb.content|smartypants }}
+                        </a>
+                    {% else %}
+                        <span class="Breadcrumbs__Text">
+                            {{ breadcrumb.content|smartypants }}
+                        </span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

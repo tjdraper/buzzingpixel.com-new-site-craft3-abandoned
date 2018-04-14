@@ -6,9 +6,16 @@
 {# @var array header #}
 {# @var array contentBlocks #}
 
+{% set breadcrumbs = breadcrumbs|default(false) %}
+
 {% extends '_layouts/Master.twig' %}
 
 {% block content %}
+    {% if breadcrumbs is iterable %}
+        {% include '_partials/Breadcrumbs.twig' with {
+            breadcrumbs: breadcrumbs
+        } %}
+    {% endif %}
     {% for block in contentBlocks %}
         {% include '_contentBlocks/_blockIncluder.twig' with {
             block: block

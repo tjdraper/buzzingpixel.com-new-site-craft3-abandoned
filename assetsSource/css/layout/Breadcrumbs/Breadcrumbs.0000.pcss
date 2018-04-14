@@ -1,0 +1,75 @@
+.Breadcrumbs {
+    background-color: var(--lightestGray);
+    overflow: hidden;
+}
+
+.Breadcrumbs__List {
+    list-style-type: none;
+    margin: 0;
+}
+
+.Breadcrumbs__ListItem {
+    display: inline-block;
+    margin: 0;
+}
+
+.Breadcrumbs__Link,
+.Breadcrumbs__Text {
+    display: inline-block;
+    padding: 6px 12px;
+    position: relative;
+}
+
+.Breadcrumbs__Link {
+    background-color: var(--lighterGray);
+    text-decoration: none;
+}
+
+.Breadcrumbs__ListItem:not(:first-child) {
+    padding-left: 14px;
+}
+
+.Breadcrumbs__Link:before,
+.Breadcrumbs__Link:after {
+    display: block;
+    position: absolute;
+    right: -9px;
+    top: 0;
+}
+
+.Breadcrumbs__DisplayHelper {
+    background-color: var(--lighterGray);
+    display: block;
+    height: 100%;
+    left: -14px;
+    position: absolute;
+    top:0;
+    width: 14px;
+}
+
+.Breadcrumbs__Link:before {
+    right: -11px;
+    top: -2px;
+    z-index: 2;
+
+    @mixin caretRight #fff, 12px, 20px;
+}
+
+.Breadcrumbs__Link:after {
+    @mixin caretRight var(--lighterGray), 10px, 18px;
+    z-index: 3;
+}
+
+.Breadcrumbs__Link:hover {
+    background-color: var(--orange);
+    color: #fff;
+    text-decoration: none;
+}
+
+.Breadcrumbs__Link:hover:after {
+    border-left-color: var(--orange);
+}
+
+.Breadcrumbs__Link:hover .Breadcrumbs__DisplayHelper {
+    background-color: var(--orange);
+}
