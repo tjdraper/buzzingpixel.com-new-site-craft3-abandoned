@@ -164,4 +164,28 @@ class FileContentService
 
         return $listingsModel;
     }
+
+    /**
+     * Gets entry content by slug
+     * @param string $slug
+     * @param string $dir
+     * @return null|ListingMetaModel
+     * @throws \Exception
+     */
+    public function getEntryContentBySlug(string $slug, string $dir)
+    {
+        $listingsModel = $this->getListingsFromDirectory($dir);
+
+        if (! isset($listingsModel->listings[$slug])) {
+            return null;
+        }
+
+        $model = $listingsModel->listings[$slug];
+
+        $model->contentModel = $this->getContentFromDirInner(
+            $model->fullDirectoryPath
+        );
+
+        return $model;
+    }
 }

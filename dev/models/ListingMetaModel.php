@@ -3,6 +3,7 @@
 namespace dev\models;
 
 use felicity\datamodel\Model;
+use dev\models\FileContentModel;
 use felicity\datamodel\services\datahandlers\ArrayHandler;
 use felicity\datamodel\services\datahandlers\StringHandler;
 use felicity\datamodel\services\datahandlers\DateTimeHandler;
@@ -35,6 +36,9 @@ class ListingMetaModel extends Model
 
     /** @var \DateTime $date */
     public $date;
+
+    /** @var FileContentModel $contentModel */
+    public $contentModel;
 
     /**
      * @inheritdoc

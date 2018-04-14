@@ -3,6 +3,7 @@
 namespace dev\models;
 
 use felicity\datamodel\Model;
+use dev\models\ListingMetaModel;
 use felicity\datamodel\services\datahandlers\ArrayHandler;
 
 /**
@@ -10,7 +11,7 @@ use felicity\datamodel\services\datahandlers\ArrayHandler;
  */
 class ListingsModel extends Model
 {
-    /** @var array $listings */
+    /** @var ListingMetaModel[] $listings */
     public $listings;
 
     /** @var array $meta */

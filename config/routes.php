@@ -61,4 +61,10 @@ return [
     'GET /news' => 'dev/listing/news',
     'GET /news/page/<pageNum:\d+>' => 'dev/listing/news',
 
+    /**
+     * News permalink
+     * @see \dev\controllers\ListingController::actionNews()
+     */
+    'GET /news/<slug:[^\/]+>' => 'dev/listing/news-permalink',
+
 ];
