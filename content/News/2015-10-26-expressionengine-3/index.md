@@ -1,5 +1,6 @@
 {
     "title": "ExpressionEngine 3",
+    "description": "Some BuzzingPixel add-ons are already up to speed with EE 3, others are following close behind!",
     "slug": "expressionengine-3",
     "date": "2015-10-26 4:00 pm"
 }

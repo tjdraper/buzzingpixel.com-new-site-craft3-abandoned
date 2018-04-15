@@ -8,4 +8,4 @@
     }
 }
 
-I made friends, I learned cool things, I made cool things. But all things must come to an end.
+I had a lot of fun at Caddis. I made friends, I learned cool things, I made cool things. But all things must come to an end.

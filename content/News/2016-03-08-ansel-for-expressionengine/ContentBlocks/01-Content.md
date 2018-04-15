@@ -1,9 +1,7 @@
 {
-    "title": "Ansel for ExpressionEngine",
-    "description": "Ansel for ExpressionEngine is here, allowing you define images sizes, limits, and more so content editors always upload the right size image",
-    "shareImage": "/uploads-static/news/2016-03-08-ansel-for-expressionengine/ansel-screen-shot-with-custom-safari-bar-desktop-2x.jpg",
-    "slug": "ansel-for-expressionengine",
-    "date": "2016-03-08 8:00 am"
+    "blockType": "standard",
+    "floatingRightImage": "/uploads-static/news/2016-03-08-ansel-for-expressionengine/ansel-computer-screen.png",
+    "floatingRightImageWidth": 480
 }
 
 I am really and truly excited to release [Ansel for ExpressionEngine]. Ansel is something I’ve been working on for quite a while. It was first conceived of over two years ago while I was working at [Caddis]. I asked my friend and Caddis co-owner, [Michael], if surely there was not a better way to manage image sizes and constraints in a CMS. Using existing resizing tools was a very frustrating experience because they were all blind cropping tools. What I mean is, sure, you could have a file field to upload an image to, but if you resized it, either with ExpressionEngine manipulations, or with tools for resizing images on the fly in templates, those tools would blindly crop and resize. What we wanted was a way to let the user choose what part of the image to see and stay within defined constraints.

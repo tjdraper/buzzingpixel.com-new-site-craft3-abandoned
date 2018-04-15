@@ -1,5 +1,7 @@
 {
     "title": "Ansel for Craft CMS",
+    "description": "Announcing Ansel for Craft CMS, a field type for manipulating and constraining images so you'll never have to worry about uploading the wrong image size again!",
+    "shareImage": "/uploads-static/news/2017-03-30-ansel-for-craft-cms/ansel-craft-mobile-tablet-desktop-2x.jpg",
     "slug": "ansel-for-craft-cms",
     "date": "2017-03-30 9:30 am"
 }

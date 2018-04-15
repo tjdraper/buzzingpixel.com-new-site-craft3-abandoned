@@ -63,7 +63,7 @@ return [
 
     /**
      * News permalink
-     * @see \dev\controllers\ListingController::actionNews()
+     * @see \dev\controllers\ListingController::actionNewsPermalink()
      */
     'GET /news/<slug:[^\/]+>' => 'dev/listing/news-permalink',
 

@@ -32,6 +32,15 @@
                 {% endif %}
                 {% if block['html'] is defined %}
                     <div class="BlockStandard__ContentBody">
+                        {% if block['meta']['floatingRightImage'] is defined %}
+                            <img
+                                src="{{ block.meta.floatingRightImage }}"
+                                {% if block['meta']['floatingRightImageWidth'] %}
+                                width="{{ block.meta.floatingRightImageWidth }}"
+                                {% endif %}
+                                class="img-right"
+                            >
+                        {% endif %}
                         {{ block.html|typeset }}
                     </div>
                 {% endif %}

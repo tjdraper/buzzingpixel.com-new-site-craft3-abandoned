@@ -1,5 +1,6 @@
 {
     "title": "The Next Adventure",
+    "description": "I learned a lot working at Caddis and I can't wait to start the next adventure!",
     "slug": "the-next-adventure",
     "date": "2015-11-04 12:30 pm"
 }

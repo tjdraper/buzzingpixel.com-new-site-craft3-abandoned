@@ -1,5 +1,6 @@
 {
     "title": "Category Construct for ExpressionEngine 3",
+    "description": "Category Construct has been rebuilt for ExpressionEngine 3",
     "slug": "category-construct-for-expressionengine-3",
     "date": "2015-10-27 9:00 pm"
 }

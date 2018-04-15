@@ -1,5 +1,6 @@
 {
     "title": "Category Construct 2.1.0",
+    "description": "Check out the release of CategoryConstruct 2.1.0 which fixes a few bugs and adds some features",
     "slug": "category-construct-2-1-0",
     "date": "2016-01-14 10:00 am"
 }

@@ -1,5 +1,7 @@
 {
     "title": "Treasury for ExpressionEngine",
+    "description": "Treasury is an Amazon S3/FTP/SFTP capable file manager for ExpressionEngine 3",
+    "shareImage": "/uploads-static/news/2016-07-01-treasury-for-expressionengine/treasury-safari-bar-tablet-desktop-2x.jpg",
     "slug": "treasury-for-expressionengine",
     "date": "2016-07-01 8:00 am"
 }

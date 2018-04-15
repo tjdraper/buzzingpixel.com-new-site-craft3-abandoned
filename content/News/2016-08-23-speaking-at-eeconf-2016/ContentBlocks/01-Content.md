@@ -1,8 +1,7 @@
 {
-    "title": "Speaking at ExpressionEngine Conference 2016",
-    "shareImage": "/uploads-static/news/2016-08-23-speaking-at-eeconf-2016/gitflow.jpg",
-    "slug": "speaking-at-eeconf-2016",
-    "date": "2016-08-23 10:30 am"
+    "blockType": "standard",
+    "floatingRightImage": "/uploads-static/news/2016-08-23-speaking-at-eeconf-2016/gitflow.jpg",
+    "floatingRightImageWidth": 480
 }
 
 I am excited (and slightly nervous) to tell you that one of the presentations I submitted to [ExpressionEngine Conference 2016] has been accepted. I will be speaking on Git best practices and how best to leverage Git when using ExpressionEngine. This is a topic I am passionate and excited about. Git is one of the best things that happened to me as a developer and I’ve put a lot of time and effort into learning how best to leverage Git. I also believe in sharing knowledge so I’m very happy to bring the knowledge that I have to a community I truly enjoy being part of.

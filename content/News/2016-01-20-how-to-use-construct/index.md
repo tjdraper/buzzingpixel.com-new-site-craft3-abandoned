@@ -1,5 +1,6 @@
 {
     "title": "How To Use Construct",
+    "description": "Learn how to use Construct for ExpressionEngine 3 in detail with illustrative screen shots",
     "slug": "how-to-use-construct",
     "date": "2016-01-20 1:00 pm"
 }

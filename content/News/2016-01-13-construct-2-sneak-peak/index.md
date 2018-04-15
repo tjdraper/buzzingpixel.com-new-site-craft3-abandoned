@@ -1,5 +1,6 @@
 {
     "title": "Construct 2 Sneak Peak",
+    "description": "Get a look at the upcoming release of Construct 2 for ExpressionEngine",
     "slug": "construct-2-sneak-peak",
     "date": "2016-01-13 1:00 pm"
 }

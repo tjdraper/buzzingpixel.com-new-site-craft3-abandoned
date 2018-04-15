@@ -224,6 +224,8 @@ class ListingController extends BaseController
             'content' => 'Viewing Entry',
         ];
 
+        $shareImage = $contentMeta['shareImage'] ?? null;
+
         return $this->renderTemplate('_core/PageStandard.twig', compact(
             'contentModel',
             'content',
@@ -232,7 +234,8 @@ class ListingController extends BaseController
             'metaDescription',
             'header',
             'contentBlocks',
-            'breadcrumbs'
+            'breadcrumbs',
+            'shareImage'
         ));
     }
 }

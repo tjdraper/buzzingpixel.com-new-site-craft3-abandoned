@@ -1,5 +1,6 @@
 {
     "title": "Construct 2",
+    "description": "Construct 2.0.0 is a free update for existing users",
     "slug": "construct-2",
     "date": "2016-01-18 4:45 pm"
 }
