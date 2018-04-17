@@ -1,7 +1,6 @@
 {
-    "blockType": "standard",
+    "blockType": "latestNews",
+    "limit": 2,
     "bgColor": "Green",
-    "heading": "Latest News Placeholder"
+    "heading": "Latest News"
 }
-
-TODO: replace this placeholder

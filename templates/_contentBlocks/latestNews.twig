@@ -1,0 +1,38 @@
+{# @var \craft\web\twig\variables\CraftVariable craft #}
+{# @var array block #}
+
+{# @var \dev\services\FileContentService fileContentService #}
+{% set fileContentService = craft.fileContent.get() %}
+
+{% set limit = 2 %}
+
+{% if block['meta']['limit'] is defined %}
+    {% set limit = block.meta.limit %}
+{% endif %}
+
+{% set listings = fileContentService.getListingsFromDirectory('News').listings|slice(0, limit) %}
+
+<div class="BlockLatestNews">
+    <div class="BlockLatestNews__Inner">
+        {% if block['meta']['heading'] is defined %}
+            <h2 class="BlockLatestNews__Heading">
+                {{ block.meta.heading|typeset }}
+            </h2>
+        {% endif %}
+        <div class="BlockLatestNews__Items">
+            {% for listing in listings %}
+                <div class="BlockLatestNews__Item">
+                    <a href="/news/{{ listing.slug }}" class="BlockLatestNews__ItemHeading">
+                        {{ listing.title|typeset }}
+                    </a>
+                    <div class="BlockLatestNews__ItemBody">
+                        <p>{{ listing.html|striptags|truncate(200)|typeset }}</p>
+                    </div>
+                    <a href="/news/{{ listing.slug }}" class="button button--colored">
+                        Read Entry &raquo;
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

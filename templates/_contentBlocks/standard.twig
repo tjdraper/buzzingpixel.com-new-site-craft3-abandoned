@@ -21,9 +21,9 @@
         <div class="BlockStandard__ContentPrimary{% if hasFeaturedImage %} BlockStandard__ContentPrimary--HasFeaturedImage{% endif %} BlockStandard__ContentPrimary--FeaturedImageStyle-{{ featuredImageStyle }}{% if featuredImageSmallPullLeft %} BlockStandard__ContentPrimary--FeaturedImageSmallPullLeft{% endif %}">
             <div class="BlockStandard__ContentPrimaryInner">
                 {% if block['meta']['heading'] is defined %}
-                    <h1 class="BlockStandard__Heading">
+                    <h2 class="BlockStandard__Heading">
                         {{ block.meta.heading|typeset }}
-                    </h1>
+                    </h2>
                 {% endif %}
                 {% if block['meta']['subHeading'] is defined %}
                     <h2 class="BlockStandard__SubHeading">
