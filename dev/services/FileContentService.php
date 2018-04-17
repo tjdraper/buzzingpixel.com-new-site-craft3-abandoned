@@ -29,6 +29,7 @@ class FileContentService
      * @param string $contentPath
      * @param Parser $parser
      * @param ListingMetaModel $listingMetaModel
+     * @param ListingsModel $listingsModel
      */
     public function __construct(
         string $contentPath,

@@ -17,7 +17,9 @@ use yii\base\Module as ModuleBase;
 use dev\services\FileContentService;
 use dev\services\EntryRoutingService;
 use craft\events\SetElementRouteEvent;
+use dev\variables\FileContentVariable;
 use dev\services\FileOperationsService;
+use craft\web\twig\variables\CraftVariable;
 use dev\twigextensions\TypesetTwigExtension;
 use dev\twigextensions\FileTimeTwigExtension;
 use craft\console\Application as ConsoleApplication;
@@ -43,6 +45,7 @@ class Module extends ModuleBase
         $this->registerTwigExtensions();
         $this->registerGlobals();
         $this->setEvents();
+        $this->registerVariables();
 
         // Add in our console commands
         if (Craft::$app instanceof ConsoleApplication) {
@@ -94,6 +97,23 @@ class Module extends ModuleBase
             function (SetElementRouteEvent $eventModel) {
                 $entryRoutingService = new EntryRoutingService();
                 $entryRoutingService->entryControllerRouting($eventModel);
+            }
+        );
+    }
+
+    /**
+     * Register variables
+     * @throws \Exception
+     */
+    private function registerVariables()
+    {
+        Event::on(
+            CraftVariable::class,
+            CraftVariable::EVENT_INIT,
+            function (Event $e) {
+                /** @var CraftVariable $variable */
+                $variable = $e->sender;
+                $variable->set('fileContent', FileContentVariable::class);
             }
         );
     }
