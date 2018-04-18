@@ -1,0 +1,16 @@
+{% set standardPad = standardPad|default(true) %}
+
+<div class="LayoutTwoColumn">
+    <div class="LayoutTwoColumn__Inner">
+        <div class="LayoutTwoColumn__Left">
+            <div class="LayoutTwoColumn__StandardContentWrapper{% if standardPad %} LayoutTwoColumn__StandardContentWrapper--IsPadded{% endif %}">
+                {{ block('leftColumnContent') ?? '' }}
+            </div>
+        </div>
+        <div class="LayoutTwoColumn__Right">
+            <div class="LayoutTwoColumn__StandardContentWrapper{% if standardPad %} LayoutTwoColumn__StandardContentWrapper--IsPadded{% endif %}">
+                {{ block('rightColumnContent') ?? '' }}
+            </div>
+        </div>
+    </div>
+</div>

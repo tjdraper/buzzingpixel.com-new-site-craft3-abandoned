@@ -1,0 +1,27 @@
+.LayoutTwoColumn__Inner {
+    display: flex;
+}
+
+.LayoutTwoColumn__Right,
+.LayoutTwoColumn__Left {
+    width: 50%;
+}
+
+.LayoutTwoColumn__Left {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.LayoutTwoColumn__Left:after {
+    bottom: 50%;
+    height: 80%;
+    left: auto;
+    right: 0;
+    transform: translate(0, 50%);
+    width: 1px;
+}
+
+.LayoutTwoColumn__StandardContentWrapper--IsPadded {
+    padding-left: 36px;
+    padding-right: 36px;
+}
