@@ -1,6 +1,24 @@
 {% set standardPad = standardPad|default(true) %}
+{% set noticeTitle = noticeTitle|default('Note') %}
+{% set noticeContent = noticeContent|default(null) %}
 
 <div class="LayoutTwoColumn">
+    <div class="LayoutTwoColumn__NoticeContainer">
+        {% if noticeContent %}
+            <div class="LayoutTwoColumn__Notice">
+                <div class="LayoutTwoColumn__StandardContentWrapper{% if standardPad %} LayoutTwoColumn__StandardContentWrapper--IsPadded{% endif %}">
+                    <div class="Note">
+                        <div class="Note__Title">
+                            {{ noticeTitle|typeset }}
+                        </div>
+                        <div class="Note__Body">
+                            {{ noticeContent|typeset }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
     <div class="LayoutTwoColumn__Inner">
         <div class="LayoutTwoColumn__Left">
             <div class="LayoutTwoColumn__StandardContentWrapper{% if standardPad %} LayoutTwoColumn__StandardContentWrapper--IsPadded{% endif %}">
