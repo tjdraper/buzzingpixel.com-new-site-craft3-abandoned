@@ -11,3 +11,23 @@
 .BlockContact__SubmitWrapper {
     text-align: right;
 }
+
+.BlockContact__InputLabel--HasError {
+    color: var(--orange);
+}
+
+.BlockContact__Input--HasError,
+.BlockContact__Input--HasError:hover,
+.BlockContact__Input--HasError:focus,
+.BlockContact__TextArea--HasError,
+.BlockContact__TextArea--HasError:hover,
+.BlockContact__TextArea--HasError:focus {
+    border-color: var(--orange);
+}
+
+.BlockContact__InputErrorMessage {
+    font-style: normal;
+    font-weight: var(--StandardFontBoldWeight);
+    margin-bottom: 20px;
+    margin-top: -16px;
+}

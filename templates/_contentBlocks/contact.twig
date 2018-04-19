@@ -49,7 +49,7 @@
                         <input
                             type="text"
                             name="name"
-                            class="input BlockContact__Input"
+                            class="input BlockContact__Input{% if contactInputErrors['email'] is defined %} BlockContact__Input--HasError{% endif %}"
                             {% if contactInputValues['name'] is defined %}
                             value="{{ contactInputValues.name }}"
                             {% endif %}
@@ -66,7 +66,7 @@
                         <input
                             type="email"
                             name="email"
-                            class="input BlockContact__Input"
+                            class="input BlockContact__Input{% if contactInputErrors['email'] is defined %} BlockContact__Input--HasError{% endif %}"
                             {% if contactInputValues['email'] is defined %}
                             value="{{ contactInputValues.email }}"
                             {% endif %}
@@ -82,7 +82,7 @@
                         Your Message
                         <textarea
                             name="message"
-                            class="textarea BlockContact__TextArea"
+                            class="textarea BlockContact__TextArea{% if contactInputErrors['email'] is defined %} BlockContact__TextArea--HasError{% endif %}"
                             required
                         >{% if contactInputValues['message'] is defined %}{{ contactInputValues.message }}{% endif %}</textarea>
                         {% if contactInputErrors['message'] is defined %}
