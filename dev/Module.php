@@ -14,6 +14,7 @@ use dev\models\ListingMetaModel;
 use dev\services\GlobalsService;
 use dev\services\TypesetService;
 use yii\base\Module as ModuleBase;
+use dev\variables\StorageVariable;
 use dev\services\FileContentService;
 use dev\services\EntryRoutingService;
 use craft\events\SetElementRouteEvent;
@@ -113,6 +114,7 @@ class Module extends ModuleBase
             function (Event $e) {
                 /** @var CraftVariable $variable */
                 $variable = $e->sender;
+                $variable->set('storage', StorageVariable::class);
                 $variable->set('fileContent', FileContentVariable::class);
             }
         );
