@@ -61,6 +61,16 @@ class PagesController extends BaseController
     }
 
     /**
+     * Displays Portfolio page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionContact(): Response
+    {
+        return $this->parsePage('Contact');
+    }
+
+    /**
      * Parses a page
      * @param string directory
      * @return Response

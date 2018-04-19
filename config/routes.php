@@ -55,6 +55,12 @@ return [
     'GET /work-with-me/portfolio' => 'dev/pages/portfolio',
 
     /**
+     * Contact page
+     * @see \dev\controllers\PagesController::actionContact()
+     */
+    'GET /contact' => 'dev/pages/contact',
+
+    /**
      * News page (paginated)
      * @see \dev\controllers\ListingController::actionNews()
      */

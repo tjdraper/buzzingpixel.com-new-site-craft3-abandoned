@@ -1,0 +1,30 @@
+{# @var array block #}
+
+<div class="BlockContact">
+    <div class="BlockContact__Inner">
+        {% embed '_embeds/LayoutTwoColumns.twig' %}
+            {% block leftColumnContent %}
+                {{ block.html|typeset }}
+            {% endblock %}
+            {% block rightColumnContent %}
+                <form action="#" class="BlockContact__Form">
+                    <label class="label BlockConact__InputLabel">
+                        Your Name
+                        <input type="text" class="input BlockContact__Input" required>
+                    </label>
+                    <label class="label BlockContact__InputLabel">
+                        Your Email Address
+                        <input type="email" class="input BlockContact__Input" required>
+                    </label>
+                    <label class="label BlockContact__InputLabel">
+                        Your Message
+                        <textarea class="textarea BlockContact__TextArea" required></textarea>
+                    </label>
+                    <div class="BlockContact__SubmitWrapper">
+                        <button class="button">Send your Message</button>
+                    </div>
+                </form>
+            {% endblock %}
+        {% endembed %}
+    </div>
+</div>
