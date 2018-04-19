@@ -61,13 +61,23 @@ class PagesController extends BaseController
     }
 
     /**
-     * Displays Portfolio page
+     * Displays the contact page
      * @return Response
      * @throws \Exception
      */
     public function actionContact(): Response
     {
         return $this->parsePage('Contact');
+    }
+
+    /**
+     * Displays contact thanks page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionContactThanks(): Response
+    {
+        return $this->parsePage('ContactThanks');
     }
 
     /**

@@ -62,6 +62,12 @@ return [
     'POST /contact' => 'dev/pages/contact',
 
     /**
+     * Contact thank you page
+     * @see \dev\controllers\PagesController::actionContactThanks()
+     */
+    'GET /contact/thanks' => 'dev/pages/contact-thanks',
+
+    /**
      * News page (paginated)
      * @see \dev\controllers\ListingController::actionNews()
      */
