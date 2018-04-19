@@ -1,0 +1,12 @@
+{% set noteTitle = block('noteTitle') ?? 'Note' %}
+{% set noteContent = block('noteContent') ?? '' %}
+{% set isError = isError|default(false) %}
+
+<div class="Note{% if isError %} Note__IsError{% endif %}">
+    <div class="Note__Title{% if isError %} Note__Title--IsError{% endif %}">
+        {{ noteTitle|typeset }}
+    </div>
+    <div class="Note__Body{% if isError %} Note__Body--IsError{% endif %}">
+        {{ noteContent|typeset }}
+    </div>
+</div>

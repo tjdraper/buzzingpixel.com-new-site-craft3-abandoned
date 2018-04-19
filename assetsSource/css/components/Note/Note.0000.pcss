@@ -1,14 +1,19 @@
 .Note {
-    background-color: rgba(207, 100, 14, 0.15);
-    border: 1px solid rgba(0, 140, 105, 0.5);
+    background-color: rgba(var(--orange), 0.15);
+    border: 1px solid rgba(var(--green), 0.5);
     font-size: 14px;
     margin: 30px 0;
     padding: 20px;
     position: relative;
 }
 
+.Note__IsError {
+    background-color: rgba(var(--lightOrange), 0.8);
+    border-color: var(--lighterGreen);
+}
+
 .Note__Title {
-    background-color: rgba(0, 140, 105, 0.75);
+    background-color: rgba(var(--green), 0.75);
     border-radius: 2px;
     color: #fff;
     display: block;
@@ -18,4 +23,13 @@
     padding: 3px 10px;
     position: absolute;
     top: -12px;
+}
+
+.Note__Title--IsError {
+    background-color: rgba(var(--darkerOrange), 0.75);
+}
+
+.Note__Body--IsError,
+.Note__Body--IsError p {
+    color: #fff;
 }

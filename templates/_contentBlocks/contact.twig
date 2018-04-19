@@ -13,6 +13,7 @@
 <div class="BlockContact">
     <div class="BlockContact__Inner">
         {% embed '_embeds/LayoutTwoColumns.twig' with {
+            noticeIsError: true,
             noticeTitle: 'Form Submission Error',
             noticeContent: contactErrorMessage|markdown,
         } %}
