@@ -7,18 +7,41 @@
                 {{ block.html|typeset }}
             {% endblock %}
             {% block rightColumnContent %}
-                <form action="#" class="BlockContact__Form">
-                    <label class="label BlockConact__InputLabel">
+                <form class="BlockContact__Form" method="post" novalidate>
+                    {{ csrfInput() }}
+
+                    <input type="hidden" name="action" value="dev/contact-submission/handle-submission">
+                    <input type="hidden" name="redirect" value="/contact/thanks">
+
+                    {#
+                        This is a honeypot, but we're trying not to give that away to spambots.
+                        By making it required, and making it look like a normal input, AND pre-filling
+                        it with content, we ensure users can't submit the form and get through unless they're
+                        real people with JS enabled (JS will unrequire it and remove the content)
+
+                        A second input will also act as a honey pot, but we're not touching that input with a pre-filled value or required.
+                        No prefilled values and js, in case a spam bot is sneaky
+                    #}
+                    <label for="site" class="label BlockContact__InputLabel">
+                        Site
+                        <input type="text" name="site" class="input BlockContact__Input" id="site" value="buzzingpixel.com" required>
+                    </label>
+                    <label for="mailing_address" class="label BlockContact__InputLabel">
+                        Mailing Address
+                        <input type="text" name="mailingAddress" class="input BlockContact__Input" id="mailing_address">
+                    </label>
+
+                    <label class="label BlockContact__InputLabel">
                         Your Name
-                        <input type="text" class="input BlockContact__Input" required>
+                        <input type="text" name="name" class="input BlockContact__Input" required>
                     </label>
                     <label class="label BlockContact__InputLabel">
                         Your Email Address
-                        <input type="email" class="input BlockContact__Input" required>
+                        <input type="email" name="email" class="input BlockContact__Input" required>
                     </label>
                     <label class="label BlockContact__InputLabel">
                         Your Message
-                        <textarea class="textarea BlockContact__TextArea" required></textarea>
+                        <textarea name="message" class="textarea BlockContact__TextArea" required></textarea>
                     </label>
                     <div class="BlockContact__SubmitWrapper">
                         <button class="button">Send your Message</button>

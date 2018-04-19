@@ -59,6 +59,7 @@ return [
      * @see \dev\controllers\PagesController::actionContact()
      */
     'GET /contact' => 'dev/pages/contact',
+    'POST /contact' => 'dev/pages/contact',
 
     /**
      * News page (paginated)
