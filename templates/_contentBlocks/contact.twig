@@ -1,8 +1,21 @@
 {# @var array block #}
+{# @var \craft\web\twig\variables\CraftVariable craft #}
+
+{% set storageService = craft.storage.get() %}
+
+{# @var \dev\services\StorageService storageService #}
+
+{% set contactHasErrors = storageService.get('ContactHasErrors') %}
+{% set contactErrorMessage = storageService.get('ContactErrorMessage')|default('') %}
+{% set contactInputValues = storageService.get('ContactInputValues')|default({}) %}
+{% set contactInputErrors = storageService.get('ContactInputErrors')|default({}) %}
 
 <div class="BlockContact">
     <div class="BlockContact__Inner">
-        {% embed '_embeds/LayoutTwoColumns.twig' %}
+        {% embed '_embeds/LayoutTwoColumns.twig' with {
+            noticeTitle: 'Form Submission Error',
+            noticeContent: contactErrorMessage|markdown,
+        } %}
             {% block leftColumnContent %}
                 {{ block.html|typeset }}
             {% endblock %}
@@ -31,17 +44,52 @@
                         <input type="text" name="mailingAddress" class="input BlockContact__Input" id="mailing_address">
                     </label>
 
-                    <label class="label BlockContact__InputLabel">
+                    <label class="label BlockContact__InputLabel{% if contactInputErrors['name'] is defined %} BlockContact__InputLabel--HasError{% endif %}">
                         Your Name
-                        <input type="text" name="name" class="input BlockContact__Input" required>
+                        <input
+                            type="text"
+                            name="name"
+                            class="input BlockContact__Input"
+                            {% if contactInputValues['name'] is defined %}
+                            value="{{ contactInputValues.name }}"
+                            {% endif %}
+                            required
+                        >
+                        {% if contactInputErrors['name'] is defined %}
+                            <div class="BlockContact__InputErrorMessage">
+                                {{ contactInputErrors.name|typeset }}
+                            </div>
+                        {% endif %}
                     </label>
-                    <label class="label BlockContact__InputLabel">
+                    <label class="label BlockContact__InputLabel{% if contactInputErrors['email'] is defined %} BlockContact__InputLabel--HasError{% endif %}">
                         Your Email Address
-                        <input type="email" name="email" class="input BlockContact__Input" required>
+                        <input
+                            type="email"
+                            name="email"
+                            class="input BlockContact__Input"
+                            {% if contactInputValues['email'] is defined %}
+                            value="{{ contactInputValues.email }}"
+                            {% endif %}
+                            required
+                        >
+                        {% if contactInputErrors['email'] is defined %}
+                            <div class="BlockContact__InputErrorMessage">
+                                {{ contactInputErrors.email|typeset }}
+                            </div>
+                        {% endif %}
                     </label>
-                    <label class="label BlockContact__InputLabel">
+                    <label class="label BlockContact__InputLabel{% if contactInputErrors['message'] is defined %} BlockContact__InputLabel--HasError{% endif %}">
                         Your Message
-                        <textarea name="message" class="textarea BlockContact__TextArea" required></textarea>
+                        <textarea
+                            name="message"
+                            class="textarea BlockContact__TextArea"
+                            required
+                        >{% if contactInputValues['message'] is defined %}{{ contactInputValues.message }}{% endif %}</textarea>
+                        {% if contactInputErrors['message'] is defined %}
+                            <div class="BlockContact__InputErrorMessage">
+                                {{ contactInputErrors.message|typeset }}
+                            </div>
+                        {% endif %}
                     </label>
                     <div class="BlockContact__SubmitWrapper">
                         <button class="button">Send your Message</button>
