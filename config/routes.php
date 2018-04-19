@@ -80,4 +80,10 @@ return [
      */
     'GET /news/<slug:[^\/]+>' => 'dev/listing/news-permalink',
 
+    /**
+     * Ansel Craft Page
+     * @see \dev\controllers\PagesController::actionAnselCraft()
+     */
+    'GET /software/ansel-craft' => 'dev/pages/ansel-craft',
+
 ];

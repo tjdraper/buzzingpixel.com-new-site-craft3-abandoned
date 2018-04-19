@@ -18,7 +18,7 @@
         {
             "style": "orange",
             "content": "Ansel for Craft &raquo;",
-            "link": "//software/ansel-craft"
+            "link": "/software/ansel-craft"
         }
     ],
     "ctaGroup-disabled": [

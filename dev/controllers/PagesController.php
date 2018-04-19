@@ -81,6 +81,16 @@ class PagesController extends BaseController
     }
 
     /**
+     * Displays contact thanks page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionAnselCraft(): Response
+    {
+        return $this->parsePage('AnselCraft');
+    }
+
+    /**
      * Parses a page
      * @param string directory
      * @return Response

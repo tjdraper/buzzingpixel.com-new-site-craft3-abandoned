@@ -16,6 +16,11 @@
     {% set featuredImageSmallPullLeft = true %}
 {% endif %}
 
+{% set featuredImageMaxWidth = false %}
+{% if block['meta']['featuredImage']['maxWidth'] is defined %}
+    {% set featuredImageMaxWidth = block.meta.featuredImage.maxWidth %}
+{% endif %}
+
 <div class="BlockStandard">
     <div class="BlockStandard__Inner{% if hasFeaturedImage %} BlockStandard__Inner--HasFeaturedImage{% else %} BlockStandard__Inner--HasNoFeaturedImage{% endif %} BlockStandard__Inner--FeaturedImageStyle-{{ featuredImageStyle }}{% if featuredImageSmallPullLeft %} BlockStandard__Inner--FeaturedImageSmallPullLeft{% endif %}">
         <div class="BlockStandard__ContentPrimary{% if hasFeaturedImage %} BlockStandard__ContentPrimary--HasFeaturedImage{% endif %} BlockStandard__ContentPrimary--FeaturedImageStyle-{{ featuredImageStyle }}{% if featuredImageSmallPullLeft %} BlockStandard__ContentPrimary--FeaturedImageSmallPullLeft{% endif %}">
@@ -72,6 +77,9 @@
         {% if hasFeaturedImage %}
             <div
                 class="BlockStandard__FeaturedImage{% if featuredImages['hasShadow'] is defined and featuredImages.hasShadow %} BlockStandard__FeaturedImage--HasShadow{% endif %} BlockStandard__FeaturedImage--FeaturedImageStyle-{{ featuredImageStyle }}{% if featuredImageSmallPullLeft %} BlockStandard__FeaturedImage--SmallPullLeft{% endif %}"
+                {% if featuredImageMaxWidth %}
+                style="margin: 0 auto; max-width: {{ featuredImageMaxWidth }}px;"
+                {% endif %}
             >
                 <picture>
                     {% if featuredImages['mobile'] is defined %}
