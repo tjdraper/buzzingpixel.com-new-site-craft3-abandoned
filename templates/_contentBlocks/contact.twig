@@ -16,12 +16,13 @@
             noticeIsError: true,
             noticeTitle: 'Form Submission Error',
             noticeContent: contactErrorMessage|markdown,
+            noticeContainerClass: 'JSContactForm__ErrorMessage',
         } %}
             {% block leftColumnContent %}
                 {{ block.html|typeset }}
             {% endblock %}
             {% block rightColumnContent %}
-                <form class="BlockContact__Form" method="post" novalidate>
+                <form class="BlockContact__Form JSContactForm" method="post">
                     {{ csrfInput() }}
 
                     <input type="hidden" name="action" value="dev/contact-submission/handle-submission">
@@ -38,19 +39,19 @@
                     #}
                     <label for="site" class="label BlockContact__InputLabel BlockContact__InputLabel--Site">
                         Site
-                        <input type="text" name="site" class="input BlockContact__Input" id="site" value="buzzingpixel.com" required>
+                        <input type="text" name="site" class="input BlockContact__Input BlockContact__Input--Site" id="site" value="buzzingpixel.com" required>
                     </label>
                     <label for="mailing_address" class="label BlockContact__InputLabel BlockContact__InputLabel--MailingAddress">
                         Mailing Address
-                        <input type="text" name="mailingAddress" class="input BlockContact__Input" id="mailing_address">
+                        <input type="text" name="mailingAddress" class="input BlockContact__Input BlockContact__Input--MailingAddress">
                     </label>
 
-                    <label class="label BlockContact__InputLabel{% if contactInputErrors['name'] is defined %} BlockContact__InputLabel--HasError{% endif %}">
+                    <label class="label BlockContact__InputLabel{% if contactInputErrors['name'] is defined %} BlockContact__InputLabel--HasError{% endif %} JSContactForm__InputWrapper">
                         Your Name
                         <input
                             type="text"
                             name="name"
-                            class="input BlockContact__Input{% if contactInputErrors['email'] is defined %} BlockContact__Input--HasError{% endif %}"
+                            class="input BlockContact__Input{% if contactInputErrors['email'] is defined %} BlockContact__Input--HasError{% endif %} JSContactForm__Input"
                             {% if contactInputValues['name'] is defined %}
                             value="{{ contactInputValues.name }}"
                             {% endif %}
@@ -62,12 +63,12 @@
                             </div>
                         {% endif %}
                     </label>
-                    <label class="label BlockContact__InputLabel{% if contactInputErrors['email'] is defined %} BlockContact__InputLabel--HasError{% endif %}">
+                    <label class="label BlockContact__InputLabel{% if contactInputErrors['email'] is defined %} BlockContact__InputLabel--HasError{% endif %} JSContactForm__InputWrapper">
                         Your Email Address
                         <input
                             type="email"
                             name="email"
-                            class="input BlockContact__Input{% if contactInputErrors['email'] is defined %} BlockContact__Input--HasError{% endif %}"
+                            class="input BlockContact__Input{% if contactInputErrors['email'] is defined %} BlockContact__Input--HasError{% endif %} JSContactForm__Input"
                             {% if contactInputValues['email'] is defined %}
                             value="{{ contactInputValues.email }}"
                             {% endif %}
@@ -79,11 +80,11 @@
                             </div>
                         {% endif %}
                     </label>
-                    <label class="label BlockContact__InputLabel{% if contactInputErrors['message'] is defined %} BlockContact__InputLabel--HasError{% endif %}">
+                    <label class="label BlockContact__InputLabel{% if contactInputErrors['message'] is defined %} BlockContact__InputLabel--HasError{% endif %} JSContactForm__InputWrapper">
                         Your Message
                         <textarea
                             name="message"
-                            class="textarea BlockContact__TextArea{% if contactInputErrors['email'] is defined %} BlockContact__TextArea--HasError{% endif %}"
+                            class="textarea BlockContact__TextArea{% if contactInputErrors['email'] is defined %} BlockContact__TextArea--HasError{% endif %} JSContactForm__Input"
                             required
                         >{% if contactInputValues['message'] is defined %}{{ contactInputValues.message }}{% endif %}</textarea>
                         {% if contactInputErrors['message'] is defined %}
@@ -93,7 +94,14 @@
                         {% endif %}
                     </label>
                     <div class="BlockContact__SubmitWrapper">
-                        <button class="button">Send your Message</button>
+                        <button
+                            type="submit"
+                            class="button JSContactForm__SubmitButton"
+                            data-value="Send your Message"
+                            data-working="Sending..."
+                        >
+                            Send your Message
+                        </button>
                     </div>
                 </form>
             {% endblock %}

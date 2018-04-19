@@ -139,5 +139,33 @@
                 ga('send', 'pageview');
         </script>
     {% endif %}
+
+    <script type="text/template" id="JSTemplate__Note">
+        {% embed '_embeds/Note.twig' %}{% endembed %}
+    </script>
+
+    <script type="text/template" id="JSTemplate__NoteIsError">
+        {% embed '_embeds/Note.twig' with {
+            isError: true
+        } %}{% endembed %}
+    </script>
+
+    <script type="text/template" id="JSTemplate__TwoColumnNote">
+        <div class="LayoutTwoColumn__Notice">
+            <div class="LayoutTwoColumn__StandardContentWrapper LayoutTwoColumn__StandardContentWrapper--IsPadded">
+                {% embed '_embeds/Note.twig' %}{% endembed %}
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="JSTemplate__TwoColumnNoteIsError">
+        <div class="LayoutTwoColumn__Notice">
+            <div class="LayoutTwoColumn__StandardContentWrapper LayoutTwoColumn__StandardContentWrapper--IsPadded">
+                {% embed '_embeds/Note.twig' with {
+                    isError: true
+                } %}{% endembed %}
+            </div>
+        </div>
+    </script>
 </body>
 </html>

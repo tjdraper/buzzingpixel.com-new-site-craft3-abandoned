@@ -2,9 +2,10 @@
 {% set noticeTitle = noticeTitle|default('Note') %}
 {% set noticeContent = noticeContent|default(null) %}
 {% set noticeIsError = noticeIsError|default(false) %}
+{% set noticeContainerClass = noticeContainerClass|default(false) %}
 
-<div class="LayoutTwoColumn">
-    <div class="LayoutTwoColumn__NoticeContainer">
+<div class="LayoutTwoColumn JSTwoColumnContainer">
+    <div class="LayoutTwoColumn__NoticeContainer{% if noticeContainerClass %} {{ noticeContainerClass }}{% endif %}">
         {% if noticeContent %}
             <div class="LayoutTwoColumn__Notice">
                 <div class="LayoutTwoColumn__StandardContentWrapper{% if standardPad %} LayoutTwoColumn__StandardContentWrapper--IsPadded{% endif %}">
