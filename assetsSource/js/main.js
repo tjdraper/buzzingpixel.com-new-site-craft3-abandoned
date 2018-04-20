@@ -48,6 +48,10 @@ function runMain(F) {
             el: 'body'
         });
     }
+
+    if ($('pre').length) {
+        F.controller.construct('CodeHighlighting');
+    }
 }
 
 runMain(window.FAB);
