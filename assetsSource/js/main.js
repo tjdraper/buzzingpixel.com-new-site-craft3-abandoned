@@ -38,6 +38,16 @@ function runMain(F) {
             el: this
         });
     });
+
+    if ($('.JSDocsPage').length) {
+        F.controller.construct('MobileDocsPagesMenu', {
+            el: 'body'
+        });
+
+        F.controller.construct('DocsSwitcherMenu', {
+            el: 'body'
+        });
+    }
 }
 
 runMain(window.FAB);

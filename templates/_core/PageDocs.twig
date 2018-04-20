@@ -11,21 +11,21 @@
 
 {% extends '_layouts/Docs.twig' %}
 
-{% set bodyClass = 'DocsBody' %}
+{% set bodyClass = 'DocsBody JSDocsPage' %}
 
 {% set backLink = backLink|default('/') %}
 
 {% block header %}
     <div class="DocsHeadingBackLink">
         <a href="{{ backLink }}" class="DocsBackLink">&laquo; Back</a>
-        <h1 class="DocsHeading{% if switcher|length %} DocsHeading--HasNav{% endif %}">
+        <h1 class="DocsHeading{% if switcher|length %} DocsHeading--HasNav JSDocsSwitcherMenuActivator{% endif %}">
             Ansel 2.x Docs
             {% if switcher|length %}<span class="DocsHeading__Caret">{% include '_icons/icon-caret.svg' %}</span>{% endif %}
         </h1>
     </div>
     {% if switcher|length %}
         <nav class="DocsHeadingNav">
-            <ul class="DocsHeadingNav__List">
+            <ul class="DocsHeadingNav__List JSDocsSwitcherMenu__List">
                 {% for item in switcher %}
                     <li class="DocsHeadingNav__ListItem">
                         <a
@@ -43,11 +43,11 @@
 
 {% block aside %}
     <nav class="DocsNav">
-        <div class="DocsNav__MobileActivator">
+        <div class="DocsNav__MobileActivator JSMobileDocsPagesMenuActivator">
             Pages Menu
             <span class="DocsNav__MobileActivatorCaret">{% include '_icons/icon-caret.svg' %}</span>
         </div>
-        <div class="DocsNav__Sections">
+        <div class="DocsNav__Sections JS JSMobileDocsPagesMenu__List">
             {% for item in nav %}
                 <div class="DocsNav__Section">
                     {% if item['SectionName'] is defined and item.SectionName %}
