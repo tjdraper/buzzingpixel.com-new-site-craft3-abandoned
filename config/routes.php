@@ -88,8 +88,8 @@ return [
 
     /**
      * Ansel Craft Docs Page
-     * @see \dev\controllers\DocsController::actionAnselCraftDocs()
+     * @see \dev\controllers\DocsAnselCraftController::actionIndex()
      */
-    'GET /software/ansel-craft/docs' => 'dev/docs/ansel-craft-docs',
+    'GET /software/ansel-craft/docs' => 'dev/docs-ansel-craft/index',
 
 ];

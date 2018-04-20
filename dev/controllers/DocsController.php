@@ -9,38 +9,8 @@ use yii\web\Response;
 /**
  * Class DocsController
  */
-class DocsController extends BaseController
+abstract class DocsController extends BaseController
 {
-    /** @var array $anselSwitcher */
-    private $anselSwitcher = [
-        1 => [
-            'link' => '/software/ansel-craft/docs/v1',
-            'text' => 'Ansel (Craft) 1.x (legacy)',
-            'isActive' => false,
-        ],
-        2 => [
-            'link' => '/software/ansel-craft/docs',
-            'text' => 'Ansel (Craft) 2.x (current)',
-            'isActive' => false,
-        ],
-    ];
-
-    /**
-     * Displays the Ansel Craft docs page
-     * @return Response
-     * @throws \Exception
-     */
-    public function actionAnselCraftDocs(): Response
-    {
-        $this->anselSwitcher[2]['isActive'] = true;
-        return $this->parsePage(
-            'AnselCraft2Docs',
-            $this->anselSwitcher,
-            '/software/ansel-craft',
-            'GettingStarted'
-        );
-    }
-
     /**
      * Parses a docs page
      * @param string $directory
@@ -50,7 +20,7 @@ class DocsController extends BaseController
      * @return Response
      * @throws \Exception
      */
-    public function parsePage(
+    protected function parsePage(
         string $directory,
         array $switcher = [],
         string $backLink = '/',
