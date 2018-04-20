@@ -5,6 +5,8 @@ namespace dev\controllers;
 use Craft;
 use dev\Module;
 use yii\web\Response;
+use GuzzleHttp\Exception\GuzzleException;
+use cebe\markdown\GithubMarkdown as Markdown;
 
 /**
  * Class DocsController
@@ -26,6 +28,78 @@ abstract class DocsController extends BaseController
         string $backLink = '/',
         string $childIndex = ''
     ): Response {
+        $vars = $this->getPageVariablesCommon(
+            $directory,
+            $switcher,
+            $backLink,
+            $childIndex
+        );
+
+        if (! $vars['pageContentModel']) {
+            throw new \HttpException(404);
+        }
+
+        return $this->renderTemplate('_core/PageDocs.twig', $vars);
+    }
+
+    /**
+     * Parses a GitHub Changelog page
+     * @param string $directory
+     * @param array $switcher
+     * @param string $backLink
+     * @param string $metaTitle
+     * @param string $rawChangelogUrl
+     * @return Response
+     * @throws \Exception
+     * @throws GuzzleException
+     * @throws \RuntimeException
+     */
+    protected function parseGithubChangelog(
+        string $directory,
+        array $switcher,
+        string $backLink,
+        string $metaTitle,
+        string $rawChangelogUrl
+    ): Response {
+        $vars = $this->getPageVariablesCommon(
+            $directory,
+            $switcher,
+            $backLink
+        );
+
+        $vars['metaTitle'] = "{$metaTitle} | " . $vars['metaTitle'];
+
+        $resp = Craft::createGuzzleClient()->request('GET', $rawChangelogUrl);
+        $changelogMarkdown = $resp->getBody()->getContents();
+
+        $html = '<div class="ChangelogMarkdownWrapper">';
+        $html .= (new Markdown())->parse($changelogMarkdown);
+        $html .= '</div>';
+
+        $vars['pageSections'][] = [
+            'markdown' => $changelogMarkdown,
+            'meta' => null,
+            'html' => $html,
+        ];
+
+        return $this->renderTemplate('_core/PageDocs.twig', $vars);
+    }
+
+    /**
+     * Gets the variables common to pages
+     * @param string $directory
+     * @param array $switcher
+     * @param string $backLink
+     * @param string $childIndex
+     * @return array
+     * @throws \Exception
+     */
+    private function getPageVariablesCommon(
+        string $directory,
+        array $switcher = [],
+        string $backLink = '/',
+        string $childIndex = ''
+    ): array {
         $contentModel = Module::fileContentService()->getContentFromDir(
             $directory
         );
@@ -39,12 +113,12 @@ abstract class DocsController extends BaseController
 
         $pageContentModel = $contentModel->getChildAtIndex($childIndex);
 
-        if (! $pageContentModel) {
-            throw new \HttpException(404);
-        }
+        $pageContentMeta = [];
 
-        $pageContent = $pageContentModel->getContent();
-        $pageContentMeta = $pageContent['meta'];
+        if ($pageContentModel) {
+            $pageContent = $pageContentModel->getContent();
+            $pageContentMeta = $pageContent['meta'];
+        }
 
         $metaTitle = $pageContentMeta['metaTitle'] ??
             $pageContentMeta['title'] ??
@@ -59,9 +133,14 @@ abstract class DocsController extends BaseController
         }
 
         $pageTitle = $pageContentMeta['title'] ?? '';
-        $pageSections = $pageContentModel->getVars();
 
-        return $this->renderTemplate('_core/PageDocs.twig', compact(
+        $pageSections = [];
+
+        if ($pageContentModel) {
+            $pageSections = $pageContentModel->getVars();
+        }
+
+        return compact(
             'switcher',
             'backLink',
             'nav',
@@ -71,6 +150,6 @@ abstract class DocsController extends BaseController
             'pageContentModel',
             'pageTitle',
             'pageSections'
-        ));
+        );
     }
 }

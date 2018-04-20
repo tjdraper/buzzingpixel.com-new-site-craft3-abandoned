@@ -110,4 +110,7 @@ return [
     /** @see \dev\controllers\DocsAnselCraftController::actionVideos() */
     'GET /software/ansel-craft/docs/videos' => 'dev/docs-ansel-craft/videos',
 
+    /** @see \dev\controllers\DocsAnselCraftController::actionChangelog() */
+    'GET /software/ansel-craft/docs/changelog' => 'dev/docs-ansel-craft/changelog',
+
 ];

@@ -3,6 +3,7 @@
 namespace dev\controllers;
 
 use yii\web\Response;
+use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * Class DocsAnselCraftController
@@ -76,6 +77,24 @@ class DocsAnselCraftController extends DocsController
     public function actionVideos(): Response
     {
         return $this->parsePageAnselCraft2('Videos');
+    }
+
+    /**
+     * Displays the Ansel Craft docs Field Type Use page
+     * @return Response
+     * @throws \Exception
+     * @throws GuzzleException
+     * @throws \RuntimeException
+     */
+    public function actionChangelog(): Response
+    {
+        return $this->parseGithubChangelog(
+            'AnselCraft2Docs',
+            $this->anselSwitcher,
+            '/software/ansel-craft',
+            'Ansel (Craft) Changelog',
+            'https://raw.githubusercontent.com/buzzingpixel/ansel-craft/master/changelog.md'
+        );
     }
 
 
