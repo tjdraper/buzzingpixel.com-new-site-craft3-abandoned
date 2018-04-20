@@ -1,209 +1,107 @@
 {# @var \craft\web\twig\variables\CraftVariable craft #}
+{# @var array switcher #}
+{# @var string backLink #}
+{# @var array nav #}
+{# @var string fullUrlPath #}
+{# @var string metaTitle #}
+{# @var string metaDescription #}
+{# @var \dev\models\FileContentModel pageContentModel #}
+{# @var string pageTitle #}
+{# @var array pageSections #}
 
 {% extends '_layouts/Docs.twig' %}
 
 {% set bodyClass = 'DocsBody' %}
 
+{% set backLink = backLink|default('/') %}
+
 {% block header %}
     <div class="DocsHeadingBackLink">
-        <a href="#" class="DocsBackLink">&laquo; Back</a>
-        <h1 class="DocsHeading DocsHeading--HasNav">
+        <a href="{{ backLink }}" class="DocsBackLink">&laquo; Back</a>
+        <h1 class="DocsHeading{% if switcher|length %} DocsHeading--HasNav{% endif %}">
             Ansel 2.x Docs
-            <span class="DocsHeading__Caret">{% include '_icons/icon-caret.svg' %}</span>
+            {% if switcher|length %}<span class="DocsHeading__Caret">{% include '_icons/icon-caret.svg' %}</span>{% endif %}
         </h1>
     </div>
-    <nav class="DocsHeadingNav">
-        <ul class="DocsHeadingNav__List">
-            <li class="DocsHeadingNav__ListItem">
-                <a href="#" class="DocsHeadingNav__Link">Ansel 1.x Docs</a>
-            </li>
-            <li class="DocsHeadingNav__ListItem">
-                <a href="#" class="DocsHeadingNav__Link DocsHeadingNav__Link--IsActive">Ansel 2.x Docs</a>
-            </li>
-            <li class="DocsHeadingNav__ListItem">
-                <a href="#" class="DocsHeadingNav__Link">Ansel 3.x Docs</a>
-            </li>
-        </ul>
-    </nav>
+    {% if switcher|length %}
+        <nav class="DocsHeadingNav">
+            <ul class="DocsHeadingNav__List">
+                {% for item in switcher %}
+                    <li class="DocsHeadingNav__ListItem">
+                        <a
+                            href="{{ item.link }}"
+                            class="DocsHeadingNav__Link{% if item.isActive %} DocsHeadingNav__Link--IsActive{% endif %}"
+                        >
+                            {{ item.text|typeset }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    {% endif %}
 {% endblock %}
 
 {% block aside %}
     <nav class="DocsNav">
         <div class="DocsNav__MobileActivator">
-            Docs Page Menu
+            Pages Menu
             <span class="DocsNav__MobileActivatorCaret">{% include '_icons/icon-caret.svg' %}</span>
         </div>
         <div class="DocsNav__Sections">
-            <div class="DocsNav__Section">
-                <h2 class="DocsNav__SectionHeading">Some Heading</h2>
-                <ul class="DocsNav__SectionList">
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link DocsNav__Link--IsActive">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="DocsNav__Section">
-                <h2 class="DocsNav__SectionHeading">Some Heading</h2>
-                <ul class="DocsNav__SectionList">
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                </ul>
-            </div><div class="DocsNav__Section">
-                <h2 class="DocsNav__SectionHeading">Some Heading</h2>
-                <ul class="DocsNav__SectionList">
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                </ul>
-            </div><div class="DocsNav__Section">
-                <h2 class="DocsNav__SectionHeading">Some Heading</h2>
-                <ul class="DocsNav__SectionList">
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                </ul>
-            </div><div class="DocsNav__Section">
-                <h2 class="DocsNav__SectionHeading">Some Heading</h2>
-                <ul class="DocsNav__SectionList">
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                </ul>
-            </div><div class="DocsNav__Section">
-                <h2 class="DocsNav__SectionHeading">Some Heading</h2>
-                <ul class="DocsNav__SectionList">
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                </ul>
-            </div><div class="DocsNav__Section">
-                <h2 class="DocsNav__SectionHeading">Some Heading</h2>
-                <ul class="DocsNav__SectionList">
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                </ul>
-            </div><div class="DocsNav__Section">
-                <h2 class="DocsNav__SectionHeading">Some Heading</h2>
-                <ul class="DocsNav__SectionList">
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                </ul>
-            </div><div class="DocsNav__Section">
-                <h2 class="DocsNav__SectionHeading">Some Heading</h2>
-                <ul class="DocsNav__SectionList">
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                    <li class="DocsNav__SectionListItem">
-                        <a href="#" class="DocsNav__Link">Some Link</a>
-                    </li>
-                </ul>
-            </div>
+            {% for item in nav %}
+                <div class="DocsNav__Section">
+                    {% if item['SectionName'] is defined and item.SectionName %}
+                        <h2 class="DocsNav__SectionHeading">
+                            {{ item.SectionName|typeset }}
+                        </h2>
+                    {% endif %}
+                    {% if item['SectionLinks'] is defined and item.SectionLinks|length %}
+                        <ul class="DocsNav__SectionList">
+                            {% for link,linkText in item.SectionLinks %}
+                                <li class="DocsNav__SectionListItem">
+                                    <a
+                                        href="{{ link }}"
+                                        class="DocsNav__Link{% if link == fullUrlPath %} DocsNav__Link--IsActive{% endif %}"
+                                    >
+                                        {{ linkText|typeset }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
         </div>
     </nav>
 {% endblock %}
 
 {% block content %}
     <div class="DocsContent__Inner">
-        <h1 class="DocsContent__Heading">My Page Title</h1>
-        <div class="DocsContent__Section">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci amet autem, doloribus eius iure libero natus placeat quae quibusdam. Ab animi debitis delectus explicabo fugit obcaecati, rerum sequi. Hic!</p>
-        </div>
-        <div class="DocsContent__Section">
-            <h2 id="some-id" class="DocsContent__SectionHeading">
-                <a
-                    href="#some-id"
-                    class="DocsContent__SectionHeadingLink"
-                    title="Direct link to Some ID"
-                >#</a>
-                Some Page Section
-            </h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquid commodi deserunt dolore dolorem dolores eius est facilis laborum magnam obcaecati optio quae qui quia, quisquam recusandae repellat suscipit unde!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consequatur nulla obcaecati omnis, pariatur placeat quasi quia. Dolorum fuga ipsa, magnam nemo, officia, possimus quae repudiandae suscipit temporibus voluptatem voluptatum.</p>
-        </div>
-        <div class="DocsContent__Section">
-            <h2 id="some-id" class="DocsContent__SectionHeading">
-                <a
-                    href="#some-id"
-                    class="DocsContent__SectionHeadingLink"
-                    title="Direct link to Some ID"
-                >#</a>
-                Some Page Section
-            </h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquid commodi deserunt dolore dolorem dolores eius est facilis laborum magnam obcaecati optio quae qui quia, quisquam recusandae repellat suscipit unde!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consequatur nulla obcaecati omnis, pariatur placeat quasi quia. Dolorum fuga ipsa, magnam nemo, officia, possimus quae repudiandae suscipit temporibus voluptatem voluptatum.</p>
-        </div>
-        <div class="DocsContent__Section">
-            <h2 id="some-id" class="DocsContent__SectionHeading">
-                <a
-                    href="#some-id"
-                    class="DocsContent__SectionHeadingLink"
-                    title="Direct link to Some ID"
-                >#</a>
-                Some Page Section
-            </h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquid commodi deserunt dolore dolorem dolores eius est facilis laborum magnam obcaecati optio quae qui quia, quisquam recusandae repellat suscipit unde!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consequatur nulla obcaecati omnis, pariatur placeat quasi quia. Dolorum fuga ipsa, magnam nemo, officia, possimus quae repudiandae suscipit temporibus voluptatem voluptatum.</p>
-            <h3>Some Sub title</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquid commodi deserunt dolore dolorem dolores eius est facilis laborum magnam obcaecati optio quae qui quia, quisquam recusandae repellat suscipit unde!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consequatur nulla obcaecati omnis, pariatur placeat quasi quia. Dolorum fuga ipsa, magnam nemo, officia, possimus quae repudiandae suscipit temporibus voluptatem voluptatum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquid commodi deserunt dolore dolorem dolores eius est facilis laborum magnam obcaecati optio quae qui quia, quisquam recusandae repellat suscipit unde!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consequatur nulla obcaecati omnis, pariatur placeat quasi quia. Dolorum fuga ipsa, magnam nemo, officia, possimus quae repudiandae suscipit temporibus voluptatem voluptatum.</p>
-        </div>
+        {% if pageTitle %}
+            <h1 class="DocsContent__Heading">
+                {{ pageTitle|typeset }}
+            </h1>
+        {% endif %}
+        {% for section in pageSections %}
+            <div class="DocsContent__Section">
+                {% if section['meta']['title'] is defined %}
+                    <h2
+                        id="{{ section.meta.title }}"
+                        class="DocsContent__SectionHeading"
+                    >
+                        <a
+                            href="#{{ section.meta.title }}"
+                            class="DocsContent__SectionHeadingLink"
+                            title="Direct link to Some ID"
+                        >#</a>
+                        {{ section.meta.title|typeset }}
+                    </h2>
+                {% endif %}
+                <div class="DocsContent__SectionInner">
+                    {{ section.markdown|markdown('gfm')|typeset }}
+                </div>
+            </div>
+        {% endfor %}
     </div>
-    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 {% endblock %}
