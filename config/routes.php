@@ -50,7 +50,7 @@ return [
 
     /**
      * Portfolio page
-     * @see \dev\controllers\PagesController::actionHosting()
+     * @see \dev\controllers\PagesController::actionPortfolio()
      */
     'GET /work-with-me/portfolio' => 'dev/pages/portfolio',
 
@@ -86,6 +86,11 @@ return [
      */
     'GET /software/ansel-craft' => 'dev/pages/ansel-craft',
 
+
+    /**************************************************************************/
+    /* Documentation routing */
+    /**************************************************************************/
+
     /**
      * Ansel Craft Docs Pages
      */
@@ -93,7 +98,10 @@ return [
     /** @see \dev\controllers\DocsAnselCraftController::actionIndex() */
     'GET /software/ansel-craft/docs' => 'dev/docs-ansel-craft/index',
 
-    /** @see \dev\controllers\DocsAnselCraftController::actionIndex() */
+    /** @see \dev\controllers\DocsAnselCraftController::actionFieldTypeSettings() */
     'GET /software/ansel-craft/docs/field-type-settings' => 'dev/docs-ansel-craft/field-type-settings',
+
+    /** @see \dev\controllers\DocsAnselCraftController::actionFieldTypeUse() */
+    'GET /software/ansel-craft/docs/field-type-use' => 'dev/docs-ansel-craft/field-type-use',
 
 ];
