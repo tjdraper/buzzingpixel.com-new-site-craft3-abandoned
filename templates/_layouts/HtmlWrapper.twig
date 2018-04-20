@@ -6,6 +6,7 @@
 {% set noIndex = noIndex|default(false) %}
 {% set ogType = ogType|default('website') %}
 {% set staticAssetCacheTime = craft.app.config.general.staticAssetCacheTime %}
+{% set bodyClass = bodyClass|default(false) %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -85,7 +86,7 @@
     {{ block('head') ?? '' }}
     {{ head() }}
 </head>
-<body>
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
     {# Get any queued up body items #}
     {{ beginBody() }}
     {{ block('beginBody') ?? '' }}

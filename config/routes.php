@@ -86,4 +86,10 @@ return [
      */
     'GET /software/ansel-craft' => 'dev/pages/ansel-craft',
 
+    /**
+     * Ansel Craft Docs Page
+     * @see \dev\controllers\DocsController::actionAnselCraftDocs()
+     */
+    'GET /software/ansel-craft/docs' => 'dev/docs/ansel-craft-docs',
+
 ];

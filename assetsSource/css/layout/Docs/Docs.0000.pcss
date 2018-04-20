@@ -1,0 +1,156 @@
+.DocsBody {
+    background-color: #fff;
+}
+
+.DocsHeader {
+    text-align: center;
+}
+
+.DocsHeadingBackLink {
+    background-color: var(--green);
+    display: flex;
+}
+
+.DocsBackLink,
+.DocsHeading {
+    color: #fff;
+}
+
+.DocsHeading {
+    font-family: var(--StandardFont);
+    font-size: 18px;
+    font-weight: var(--StandardFontBoldWeight);
+}
+
+.DocsNav__MobileActivatorCaret,
+.DocsHeading__Caret {
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    transform: rotate(180deg);
+    width: 10px;
+    vertical-align: middle;
+}
+
+.DocsBackLink,
+.DocsHeading {
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.DocsBackLink {
+    padding-top: 15px;
+    text-decoration: none;
+    width: 30%;
+}
+
+.DocsHeading--HasNav {
+    cursor: pointer;
+}
+
+.DocsHeading--HasNav:hover,
+.DocsBackLink:hover {
+    background-color: var(--lighterGreen);
+    color: #fff;
+    text-decoration: none;
+}
+
+.DocsHeading {
+    width: 70%;
+}
+
+.DocsHeadingNav__List {
+    background-color: #fff;
+    border: 1px solid var(--lighterGray);
+    border-top: 0;
+    display: none;
+}
+
+.DocsAside {
+    background-color: var(--lightestGray);
+}
+
+.DocsNav__Sections {
+    display: none;
+}
+
+.DocsNav__MobileActivator {
+    background-color: var(--lighterGray);
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+}
+
+.DocsNav__MobileActivator:hover {
+    background-color: var(--orange);
+    color: #fff;
+}
+
+.DocsNav__Section {
+    margin-bottom: 30px;
+}
+
+.DocsNav__SectionHeading {
+    color: var(--gray);
+    font-family: var(--StandardFont);
+    font-size: 12px;
+    font-weight: var(--StandardFontBoldWeight);
+    margin: 0;
+    padding: 14px 14px 0;
+    text-transform: uppercase;
+}
+
+.DocsHeadingNav__List,
+.DocsNav__SectionList {
+    list-style: none;
+    margin: 0;
+    text-align: left;
+}
+
+.DocsHeadingNav__Link,
+.DocsNav__Link {
+    color: var(--darkerGray);
+    display: block;
+    padding: 10px 14px;
+    text-decoration: none;
+}
+
+.DocsHeadingNav__Link:hover,
+.DocsNav__Link:hover {
+    background-color: rgba(var(--orange), 0.75);
+    text-decoration: none;
+    color: #fff;
+}
+
+.DocsHeadingNav__Link--IsActive,
+.DocsHeadingNav__Link--IsActive:hover,
+.DocsNav__Link--IsActive,
+.DocsNav__Link--IsActive:hover {
+    background-color: var(--orange);
+    color: #fff;
+    cursor: default;
+}
+
+.DocsContent__Inner {
+    max-width: 1000px;
+    padding: 14px;
+}
+
+.DocsContent__Section {
+    margin-top: 50px;
+}
+
+.DocsContent__SectionHeading {
+    font-size: 26px;
+}
+
+.DocsContent__SectionHeadingLink {
+    color: rgba(var(--green), 0.3);
+    text-decoration: none;
+}
+
+.DocsContent__SectionHeadingLink:hover {
+    text-decoration: none;
+}

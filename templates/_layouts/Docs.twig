@@ -1,0 +1,17 @@
+{# @var \craft\web\twig\variables\CraftVariable craft #}
+
+{% extends '_layouts/HtmlWrapper.twig' %}
+
+{% block layoutContent %}
+    <div class="SiteWrapper">
+        <header class="DocsHeader">
+            {{ block('header') ?? '' }}
+        </header>
+        <aside class="DocsAside">
+            {{ block('aside') ?? '' }}
+        </aside>
+        <main class="DocsContent">
+            {{ block('content') ?? '' }}
+        </main>
+    </div>
+{% endblock %}
