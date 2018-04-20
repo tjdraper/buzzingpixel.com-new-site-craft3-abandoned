@@ -18,7 +18,10 @@
 {% block header %}
     <div class="DocsHeadingBackLink">
         <a href="{{ backLink }}" class="DocsBackLink">&laquo; Back</a>
-        <h1 class="DocsHeading{% if switcher|length %} DocsHeading--HasNav JSDocsSwitcherMenuActivator{% endif %}">
+        <h1
+            class="DocsHeading{% if switcher|length %} DocsHeading--HasNav JSDocsSwitcherMenuActivator{% endif %}"
+            data-active-class="DocsHeading--NavActive"
+        >
             Ansel 2.x Docs
             {% if switcher|length %}<span class="DocsHeading__Caret">{% include '_icons/icon-caret.svg' %}</span>{% endif %}
         </h1>
@@ -43,7 +46,10 @@
 
 {% block aside %}
     <nav class="DocsNav">
-        <div class="DocsNav__MobileActivator JSMobileDocsPagesMenuActivator">
+        <div
+            class="DocsNav__MobileActivator JSMobileDocsPagesMenuActivator"
+            data-active-class="DocsNav__MobileActivator--IsActive"
+        >
             Pages Menu
             <span class="DocsNav__MobileActivatorCaret">{% include '_icons/icon-caret.svg' %}</span>
         </div>

@@ -21,6 +21,7 @@
     font-family: var(--StandardFont);
     font-size: 18px;
     font-weight: var(--StandardFontBoldWeight);
+    user-select: none;
 }
 
 .DocsNav__MobileActivatorCaret,
@@ -31,6 +32,16 @@
     transform: rotate(180deg);
     width: 10px;
     vertical-align: middle;
+}
+
+.DocsHeading--NavActive {
+    background-color: var(--lightGreen);
+}
+
+.DocsNav__MobileActivator--IsActive .DocsNav__MobileActivatorCaret,
+.DocsHeading--NavActive .DocsHeading__Caret {
+    top: -3px;
+    transform: rotate(0);
 }
 
 .DocsBackLink,
@@ -82,8 +93,10 @@
     cursor: pointer;
     padding: 10px;
     text-align: center;
+    user-select: none;
 }
 
+.DocsNav__MobileActivator--IsActive,
 .DocsNav__MobileActivator:hover {
     background-color: var(--orange);
     color: #fff;
