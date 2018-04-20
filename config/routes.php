@@ -104,4 +104,7 @@ return [
     /** @see \dev\controllers\DocsAnselCraftController::actionFieldTypeUse() */
     'GET /software/ansel-craft/docs/field-type-use' => 'dev/docs-ansel-craft/field-type-use',
 
+    /** @see \dev\controllers\DocsAnselCraftController::actionTemplating() */
+    'GET /software/ansel-craft/docs/templating' => 'dev/docs-ansel-craft/templating',
+
 ];

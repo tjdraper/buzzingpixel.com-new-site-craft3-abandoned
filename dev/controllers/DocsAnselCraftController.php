@@ -23,6 +23,11 @@ class DocsAnselCraftController extends DocsController
         ],
     ];
 
+
+    /**************************************************************************/
+    /* Ansel 2.x */
+    /**************************************************************************/
+
     /**
      * Displays the Ansel Craft docs index page
      * @return Response
@@ -34,7 +39,7 @@ class DocsAnselCraftController extends DocsController
     }
 
     /**
-     * Displays the Ansel Craft docs index page
+     * Displays the Ansel Craft docs Field Type Settings page
      * @return Response
      * @throws \Exception
      */
@@ -44,7 +49,7 @@ class DocsAnselCraftController extends DocsController
     }
 
     /**
-     * Displays the Ansel Craft docs index page
+     * Displays the Ansel Craft docs Field Type Use page
      * @return Response
      * @throws \Exception
      */
@@ -52,6 +57,21 @@ class DocsAnselCraftController extends DocsController
     {
         return $this->parsePageAnselCraft2('FieldTypeUse');
     }
+
+    /**
+     * Displays the Ansel Craft docs Field Type Use page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionTemplating(): Response
+    {
+        return $this->parsePageAnselCraft2('Templating');
+    }
+
+
+    /**************************************************************************/
+    /* Common parsing for Ansel Craft Docs */
+    /**************************************************************************/
 
     /**
      * @param string $childIndex
