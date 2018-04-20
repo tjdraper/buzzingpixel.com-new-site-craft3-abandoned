@@ -86,6 +86,7 @@
             <div class="DocsContent__Section">
                 {% if section['meta']['title'] is defined %}
                     <h2
+                        {# TODO: slugify this #}
                         id="{{ section.meta.title }}"
                         class="DocsContent__SectionHeading"
                     >
