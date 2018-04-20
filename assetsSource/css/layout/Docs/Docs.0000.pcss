@@ -139,7 +139,12 @@
 }
 
 .DocsContent__Section {
-    margin-top: 50px;
+    margin-top: 80px;
+}
+
+.DocsContent__Section:not(:last-child) {
+    border-bottom: 1px solid var(--orange);
+    padding-bottom: 60px;
 }
 
 .DocsContent__SectionHeading {
@@ -153,4 +158,22 @@
 
 .DocsContent__SectionHeadingLink:hover {
     text-decoration: none;
+}
+
+.DocsContent__SectionInner h1,
+.DocsContent__SectionInner h2,
+.DocsContent__SectionInner h3 {
+    font-size: 22px;
+}
+
+.DocsContent__SectionInner h4 {
+    font-size: 18px;
+}
+
+.DocsContent__SectionInner h5 {
+    font-size: 16px;
+}
+
+.DocsContent__SectionInner h6 {
+    font-size: 14px;
 }
