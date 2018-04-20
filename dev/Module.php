@@ -7,7 +7,6 @@ use yii\base\Event;
 use Michelf\SmartyPants;
 use craft\elements\Entry;
 use Hyn\Frontmatter\Parser;
-use cebe\markdown\Markdown;
 use dev\models\ListingsModel;
 use dev\services\CacheService;
 use dev\models\ListingMetaModel;
@@ -22,6 +21,7 @@ use dev\variables\FileContentVariable;
 use dev\services\FileOperationsService;
 use craft\web\twig\variables\CraftVariable;
 use dev\twigextensions\TypesetTwigExtension;
+use cebe\markdown\GithubMarkdown as Markdown;
 use dev\twigextensions\FileTimeTwigExtension;
 use craft\console\Application as ConsoleApplication;
 

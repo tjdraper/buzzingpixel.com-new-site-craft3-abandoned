@@ -2,9 +2,9 @@
 
 namespace dev\models;
 
-use cebe\markdown\Markdown;
 use Hyn\Frontmatter\Parser;
 use felicity\datamodel\Model;
+use cebe\markdown\GithubMarkdown as Markdown;
 use felicity\datamodel\services\datahandlers\ArrayHandler;
 use felicity\datamodel\services\datahandlers\StringHandler;
 

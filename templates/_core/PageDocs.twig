@@ -99,7 +99,7 @@
                     </h2>
                 {% endif %}
                 <div class="DocsContent__SectionInner">
-                    {{ section.markdown|markdown('gfm')|typeset }}
+                    {{ section.html|typeset }}
                 </div>
             </div>
         {% endfor %}
