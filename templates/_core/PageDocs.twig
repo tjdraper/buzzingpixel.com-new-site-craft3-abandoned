@@ -85,13 +85,13 @@
         {% for section in pageSections %}
             <div class="DocsContent__Section">
                 {% if section['meta']['title'] is defined %}
+                    {% set slug = section.meta.title|slugify %}
                     <h2
-                        {# TODO: slugify this #}
-                        id="{{ section.meta.title }}"
+                        id="{{ slug }}"
                         class="DocsContent__SectionHeading"
                     >
                         <a
-                            href="#{{ section.meta.title }}"
+                            href="#{{ slug }}"
                             class="DocsContent__SectionHeadingLink"
                             title="Direct link to Some ID"
                         >#</a>

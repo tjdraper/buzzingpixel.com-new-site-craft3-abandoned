@@ -21,6 +21,7 @@ use dev\variables\FileContentVariable;
 use dev\services\FileOperationsService;
 use craft\web\twig\variables\CraftVariable;
 use dev\twigextensions\TypesetTwigExtension;
+use dev\twigextensions\SlugifyTwigExtension;
 use cebe\markdown\GithubMarkdown as Markdown;
 use dev\twigextensions\FileTimeTwigExtension;
 use craft\console\Application as ConsoleApplication;
@@ -77,6 +78,7 @@ class Module extends ModuleBase
         $view = Craft::$app->view;
         $view->registerTwigExtension(new FileTimeTwigExtension());
         $view->registerTwigExtension(new TypesetTwigExtension());
+        $view->registerTwigExtension(new SlugifyTwigExtension());
     }
 
     private function registerGlobals()
