@@ -87,9 +87,13 @@ return [
     'GET /software/ansel-craft' => 'dev/pages/ansel-craft',
 
     /**
-     * Ansel Craft Docs Page
-     * @see \dev\controllers\DocsAnselCraftController::actionIndex()
+     * Ansel Craft Docs Pages
      */
+
+    /** @see \dev\controllers\DocsAnselCraftController::actionIndex() */
     'GET /software/ansel-craft/docs' => 'dev/docs-ansel-craft/index',
+
+    /** @see \dev\controllers\DocsAnselCraftController::actionIndex() */
+    'GET /software/ansel-craft/docs/field-type-settings' => 'dev/docs-ansel-craft/field-type-settings',
 
 ];

@@ -17,7 +17,7 @@ Ansel has a number of global settings you may wish to take advantage of. To acce
         Note
     </div>
     <div class="Note__Body">
-        On applicable settings, you can override the settings in config files. In order to take advantage of this feature, you can create an <code>ansel.php</code> file in <code>/config</code> and return an array of settings.
+        <p>On applicable settings, you can override the settings in config files. In order to take advantage of this feature, you can create an <code>ansel.php</code> file in <code>/config</code> and return an array of settings.</p>
     </div>
 </div>
 

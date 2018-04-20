@@ -24,7 +24,7 @@ class DocsAnselCraftController extends DocsController
     ];
 
     /**
-     * Displays the Ansel Craft docs page
+     * Displays the Ansel Craft docs index page
      * @return Response
      * @throws \Exception
      */
@@ -36,6 +36,22 @@ class DocsAnselCraftController extends DocsController
             $this->anselSwitcher,
             '/software/ansel-craft',
             'GettingStarted'
+        );
+    }
+
+    /**
+     * Displays the Ansel Craft docs index page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionFieldTypeSettings(): Response
+    {
+        $this->anselSwitcher[2]['isActive'] = true;
+        return $this->parsePage(
+            'AnselCraft2Docs',
+            $this->anselSwitcher,
+            '/software/ansel-craft',
+            'FieldTypeSettings'
         );
     }
 }
