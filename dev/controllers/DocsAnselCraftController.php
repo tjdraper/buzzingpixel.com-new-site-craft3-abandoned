@@ -68,6 +68,16 @@ class DocsAnselCraftController extends DocsController
         return $this->parsePageAnselCraft2('Templating');
     }
 
+    /**
+     * Displays the Ansel Craft docs Field Type Use page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionVideos(): Response
+    {
+        return $this->parsePageAnselCraft2('Videos');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Ansel Craft Docs */
