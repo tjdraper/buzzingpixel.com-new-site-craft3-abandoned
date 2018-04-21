@@ -126,4 +126,7 @@ return [
     /** @see \dev\controllers\DocsAnselCraftController::actionFieldTypeUseV1() */
     'GET /software/ansel-craft/docs/v1/field-type-use' => 'dev/docs-ansel-craft/field-type-use-v1',
 
+    /** @see \dev\controllers\DocsAnselCraftController::actionTemplatingV1() */
+    'GET /software/ansel-craft/docs/v1/templating' => 'dev/docs-ansel-craft/templating-v1',
+
 ];
