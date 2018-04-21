@@ -129,4 +129,7 @@ return [
     /** @see \dev\controllers\DocsAnselCraftController::actionTemplatingV1() */
     'GET /software/ansel-craft/docs/v1/templating' => 'dev/docs-ansel-craft/templating-v1',
 
+    /** @see \dev\controllers\DocsAnselCraftController::actionVideosV1() */
+    'GET /software/ansel-craft/docs/v1/videos' => 'dev/docs-ansel-craft/videos-v1',
+
 ];

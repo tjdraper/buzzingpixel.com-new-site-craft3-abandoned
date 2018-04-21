@@ -143,6 +143,16 @@ class DocsAnselCraftController extends DocsController
         return $this->parsePageAnselCraft1('Templating');
     }
 
+    /**
+     * Displays the Ansel Craft docs index page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionVideosV1(): Response
+    {
+        return $this->parsePageAnselCraft1('Videos');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Ansel Craft Docs */
