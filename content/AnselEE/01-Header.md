@@ -1,6 +1,6 @@
 {
     "heading": "Ansel",
-    "subHeading": "for Craft ExpressionEngine",
+    "subHeading": "for ExpressionEngine",
     "featuredImage": {
         "hasShadow": true,
         "mobile": "/uploads-static/banner/ansel-screen-shot-with-custom-safari-bar-mobile.jpg",
