@@ -16,6 +16,7 @@ abstract class DocsController extends BaseController
     /**
      * Parses a docs page
      * @param string $directory
+     * @param string $switcherTitle
      * @param array $switcher
      * @param string $backLink
      * @param string $childIndex
@@ -24,12 +25,14 @@ abstract class DocsController extends BaseController
      */
     protected function parsePage(
         string $directory,
+        string $switcherTitle,
         array $switcher = [],
         string $backLink = '/',
         string $childIndex = ''
     ): Response {
         $vars = $this->getPageVariablesCommon(
             $directory,
+            $switcherTitle,
             $switcher,
             $backLink,
             $childIndex
@@ -45,6 +48,7 @@ abstract class DocsController extends BaseController
     /**
      * Parses a GitHub Changelog page
      * @param string $directory
+     * @param string $switcherTitle
      * @param array $switcher
      * @param string $backLink
      * @param string $metaTitle
@@ -56,6 +60,7 @@ abstract class DocsController extends BaseController
      */
     protected function parseGithubChangelog(
         string $directory,
+        string $switcherTitle,
         array $switcher,
         string $backLink,
         string $metaTitle,
@@ -63,6 +68,7 @@ abstract class DocsController extends BaseController
     ): Response {
         $vars = $this->getPageVariablesCommon(
             $directory,
+            $switcherTitle,
             $switcher,
             $backLink
         );
@@ -88,6 +94,7 @@ abstract class DocsController extends BaseController
     /**
      * Gets the variables common to pages
      * @param string $directory
+     * @param string $switcherTitle
      * @param array $switcher
      * @param string $backLink
      * @param string $childIndex
@@ -96,6 +103,7 @@ abstract class DocsController extends BaseController
      */
     private function getPageVariablesCommon(
         string $directory,
+        string $switcherTitle,
         array $switcher = [],
         string $backLink = '/',
         string $childIndex = ''
@@ -141,6 +149,7 @@ abstract class DocsController extends BaseController
         }
 
         return compact(
+            'switcherTitle',
             'switcher',
             'backLink',
             'nav',

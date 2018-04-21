@@ -92,7 +92,7 @@ return [
     /**************************************************************************/
 
     /**
-     * Ansel Craft Docs Pages
+     * Ansel Craft Docs Pages V2
      */
 
     /** @see \dev\controllers\DocsAnselCraftController::actionIndex() */
@@ -112,5 +112,12 @@ return [
 
     /** @see \dev\controllers\DocsAnselCraftController::actionChangelog() */
     'GET /software/ansel-craft/docs/changelog' => 'dev/docs-ansel-craft/changelog',
+
+    /**
+     * Ansel Craft Docs Pages V2
+     */
+
+    /** @see \dev\controllers\DocsAnselCraftController::actionIndexV1() */
+    'GET /software/ansel-craft/docs/v1' => 'dev/docs-ansel-craft/index-v1',
 
 ];

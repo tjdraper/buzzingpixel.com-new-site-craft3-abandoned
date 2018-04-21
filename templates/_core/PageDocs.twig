@@ -1,4 +1,5 @@
 {# @var \craft\web\twig\variables\CraftVariable craft #}
+{# @var string switcherTitle #}
 {# @var array switcher #}
 {# @var string backLink #}
 {# @var array nav #}
@@ -22,7 +23,7 @@
             class="DocsHeading{% if switcher|length %} DocsHeading--HasNav JSDocsSwitcherMenuActivator{% endif %}"
             data-active-class="DocsHeading--NavActive"
         >
-            Ansel 2.x Docs
+            {{ switcherTitle|typeset }}
             {% if switcher|length %}<span class="DocsHeading__Caret">{% include '_icons/icon-caret.svg' %}</span>{% endif %}
         </h1>
     </div>

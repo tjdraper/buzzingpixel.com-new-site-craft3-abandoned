@@ -90,11 +90,27 @@ class DocsAnselCraftController extends DocsController
     {
         return $this->parseGithubChangelog(
             'AnselCraft2Docs',
+            'Ansel 2.x Docs',
             $this->anselSwitcher,
             '/software/ansel-craft',
             'Ansel (Craft) Changelog',
             'https://raw.githubusercontent.com/buzzingpixel/ansel-craft/master/changelog.md'
         );
+    }
+
+
+    /**************************************************************************/
+    /* Ansel 1.x */
+    /**************************************************************************/
+
+    /**
+     * Displays the Ansel Craft docs index page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionIndexV1(): Response
+    {
+        return $this->parsePageAnselCraft1('GettingStarted');
     }
 
 
@@ -112,6 +128,24 @@ class DocsAnselCraftController extends DocsController
         $this->anselSwitcher[2]['isActive'] = true;
         return $this->parsePage(
             'AnselCraft2Docs',
+            'Ansel 2.x Docs',
+            $this->anselSwitcher,
+            '/software/ansel-craft',
+            $childIndex
+        );
+    }
+
+    /**
+     * @param string $childIndex
+     * @return Response
+     * @throws \Exception
+     */
+    private function parsePageAnselCraft1(string $childIndex): Response
+    {
+        $this->anselSwitcher[1]['isActive'] = true;
+        return $this->parsePage(
+            'AnselCraft1Docs',
+            'Ansel 1.x Docs',
             $this->anselSwitcher,
             '/software/ansel-craft',
             $childIndex
