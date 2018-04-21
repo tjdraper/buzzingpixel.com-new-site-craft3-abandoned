@@ -120,4 +120,7 @@ return [
     /** @see \dev\controllers\DocsAnselCraftController::actionIndexV1() */
     'GET /software/ansel-craft/docs/v1' => 'dev/docs-ansel-craft/index-v1',
 
+    /** @see \dev\controllers\DocsAnselCraftController::actionFieldTypeSettingsV1() */
+    'GET /software/ansel-craft/docs/v1/field-type-settings' => 'dev/docs-ansel-craft/field-type-settings-v1',
+
 ];
