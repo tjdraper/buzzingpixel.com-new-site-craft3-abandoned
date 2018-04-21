@@ -86,6 +86,12 @@ return [
      */
     'GET /software/ansel-craft' => 'dev/pages/ansel-craft',
 
+    /**
+     * Ansel Craft Page
+     * @see \dev\controllers\PagesController::actionAnselEE()
+     */
+    'GET /software/ansel-ee' => 'dev/pages/ansel-ee',
+
 
     /**************************************************************************/
     /* Documentation routing */
