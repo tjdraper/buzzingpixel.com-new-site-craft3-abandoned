@@ -123,6 +123,16 @@ class DocsAnselCraftController extends DocsController
         return $this->parsePageAnselCraft1('FieldTypeSettings');
     }
 
+    /**
+     * Displays the Ansel Craft docs index page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionFieldTypeUseV1(): Response
+    {
+        return $this->parsePageAnselCraft1('FieldTypeUse');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Ansel Craft Docs */
