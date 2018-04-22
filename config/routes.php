@@ -138,4 +138,16 @@ return [
     /** @see \dev\controllers\DocsAnselCraftController::actionVideosV1() */
     'GET /software/ansel-craft/docs/v1/videos' => 'dev/docs-ansel-craft/videos-v1',
 
+
+    /**************************************************************************/
+    /* Cart routing */
+    /**************************************************************************/
+
+    /**
+     * Ansel Craft Docs Pages V2
+     */
+
+    /** @see \modules\store\controllers\CartContentController::actionAdd() */
+    'GET /cart/add/<productKey:([^\/]+)>' => 'store/cart-content/add',
+
 ];
