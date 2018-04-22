@@ -131,6 +131,9 @@ return [
     /** @see \dev\controllers\DocsAnselEeController::actionFieldTypeSettings() */
     'GET /software/ansel-ee/docs/field-type-settings' => 'dev/docs-ansel-ee/field-type-settings',
 
+    /** @see \dev\controllers\DocsAnselEeController::actionFieldTypeUse() */
+    'GET /software/ansel-ee/docs/field-type-use' => 'dev/docs-ansel-ee/field-type-use',
+
 
 
 

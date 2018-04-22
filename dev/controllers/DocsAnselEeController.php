@@ -37,6 +37,16 @@ class DocsAnselEeController extends DocsController
         return $this->parsePageAnselEE2('FieldTypeSettings');
     }
 
+    /**
+     * Displays the Ansel EE docs Field Type Use page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionFieldTypeUse(): Response
+    {
+        return $this->parsePageAnselEE2('FieldTypeUse');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Ansel EE Docs */

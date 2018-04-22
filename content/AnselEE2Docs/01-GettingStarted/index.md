@@ -1,3 +1,3 @@
 {
-    "title": "Getting Started with Ansel for Craft ExpressionEngine"
+    "title": "Getting Started with Ansel for ExpressionEngine"
 }
