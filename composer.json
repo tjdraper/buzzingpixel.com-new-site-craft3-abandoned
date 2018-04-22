@@ -22,7 +22,8 @@
     },
     "autoload": {
         "psr-4": {
-            "dev\\": "dev/"
+            "dev\\": "dev/",
+            "modules\\": "modules/"
         }
     }
 }

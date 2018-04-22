@@ -18,12 +18,15 @@
  */
 
 use dev\Module;
+use modules\store\Store;
 
 return [
     'modules' => [
         'dev' => Module::class,
+        'store' => Store::class
     ],
     'bootstrap' => [
-        'dev'
+        'dev',
+        'store',
     ],
 ];
