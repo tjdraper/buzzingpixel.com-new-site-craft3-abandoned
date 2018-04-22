@@ -47,6 +47,16 @@ class DocsAnselEeController extends DocsController
         return $this->parsePageAnselEE2('FieldTypeUse');
     }
 
+    /**
+     * Displays the Ansel EE docs Templating page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionTemplating(): Response
+    {
+        return $this->parsePageAnselEE2('Templating');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Ansel EE Docs */

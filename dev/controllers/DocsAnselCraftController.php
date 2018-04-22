@@ -60,7 +60,7 @@ class DocsAnselCraftController extends DocsController
     }
 
     /**
-     * Displays the Ansel Craft docs Field Type Use page
+     * Displays the Ansel Craft docs Templating page
      * @return Response
      * @throws \Exception
      */
