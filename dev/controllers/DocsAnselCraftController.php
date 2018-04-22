@@ -70,7 +70,7 @@ class DocsAnselCraftController extends DocsController
     }
 
     /**
-     * Displays the Ansel Craft docs Field Type Use page
+     * Displays the Ansel Craft docs Videos page
      * @return Response
      * @throws \Exception
      */
@@ -80,7 +80,7 @@ class DocsAnselCraftController extends DocsController
     }
 
     /**
-     * Displays the Ansel Craft docs Field Type Use page
+     * Displays the Ansel Craft docs Changelog page
      * @return Response
      * @throws \Exception
      * @throws GuzzleException
@@ -104,7 +104,7 @@ class DocsAnselCraftController extends DocsController
     /**************************************************************************/
 
     /**
-     * Displays the Ansel Craft docs index page
+     * Displays the Ansel Craft docs V1 index page
      * @return Response
      * @throws \Exception
      */
@@ -114,7 +114,7 @@ class DocsAnselCraftController extends DocsController
     }
 
     /**
-     * Displays the Ansel Craft docs index page
+     * Displays the Ansel Craft docs V1 Field Type Settings page
      * @return Response
      * @throws \Exception
      */
@@ -124,7 +124,7 @@ class DocsAnselCraftController extends DocsController
     }
 
     /**
-     * Displays the Ansel Craft docs index page
+     * Displays the Ansel Craft docs V1 Field Type Use page
      * @return Response
      * @throws \Exception
      */
@@ -134,7 +134,7 @@ class DocsAnselCraftController extends DocsController
     }
 
     /**
-     * Displays the Ansel Craft docs index page
+     * Displays the Ansel Craft docs V1 Templating
      * @return Response
      * @throws \Exception
      */
@@ -144,7 +144,7 @@ class DocsAnselCraftController extends DocsController
     }
 
     /**
-     * Displays the Ansel Craft docs index page
+     * Displays the Ansel Craft docs V1 Videos page
      * @return Response
      * @throws \Exception
      */

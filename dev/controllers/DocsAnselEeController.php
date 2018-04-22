@@ -57,6 +57,16 @@ class DocsAnselEeController extends DocsController
         return $this->parsePageAnselEE2('Templating');
     }
 
+    /**
+     * Displays the Ansel Craft docs Videos page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionVideos(): Response
+    {
+        return $this->parsePageAnselEE2('Videos');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Ansel EE Docs */

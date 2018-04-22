@@ -137,6 +137,9 @@ return [
     /** @see \dev\controllers\DocsAnselEeController::actionTemplating() */
     'GET /software/ansel-ee/docs/templating' => 'dev/docs-ansel-ee/templating',
 
+    /** @see \dev\controllers\DocsAnselEeController::actionVideos() */
+    'GET /software/ansel-ee/docs/videos' => 'dev/docs-ansel-ee/videos',
+
 
 
 
