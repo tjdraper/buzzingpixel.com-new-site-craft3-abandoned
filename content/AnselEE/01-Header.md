@@ -19,7 +19,7 @@
         {
             "style": "orange",
             "content": "Add To Cart ($79)",
-            "link": "#TODO"
+            "link": "/cart/add/ansel-ee"
         }
     ]
 }

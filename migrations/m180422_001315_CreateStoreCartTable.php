@@ -21,8 +21,8 @@ class m180422_001315_CreateStoreCartTable extends Migration
 
         $this->createTable('{{%storeCart}}', [
             'id' => $this->primaryKey(),
-            'userId' => $this->integer(11)->notNull(),
-            'cookieId' => $this->string(255),
+            'userId' => $this->integer(11),
+            'sessionId' => $this->string(255),
             'cartData' => $this->text(),
             'dateCreated' => $this->dateTime()->notNull(),
             'dateUpdated' => $this->dateTime()->notNull(),

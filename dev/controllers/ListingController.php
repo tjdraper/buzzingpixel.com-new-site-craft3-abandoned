@@ -4,9 +4,9 @@ namespace dev\controllers;
 
 use Craft;
 use dev\Module;
-use dev\services\PaginationGeneratorService;
 use yii\web\Response;
 use yii\web\HttpException;
+use dev\services\PaginationGeneratorService;
 
 /**
  * Class PagesController
