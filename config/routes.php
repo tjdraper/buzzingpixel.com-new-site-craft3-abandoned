@@ -143,17 +143,15 @@ return [
     /* Cart routing */
     /**************************************************************************/
 
-    /**
-     * Add to cart action
-     */
-
+    // Display cart page
     /** @see \dev\controllers\PagesController::actionCart() */
     'GET /cart' => 'dev/pages/cart',
 
-    /**
-     * Add to cart action
-     */
+    // Get cart count
+    /** @see \dev\controllers\PagesController::actionAjaxCount() */
+    'GET /ajax/cart/count' => 'store/cart-content/ajax-count',
 
+    // Add to cart action
     /** @see \modules\store\controllers\CartContentController::actionAdd() */
     'GET /cart/add/<productKey:([^\/]+)>' => 'store/cart-content/add',
 

@@ -190,4 +190,19 @@ class CartService
         $this->updateCart();
         return true;
     }
+
+    /**
+     * Gets the cart count
+     * @return int
+     */
+    public function count(): int
+    {
+        $count = 0;
+
+        foreach ($this->cartData as $itemCount) {
+            $count += $itemCount;
+        }
+
+        return $count;
+    }
 }

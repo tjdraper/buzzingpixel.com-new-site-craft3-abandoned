@@ -32,4 +32,16 @@ class CartContentController extends Controller
             Craft::$app->getRequest()->get('redirect', '/cart')
         );
     }
+
+    /**
+     * Gets the cart count and outputs AJAX
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionAjaxCount(): Response
+    {
+        return $this->asJson([
+            'count' => Store::cartService()->count(),
+        ]);
+    }
 }
