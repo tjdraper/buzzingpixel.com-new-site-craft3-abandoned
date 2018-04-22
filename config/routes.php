@@ -128,6 +128,9 @@ return [
     /** @see \dev\controllers\DocsAnselEeController::actionIndex() */
     'GET /software/ansel-ee/docs' => 'dev/docs-ansel-ee/index',
 
+    /** @see \dev\controllers\DocsAnselEeController::actionFieldTypeSettings() */
+    'GET /software/ansel-ee/docs/field-type-settings' => 'dev/docs-ansel-ee/field-type-settings',
+
 
 
 

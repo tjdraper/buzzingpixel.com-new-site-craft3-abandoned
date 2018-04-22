@@ -18,13 +18,23 @@ class DocsAnselEeController extends DocsController
     /**************************************************************************/
 
     /**
-     * Displays the Ansel Craft docs index page
+     * Displays the Ansel EE docs index page
      * @return Response
      * @throws \Exception
      */
     public function actionIndex(): Response
     {
         return $this->parsePageAnselEE2('GettingStarted');
+    }
+
+    /**
+     * Displays the Ansel EE docs Field Type Settings page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionFieldTypeSettings(): Response
+    {
+        return $this->parsePageAnselEE2('FieldTypeSettings');
     }
 
 
