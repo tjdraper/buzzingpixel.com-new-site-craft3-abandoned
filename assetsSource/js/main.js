@@ -52,6 +52,12 @@ function runMain(F) {
     if ($('pre').length) {
         F.controller.construct('CodeHighlighting');
     }
+
+    $('.JSCartCount').each(function() {
+        F.controller.construct('CartCount', {
+            el: this
+        });
+    });
 }
 
 runMain(window.FAB);
