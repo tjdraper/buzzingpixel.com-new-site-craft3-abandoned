@@ -144,7 +144,14 @@ return [
     /**************************************************************************/
 
     /**
-     * Ansel Craft Docs Pages V2
+     * Add to cart action
+     */
+
+    /** @see \dev\controllers\PagesController::actionCart() */
+    'GET /cart' => 'dev/pages/cart',
+
+    /**
+     * Add to cart action
      */
 
     /** @see \modules\store\controllers\CartContentController::actionAdd() */

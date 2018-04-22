@@ -101,6 +101,17 @@ class PagesController extends BaseController
     }
 
     /**
+     * Displays the Index page
+     * @return string
+     * @throws \Exception
+     */
+    public function actionCart(): string
+    {
+        // TODO: Create cart page
+        return 'TODO: Create cart page';
+    }
+
+    /**
      * Parses a page
      * @param string directory
      * @return Response
