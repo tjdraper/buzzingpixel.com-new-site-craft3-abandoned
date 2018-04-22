@@ -24,73 +24,54 @@ return [
     /* Pages routing */
     /**************************************************************************/
 
-    /**
-     * Index page
-     * @see \dev\controllers\PagesController::actionIndex()
-     */
+    // Index page
+    /** @see \dev\controllers\PagesController::actionIndex() */
     'GET /' => 'dev/pages/index',
 
-    /**
-     * Custom Websites page
-     * @see \dev\controllers\PagesController::actionCustomWebsites()
-     */
+    // Custom Websites page
+    /** @see \dev\controllers\PagesController::actionCustomWebsites() */
     'GET /work-with-me/custom-websites' => 'dev/pages/custom-websites',
 
-    /**
-     * Custom Add-ons page
-     * @see \dev\controllers\PagesController::actionCustomAddons()
-     */
+    // Custom Add-ons page
+    /** @see \dev\controllers\PagesController::actionCustomAddons() */
     'GET /work-with-me/custom-add-ons' => 'dev/pages/custom-addons',
 
-    /**
-     * Managed Hosting page
-     * @see \dev\controllers\PagesController::actionHosting()
-     */
+    // Managed Hosting page
+    /** @see \dev\controllers\PagesController::actionHosting() */
     'GET /work-with-me/hosting' => 'dev/pages/hosting',
 
-    /**
-     * Portfolio page
-     * @see \dev\controllers\PagesController::actionPortfolio()
-     */
+    // Portfolio page
+    /** @see \dev\controllers\PagesController::actionPortfolio() */
     'GET /work-with-me/portfolio' => 'dev/pages/portfolio',
 
-    /**
-     * Contact page
-     * @see \dev\controllers\PagesController::actionContact()
-     */
+    // Contact page
+    /** @see \dev\controllers\PagesController::actionContact() */
     'GET /contact' => 'dev/pages/contact',
     'POST /contact' => 'dev/pages/contact',
 
-    /**
-     * Contact thank you page
-     * @see \dev\controllers\PagesController::actionContactThanks()
-     */
+    // Contact thank you page
+    /** @see \dev\controllers\PagesController::actionContactThanks() */
     'GET /contact/thanks' => 'dev/pages/contact-thanks',
 
-    /**
-     * News page (paginated)
-     * @see \dev\controllers\ListingController::actionNews()
-     */
+    // News page (paginated)
+    /** @see \dev\controllers\ListingController::actionNews() */
     'GET /news' => 'dev/listing/news',
     'GET /news/page/<pageNum:\d+>' => 'dev/listing/news',
 
-    /**
-     * News permalink
-     * @see \dev\controllers\ListingController::actionNewsPermalink()
-     */
+    // News permalink
+    /** @see \dev\controllers\ListingController::actionNewsPermalink() */
     'GET /news/<slug:[^\/]+>' => 'dev/listing/news-permalink',
 
-    /**
-     * Ansel Craft Page
-     * @see \dev\controllers\PagesController::actionAnselCraft()
-     */
+    // Ansel Craft Page
+    /** @see \dev\controllers\PagesController::actionAnselCraft() */
     'GET /software/ansel-craft' => 'dev/pages/ansel-craft',
 
-    /**
-     * Ansel Craft Page
-     * @see \dev\controllers\PagesController::actionAnselEE()
-     */
+    // Ansel EE Page
+    /** @see \dev\controllers\PagesController::actionAnselEe() */
     'GET /software/ansel-ee' => 'dev/pages/ansel-ee',
+
+
+
 
 
     /**************************************************************************/
@@ -119,8 +100,9 @@ return [
     /** @see \dev\controllers\DocsAnselCraftController::actionChangelog() */
     'GET /software/ansel-craft/docs/changelog' => 'dev/docs-ansel-craft/changelog',
 
+
     /**
-     * Ansel Craft Docs Pages V2
+     * Ansel Craft Docs Pages V1
      */
 
     /** @see \dev\controllers\DocsAnselCraftController::actionIndexV1() */
@@ -137,6 +119,17 @@ return [
 
     /** @see \dev\controllers\DocsAnselCraftController::actionVideosV1() */
     'GET /software/ansel-craft/docs/v1/videos' => 'dev/docs-ansel-craft/videos-v1',
+
+
+    /**
+     * Ansel EE Docs Pages V2
+     */
+
+    /** @see \dev\controllers\DocsAnselEeController::actionIndex() */
+    'GET /software/ansel-ee/docs' => 'dev/docs-ansel-ee/index',
+
+
+
 
 
     /**************************************************************************/

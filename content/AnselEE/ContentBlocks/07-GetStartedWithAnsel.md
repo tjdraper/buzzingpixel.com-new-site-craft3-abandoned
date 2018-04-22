@@ -11,6 +11,11 @@
             "style": "orange",
             "content": "Add To Cart ($79)",
             "link": "/cart/add/ansel-ee"
+        },
+        {
+            "style": "orange",
+            "content": "Docs &raquo;",
+            "link": "/software/ansel-ee/docs"
         }
     ]
 }

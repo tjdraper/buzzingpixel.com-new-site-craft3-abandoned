@@ -2,8 +2,6 @@
     "title": "Configuring"
 }
 
-### General requirements
-
 Ansel has a few settings you may want to look at before diving in to making your Ansel fields.
 
 <img alt="Ansel Global Settings" src="/uploads-static/software/ansel-craft/documentation/ansel-craft-2-settings-page.png" srcset="/uploads-static/software/ansel-craft/documentation/ansel-craft-2-settings-page.png 1x, /uploads-static/software/ansel-craft/documentation/ansel-craft-2-settings-page-2x.png 2x">
