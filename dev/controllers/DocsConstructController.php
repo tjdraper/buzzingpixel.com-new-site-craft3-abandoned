@@ -47,6 +47,16 @@ class DocsConstructController extends DocsController
         return $this->parsePageConstruct1('FieldTypes');
     }
 
+    /**
+     * Displays the Construct docs Routing page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionRouting(): Response
+    {
+        return $this->parsePageConstruct1('Routing');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Construct Docs */

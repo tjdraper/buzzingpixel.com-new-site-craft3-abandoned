@@ -189,6 +189,9 @@ return [
     /** @see \dev\controllers\DocsConstructController::actionFieldTypes() */
     'GET /software/construct/docs/field-types' => 'dev/docs-construct/field-types',
 
+    /** @see \dev\controllers\DocsConstructController::actionRouting() */
+    'GET /software/construct/docs/routing' => 'dev/docs-construct/routing',
+
 
 
 
