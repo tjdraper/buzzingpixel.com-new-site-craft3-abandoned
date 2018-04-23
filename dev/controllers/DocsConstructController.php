@@ -75,7 +75,6 @@ class DocsConstructController extends DocsController
     public function actionTemplating(): Response
     {
         return $this->parsePageConstruct1('Templating');
-        return $this->parsePageConstruct1('Templating');
     }
 
 
