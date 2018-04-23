@@ -68,13 +68,23 @@ class DocsConstructController extends DocsController
     }
 
     /**
-     * Displays the Construct docs Temlating page
+     * Displays the Construct docs Templating page
      * @return Response
      * @throws \Exception
      */
     public function actionTemplating(): Response
     {
         return $this->parsePageConstruct1('Templating');
+    }
+
+    /**
+     * Displays the Construct docs Templating page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionExtensionHook(): Response
+    {
+        return $this->parsePageConstruct1('ExtensionHook');
     }
 
 

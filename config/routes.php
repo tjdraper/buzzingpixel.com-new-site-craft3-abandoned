@@ -198,6 +198,9 @@ return [
     /** @see \dev\controllers\DocsConstructController::actionTemplating() */
     'GET /software/construct/docs/templating' => 'dev/docs-construct/templating',
 
+    /** @see \dev\controllers\DocsConstructController::actionExtensionHook() */
+    'GET /software/construct/docs/extension-hook' => 'dev/docs-construct/extension-hook',
+
 
 
 
