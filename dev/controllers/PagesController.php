@@ -101,6 +101,16 @@ class PagesController extends BaseController
     }
 
     /**
+     * Displays contact thanks page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionTreasury(): Response
+    {
+        return $this->parsePage('Treasury');
+    }
+
+    /**
      * Displays the Index page
      * @return string
      * @throws \Exception

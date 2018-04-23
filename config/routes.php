@@ -70,6 +70,10 @@ return [
     /** @see \dev\controllers\PagesController::actionAnselEe() */
     'GET /software/ansel-ee' => 'dev/pages/ansel-ee',
 
+    // Treasury Page
+    /** @see \dev\controllers\PagesController::actionTreasury() */
+    'GET /software/treasury' => 'dev/pages/treasury',
+
 
 
 
