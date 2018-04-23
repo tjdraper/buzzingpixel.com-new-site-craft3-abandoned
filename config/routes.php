@@ -176,6 +176,14 @@ return [
     'GET /software/ansel-ee/docs/changelog' => 'dev/docs-ansel-ee/changelog',
 
 
+    /**
+     * Construct Docs Pages
+     */
+
+    /** @see \dev\controllers\DocsConstructController::actionIndex() */
+    'GET /software/construct/docs' => 'dev/docs-construct/index',
+
+
 
 
 

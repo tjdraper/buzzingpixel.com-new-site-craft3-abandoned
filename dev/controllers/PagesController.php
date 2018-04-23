@@ -121,7 +121,7 @@ class PagesController extends BaseController
     }
 
     /**
-     * Displays Construt page
+     * Displays Construct page
      * @return Response
      * @throws \Exception
      */

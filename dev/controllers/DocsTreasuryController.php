@@ -10,7 +10,7 @@ use yii\web\Response;
  */
 class DocsTreasuryController extends DocsController
 {
-    /** @var array $anselSwitcher */
+    /** @var array $switcher */
     private $switcher = [];
 
 
