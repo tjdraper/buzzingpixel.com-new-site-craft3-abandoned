@@ -186,6 +186,9 @@ return [
     /** @see \dev\controllers\DocsConstructController::actionControlPanel() */
     'GET /software/construct/docs/control-panel' => 'dev/docs-construct/control-panel',
 
+    /** @see \dev\controllers\DocsConstructController::actionFieldTypes() */
+    'GET /software/construct/docs/field-types' => 'dev/docs-construct/field-types',
+
 
 
 

@@ -37,6 +37,16 @@ class DocsConstructController extends DocsController
         return $this->parsePageConstruct1('ControlPanel');
     }
 
+    /**
+     * Displays the Construct docs Field Types page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionFieldTypes(): Response
+    {
+        return $this->parsePageConstruct1('FieldTypes');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Construct Docs */
