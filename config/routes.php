@@ -138,6 +138,9 @@ return [
     /** @see \dev\controllers\DocsTreasuryController::actionTemplating() */
     'GET /software/treasury/docs/templating' => 'dev/docs-treasury/templating',
 
+    /** @see \dev\controllers\DocsTreasuryController::actionDevelopers() */
+    'GET /software/treasury/docs/developers' => 'dev/docs-treasury/developers',
+
 
     /**
      * Ansel EE Docs Pages V2

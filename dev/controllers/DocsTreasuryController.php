@@ -47,6 +47,16 @@ class DocsTreasuryController extends DocsController
         return $this->parsePageTreasury1('Templating');
     }
 
+    /**
+     * Displays the Treasury docs Developers page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionDevelopers(): Response
+    {
+        return $this->parsePageTreasury1('Developers');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Treasury Docs */
