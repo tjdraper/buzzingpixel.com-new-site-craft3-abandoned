@@ -4,15 +4,15 @@
         {
             "SectionName": "Construct Docs Pages",
             "SectionLinks": {
-                "/software/treasury/docs": "Getting Started",
-                "/software/treasury/docs/control-panel": "Control Panel",
-                "/software/treasury/docs/field-types": "Field Types",
-                "/software/treasury/docs/routing": "Routing",
-                "/software/treasury/docs/config-routing": "Config Routing",
-                "/software/treasury/docs/templating": "Templating",
-                "/software/treasury/docs/extension-hook": "Extension Hook",
-                "/software/treasury/docs/videos": "Videos",
-                "/software/treasury/docs/changelog": "Changelog"
+                "/software/construct/docs": "Getting Started",
+                "/software/construct/docs/control-panel": "Control Panel",
+                "/software/construct/docs/field-types": "Field Types",
+                "/software/construct/docs/routing": "Routing",
+                "/software/construct/docs/config-routing": "Config Routing",
+                "/software/construct/docs/templating": "Templating",
+                "/software/construct/docs/extension-hook": "Extension Hook",
+                "/software/construct/docs/videos": "Videos",
+                "/software/construct/docs/changelog": "Changelog"
             }
         }
     ]
