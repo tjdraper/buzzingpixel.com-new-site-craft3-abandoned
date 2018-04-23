@@ -27,6 +27,16 @@ class DocsConstructController extends DocsController
         return $this->parsePageConstruct1('GettingStarted');
     }
 
+    /**
+     * Displays the Construct docs Control Panel page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionControlPanel(): Response
+    {
+        return $this->parsePageConstruct1('ControlPanel');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Construct Docs */

@@ -183,6 +183,9 @@ return [
     /** @see \dev\controllers\DocsConstructController::actionIndex() */
     'GET /software/construct/docs' => 'dev/docs-construct/index',
 
+    /** @see \dev\controllers\DocsConstructController::actionControlPanel() */
+    'GET /software/construct/docs/control-panel' => 'dev/docs-construct/control-panel',
+
 
 
 
