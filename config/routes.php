@@ -132,6 +132,9 @@ return [
     /** @see \dev\controllers\DocsTreasuryController::actionIndex() */
     'GET /software/treasury/docs' => 'dev/docs-treasury/index',
 
+    /** @see \dev\controllers\DocsTreasuryController::actionLocations() */
+    'GET /software/treasury/docs/locations' => 'dev/docs-treasury/locations',
+
 
     /**
      * Ansel EE Docs Pages V2

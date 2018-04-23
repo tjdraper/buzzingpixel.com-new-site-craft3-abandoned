@@ -27,6 +27,16 @@ class DocsTreasuryController extends DocsController
         return $this->parsePageTreasury1('GettingStarted');
     }
 
+    /**
+     * Displays the Treasury docs index page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionLocations(): Response
+    {
+        return $this->parsePageTreasury1('Locations');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Treasury Docs */
