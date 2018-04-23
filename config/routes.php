@@ -201,6 +201,9 @@ return [
     /** @see \dev\controllers\DocsConstructController::actionExtensionHook() */
     'GET /software/construct/docs/extension-hook' => 'dev/docs-construct/extension-hook',
 
+    /** @see \dev\controllers\DocsConstructController::actionVideos() */
+    'GET /software/construct/docs/videos' => 'dev/docs-construct/videos',
+
 
 
 
