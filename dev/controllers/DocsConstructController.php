@@ -67,6 +67,17 @@ class DocsConstructController extends DocsController
         return $this->parsePageConstruct1('ConfigRouting');
     }
 
+    /**
+     * Displays the Construct docs Temlating page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionTemplating(): Response
+    {
+        return $this->parsePageConstruct1('Templating');
+        return $this->parsePageConstruct1('Templating');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Construct Docs */

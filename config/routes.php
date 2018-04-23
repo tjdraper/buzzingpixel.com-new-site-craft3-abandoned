@@ -195,6 +195,9 @@ return [
     /** @see \dev\controllers\DocsConstructController::actionConfigRouting() */
     'GET /software/construct/docs/config-routing' => 'dev/docs-construct/config-routing',
 
+    /** @see \dev\controllers\DocsConstructController::actionTemplating() */
+    'GET /software/construct/docs/templating' => 'dev/docs-construct/templating',
+
 
 
 
