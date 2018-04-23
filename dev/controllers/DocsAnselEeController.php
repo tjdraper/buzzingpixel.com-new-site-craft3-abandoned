@@ -2,6 +2,7 @@
 
 namespace dev\controllers;
 
+use Craft;
 use yii\web\Response;
 
 /**
@@ -65,6 +66,22 @@ class DocsAnselEeController extends DocsController
     public function actionVideos(): Response
     {
         return $this->parsePageAnselEE2('Videos');
+    }
+
+    /**
+     * Displays the Ansel EE docs Changelog page
+     * @return Response
+     */
+    public function actionChangelog(): Response
+    {
+        return $this->parseLocalChangelog(
+            'AnselEE2Docs',
+            'Ansel 2.x Docs',
+            $this->anselSwitcher,
+            '/software/ansel-ee',
+            'Ansel (EE) Changelog',
+            Craft::$app->getConfig()->general->projectPath. '/content/AnselEE2Docs/changelog.md'
+        );
     }
 
 

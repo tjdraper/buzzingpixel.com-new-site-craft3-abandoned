@@ -140,6 +140,9 @@ return [
     /** @see \dev\controllers\DocsAnselEeController::actionVideos() */
     'GET /software/ansel-ee/docs/videos' => 'dev/docs-ansel-ee/videos',
 
+    /** @see \dev\controllers\DocsAnselEeController::actionChangelog() */
+    'GET /software/ansel-ee/docs/changelog' => 'dev/docs-ansel-ee/changelog',
+
 
 
 

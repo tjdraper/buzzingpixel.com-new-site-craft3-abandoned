@@ -92,6 +92,51 @@ abstract class DocsController extends BaseController
     }
 
     /**
+     * Parses a GitHub Changelog page
+     * @param string $directory
+     * @param string $switcherTitle
+     * @param array $switcher
+     * @param string $backLink
+     * @param string $metaTitle
+     * @param string $changelogPath
+     * @return Response
+     * @throws \Exception
+     * @throws GuzzleException
+     * @throws \RuntimeException
+     */
+    protected function parseLocalChangelog(
+        string $directory,
+        string $switcherTitle,
+        array $switcher,
+        string $backLink,
+        string $metaTitle,
+        string $changelogPath
+    ): Response {
+        $vars = $this->getPageVariablesCommon(
+            $directory,
+            $switcherTitle,
+            $switcher,
+            $backLink
+        );
+
+        $vars['metaTitle'] = "{$metaTitle} | " . $vars['metaTitle'];
+
+        $changelogMarkdown = file_get_contents($changelogPath);
+
+        $html = '<div class="ChangelogMarkdownWrapper">';
+        $html .= (new Markdown())->parse($changelogMarkdown);
+        $html .= '</div>';
+
+        $vars['pageSections'][] = [
+            'markdown' => $changelogMarkdown,
+            'meta' => null,
+            'html' => $html,
+        ];
+
+        return $this->renderTemplate('_core/PageDocs.twig', $vars);
+    }
+
+    /**
      * Gets the variables common to pages
      * @param string $directory
      * @param string $switcherTitle
