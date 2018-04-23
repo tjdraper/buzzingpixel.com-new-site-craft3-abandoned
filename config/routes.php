@@ -192,6 +192,9 @@ return [
     /** @see \dev\controllers\DocsConstructController::actionRouting() */
     'GET /software/construct/docs/routing' => 'dev/docs-construct/routing',
 
+    /** @see \dev\controllers\DocsConstructController::actionConfigRouting() */
+    'GET /software/construct/docs/config-routing' => 'dev/docs-construct/config-routing',
+
 
 
 
