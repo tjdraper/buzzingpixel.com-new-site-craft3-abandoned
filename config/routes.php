@@ -126,6 +126,14 @@ return [
 
 
     /**
+     * Treasury Docs Pages
+     */
+
+    /** @see \dev\controllers\DocsTreasuryController::actionIndex() */
+    'GET /software/treasury/docs' => 'dev/docs-treasury/index',
+
+
+    /**
      * Ansel EE Docs Pages V2
      */
 
