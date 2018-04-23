@@ -71,6 +71,7 @@ class DocsAnselEeController extends DocsController
     /**
      * Displays the Ansel EE docs Changelog page
      * @return Response
+     * @throws \Exception
      */
     public function actionChangelog(): Response
     {

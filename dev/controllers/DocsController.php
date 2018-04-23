@@ -101,7 +101,6 @@ abstract class DocsController extends BaseController
      * @param string $changelogPath
      * @return Response
      * @throws \Exception
-     * @throws GuzzleException
      * @throws \RuntimeException
      */
     protected function parseLocalChangelog(
