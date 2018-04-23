@@ -204,6 +204,9 @@ return [
     /** @see \dev\controllers\DocsConstructController::actionVideos() */
     'GET /software/construct/docs/videos' => 'dev/docs-construct/videos',
 
+    /** @see \dev\controllers\DocsConstructController::actionChangelog() */
+    'GET /software/construct/docs/changelog' => 'dev/docs-construct/changelog',
+
 
 
 

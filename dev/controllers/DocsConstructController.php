@@ -2,6 +2,7 @@
 
 namespace dev\controllers;
 
+use Craft;
 use yii\web\Response;
 
 /**
@@ -88,13 +89,30 @@ class DocsConstructController extends DocsController
     }
 
     /**
-     * Displays the Construct docs Templating page
+     * Displays the Construct docs Videos page
      * @return Response
      * @throws \Exception
      */
     public function actionVideos(): Response
     {
         return $this->parsePageConstruct1('Videos');
+    }
+
+    /**
+     * Displays the Construct docs Changelog page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionChangelog(): Response
+    {
+        return $this->parseLocalChangelog(
+            'Construct2Docs',
+            'Construct Docs',
+            $this->switcher,
+            '/software/construct',
+            'Construct Changelog',
+            Craft::$app->getConfig()->general->projectPath. '/content/Construct2Docs/changelog.md'
+        );
     }
 
 
