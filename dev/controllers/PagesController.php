@@ -41,7 +41,7 @@ class PagesController extends BaseController
     }
 
     /**
-     * Displays Custom Add-ons page
+     * Displays Hosting page
      * @return Response
      * @throws \Exception
      */
@@ -81,7 +81,7 @@ class PagesController extends BaseController
     }
 
     /**
-     * Displays contact thanks page
+     * Displays Ansel for Craft page
      * @return Response
      * @throws \Exception
      */
@@ -91,7 +91,7 @@ class PagesController extends BaseController
     }
 
     /**
-     * Displays contact thanks page
+     * Displays Ansel for EE page
      * @return Response
      * @throws \Exception
      */
@@ -101,13 +101,23 @@ class PagesController extends BaseController
     }
 
     /**
-     * Displays contact thanks page
+     * Displays Treasury page
      * @return Response
      * @throws \Exception
      */
     public function actionTreasury(): Response
     {
         return $this->parsePage('Treasury');
+    }
+
+    /**
+     * Displays Ansel + Treasury page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionAnselTreasuryEe(): Response
+    {
+        return $this->parsePage('AnselTreasury');
     }
 
     /**
