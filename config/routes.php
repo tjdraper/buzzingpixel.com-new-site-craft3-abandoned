@@ -141,6 +141,9 @@ return [
     /** @see \dev\controllers\DocsTreasuryController::actionDevelopers() */
     'GET /software/treasury/docs/developers' => 'dev/docs-treasury/developers',
 
+    /** @see \dev\controllers\DocsTreasuryController::actionChangelog() */
+    'GET /software/treasury/docs/changelog' => 'dev/docs-treasury/changelog',
+
 
     /**
      * Ansel EE Docs Pages V2

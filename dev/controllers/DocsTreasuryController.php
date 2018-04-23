@@ -2,6 +2,7 @@
 
 namespace dev\controllers;
 
+use Craft;
 use yii\web\Response;
 
 /**
@@ -55,6 +56,23 @@ class DocsTreasuryController extends DocsController
     public function actionDevelopers(): Response
     {
         return $this->parsePageTreasury1('Developers');
+    }
+
+    /**
+     * Displays the Ansel EE docs Changelog page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionChangelog(): Response
+    {
+        return $this->parseLocalChangelog(
+            'Treasury1Docs',
+            'Treasury Docs',
+            $this->switcher,
+            '/software/ansel-ee',
+            'Ansel (EE) Changelog',
+            Craft::$app->getConfig()->general->projectPath. '/content/Treasury1Docs/changelog.md'
+        );
     }
 
 
