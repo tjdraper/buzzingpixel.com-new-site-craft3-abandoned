@@ -78,6 +78,10 @@ return [
     /** @see \dev\controllers\PagesController::actionAnselTreasuryEe() */
     'GET /software/ansel-treasury-ee' => 'dev/pages/ansel-treasury-ee',
 
+    // Construct Page
+    /** @see \dev\controllers\PagesController::actionConstruct() */
+    'GET /software/construct' => 'dev/pages/construct',
+
 
 
 
