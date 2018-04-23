@@ -131,6 +131,16 @@ class PagesController extends BaseController
     }
 
     /**
+     * Displays Construct page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionCategoryConstruct(): Response
+    {
+        return $this->parsePage('CategoryConstruct');
+    }
+
+    /**
      * Displays the Index page
      * @return string
      * @throws \Exception

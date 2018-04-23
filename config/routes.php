@@ -82,6 +82,10 @@ return [
     /** @see \dev\controllers\PagesController::actionConstruct() */
     'GET /software/construct' => 'dev/pages/construct',
 
+    // Category Construct Page
+    /** @see \dev\controllers\PagesController::actionCategoryConstruct() */
+    'GET /software/category-construct' => 'dev/pages/category-construct',
+
 
 
 
