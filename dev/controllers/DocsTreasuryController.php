@@ -28,13 +28,23 @@ class DocsTreasuryController extends DocsController
     }
 
     /**
-     * Displays the Treasury docs index page
+     * Displays the Treasury docs Locations page
      * @return Response
      * @throws \Exception
      */
     public function actionLocations(): Response
     {
         return $this->parsePageTreasury1('Locations');
+    }
+
+    /**
+     * Displays the Treasury docs Templating page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionTemplating(): Response
+    {
+        return $this->parsePageTreasury1('Templating');
     }
 
 

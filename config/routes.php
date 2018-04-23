@@ -135,6 +135,9 @@ return [
     /** @see \dev\controllers\DocsTreasuryController::actionLocations() */
     'GET /software/treasury/docs/locations' => 'dev/docs-treasury/locations',
 
+    /** @see \dev\controllers\DocsTreasuryController::actionTemplating() */
+    'GET /software/treasury/docs/templating' => 'dev/docs-treasury/templating',
+
 
     /**
      * Ansel EE Docs Pages V2
