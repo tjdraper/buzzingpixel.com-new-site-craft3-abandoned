@@ -86,6 +86,10 @@ return [
     /** @see \dev\controllers\PagesController::actionCategoryConstruct() */
     'GET /software/category-construct' => 'dev/pages/category-construct',
 
+    // Collective Page
+    /** @see \dev\controllers\PagesController::actionCollective() */
+    'GET /software/collective' => 'dev/pages/collective',
+
 
 
 

@@ -141,7 +141,17 @@ class PagesController extends BaseController
     }
 
     /**
-     * Displays the Index page
+     * Displays Construct page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionCollective(): Response
+    {
+        return $this->parsePage('Collective');
+    }
+
+    /**
+     * Displays the Cart page
      * @return string
      * @throws \Exception
      */
@@ -150,6 +160,11 @@ class PagesController extends BaseController
         // TODO: Create cart page
         return 'TODO: Create cart page';
     }
+
+
+    /**************************************************************************/
+    /* Common parsing for Pages */
+    /**************************************************************************/
 
     /**
      * Parses a page
