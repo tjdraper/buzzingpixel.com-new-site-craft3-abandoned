@@ -212,6 +212,17 @@ return [
     'GET /software/construct/docs/changelog' => 'dev/docs-construct/changelog',
 
 
+    /**
+     * Category Construct Docs Pages
+     */
+
+    /** @see \dev\controllers\DocsCategoryConstructController::actionIndex() */
+    'GET /software/category-construct/docs' => 'dev/docs-category-construct/index',
+
+    /** @see \dev\controllers\DocsCategoryConstructController::actionTemplating() */
+    'GET /software/category-construct/docs/templating' => 'dev/docs-category-construct/templating',
+
+
 
 
 
