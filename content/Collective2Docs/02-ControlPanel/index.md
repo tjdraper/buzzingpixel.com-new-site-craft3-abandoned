@@ -1,3 +1,3 @@
 {
-    "title": "Control Panel"
+    "title": "Collective Control Panel"
 }

@@ -240,6 +240,9 @@ return [
     /** @see \dev\controllers\DocsCollectiveController::actionControlPanel() */
     'GET /software/collective/docs/control-panel' => 'dev/docs-collective/control-panel',
 
+    /** @see \dev\controllers\DocsCollectiveController::actionTemplating() */
+    'GET /software/collective/docs/templating' => 'dev/docs-collective/templating',
+
 
 
 

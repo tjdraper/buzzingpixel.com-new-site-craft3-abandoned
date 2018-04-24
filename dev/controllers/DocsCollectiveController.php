@@ -29,13 +29,23 @@ class DocsCollectiveController extends DocsController
     }
 
     /**
-     * Displays the Collective docs index page
+     * Displays the Collective docs Control Panel page
      * @return Response
      * @throws \Exception
      */
     public function actionControlPanel(): Response
     {
         return $this->parsePageCollective2('ControlPanel');
+    }
+
+    /**
+     * Displays the Collective docs Templating page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionTemplating(): Response
+    {
+        return $this->parsePageCollective2('Templating');
     }
 
 
