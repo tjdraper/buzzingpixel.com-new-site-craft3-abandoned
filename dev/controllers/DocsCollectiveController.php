@@ -28,6 +28,16 @@ class DocsCollectiveController extends DocsController
         return $this->parsePageCollective2('GettingStarted');
     }
 
+    /**
+     * Displays the Collective docs index page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionControlPanel(): Response
+    {
+        return $this->parsePageCollective2('ControlPanel');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Collective */

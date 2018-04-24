@@ -237,6 +237,9 @@ return [
     /** @see \dev\controllers\DocsCollectiveController::actionIndex() */
     'GET /software/collective/docs' => 'dev/docs-collective/index',
 
+    /** @see \dev\controllers\DocsCollectiveController::actionControlPanel() */
+    'GET /software/collective/docs/control-panel' => 'dev/docs-collective/control-panel',
+
 
 
 
