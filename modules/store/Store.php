@@ -67,15 +67,19 @@ class Store extends Module
      */
     public static function cartService(): CartService
     {
-        // Make sure session is started
-        Craft::$app->getSession()->open();
+        if (! isset(self::$plugin->storage['CartService'])) {
+            // Make sure session is started
+            Craft::$app->getSession()->open();
 
-        return new CartService(
-            self::settings(),
-            Craft::$app->getSession()->getId(),
-            Craft::$app->getUser()->getId() ?? 0,
-            new QueryFactory(),
-            Craft::$app->getDb()
-        );
+            self::$plugin->storage['CartService'] = new CartService(
+                self::settings(),
+                Craft::$app->getSession()->getId(),
+                Craft::$app->getUser()->getId() ?? 0,
+                new QueryFactory(),
+                Craft::$app->getDb()
+            );
+        }
+
+        return self::$plugin->storage['CartService'];
     }
 }
