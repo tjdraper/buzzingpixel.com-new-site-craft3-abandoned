@@ -246,6 +246,9 @@ return [
     /** @see \dev\controllers\DocsCollectiveController::actionExtensionHook() */
     'GET /software/collective/docs/extension-hook' => 'dev/docs-collective/extension-hook',
 
+    /** @see \dev\controllers\DocsCollectiveController::actionChangelog() */
+    'GET /software/collective/docs/changelog' => 'dev/docs-collective/changelog',
+
 
 
 

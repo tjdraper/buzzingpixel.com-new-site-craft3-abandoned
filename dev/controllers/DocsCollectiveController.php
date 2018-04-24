@@ -49,13 +49,30 @@ class DocsCollectiveController extends DocsController
     }
 
     /**
-     * Displays the Collective docs ExtensionHook page
+     * Displays the Collective docs Extension Hook page
      * @return Response
      * @throws \Exception
      */
     public function actionExtensionHook(): Response
     {
         return $this->parsePageCollective2('ExtensionHook');
+    }
+
+    /**
+     * Displays the Collective docs Changelog page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionChangelog(): Response
+    {
+        return $this->parseLocalChangelog(
+            'Collective2Docs',
+            'Collective Docs',
+            $this->switcher,
+            '/software/collective',
+            'Collective Changelog',
+            Craft::$app->getConfig()->general->projectPath . '/content/Collective2Docs/changelog.md'
+        );
     }
 
 
