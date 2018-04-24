@@ -160,17 +160,6 @@ class PagesController extends BaseController
         return $this->parsePage('FreeSoftware');
     }
 
-    /**
-     * Displays the Cart page
-     * @return string
-     * @throws \Exception
-     */
-    public function actionCart(): string
-    {
-        // TODO: Create cart page
-        return 'TODO: Create cart page';
-    }
-
 
     /**************************************************************************/
     /* Common parsing for Pages */

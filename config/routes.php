@@ -262,11 +262,11 @@ return [
     /**************************************************************************/
 
     // Display cart page
-    /** @see \dev\controllers\PagesController::actionCart() */
-    'GET /cart' => 'dev/pages/cart',
+    /** @see \dev\controllers\\dev\controllers\CartController::actionIndex() */
+    'GET /cart' => 'dev/cart/index',
 
     // Get cart count
-    /** @see \dev\controllers\PagesController::actionAjaxCount() */
+    /** @see \modules\store\controllers\CartContentController::actionAjaxCount() */
     'GET /ajax/cart/count' => 'store/cart-content/ajax-count',
 
     // Add to cart action
