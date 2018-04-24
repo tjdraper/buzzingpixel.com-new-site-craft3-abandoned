@@ -151,6 +151,16 @@ class PagesController extends BaseController
     }
 
     /**
+     * Displays Construct page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionFreeSoftware(): Response
+    {
+        return $this->parsePage('FreeSoftware');
+    }
+
+    /**
      * Displays the Cart page
      * @return string
      * @throws \Exception

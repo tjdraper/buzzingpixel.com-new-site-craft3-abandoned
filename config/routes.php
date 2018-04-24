@@ -90,6 +90,10 @@ return [
     /** @see \dev\controllers\PagesController::actionCollective() */
     'GET /software/collective' => 'dev/pages/collective',
 
+    // Free Page
+    /** @see \dev\controllers\PagesController::actionFreeSoftware() */
+    'GET /software/free' => 'dev/pages/free-software',
+
 
 
 
