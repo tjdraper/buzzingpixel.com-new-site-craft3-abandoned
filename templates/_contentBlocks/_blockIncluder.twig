@@ -1,6 +1,6 @@
 {# @var array block #}
 
-<section class="ContentBlock{% if block['meta']['bgColor'] is defined and block.meta.bgColor %} ContentBlock--HasBgColor-{{ block.meta.bgColor }}{% endif %}">
+<section class="ContentBlock{% if block['meta']['bgColor'] is defined and block.meta.bgColor %} ContentBlock--HasBgColor-{{ block.meta.bgColor }}{% endif %}{% if block['meta']['alternateBgColor'] is defined and block.meta.alternateBgColor %} ContentBlock--HasAlternatingBgColor{% endif %}">
     <div class="ContentBlock__Inner">
         {% include '_contentBlocks/' ~ block.meta.blockType with {
             block: block

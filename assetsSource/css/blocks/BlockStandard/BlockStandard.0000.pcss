@@ -55,8 +55,14 @@
  * Background Modifiers
  */
 
+.ContentBlock--HasAlternatingBgColor:nth-child(even) *,
 .ContentBlock--HasBgColor-Green * {
     color: #fff;
+}
+
+.ContentBlock--HasAlternatingBgColor:nth-child(even) code,
+.ContentBlock--HasBgColor-Green code {
+    color: #404040;
 }
 
 
