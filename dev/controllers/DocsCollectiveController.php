@@ -48,6 +48,16 @@ class DocsCollectiveController extends DocsController
         return $this->parsePageCollective2('Templating');
     }
 
+    /**
+     * Displays the Collective docs ExtensionHook page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionExtensionHook(): Response
+    {
+        return $this->parsePageCollective2('ExtensionHook');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Collective */

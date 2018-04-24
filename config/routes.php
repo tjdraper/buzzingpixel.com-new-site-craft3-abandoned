@@ -243,6 +243,9 @@ return [
     /** @see \dev\controllers\DocsCollectiveController::actionTemplating() */
     'GET /software/collective/docs/templating' => 'dev/docs-collective/templating',
 
+    /** @see \dev\controllers\DocsCollectiveController::actionExtensionHook() */
+    'GET /software/collective/docs/extension-hook' => 'dev/docs-collective/extension-hook',
+
 
 
 
