@@ -222,6 +222,9 @@ return [
     /** @see \dev\controllers\DocsCategoryConstructController::actionTemplating() */
     'GET /software/category-construct/docs/templating' => 'dev/docs-category-construct/templating',
 
+    /** @see \dev\controllers\DocsCategoryConstructController::actionChangelog() */
+    'GET /software/category-construct/docs/changelog' => 'dev/docs-category-construct/changelog',
+
 
 
 

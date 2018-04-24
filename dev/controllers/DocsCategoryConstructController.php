@@ -38,6 +38,23 @@ class DocsCategoryConstructController extends DocsController
         return $this->parsePageCategoryConstruct2('Templating');
     }
 
+    /**
+     * Displays the Construct docs Changelog page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionChangelog(): Response
+    {
+        return $this->parseLocalChangelog(
+            'CategoryConstruct2Docs',
+            'Category Construct Docs',
+            $this->switcher,
+            '/software/category-construct',
+            'Category Construct Changelog',
+            Craft::$app->getConfig()->general->projectPath . '/content/CategoryConstruct2Docs/changelog.md'
+        );
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Construct Docs */
