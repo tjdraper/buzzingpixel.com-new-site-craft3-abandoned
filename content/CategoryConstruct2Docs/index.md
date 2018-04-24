@@ -1,5 +1,5 @@
 {
-    "title": "Category category-construct Documentation",
+    "title": "Category Construct Documentation",
     "Nav": [
         {
             "SectionName": "Category Construct Docs Pages",

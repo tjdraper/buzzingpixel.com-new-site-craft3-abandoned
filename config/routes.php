@@ -230,6 +230,14 @@ return [
     'GET /software/category-construct/docs/changelog' => 'dev/docs-category-construct/changelog',
 
 
+    /**
+     * Collective Docs Pages
+     */
+
+    /** @see \dev\controllers\DocsCollectiveController::actionIndex() */
+    'GET /software/collective/docs' => 'dev/docs-collective/index',
+
+
 
 
 
