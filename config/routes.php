@@ -262,7 +262,7 @@ return [
     /**************************************************************************/
 
     // Display cart page
-    /** @see \dev\controllers\\dev\controllers\CartController::actionIndex() */
+    /** @see \dev\controllers\CartController::actionIndex() */
     'GET /cart' => 'dev/cart/index',
 
     // Get cart count
