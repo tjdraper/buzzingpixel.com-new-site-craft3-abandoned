@@ -1,5 +1,141 @@
 {% extends '_layouts/Master.twig' %}
 
 {% block content %}
-    TODO: Create cart page
+    <div class="Cart">
+        <div class="Cart__Inner">
+            <div class="Cart__Checkout">
+                <div class="Cart__Checkout__Inner">
+                    <form action="#TODO" class="CheckoutForm">
+                        <section class="CheckoutForm__Section">
+                            <h2 class="CheckoutForm__SectionHeader">Billing</h2>
+                            <label class="label CheckoutForm__Label">
+                                Email Address
+                                <input
+                                    type="text"
+                                    class="input CheckoutForm__Input"
+                                    placeholder="johnsmith@emailprovider.com"
+                                >
+                            </label>
+                            <label class="label CheckoutForm__Label">
+                                Phone Number
+                                <input
+                                    type="text"
+                                    class="input CheckoutForm__Input"
+                                    placeholder="123-555-1212"
+                                >
+                            </label>
+                            <label class="label CheckoutForm__Label">
+                                Country
+                                <select class="select CheckoutForm__Select">
+                                    <option value="USA">United States</option>
+                                    <option value="OTHER">Other</option>
+                                </select>
+                            </label>
+                            <label class="label CheckoutForm__Label">
+                                Full Name
+                                <input
+                                    type="text"
+                                    class="input CheckoutForm__Input"
+                                    placeholder="John Smith"
+                                >
+                            </label>
+                            <label class="label CheckoutForm__Label">
+                                Company
+                                <input
+                                    type="text"
+                                    class="input CheckoutForm__Input"
+                                    placeholder="BuzzingPixel, LLC"
+                                >
+                            </label>
+                            <label class="label CheckoutForm__Label">
+                                Address
+                                <input
+                                    type="text"
+                                    class="input CheckoutForm__Input"
+                                    placeholder="123 Some Street"
+                                >
+                            </label>
+                            <label class="label CheckoutForm__Label">
+                                Address Line 2
+                                <input
+                                    type="text"
+                                    class="input CheckoutForm__Input"
+                                    placeholder="Suite 201"
+                                >
+                            </label>
+                            <label class="label CheckoutForm__Label">
+                                City
+                                <input
+                                    type="text"
+                                    class="input CheckoutForm__Input"
+                                    placeholder="Metropolis"
+                                >
+                            </label>
+                            <label class="label CheckoutForm__Label">
+                                State
+                                <select class="select CheckoutForm__Select">
+                                    <option value="TN">Tennessee</option>
+                                    <option value="OTHER">Other</option>
+                                </select>
+                            </label>
+                            <label class="label CheckoutForm__Label">
+                                Postal Code
+                                <input
+                                    type="text"
+                                    class="input CheckoutForm__Input"
+                                    placeholder="12345"
+                                >
+                            </label>
+                        </section>
+                    </form>
+                </div>
+            </div>
+            <div class="Cart__SidebarAtDesktop">
+                <div class="Cart__TotalsContainer">
+                    <ul class="Cart__TotalsList">
+                        <li class="Cart__TotalsListItem">
+                            <span class="Cart__TotalsListItemTitle">
+                                Subtotal
+                            </span>
+                            <span class="Cart__TotalsListItemValue">
+                                $123.09
+                            </span>
+                        </li>
+                        <li class="Cart__TotalsListItem">
+                            <span class="Cart__TotalsListItemTitle">
+                                Tax
+                            </span>
+                            <span class="Cart__TotalsListItemValue">
+                                $0.00
+                            </span>
+                        </li>
+                        <li class="Cart__TotalsListItem Cart__TotalsListItem--IsEmphasized">
+                            <span class="Cart__TotalsListItemTitle">
+                                Total
+                            </span>
+                            <span class="Cart__TotalsListItemValue">
+                                $123.00
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="Cart__ItemsContainer">
+                    <ul class="Cart__Items">
+                        <li class="Cart__Item">
+                            <div class="Cart__ItemTitle">Some Item</div>
+                            <form class="Cart__ItemMeta">
+                                <div class="Cart__ItemMetaPrice">$79.00</div>
+                                <div class="Cart__ItemMetaQty">
+                                    <input type="text" class="input Cart__ItemMetaQtyInput">
+                                </div>
+                                <div class="Cart__ItemMetaUpdateBtn">
+                                    <input class="button cart__item-update-submit" type="submit" value="Update">
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
