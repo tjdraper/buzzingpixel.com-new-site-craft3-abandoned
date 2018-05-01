@@ -2,6 +2,7 @@
 
 namespace dev\controllers;
 
+use Craft;
 use yii\web\Response;
 use modules\store\Store;
 
@@ -48,6 +49,7 @@ class CartController extends BaseController
                     ],
                 ],
                 'cartModel' => Store::cartService()->getCartModel(),
+                'isGuest' => Craft::$app->getUser()->isGuest,
             ],
             false
         );
