@@ -1,0 +1,60 @@
+<div class="LogInForm">
+    <div class="LogInForm__Inner">
+        <h2 class="LogInForm__Title">Log In or Register</h2>
+        {% embed '_embeds/LayoutTwoColumns.twig' %}
+            {% block leftColumnContent %}
+                <form action="#TODO" class="LogInForm__Form">
+                    <h3 class="LogInForm__FormTitle">Log In</h3>
+                    <label class="label LogInForm__Label LogInForm__Label--Required">
+                        Email Address
+                        <input
+                            type="email"
+                            class="input LogInForm__Input"
+                            placeholder="bill@smith.com"
+                            required
+                        >
+                    </label>
+                    <label class="label LogInForm__Label LogInForm__Label--Required">
+                        Password
+                        <input
+                            type="password"
+                            class="input LogInForm__Input"
+                            placeholder="MyPassW0rd!"
+                            required
+                        >
+                    </label>
+                    <div class="LogInForm__ButtonSet">
+                        <input class="button LogInForm__ButtonSubmit" type="submit" value="Log In">
+                        <a href="/account/iforgot" class="button button--colored button--outlined LogInForm__ButtonReset">Reset Password</a>
+                    </div>
+                </form>
+            {% endblock %}
+            {% block rightColumnContent %}
+                <form action="#TODO" class="LogInForm__Form">
+                    <h3 class="LogInForm__FormTitle">Register</h3>
+                    <label class="label LogInForm__Label LogInForm__Label--Required">
+                        Email Address
+                        <input
+                            type="email"
+                            class="input LogInForm__Input"
+                            placeholder="bill@smith.com"
+                            required
+                        >
+                    </label>
+                    <label class="label LogInForm__Label LogInForm__Label--Required">
+                        Password
+                        <input
+                            type="password"
+                            class="input LogInForm__Input"
+                            placeholder="MyPassW0rd!"
+                            required
+                        >
+                    </label>
+                    <div class="LogInForm__ButtonSet">
+                        <input class="button LogInForm__ButtonSubmit" type="submit" value="Register">
+                    </div>
+                </form>
+            {% endblock %}
+        {% endembed %}
+    </div>
+</div>
