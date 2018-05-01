@@ -26,6 +26,7 @@ use dev\twigextensions\SlugifyTwigExtension;
 use cebe\markdown\GithubMarkdown as Markdown;
 use dev\twigextensions\FileTimeTwigExtension;
 use dev\twigextensions\CountriesTwigExtension;
+use dev\twigextensions\DateRangesTwigExtension;
 use craft\console\Application as ConsoleApplication;
 
 /**
@@ -83,6 +84,7 @@ class Module extends ModuleBase
         $view->registerTwigExtension(new SlugifyTwigExtension());
         $view->registerTwigExtension(new FileTimeTwigExtension());
         $view->registerTwigExtension(new CountriesTwigExtension());
+        $view->registerTwigExtension(new DateRangesTwigExtension());
     }
 
     private function registerGlobals()
