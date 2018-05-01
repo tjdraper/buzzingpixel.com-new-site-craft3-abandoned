@@ -273,4 +273,8 @@ return [
     /** @see \modules\store\controllers\CartContentController::actionAdd() */
     'GET /cart/add/<productKey:([^\/]+)>' => 'store/cart-content/add',
 
+    // Add to cart action
+    /** @see \modules\store\controllers\CartContentController::actionRemove() */
+    'GET /cart/remove/<productKey:([^\/]+)>' => 'store/cart-content/remove',
+
 ];

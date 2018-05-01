@@ -207,6 +207,27 @@ class CartService
     }
 
     /**
+     * Removes a product from the cart
+     * @param string $productKey
+     * @return bool `(bool) true` if product exists. `(bool) false` if not
+     * @throws \Exception
+     */
+    public function remove(string $productKey): bool
+    {
+        if (! isset($this->configModel->products[$productKey])) {
+            return false;
+        }
+
+        if (! isset($this->cartModel->cartData[$productKey])) {
+            return true;
+        }
+
+        unset($this->cartModel->cartData[$productKey]);
+        $this->updateCart();
+        return true;
+    }
+
+    /**
      * Gets the cart count
      * @return int
      */
