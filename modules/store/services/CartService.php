@@ -214,4 +214,13 @@ class CartService
     {
         return $this->cartModel->count();
     }
+
+    /**
+     * Gets the cart model
+     * @return CartModel
+     */
+    public function getCartModel(): CartModel
+    {
+        return $this->cartModel;
+    }
 }

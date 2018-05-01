@@ -2,6 +2,9 @@
 
 namespace modules\store\models;
 
+use modules\store\Store;
+use modules\store\models\StoreProductModel;
+
 /**
  * Class CartModel
  */
@@ -97,5 +100,23 @@ class CartModel
         }
 
         return $saveData;
+    }
+
+    /**
+     * Gets the product models in cart
+     * @return StoreProductModel[]
+     */
+    public function getProductModels(): array
+    {
+        $models = [];
+
+        $products = Store::settings()->products;
+
+        foreach ($this->cartData as $key => $qty) {
+            $models[$key] = $products[$key];
+            $models[$key]->qty = $qty;
+        }
+
+        return $models;
     }
 }

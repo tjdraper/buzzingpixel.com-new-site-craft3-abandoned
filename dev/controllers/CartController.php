@@ -47,6 +47,7 @@ class CartController extends BaseController
                         'heading' => 'Checkout',
                     ],
                 ],
+                'cartModel' => Store::cartService()->getCartModel(),
             ],
             false
         );

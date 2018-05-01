@@ -1,3 +1,5 @@
+{# @var \modules\store\models\CartModel cartModel #}
+
 {% extends '_layouts/Master.twig' %}
 
 {% block content %}
@@ -165,33 +167,24 @@
                 </div>
                 <div class="Cart__ItemsContainer">
                     <ul class="Cart__Items">
-                        <li class="Cart__Item">
-                            <div class="Cart__ItemTitle">Some Item Of Long Value</div>
-                            <form class="Cart__ItemMeta">
-                                <div class="Cart__ItemMetaPrice">$79.00</div>
-                                <input type="text" class="input Cart__ItemMetaQtyInput" value="1">
-                                <input class="button Cart__ItemMetaUpdateSubmit" type="submit" value="Update">
-                                <a href="#" class="button Cart__ItemMetaRemove">X</a>
-                            </form>
-                        </li>
-                        <li class="Cart__Item">
-                            <div class="Cart__ItemTitle">Some Item</div>
-                            <form class="Cart__ItemMeta">
-                                <div class="Cart__ItemMetaPrice">$79.00</div>
-                                <input type="text" class="input Cart__ItemMetaQtyInput" value="1">
-                                <input class="button Cart__ItemMetaUpdateSubmit" type="submit" value="Update">
-                                <a href="#" class="button Cart__ItemMetaRemove">X</a>
-                            </form>
-                        </li>
-                        <li class="Cart__Item">
-                            <div class="Cart__ItemTitle">Some Item</div>
-                            <form class="Cart__ItemMeta">
-                                <div class="Cart__ItemMetaPrice">$79.00</div>
-                                <input type="text" class="input Cart__ItemMetaQtyInput" value="1">
-                                <input class="button Cart__ItemMetaUpdateSubmit" type="submit" value="Update">
-                                <a href="#" class="button Cart__ItemMetaRemove">X</a>
-                            </form>
-                        </li>
+                        {% for productKey,productModel in cartModel.getProductModels() %}
+                            <li class="Cart__Item">
+                                <a href="{{ productModel.url }}" class="Cart__ItemTitle">
+                                    {{ productModel.title|smartypants }}
+                                </a>
+                                <form class="Cart__ItemMeta">
+                                    <div class="Cart__ItemMetaPrice">${{ productModel.price|number_format(2) }}</div>
+                                    <input type="text" class="input Cart__ItemMetaQtyInput" value="{{ productModel.qty }}">
+                                    <input class="button Cart__ItemMetaUpdateSubmit" type="submit" value="Update">
+                                    <a
+                                        href="/cart/remove/{{ productKey }}"
+                                        class="button Cart__ItemMetaRemove"
+                                    >
+                                        X
+                                    </a>
+                                </form>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
