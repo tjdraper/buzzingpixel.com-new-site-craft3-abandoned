@@ -143,6 +143,22 @@ class CartService
             }
 
             $this->cartModel->cartData = json_decode($cartQuery['cartData'], true) ?? [];
+
+            unset($cartQuery['cartData']);
+
+            foreach ($cartQuery as $key => $val) {
+                $this->cartModel->{$key} = $val;
+            }
+        }
+
+        if ($this->cartModel->userId !== $this->craftUserId) {
+            $updateCart = true;
+            $this->cartModel->userId = $this->craftUserId;
+        }
+
+        if ($this->cartModel->sessionId !== $this->userSessionId) {
+            $updateCart = true;
+            $this->cartModel->sessionId = $this->userSessionId;
         }
 
         if ($updateCart) {

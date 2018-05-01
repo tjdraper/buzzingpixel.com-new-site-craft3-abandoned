@@ -92,7 +92,7 @@ class CartModel
             'postalCode' => $this->postalCode,
         ];
 
-        if ($includeId) {
+        if ($includeId && $this->id) {
             $saveData['id'] = $this->id;
         }
 
