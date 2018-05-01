@@ -41,7 +41,13 @@ class CartController extends BaseController
 
         return $this->renderTemplate(
             '_core/Cart.twig',
-            [],
+            [
+                'header' => [
+                    'meta' => [
+                        'heading' => 'Checkout',
+                    ],
+                ],
+            ],
             false
         );
     }
