@@ -104,48 +104,50 @@
     </nav>
     <div class="SiteHeader__Content">
         <div class="SiteHeader__ContentInner{% if hasFeaturedImage %} SiteHeader__ContentInner--HasFeaturedImage{% endif %}">
-            <div class="SiteHeader__ContentPrimary{% if hasFeaturedImage %} SiteHeader__ContentPrimary--HasFeaturedImage{% endif %}">
-                <header class="SiteHeader__ContentHeader">
-                    {% if header['meta']['heading'] is defined %}
-                        <h1 class="SiteHeader__Heading">
-                            {{ header['meta']['heading']|typeset }}
-                        </h1>
-                    {% endif %}
-                    {% if header['meta']['subHeading'] is defined %}
-                        <h2 class="SiteHeader__SubHeading">
-                            {{ header['meta']['subHeading']|typeset }}
-                        </h2>
-                    {% endif %}
-                    {% if header['html'] is defined %}
-                        <div class="SiteHeader__ContentBody">
-                            {{ header['html']|typeset }}
-                        </div>
-                    {% endif %}
-                    {% if header['meta']['ctaGroup'] is defined %}
-                        <div class="SiteHeader__CTAGroup">
-                            <div class="CTAGroup">
-                                {% for cta in header['meta']['ctaGroup'] %}
-                                    {% set style = cta['style']|default('orange') %}
-                                    {% set ctaClass = 'button--colored' %}
-                                    {% if style == 'green' %}
-                                        {% set ctaClass = '' %}
-                                    {% elseif style == 'greenOutline' %}
-                                        {% set ctaClass = 'button--outlined' %}
-                                    {% elseif style == 'orangeOutline' %}
-                                        {% set ctaClass = 'button--colored button--outlined' %}
-                                    {% endif %}
-                                    <a
-                                        href="{{ cta.link|raw }}"
-                                        class="button {{ ctaClass }} CTAGroup__Button"
-                                    >
-                                        {{ cta.content|raw|typeset }}
-                                    </a>
-                                {% endfor %}
+            {% if header['meta']['heading'] is defined or header['meta']['subHeading'] is defined or header['html'] is defined or header['meta']['ctaGroup'] is defined %}
+                <div class="SiteHeader__ContentPrimary{% if hasFeaturedImage %} SiteHeader__ContentPrimary--HasFeaturedImage{% endif %}">
+                    <header class="SiteHeader__ContentHeader">
+                        {% if header['meta']['heading'] is defined %}
+                            <h1 class="SiteHeader__Heading">
+                                {{ header['meta']['heading']|typeset }}
+                            </h1>
+                        {% endif %}
+                        {% if header['meta']['subHeading'] is defined %}
+                            <h2 class="SiteHeader__SubHeading">
+                                {{ header['meta']['subHeading']|typeset }}
+                            </h2>
+                        {% endif %}
+                        {% if header['html'] is defined %}
+                            <div class="SiteHeader__ContentBody">
+                                {{ header['html']|typeset }}
                             </div>
-                        </div>
-                    {% endif %}
-                </header>
-            </div>
+                        {% endif %}
+                        {% if header['meta']['ctaGroup'] is defined %}
+                            <div class="SiteHeader__CTAGroup">
+                                <div class="CTAGroup">
+                                    {% for cta in header['meta']['ctaGroup'] %}
+                                        {% set style = cta['style']|default('orange') %}
+                                        {% set ctaClass = 'button--colored' %}
+                                        {% if style == 'green' %}
+                                            {% set ctaClass = '' %}
+                                        {% elseif style == 'greenOutline' %}
+                                            {% set ctaClass = 'button--outlined' %}
+                                        {% elseif style == 'orangeOutline' %}
+                                            {% set ctaClass = 'button--colored button--outlined' %}
+                                        {% endif %}
+                                        <a
+                                            href="{{ cta.link|raw }}"
+                                            class="button {{ ctaClass }} CTAGroup__Button"
+                                        >
+                                            {{ cta.content|raw|typeset }}
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </header>
+                </div>
+            {% endif %}
             {% if hasFeaturedImage %}
                 <div
                     class="SiteHeader__FeaturedImage{% if featuredImages['hasShadow'] is defined and featuredImages.hasShadow %} SiteHeader__FeaturedImage--HasShadow{% endif %}{% if featuredImages['size'] is defined %} SiteHeader__FeaturedImage--HasSize-{{ featuredImages.size }}{% endif %}"
