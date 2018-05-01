@@ -8,24 +8,26 @@
                     <form action="#TODO" class="CheckoutForm">
                         <section class="CheckoutForm__Section">
                             <h2 class="CheckoutForm__SectionHeader">Billing</h2>
-                            <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
-                                Email Address
-                                <input
-                                    type="text"
-                                    class="input CheckoutForm__Input"
-                                    placeholder="johnsmith@emailprovider.com"
-                                    required
-                                >
-                            </label>
-                            <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
-                                Phone Number
-                                <input
-                                    type="text"
-                                    class="input CheckoutForm__Input"
-                                    placeholder="123-555-1212"
-                                    required
-                                >
-                            </label>
+                            <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
+                                <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
+                                    Email Address
+                                    <input
+                                        type="text"
+                                        class="input CheckoutForm__Input"
+                                        placeholder="johnsmith@emailprovider.com"
+                                        required
+                                    >
+                                </label>
+                                <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
+                                    Phone Number
+                                    <input
+                                        type="text"
+                                        class="input CheckoutForm__Input"
+                                        placeholder="123-555-1212"
+                                        required
+                                    >
+                                </label>
+                            </div>
                             <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                 Country
                                 <select class="select CheckoutForm__Select" required>
@@ -33,23 +35,25 @@
                                     <option value="OTHER">Other</option>
                                 </select>
                             </label>
-                            <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
-                                Full Name
-                                <input
-                                    type="text"
-                                    class="input CheckoutForm__Input"
-                                    placeholder="John Smith"
-                                    required
-                                >
-                            </label>
-                            <label class="label CheckoutForm__Label">
-                                Company
-                                <input
-                                    type="text"
-                                    class="input CheckoutForm__Input"
-                                    placeholder="BuzzingPixel, LLC"
-                                >
-                            </label>
+                            <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
+                                <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
+                                    Full Name
+                                    <input
+                                        type="text"
+                                        class="input CheckoutForm__Input"
+                                        placeholder="John Smith"
+                                        required
+                                    >
+                                </label>
+                                <label class="label CheckoutForm__Label">
+                                    Company
+                                    <input
+                                        type="text"
+                                        class="input CheckoutForm__Input"
+                                        placeholder="BuzzingPixel, LLC"
+                                    >
+                                </label>
+                            </div>
                             <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                 Address
                                 <input
@@ -76,55 +80,64 @@
                                     required
                                 >
                             </label>
-                            <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
-                                State/Province
-                                <select class="select CheckoutForm__Select" required>
-                                    <option value="TN">Tennessee</option>
-                                    <option value="OTHER">Other</option>
-                                </select>
-                            </label>
-                            <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
-                                Postal Code
-                                <input
-                                    type="text"
-                                    class="input CheckoutForm__Input"
-                                    placeholder="12345"
-                                    required
-                                >
-                            </label>
+                            <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
+                                <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
+                                    State/Province
+                                    <select class="select CheckoutForm__Select" required>
+                                        <option value="TN">Tennessee</option>
+                                        <option value="OTHER">Other</option>
+                                    </select>
+                                </label>
+                                <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
+                                    Postal Code
+                                    <input
+                                        type="text"
+                                        class="input CheckoutForm__Input"
+                                        placeholder="12345"
+                                        required
+                                    >
+                                </label>
+                            </div>
                         </section>
                         <section class="CheckoutForm__Section">
                             <h2 class="CheckoutForm__SectionHeader">Payment</h2>
-                            <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
-                                Credit Card Number
-                                <input
-                                    type="text"
-                                    class="input CheckoutForm__Input JSCreditCardNumber"
-                                    placeholder="5530 8628 8440 9534"
-                                    required
-                                >
-                            </label>
-                            <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
-                                Security Code
-                                <input
-                                    type="text"
-                                    class="input CheckoutForm__Input "
-                                    placeholder="543"
-                                    required
-                                >
-                            </label>
+                            <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
+                                <label class="label CheckoutForm__Label CheckoutForm__Label--Required CheckoutForm__Label--TwoThirds">
+                                    Credit Card Number
+                                    <input
+                                        type="text"
+                                        class="input CheckoutForm__Input JSCreditCardNumber"
+                                        placeholder="5530 8628 8440 9534"
+                                        required
+                                    >
+                                </label>
+                                <label class="label CheckoutForm__Label CheckoutForm__Label--Required CheckoutForm__Label--OneThird">
+                                    CVC
+                                    <input
+                                        type="text"
+                                        class="input CheckoutForm__Input "
+                                        placeholder="543"
+                                        required
+                                    >
+                                </label>
+                            </div>
                             <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                 Expiration
-                                <select class="select CheckoutForm__Select" required>
-                                    <option value="" disabled selected>Select Month</option>
-                                    <option value="0">April</option>
-                                    <option value="OTHER">Other</option>
-                                </select>
-                                <select class="select CheckoutForm__Select" required>
-                                    <option value="" disabled selected>Select Year</option>
-                                    <option value="2018">2018</option>
-                                    <option value="OTHER">Other</option>
-                                </select>
+                                <span class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
+                                    <select class="select CheckoutForm__Select" required>
+                                        <option value="" disabled selected>Select Month</option>
+                                        <option value="0">April</option>
+                                        <option value="OTHER">Other</option>
+                                    </select>
+                                    <select class="select CheckoutForm__Select" required>
+                                        <option value="" disabled selected>Select Year</option>
+                                        <option value="2018">2018</option>
+                                        <option value="OTHER">Other</option>
+                                    </select>
+                                </span>
+                            </label>
+                            <label class="label CheckoutForm__Label CheckoutForm__Label--PaySubmit">
+                                <input class="button CheckoutForm__PaySubmit" type="submit" value="Pay $95.99">
                             </label>
                         </section>
                     </form>
@@ -162,39 +175,30 @@
                 <div class="Cart__ItemsContainer">
                     <ul class="Cart__Items">
                         <li class="Cart__Item">
-                            <div class="Cart__ItemTitle">Some Item</div>
+                            <div class="Cart__ItemTitle">Some Item Of Long Value</div>
                             <form class="Cart__ItemMeta">
                                 <div class="Cart__ItemMetaPrice">$79.00</div>
-                                <div class="Cart__ItemMetaQty">
-                                    <input type="text" class="input Cart__ItemMetaQtyInput">
-                                </div>
-                                <div class="Cart__ItemMetaUpdateBtn">
-                                    <input class="button cart__item-update-submit" type="submit" value="Update">
-                                </div>
+                                <input type="text" class="input Cart__ItemMetaQtyInput" value="1">
+                                <input class="button Cart__ItemMetaUpdateSubmit" type="submit" value="Update">
+                                <a href="#" class="button Cart__ItemMetaRemove">X</a>
                             </form>
                         </li>
                         <li class="Cart__Item">
                             <div class="Cart__ItemTitle">Some Item</div>
                             <form class="Cart__ItemMeta">
                                 <div class="Cart__ItemMetaPrice">$79.00</div>
-                                <div class="Cart__ItemMetaQty">
-                                    <input type="text" class="input Cart__ItemMetaQtyInput">
-                                </div>
-                                <div class="Cart__ItemMetaUpdateBtn">
-                                    <input class="button cart__item-update-submit" type="submit" value="Update">
-                                </div>
+                                <input type="text" class="input Cart__ItemMetaQtyInput" value="1">
+                                <input class="button Cart__ItemMetaUpdateSubmit" type="submit" value="Update">
+                                <a href="#" class="button Cart__ItemMetaRemove">X</a>
                             </form>
                         </li>
                         <li class="Cart__Item">
                             <div class="Cart__ItemTitle">Some Item</div>
                             <form class="Cart__ItemMeta">
                                 <div class="Cart__ItemMetaPrice">$79.00</div>
-                                <div class="Cart__ItemMetaQty">
-                                    <input type="text" class="input Cart__ItemMetaQtyInput">
-                                </div>
-                                <div class="Cart__ItemMetaUpdateBtn">
-                                    <input class="button cart__item-update-submit" type="submit" value="Update">
-                                </div>
+                                <input type="text" class="input Cart__ItemMetaQtyInput" value="1">
+                                <input class="button Cart__ItemMetaUpdateSubmit" type="submit" value="Update">
+                                <a href="#" class="button Cart__ItemMetaRemove">X</a>
                             </form>
                         </li>
                     </ul>
