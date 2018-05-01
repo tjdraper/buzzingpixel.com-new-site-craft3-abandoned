@@ -79,8 +79,10 @@
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                     State/Province
                                     <select class="select CheckoutForm__Select" required>
-                                        <option value="TN">Tennessee</option>
-                                        <option value="OTHER">Other</option>
+                                        <option value="" disabled selected>Select State...</option>
+                                        {% for stateAbbr,stateName in states() %}
+                                            <option value="{{ stateAbbr }}">{{ stateName }}</option>
+                                        {% endfor %}
                                     </select>
                                 </label>
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--Required">

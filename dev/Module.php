@@ -20,6 +20,7 @@ use craft\events\SetElementRouteEvent;
 use dev\variables\FileContentVariable;
 use dev\services\FileOperationsService;
 use craft\web\twig\variables\CraftVariable;
+use dev\twigextensions\StatesTwigExtension;
 use dev\twigextensions\TypesetTwigExtension;
 use dev\twigextensions\SlugifyTwigExtension;
 use cebe\markdown\GithubMarkdown as Markdown;
@@ -77,6 +78,7 @@ class Module extends ModuleBase
     private function registerTwigExtensions()
     {
         $view = Craft::$app->view;
+        $view->registerTwigExtension(new StatesTwigExtension());
         $view->registerTwigExtension(new TypesetTwigExtension());
         $view->registerTwigExtension(new SlugifyTwigExtension());
         $view->registerTwigExtension(new FileTimeTwigExtension());
