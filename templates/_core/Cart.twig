@@ -23,8 +23,10 @@
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                     Country
                                     <select class="select CheckoutForm__Select" required>
-                                        <option value="USA">United States</option>
-                                        <option value="OTHER">Other</option>
+                                        <option value="" disabled selected>Select Country...</option>
+                                        {% for country in countries().all() %}
+                                            <option value="{{ country.alpha2 }}">{{ country.name }}</option>
+                                        {% endfor %}
                                     </select>
                                 </label>
                             </div>

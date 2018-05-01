@@ -24,6 +24,7 @@ use dev\twigextensions\TypesetTwigExtension;
 use dev\twigextensions\SlugifyTwigExtension;
 use cebe\markdown\GithubMarkdown as Markdown;
 use dev\twigextensions\FileTimeTwigExtension;
+use dev\twigextensions\CountriesTwigExtension;
 use craft\console\Application as ConsoleApplication;
 
 /**
@@ -76,9 +77,10 @@ class Module extends ModuleBase
     private function registerTwigExtensions()
     {
         $view = Craft::$app->view;
-        $view->registerTwigExtension(new FileTimeTwigExtension());
         $view->registerTwigExtension(new TypesetTwigExtension());
         $view->registerTwigExtension(new SlugifyTwigExtension());
+        $view->registerTwigExtension(new FileTimeTwigExtension());
+        $view->registerTwigExtension(new CountriesTwigExtension());
     }
 
     private function registerGlobals()
