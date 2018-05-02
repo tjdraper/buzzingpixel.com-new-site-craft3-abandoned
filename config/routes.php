@@ -286,7 +286,12 @@ return [
     /* Account routing */
     /**************************************************************************/
 
+    // Post credentials to this endpoint to log in
     /** @see \dev\controllers\AccountActionController::actionLogin() */
     'POST /account/login' => 'dev/account-action/login',
+
+    // Display forgot password page
+    /** @see \dev\controllers\AccountController::actionForgotPassword() */
+    'GET /account/iforgot' => 'dev/account/forgot-password',
 
 ];
