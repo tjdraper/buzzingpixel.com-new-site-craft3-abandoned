@@ -264,6 +264,7 @@ return [
     // Display cart page
     /** @see \dev\controllers\CartController::actionIndex() */
     'GET /cart' => 'dev/cart/index',
+    'POST /cart' => 'dev/cart/index',
 
     // Get cart count
     /** @see \modules\store\controllers\CartContentController::actionAjaxCount() */
@@ -276,5 +277,16 @@ return [
     // Add to cart action
     /** @see \modules\store\controllers\CartContentController::actionRemove() */
     'GET /cart/remove/<productKey:([^\/]+)>' => 'store/cart-content/remove',
+
+
+
+
+
+    /**************************************************************************/
+    /* Account routing */
+    /**************************************************************************/
+
+    /** @see \dev\controllers\AccountActionController::actionLogin() */
+    'POST /account/login' => 'dev/account-action/login',
 
 ];

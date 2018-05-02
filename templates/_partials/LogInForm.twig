@@ -1,14 +1,28 @@
+{# @var \craft\web\twig\variables\CraftVariable craft #}
+
+{% set redirectUrl = redirectUrl|default('/') %}
+{% set loginError = craft.app.session.flash('error') ?? '' %}
+
 <div class="LogInForm">
     <div class="LogInForm__Inner">
         <h2 class="LogInForm__Title">Log In or Register</h2>
-        {% embed '_embeds/LayoutTwoColumns.twig' %}
+        {% embed '_embeds/LayoutTwoColumns.twig' with {
+            noticeIsError: true,
+            noticeTitle: 'Unable to log in',
+            noticeContent: loginError|markdown,
+        } %}
             {% block leftColumnContent %}
-                <form action="#TODO" class="LogInForm__Form">
+                <form method="post" accept-charset="UTF-8" class="LogInForm__Form">
+                    {{ csrfInput() }}
+                    {{ redirectInput(redirectUrl) }}
+                    <input type="hidden" name="action" value="dev/account-action/login">
+                    <input type="hidden" name="rememberMe" value="1">
                     <h3 class="LogInForm__FormTitle">Log In</h3>
                     <label class="label LogInForm__Label LogInForm__Label--Required">
                         Email Address
                         <input
                             type="email"
+                            name="loginName"
                             class="input LogInForm__Input"
                             placeholder="bill@smith.com"
                             required
@@ -18,6 +32,7 @@
                         Password
                         <input
                             type="password"
+                            name="password"
                             class="input LogInForm__Input"
                             placeholder="MyPassW0rd!"
                             required

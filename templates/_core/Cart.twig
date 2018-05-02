@@ -11,7 +11,9 @@
                     {% if isGuest %}
                         <div class="Cart__CheckoutLogIn">
                             <div class="Cart__CheckoutLogInInner">
-                                {% include '_partials/LogInForm.twig' %}
+                                {% include '_partials/LogInForm.twig' with {
+                                    redirectUrl: '/cart'
+                                } %}
                             </div>
                         </div>
                     {% else %}
