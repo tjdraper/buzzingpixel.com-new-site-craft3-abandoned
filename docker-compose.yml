@@ -5,7 +5,7 @@ services:
     build: ./serverConfig/nginx
     container_name: nginx-buzzingpixel
     ports:
-      - "80:80"
+      - "${dockerNginxPort}:80"
     volumes:
       - .:/app
       - ${dockerNginxConfFile}:/etc/nginx/conf.d/site.conf
@@ -31,4 +31,4 @@ services:
       - ./serverConfig/db/local.cnf:/etc/mysql/conf.d/x-local.cnf
       - ${dockerDbDataDir}:/var/lib/mysql
     ports:
-      - "30013:3306"
+      - "${dockerDbPort}:3306"
