@@ -153,3 +153,11 @@ RUN docker-php-ext-configure opcache --enable-opcache && docker-php-ext-install 
 # Bash
 COPY .profile /root/.profile
 COPY .profile /root/.bashrc
+
+
+
+
+
+# Additional tools
+RUN apt-get install -y cron sudo
+RUN apt-get install -y git
