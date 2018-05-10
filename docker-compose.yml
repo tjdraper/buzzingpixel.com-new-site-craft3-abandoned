@@ -26,7 +26,6 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_PASSWORD: ${DB_PASSWORD}
     user: "1000:50"
-    command: mysqld --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
     volumes:
       - .:/app
       - ./serverConfig/db/local.cnf:/etc/mysql/conf.d/x-local.cnf
