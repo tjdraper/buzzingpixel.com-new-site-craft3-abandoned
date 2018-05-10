@@ -1,0 +1,13 @@
+# Build (or rebuild) images
+docker-compose build
+
+# Run the servers for the project
+docker-compose up -d
+
+# Shut down the servers for the project
+docker-compose down
+
+# Bash into the environments
+docker exec -it --user root php-buzzingpixel bash
+docker exec -it --user root nginx-buzzingpixel bash
+docker exec -it --user root db-buzzingpixel bash

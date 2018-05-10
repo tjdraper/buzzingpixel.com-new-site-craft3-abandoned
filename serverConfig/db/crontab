@@ -1,0 +1,1 @@
+*/30 * * * * /app/serverConfig/db/dbBackups.sh >/dev/null 2>&1

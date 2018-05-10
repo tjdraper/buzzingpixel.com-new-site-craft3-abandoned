@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  web:
+    build: ./serverConfig/nginx
+    container_name: nginx-buzzingpixel
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app
+      - ${dockerNginxConfFile}:/etc/nginx/conf.d/site.conf
+  php:
+    container_name: php-buzzingpixel
+    build: ./serverConfig/php
+    volumes:
+      - .:/app
+      - ./serverConfig/php/php-custom-config.ini:/usr/local/etc/php/conf.d/php-custom-config.ini
+      - ${dockerPhpEnvIni}:/usr/local/etc/php/conf.d/php-env-config.ini
+  db:
+    build: ./serverConfig/db
+    container_name: db-buzzingpixel
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${mySqlRootPassword}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    user: "1000:50"
+    command: mysqld --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
+    volumes:
+      - .:/app
+      - ./serverConfig/db/local.cnf:/etc/mysql/conf.d/x-local.cnf
+      - ${dockerDbDataDir}:/var/lib/mysql
+    ports:
+      - "30013:3306"
