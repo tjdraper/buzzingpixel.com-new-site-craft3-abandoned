@@ -8,4 +8,5 @@ RUN rm /root/crontab
 RUN echo "mysql2:x:1000:50::/home/mysql:/bin/sh" >> /etc/passwd
 RUN echo "mysql2 ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 COPY run.sh /usr/local/config/run.sh
+RUN chmod +x /usr/local/config/run.sh
 ENTRYPOINT exec /usr/local/config/run.sh
