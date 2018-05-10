@@ -4,6 +4,7 @@ namespace modules\store;
 
 use Craft;
 use yii\base\Module;
+use modules\store\models\CartModel;
 use modules\store\services\CartService;
 use modules\store\factories\QueryFactory;
 use modules\store\factories\ConfigFactory;
@@ -73,6 +74,7 @@ class Store extends Module
 
             self::$plugin->storage['CartService'] = new CartService(
                 self::settings(),
+                new CartModel(),
                 Craft::$app->getSession()->getId(),
                 Craft::$app->getUser()->getId() ?? 0,
                 new QueryFactory(),

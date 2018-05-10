@@ -58,6 +58,12 @@ function runMain(F) {
             el: this
         });
     });
+
+    $('.JSCreditCardNumber').each(function() {
+        new window.Cleave(this, {
+            creditCard: true
+        });
+    });
 }
 
 runMain(window.FAB);

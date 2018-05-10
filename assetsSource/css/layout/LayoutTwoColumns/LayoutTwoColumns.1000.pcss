@@ -1,0 +1,32 @@
+.Cart .LayoutTwoColumn__Inner {
+    display: inherit;
+}
+
+.Cart .LayoutTwoColumn__Right,
+.Cart .LayoutTwoColumn__Left {
+    width: 100%;
+}
+
+.Cart .LayoutTwoColumn__Left {
+    margin-bottom: 40px;
+    padding-bottom: 42px;
+    position: relative;
+}
+
+.Cart .LayoutTwoColumn__Left:after {
+    background-color: var(--lighterGray);
+    bottom: 0;
+    content: ' ';
+    display: block;
+    height: 1px;
+    left: 50%;
+    position: absolute;
+    top: auto;
+    width: 70%;
+    transform: translate(-50%);
+}
+
+.Cart .LayoutTwoColumn__StandardContentWrapper--IsPadded {
+    padding-left: 16px;
+    padding-right: 16px;
+}

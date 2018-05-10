@@ -2,6 +2,7 @@
 
 namespace modules\store\services;
 
+use modules\store\models\CartModel;
 use craft\db\Connection as DBConnection;
 use modules\store\factories\QueryFactory;
 use modules\store\models\StoreConfigModel;
@@ -13,6 +14,9 @@ class CartService
 {
     /** @var StoreConfigModel $configModel */
     private $configModel;
+
+    /** @var CartModel $cartModel */
+    private $cartModel;
 
     /** @var string $userSessionId */
     private $userSessionId;
@@ -26,15 +30,10 @@ class CartService
     /** @var DBConnection $dbConnection */
     private $dbConnection;
 
-    /** @var array $cartData */
-    private $cartData = [];
-
-    /** @var int $cartPrimaryKey */
-    private $cartPrimaryKey;
-
     /**
      * CartService constructor
      * @param StoreConfigModel $configModel
+     * @param CartModel $cartModel
      * @param string $userSessionId
      * @param int $craftUserId
      * @param QueryFactory $queryFactory
@@ -43,12 +42,14 @@ class CartService
      */
     public function __construct(
         StoreConfigModel $configModel,
+        CartModel $cartModel,
         string $userSessionId,
         int $craftUserId,
         QueryFactory $queryFactory,
         DBConnection $dbConnection
     ) {
         $this->configModel = $configModel;
+        $this->cartModel = $cartModel;
         $this->userSessionId = $userSessionId;
         $this->craftUserId = $craftUserId ?: null;
         $this->queryFactory = $queryFactory;
@@ -82,17 +83,31 @@ class CartService
 
         $ids = [];
 
+        $lastDateUpdated = 0;
+
         foreach ($queryAll as $query) {
+            $query = \is_array($query) ? $query : [];
             $ids[] = (int) $query['id'];
-            $cartData = json_decode($query['cartData'], true);
+            $cartData = json_decode($query['cartData'], true) ?? [];
+            $dateUpdated = (new \DateTime($query['dateUpdated']))->getTimestamp();
 
             foreach ($cartData as $key => $total) {
-                if (isset($this->cartData[$key])) {
-                    $this->cartData[$key] += $total;
+                if (isset($this->cartModel->cartData[$key])) {
+                    $this->cartModel->cartData[$key] += $total;
                     continue;
                 }
 
-                $this->cartData[$key] = $total;
+                $this->cartModel->cartData[$key] = $total;
+            }
+
+            if ($dateUpdated <= $lastDateUpdated) {
+                continue;
+            }
+
+            unset($query['cartData']);
+
+            foreach ($query as $key => $val) {
+                $this->cartModel->{$key} = $val;
             }
         }
 
@@ -119,8 +134,6 @@ class CartService
         $updateCart = ! \is_array($cartQuery);
 
         if ($cartQuery) {
-            $this->cartPrimaryKey = (int) $cartQuery['id'];
-
             if (((int) $cartQuery['userId']) !== $this->craftUserId) {
                 $updateCart = true;
             }
@@ -129,20 +142,27 @@ class CartService
                 $updateCart = true;
             }
 
-            $this->cartData = json_decode($cartQuery['cartData'], true) ?? [];
+            $this->cartModel->cartData = json_decode($cartQuery['cartData'], true) ?? [];
+
+            unset($cartQuery['cartData']);
+
+            foreach ($cartQuery as $key => $val) {
+                $this->cartModel->{$key} = $val;
+            }
+        }
+
+        if ($this->cartModel->userId !== $this->craftUserId) {
+            $updateCart = true;
+            $this->cartModel->userId = $this->craftUserId;
+        }
+
+        if ($this->cartModel->sessionId !== $this->userSessionId) {
+            $updateCart = true;
+            $this->cartModel->sessionId = $this->userSessionId;
         }
 
         if ($updateCart) {
-            $this->dbConnection->createCommand()->upsert(
-                '{{%storeCart}}',
-                [
-                    'id' => $this->cartPrimaryKey,
-                    'userId' => $this->craftUserId,
-                    'sessionId' => $this->userSessionId,
-                    'cartData' => json_encode($this->cartData),
-                ]
-            )
-            ->execute();
+            $this->updateCart();
         }
 
         if (! $cartQuery) {
@@ -158,12 +178,7 @@ class CartService
     {
         $this->dbConnection->createCommand()->upsert(
             '{{%storeCart}}',
-            [
-                'id' => $this->cartPrimaryKey,
-                'userId' => $this->craftUserId,
-                'sessionId' => $this->userSessionId,
-                'cartData' => json_encode($this->cartData),
-            ]
+            $this->cartModel->getSaveData()
         )
         ->execute();
     }
@@ -180,13 +195,34 @@ class CartService
             return false;
         }
 
-        if (! isset($this->cartData[$productKey])) {
-            $this->cartData[$productKey] = 1;
+        if (! isset($this->cartModel->cartData[$productKey])) {
+            $this->cartModel->cartData[$productKey] = 1;
             $this->updateCart();
             return true;
         }
 
-        $this->cartData[$productKey]++;
+        $this->cartModel->cartData[$productKey]++;
+        $this->updateCart();
+        return true;
+    }
+
+    /**
+     * Removes a product from the cart
+     * @param string $productKey
+     * @return bool `(bool) true` if product exists. `(bool) false` if not
+     * @throws \Exception
+     */
+    public function remove(string $productKey): bool
+    {
+        if (! isset($this->configModel->products[$productKey])) {
+            return false;
+        }
+
+        if (! isset($this->cartModel->cartData[$productKey])) {
+            return true;
+        }
+
+        unset($this->cartModel->cartData[$productKey]);
         $this->updateCart();
         return true;
     }
@@ -197,12 +233,15 @@ class CartService
      */
     public function count(): int
     {
-        $count = 0;
+        return $this->cartModel->count();
+    }
 
-        foreach ($this->cartData as $itemCount) {
-            $count += $itemCount;
-        }
-
-        return $count;
+    /**
+     * Gets the cart model
+     * @return CartModel
+     */
+    public function getCartModel(): CartModel
+    {
+        return $this->cartModel;
     }
 }

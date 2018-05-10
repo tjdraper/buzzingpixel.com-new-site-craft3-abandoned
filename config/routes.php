@@ -262,8 +262,9 @@ return [
     /**************************************************************************/
 
     // Display cart page
-    /** @see \dev\controllers\\dev\controllers\CartController::actionIndex() */
+    /** @see \dev\controllers\CartController::actionIndex() */
     'GET /cart' => 'dev/cart/index',
+    'POST /cart' => 'dev/cart/index',
 
     // Get cart count
     /** @see \modules\store\controllers\CartContentController::actionAjaxCount() */
@@ -272,5 +273,25 @@ return [
     // Add to cart action
     /** @see \modules\store\controllers\CartContentController::actionAdd() */
     'GET /cart/add/<productKey:([^\/]+)>' => 'store/cart-content/add',
+
+    // Add to cart action
+    /** @see \modules\store\controllers\CartContentController::actionRemove() */
+    'GET /cart/remove/<productKey:([^\/]+)>' => 'store/cart-content/remove',
+
+
+
+
+
+    /**************************************************************************/
+    /* Account routing */
+    /**************************************************************************/
+
+    // Post credentials to this endpoint to log in
+    /** @see \dev\controllers\AccountActionController::actionLogin() */
+    'POST /account/login' => 'dev/account-action/login',
+
+    // Display forgot password page
+    /** @see \dev\controllers\AccountController::actionForgotPassword() */
+    'GET /account/iforgot' => 'dev/account/forgot-password',
 
 ];

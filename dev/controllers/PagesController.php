@@ -167,7 +167,7 @@ class PagesController extends BaseController
 
     /**
      * Parses a page
-     * @param string directory
+     * @param string $directory
      * @return Response
      * @throws \Exception
      */

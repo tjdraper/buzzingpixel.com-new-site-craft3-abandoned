@@ -2,6 +2,7 @@
 
 namespace dev\controllers;
 
+use Craft;
 use yii\web\Response;
 use modules\store\Store;
 
@@ -18,14 +19,42 @@ class CartController extends BaseController
     public function actionIndex(): Response
     {
         if (! Store::cartService()->count()) {
-            // TODO: Display standard block that says cart is empty
-            var_dump('TODO: Display standard block that says cart is empty');
-            die;
+            return $this->renderTemplate(
+                '_core/PageStandard.twig',
+                [
+                    'contentModel' => null,
+                    'content' => null,
+                    'contentMeta' => null,
+                    'metaTitle' => 'Empty Cart',
+                    'metaDescription' => null,
+                    'header' => [
+                        'meta' => [
+                            'heading' => 'Empty Cart',
+                        ],
+                    ],
+                    'contentBlocks' => [[
+                        'meta' => [
+                            'blockType' => 'standard',
+                            'heading' => 'Empty Cart',
+                        ],
+                        'html' => '<p>You don\'t have anything in your cart yet. But that\'s easy to fix. Up above in the menu, select one of the products from the "software" menu!</p>',
+                    ]],
+                ],
+                false
+            );
         }
 
         return $this->renderTemplate(
             '_core/Cart.twig',
-            [],
+            [
+                'header' => [
+                    'meta' => [
+                        'heading' => 'Checkout',
+                    ],
+                ],
+                'cartModel' => Store::cartService()->getCartModel(),
+                'isGuest' => Craft::$app->getUser()->isGuest,
+            ],
             false
         );
     }

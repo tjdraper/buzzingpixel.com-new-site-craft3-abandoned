@@ -1,0 +1,30 @@
+.CheckoutForm {
+    display: flex;
+}
+
+.CheckoutForm__Section {
+    margin-bottom: 0;
+    padding: 20px;
+    position: relative;
+}
+
+.CheckoutForm__Section:first-child {
+    padding-right: 30px;
+    width: 60%;
+}
+
+.CheckoutForm__Section:first-child:after {
+    background-color: var(--lighterGray);
+    content: ' ';
+    display: block;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+}
+
+.CheckoutForm__Section:last-child {
+    padding-left: 30px;
+    width: 40%;
+}

@@ -146,7 +146,7 @@ class FileContentModel extends Model
 
     /**
      * Gets child at index
-     * @param $index
+     * @param string $index
      * @return FileContentModel|null
      */
     public function getChildAtIndex(string $index)

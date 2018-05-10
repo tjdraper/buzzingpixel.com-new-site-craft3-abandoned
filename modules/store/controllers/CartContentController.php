@@ -34,6 +34,23 @@ class CartContentController extends Controller
     }
 
     /**
+     * Removes an item to the cart
+     * @param string $productKey
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionRemove(string $productKey): Response
+    {
+        if (! Store::cartService()->remove($productKey)) {
+            throw new HttpException(500, 'Product not found');
+        }
+
+        return $this->redirect(
+            Craft::$app->getRequest()->get('redirect', '/cart')
+        );
+    }
+
+    /**
      * Gets the cart count and outputs AJAX
      * @return Response
      * @throws \Exception

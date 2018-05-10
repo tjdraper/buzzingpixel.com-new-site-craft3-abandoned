@@ -16,6 +16,9 @@ class StoreProductModel
     /** @var int $price */
     public $price;
 
+    /** @var int $qty */
+    public $qty = 0;
+
     /** @var array $versions */
     public $versions = [];
 
