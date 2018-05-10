@@ -1,5 +1,5 @@
 {
-    "proxy": "http://buzzingpixel.test",
+    "proxy": "http://buzzingpixel.test:42245",
     "watch": [
         "config/**",
         "content/**",
