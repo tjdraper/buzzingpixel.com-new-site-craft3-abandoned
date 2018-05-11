@@ -1,6 +1,7 @@
 {# @var \craft\web\twig\variables\CraftVariable craft #}
 
 {% set redirectUrl = redirectUrl|default('/') %}
+{% set registerRedirectUrl = registerRedirectUrl|default('/account/register/intermediate') %}
 {% set loginError = craft.app.session.flash('error') ?? '' %}
 
 <div class="LogInForm">
@@ -45,12 +46,16 @@
                 </form>
             {% endblock %}
             {% block rightColumnContent %}
-                <form action="#TODO" class="LogInForm__Form">
+                <form method="post" accept-charset="UTF-8" class="LogInForm__Form">
+                    {{ csrfInput() }}
+                    {{ redirectInput(registerRedirectUrl) }}
+                    <input type="hidden" name="action" value="users/save-user">
                     <h3 class="LogInForm__FormTitle">Register</h3>
                     <label class="label LogInForm__Label LogInForm__Label--Required">
                         Email Address
                         <input
                             type="email"
+                            name="email"
                             class="input LogInForm__Input"
                             placeholder="bill@smith.com"
                             required
@@ -60,6 +65,7 @@
                         Password
                         <input
                             type="password"
+                            name="password"
                             class="input LogInForm__Input"
                             placeholder="MyPassW0rd!"
                             required
