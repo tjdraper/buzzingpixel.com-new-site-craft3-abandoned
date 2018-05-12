@@ -15,12 +15,17 @@ class AccountController extends BaseController
 {
     /**
      * Displays the forgot password page
+     * @throws HttpException
      */
     public function actionForgotPassword()
     {
+        if (! Craft::$app->getUser()->getIsGuest()) {
+            throw new HttpException(400, 'User is already logged in');
+        }
+
         return $this->renderTemplate(
             '_core/ResetPassword.twig',
-            [
+            array_merge(Craft::$app->getUrlManager()->getRouteParams(), [
                 'metaTitle' => 'Reset Your Password',
                 'metaDescription' => null,
                 'header' => [
@@ -28,7 +33,7 @@ class AccountController extends BaseController
                         'heading' => 'Reset Your Password',
                     ],
                 ],
-            ],
+            ]),
             false
         );
     }
