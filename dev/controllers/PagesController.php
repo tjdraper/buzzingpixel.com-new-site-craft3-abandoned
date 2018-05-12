@@ -160,6 +160,16 @@ class PagesController extends BaseController
         return $this->parsePage('FreeSoftware');
     }
 
+    /**
+     * Display registration intermediate page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionAccountRegisterIntermediate(): Response
+    {
+        return $this->parsePage('AccountRegistrationIntermediate');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Pages */

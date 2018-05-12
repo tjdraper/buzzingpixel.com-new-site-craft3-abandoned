@@ -294,4 +294,8 @@ return [
     /** @see \dev\controllers\AccountController::actionForgotPassword() */
     'GET /account/iforgot' => 'dev/account/forgot-password',
 
+    // Display registration intermediate page
+    /** @see \dev\controllers\PagesController::actionAccountRegisterIntermediate() */
+    'GET /account/register/intermediate' => 'dev/pages/account-register-intermediate',
+
 ];
