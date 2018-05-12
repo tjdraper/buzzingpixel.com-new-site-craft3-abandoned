@@ -170,6 +170,16 @@ class PagesController extends BaseController
         return $this->parsePage('AccountRegistrationIntermediate');
     }
 
+    /**
+     * Display account activation error page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionAccountActivationError(): Response
+    {
+        return $this->parsePage('AccountActivationError');
+    }
+
 
     /**************************************************************************/
     /* Common parsing for Pages */

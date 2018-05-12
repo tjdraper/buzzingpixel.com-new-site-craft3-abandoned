@@ -298,4 +298,8 @@ return [
     /** @see \dev\controllers\PagesController::actionAccountRegisterIntermediate() */
     'GET /account/register/intermediate' => 'dev/pages/account-register-intermediate',
 
+    // Display account activation error page
+    /** @see \dev\controllers\PagesController::actionAccountActivationError() */
+    'GET /account/activation-error' => 'dev/pages/account-activation-error',
+
 ];
