@@ -1,3 +1,3 @@
 {
-    "title": "You&rsquo;re almost registered!"
+    "title": "You're almost registered!"
 }
