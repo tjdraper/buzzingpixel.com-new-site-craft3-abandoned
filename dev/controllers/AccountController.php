@@ -14,7 +14,29 @@ use craft\helpers\DateTimeHelper;
 class AccountController extends BaseController
 {
     /**
-     * Displays the forgot password page
+     * Displays user account page
+     */
+    public function actionIndex()
+    {
+        // If the user is a guest, we need for them to log in
+        if (Craft::$app->getUser()->getIsGuest()) {
+            return $this->renderTemplate(
+                '_core/StandAloneLoginForm.twig',
+                array_merge(Craft::$app->getUrlManager()->getRouteParams(), [
+                    'metaTitle' => 'Log in to your account',
+                    'metaDescription' => null,
+                ]),
+                false
+            );
+        }
+
+        // TODO: Display account page
+        var_dump('TODO: Display account page');
+        die;
+    }
+
+    /**
+     * Displays forgot password page
      * @throws HttpException
      */
     public function actionForgotPassword()
