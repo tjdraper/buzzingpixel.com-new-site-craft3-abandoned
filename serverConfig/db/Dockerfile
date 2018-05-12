@@ -10,4 +10,5 @@ RUN echo "mysql2 ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 COPY run.sh /usr/local/config/run.sh
 RUN chmod +x /usr/local/config/run.sh
 RUN apt-get install -y git
+RUN chmod 0777 /usr/local/config/run.sh
 ENTRYPOINT exec /usr/local/config/run.sh
