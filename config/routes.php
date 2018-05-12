@@ -293,6 +293,7 @@ return [
     // Display forgot password page
     /** @see \dev\controllers\AccountController::actionForgotPassword() */
     'GET /account/iforgot' => 'dev/account/forgot-password',
+    'POST /account/iforgot' => 'dev/account/forgot-password',
 
     // Display registration intermediate page
     /** @see \dev\controllers\PagesController::actionAccountRegisterIntermediate() */
