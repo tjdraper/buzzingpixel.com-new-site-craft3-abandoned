@@ -186,20 +186,27 @@
                     <ul class="Cart__Items">
                         {% for productKey,productModel in cartModel.getProductModels() %}
                             <li class="Cart__Item">
-                                <a href="{{ productModel.url }}" class="Cart__ItemTitle">
-                                    {{ productModel.title|smartypants }}
-                                </a>
-                                <form class="Cart__ItemMeta">
-                                    <div class="Cart__ItemMetaPrice">${{ productModel.price|number_format(2) }}</div>
-                                    <input type="text" class="input Cart__ItemMetaQtyInput" value="{{ productModel.qty }}">
-                                    <input class="button Cart__ItemMetaUpdateSubmit" type="submit" value="Update">
-                                    <a
-                                        href="/cart/remove/{{ productKey }}"
-                                        class="button Cart__ItemMetaRemove"
-                                    >
-                                        X
+                                <div class="Cart__ItemPrimaryContent">
+                                    <a href="{{ productModel.url }}" class="Cart__ItemTitle">
+                                        {{ productModel.title|smartypants }}
                                     </a>
-                                </form>
+                                    <form class="Cart__ItemMeta">
+                                        <div class="Cart__ItemMetaPrice">${{ productModel.price|number_format(2) }}</div>
+                                        <input type="text" class="input Cart__ItemMetaQtyInput" value="{{ productModel.qty }}">
+                                        <input class="button Cart__ItemMetaUpdateSubmit" type="submit" value="Update">
+                                        <a
+                                            href="/cart/remove/{{ productKey }}"
+                                            class="button Cart__ItemMetaRemove"
+                                        >
+                                            X
+                                        </a>
+                                    </form>
+                                </div>
+                                {% if productModel.subscriptionPrice > 0 %}
+                                    <div class="Cart__ItemSecondaryContent">
+                                        Update and support subscription renews {{ productModel.subscriptionFrequency }} at ${{ productModel.subscriptionPrice|number_format(2) }} and can be canceled at any time.
+                                    </div>
+                                {% endif %}
                             </li>
                         {% endfor %}
                     </ul>

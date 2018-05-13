@@ -32,7 +32,6 @@
 }
 
 .Cart__Item {
-    display: flex;
     text-align: left;
 }
 
@@ -67,4 +66,21 @@
 .Cart__CheckoutLogInInner {
     max-width: 930px;
     margin: 40px auto;
+}
+
+.Cart__ItemPrimaryContent {
+    display: flex;
+}
+
+.Cart__ItemPrimaryContent:after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+.Cart__ItemSecondaryContent {
+    font-size: 12px;
+    font-style: italic;
+    line-height: 1em;
+    padding: 6px 0;
 }
