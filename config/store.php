@@ -32,6 +32,8 @@ return [
             'title' => 'Ansel for ExpressionEngine',
             'url' => '/software/ansel-ee',
             'price' => 79,
+            'subscriptionPrice' => 29,
+            'subscriptionFrequency' => 'yearly',
             'versions' => [
                 1 => null,
                 2 => 29, // major version => upgrade price (use null for full price, 0 to auto update)

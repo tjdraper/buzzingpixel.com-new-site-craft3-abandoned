@@ -16,6 +16,12 @@ class StoreProductModel
     /** @var int $price */
     public $price;
 
+    /** @var int $price */
+    public $subscriptionPrice = 0;
+
+    /** @var string $price */
+    public $subscriptionFrequency = 'yearly';
+
     /** @var int $qty */
     public $qty = 0;
 
