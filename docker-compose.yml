@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    build: ./serverConfig/nginx
+    image: buzzingpixel/nginx:latest
     container_name: nginx-buzzingpixel
     ports:
       - "${dockerNginxPort}:80"
@@ -10,14 +10,14 @@ services:
       - .:/app
       - ${dockerNginxConfFile}:/etc/nginx/conf.d/site.conf
   php:
+    image: buzzingpixel/php7.2:latest
     container_name: php-buzzingpixel
-    build: ./serverConfig/php
     volumes:
       - .:/app
       - ./serverConfig/php/php-custom-config.ini:/usr/local/etc/php/conf.d/php-custom-config.ini
       - ${dockerPhpEnvIni}:/usr/local/etc/php/conf.d/php-env-config.ini
   db:
-    build: ./serverConfig/db
+    image: buzzingpixel/mariadb:latest
     container_name: db-buzzingpixel
     restart: always
     environment:
@@ -28,7 +28,6 @@ services:
     user: "1000:50"
     volumes:
       - .:/app
-      - ./serverConfig/db/local.cnf:/etc/mysql/conf.d/x-local.cnf
       - ${dockerDbDataDir}:/var/lib/mysql
     ports:
       - "${dockerDbPort}:3306"
