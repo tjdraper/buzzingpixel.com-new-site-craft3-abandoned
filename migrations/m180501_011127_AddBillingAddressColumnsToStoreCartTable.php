@@ -2,7 +2,6 @@
 
 namespace craft\contentmigrations;
 
-use Craft;
 use craft\db\Migration;
 
 /**
@@ -13,7 +12,7 @@ class m180501_011127_AddBillingAddressColumnsToStoreCartTable extends Migration
     /**
      * @inheritdoc
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         $this->addColumn(
             '{{%storeCart}}',
@@ -68,6 +67,8 @@ class m180501_011127_AddBillingAddressColumnsToStoreCartTable extends Migration
             'postalCode',
             $this->string(255)->after('stateProvince')
         );
+
+        return true;
     }
 
     /**
