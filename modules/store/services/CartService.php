@@ -244,6 +244,29 @@ class CartService
     }
 
     /**
+     * Updates an item in the cart
+     * @param string $productKey
+     * @param int $qty
+     * @return bool `(bool) true` if product exists. `(bool) false` if not
+     * @throws \Exception
+     */
+    public function updateItemQty(string $productKey, int $qty): bool
+    {
+        if (! isset($this->configModel->products[$productKey])) {
+            return false;
+        }
+
+        if ($qty < 1) {
+            return $this->remove($productKey);
+        }
+
+        $this->cartModel->cartData[$productKey] = $qty;
+
+        $this->updateCart();
+        return true;
+    }
+
+    /**
      * Removes a product from the cart
      * @param string $productKey
      * @return bool `(bool) true` if product exists. `(bool) false` if not

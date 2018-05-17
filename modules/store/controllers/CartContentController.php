@@ -61,4 +61,27 @@ class CartContentController extends Controller
             'count' => Store::cartService()->count(),
         ]);
     }
+
+    /**
+     * Updates an item in the cart
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionUpdateItem(): Response
+    {
+        $request = Craft::$app->getRequest();
+
+        $result = Store::cartService()->updateItemQty(
+            $request->getParam('productKey'),
+            (int) $request->getParam('qty')
+        );
+
+        if (! $result) {
+            throw new HttpException(500, 'Product not found');
+        }
+
+        return $this->redirect(
+            Craft::$app->getRequest()->getParam('redirect', '/cart')
+        );
+    }
 }

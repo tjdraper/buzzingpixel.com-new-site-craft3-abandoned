@@ -190,9 +190,13 @@
                                     <a href="{{ productModel.url }}" class="Cart__ItemTitle">
                                         {{ productModel.title|smartypants }}
                                     </a>
-                                    <form class="Cart__ItemMeta">
+                                    <form method="post" accept-charset="UTF-8" class="Cart__ItemMeta">
+                                        {{ csrfInput() }}
+                                        <input type="hidden" name="action" value="/cart">
+                                        <input type="hidden" name="action" value="store/cart-content/update-item">
+                                        <input type="hidden" name="productKey" value="{{ productKey }}">
                                         <div class="Cart__ItemMetaPrice">${{ productModel.price|number_format(2) }}</div>
-                                        <input type="text" class="input Cart__ItemMetaQtyInput" value="{{ productModel.qty }}">
+                                        <input type="text" class="input Cart__ItemMetaQtyInput" name="qty" value="{{ productModel.qty }}">
                                         <input class="button Cart__ItemMetaUpdateSubmit" type="submit" value="Update">
                                         <a
                                             href="/cart/remove/{{ productKey }}"
