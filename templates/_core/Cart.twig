@@ -25,6 +25,7 @@
                                         Phone Number
                                         <input
                                             type="text"
+                                            name="phoneNumber"
                                             class="input CheckoutForm__Input"
                                             placeholder="123-555-1212"
                                             required
@@ -32,7 +33,7 @@
                                     </label>
                                     <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                         Country
-                                        <select class="select CheckoutForm__Select" required>
+                                        <select name="country" class="select CheckoutForm__Select" required>
                                             <option value="" disabled selected>Select Country...</option>
                                             {% for country in countries().all() %}
                                                 <option value="{{ country.alpha2 }}">{{ country.name }}</option>
@@ -45,6 +46,7 @@
                                         Full Name
                                         <input
                                             type="text"
+                                            name="name"
                                             class="input CheckoutForm__Input"
                                             placeholder="John Smith"
                                             required
@@ -54,6 +56,7 @@
                                         Company
                                         <input
                                             type="text"
+                                            name="company"
                                             class="input CheckoutForm__Input"
                                             placeholder="BuzzingPixel, LLC"
                                         >
@@ -63,6 +66,7 @@
                                     Address
                                     <input
                                         type="text"
+                                        name="address"
                                         class="input CheckoutForm__Input"
                                         placeholder="123 Some Street"
                                         required
@@ -72,6 +76,7 @@
                                     Address Line 2
                                     <input
                                         type="text"
+                                        name="addressContinued"
                                         class="input CheckoutForm__Input"
                                         placeholder="Suite 201"
                                     >
@@ -80,6 +85,7 @@
                                     City
                                     <input
                                         type="text"
+                                        name="city"
                                         class="input CheckoutForm__Input"
                                         placeholder="Metropolis"
                                         required
@@ -88,7 +94,7 @@
                                 <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
                                     <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                         State/Province
-                                        <select class="select CheckoutForm__Select" required>
+                                        <select name="stateProvince" class="select CheckoutForm__Select" required>
                                             <option value="" disabled selected>Select State...</option>
                                             {% for stateAbbr,stateName in states() %}
                                                 <option value="{{ stateAbbr }}">{{ stateName }}</option>
@@ -99,6 +105,7 @@
                                         Postal Code
                                         <input
                                             type="text"
+                                            name="postalCode"
                                             class="input CheckoutForm__Input"
                                             placeholder="12345"
                                             required
@@ -107,7 +114,7 @@
                                 </div>
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--AlignRight">
                                     Save Billing Info?
-                                    <input type="checkbox">
+                                    <input name="updateAccountInfo" type="checkbox">
                                 </label>
                             </section>
                             <section class="CheckoutForm__Section">
@@ -117,6 +124,7 @@
                                         Credit Card Number
                                         <input
                                             type="text"
+                                            name="cardNumber"
                                             class="input CheckoutForm__Input JSCreditCardNumber"
                                             placeholder="5530 8628 8440 9534"
                                             required
@@ -126,6 +134,7 @@
                                         CVC
                                         <input
                                             type="text"
+                                            name="cvc"
                                             class="input CheckoutForm__Input "
                                             placeholder="543"
                                             required
@@ -135,14 +144,14 @@
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                     Expiration
                                     <span class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
-                                        <select class="select CheckoutForm__Select" required>
+                                        <select name="expireMonth" class="select CheckoutForm__Select" required>
                                             <option value="" disabled selected>Select Month...</option>
                                             {% for month in months() %}
                                                 <option value="{{ month.numeric }}">{{ month.name }}</option>
                                             {% endfor %}
                                         </select>
                                         <select class="select CheckoutForm__Select" required>
-                                            <option value="" disabled selected>Select Year...</option>
+                                            <option name="expireYear" value="" disabled selected>Select Year...</option>
                                             {% for year in years() %}
                                                 <option value="{{ year }}">{{ year }}</option>
                                             {% endfor %}
