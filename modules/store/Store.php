@@ -4,6 +4,7 @@ namespace modules\store;
 
 use Craft;
 use yii\base\Module;
+use Ramsey\Uuid\Uuid;
 use modules\store\models\CartModel;
 use modules\store\services\CartService;
 use modules\store\factories\QueryFactory;
@@ -71,16 +72,14 @@ class Store extends Module
     public static function cartService(): CartService
     {
         if (! isset(self::$plugin->storage['CartService'])) {
-            // Make sure session is started
-            Craft::$app->getSession()->open();
-
             self::$plugin->storage['CartService'] = new CartService(
                 self::settings(),
                 new CartModel(),
-                Craft::$app->getSession()->getId(),
                 Craft::$app->getUser()->getId() ?? 0,
                 new QueryFactory(),
-                Craft::$app->getDb()
+                Craft::$app->getDb(),
+                self::cookieService(),
+                Uuid::getFactory()
             );
         }
 

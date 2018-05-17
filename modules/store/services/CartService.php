@@ -2,9 +2,12 @@
 
 namespace modules\store\services;
 
+use yii\web\CookieCollection;
 use modules\store\models\CartModel;
+use \Ramsey\Uuid\UuidFactoryInterface;
 use craft\db\Connection as DBConnection;
 use modules\store\factories\QueryFactory;
+use modules\store\services\CookieService;
 use modules\store\models\StoreConfigModel;
 
 /**
@@ -18,8 +21,8 @@ class CartService
     /** @var CartModel $cartModel */
     private $cartModel;
 
-    /** @var string $userSessionId */
-    private $userSessionId;
+    /** @var string $cartIdToken */
+    private $cartIdToken;
 
     /** @var int $craftUserId */
     private $craftUserId;
@@ -30,33 +33,67 @@ class CartService
     /** @var DBConnection $dbConnection */
     private $dbConnection;
 
+    /** @var CookieService $cookieService */
+    private $cookieService;
+
+    /** @var UuidFactoryInterface $uuidFactory */
+    private $uuidFactory;
+
     /**
      * CartService constructor
      * @param StoreConfigModel $configModel
      * @param CartModel $cartModel
-     * @param string $userSessionId
      * @param int $craftUserId
      * @param QueryFactory $queryFactory
      * @param DBConnection $dbConnection
+     * @param CookieService $cookieService
+     * @param UuidFactoryInterface $uuidFactory
      * @throws \Exception
      */
     public function __construct(
         StoreConfigModel $configModel,
         CartModel $cartModel,
-        string $userSessionId,
         int $craftUserId,
         QueryFactory $queryFactory,
-        DBConnection $dbConnection
+        DBConnection $dbConnection,
+        CookieService $cookieService,
+        UuidFactoryInterface $uuidFactory
     ) {
         $this->configModel = $configModel;
         $this->cartModel = $cartModel;
-        $this->userSessionId = $userSessionId;
         $this->craftUserId = $craftUserId ?: null;
         $this->queryFactory = $queryFactory;
         $this->dbConnection = $dbConnection;
+        $this->cookieService = $cookieService;
+        $this->uuidFactory = $uuidFactory;
+
+        $this->cartIdToken = $this->getOrGenerateCartIdToken();
 
         $this->mergeCarts();
         $this->setCart();
+    }
+
+    /**
+     * Gets cart ID token from cookie or generates it
+     * @return string
+     * @throws \Exception
+     */
+    public function getOrGenerateCartIdToken(): string
+    {
+        $cookie = $this->cookieService->get('storeCartIdToken');
+
+        if (! $cookie) {
+            $cookie = $this->cookieService->createCookie(
+                'storeCartIdToken',
+                $this->uuidFactory->uuid4()->toString()
+            );
+        }
+
+        $cookie->expire = strtotime('+20 years');
+
+        $this->cookieService->add($cookie);
+
+        return $cookie->value;
     }
 
     /**
@@ -67,7 +104,7 @@ class CartService
     {
         $count = (int) $this->queryFactory->getQuery()
             ->from('{{%storeCart}}')
-            ->where("`sessionId` = '{$this->userSessionId}'")
+            ->where("`sessionId` = '{$this->cartIdToken}'")
             ->orWhere("`userId` = '{$this->craftUserId}'")
             ->count();
 
@@ -77,7 +114,7 @@ class CartService
 
         $queryAll = $this->queryFactory->getQuery()
             ->from('{{%storeCart}}')
-            ->where("`sessionId` = '{$this->userSessionId}'")
+            ->where("`sessionId` = '{$this->cartIdToken}'")
             ->orWhere("`userId` = '{$this->craftUserId}'")
             ->all();
 
@@ -127,7 +164,7 @@ class CartService
     {
         $cartQuery = $this->queryFactory->getQuery()
             ->from('{{%storeCart}}')
-            ->where("`sessionId` = '{$this->userSessionId}'")
+            ->where("`sessionId` = '{$this->cartIdToken}'")
             ->orWhere("`userId` = '{$this->craftUserId}'")
             ->one();
 
@@ -138,7 +175,7 @@ class CartService
                 $updateCart = true;
             }
 
-            if ($cartQuery['sessionId'] !== $this->userSessionId) {
+            if ($cartQuery['sessionId'] !== $this->cartIdToken) {
                 $updateCart = true;
             }
 
@@ -156,9 +193,9 @@ class CartService
             $this->cartModel->userId = $this->craftUserId;
         }
 
-        if ($this->cartModel->sessionId !== $this->userSessionId) {
+        if ($this->cartModel->sessionId !== $this->cartIdToken) {
             $updateCart = true;
-            $this->cartModel->sessionId = $this->userSessionId;
+            $this->cartModel->sessionId = $this->cartIdToken;
         }
 
         if ($updateCart) {
