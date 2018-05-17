@@ -6,7 +6,8 @@ function runMain(F) {
 
     if (! window.jQuery ||
         ! F.controller ||
-        ! F.model
+        ! F.model ||
+        ! window.Cleave
     ) {
         setTimeout(function() {
             runMain(F);
