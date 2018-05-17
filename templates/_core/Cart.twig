@@ -33,7 +33,7 @@
                                     </label>
                                     <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                         Country
-                                        <select name="country" class="select CheckoutForm__Select" required>
+                                        <select name="country" class="select CheckoutForm__Select JSCheckoutForm__CountryInput" required>
                                             <option value="" disabled selected>Select Country...</option>
                                             {% for country in countries().all() %}
                                                 <option
@@ -232,11 +232,11 @@
         </div>
     </div>
 
-    <script type="text/template" id="JSCheckout__StateSelect">
+    <script type="text/template" id="JSCheckoutForm__StateSelect">
         {% include '_partials/CheckoutStateSelect.twig' only %}
     </script>
 
-    <script type="text/template" id="JSCheckout__StateProvince">
+    <script type="text/template" id="JSCheckoutForm__StateProvince">
         {% include '_partials/CheckoutStateProvince.twig' only %}
     </script>
 {% endblock %}

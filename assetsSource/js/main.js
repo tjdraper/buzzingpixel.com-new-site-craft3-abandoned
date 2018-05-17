@@ -65,6 +65,12 @@ function runMain(F) {
             creditCard: true
         });
     });
+
+    $('.JSCheckoutForm').each(function() {
+        F.controller.construct('CheckoutStateProvince', {
+            el: this
+        });
+    });
 }
 
 runMain(window.FAB);
