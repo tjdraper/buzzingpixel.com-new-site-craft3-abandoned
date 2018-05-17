@@ -7,8 +7,10 @@ use yii\base\Module;
 use modules\store\models\CartModel;
 use modules\store\services\CartService;
 use modules\store\factories\QueryFactory;
+use modules\store\services\CookieService;
 use modules\store\factories\ConfigFactory;
 use modules\store\models\StoreConfigModel;
+use modules\store\factories\CookieFactory;
 use craft\console\Application as ConsoleApplication;
 
 /**
@@ -83,5 +85,23 @@ class Store extends Module
         }
 
         return self::$plugin->storage['CartService'];
+    }
+
+    /**
+     * Gets the Cookie Service
+     * @return CookieService
+     */
+    public static function cookieService(): CookieService
+    {
+        if (! isset(self::$plugin->storage['CookieService'])) {
+            $cookies = \is_array($_COOKIE) ? $_COOKIE : [];
+
+            self::$plugin->storage['CookieService'] = new CookieService(
+                $cookies,
+                new CookieFactory()
+            );
+        }
+
+        return self::$plugin->storage['CookieService'];
     }
 }
