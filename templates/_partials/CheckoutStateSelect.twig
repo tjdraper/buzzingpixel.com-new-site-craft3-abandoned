@@ -1,0 +1,27 @@
+{% set value = value|default(null) %}
+
+{% set hasSelected = false %}
+{% for stateAbbr,stateName in states() %}
+    {% if value == stateAbbr %}
+        {% set hasSelected = true %}
+    {% endif %}
+{% endfor %}
+
+<label class="label CheckoutForm__Label CheckoutForm__Label--Required">
+    State
+    <select name="stateProvince" class="select CheckoutForm__Select" required>
+        <option value="" disabled{% if not hasSelected %} selected{% endif %}>
+            Select State...
+        </option>
+        {% for stateAbbr,stateName in states() %}
+            <option
+                value="{{ stateAbbr }}"
+                {% if stateAbbr == value %}
+                selected
+                {% endif %}
+            >
+                {{ stateName }}
+            </option>
+        {% endfor %}
+    </select>
+</label>

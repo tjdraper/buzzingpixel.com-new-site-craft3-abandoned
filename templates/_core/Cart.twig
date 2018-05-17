@@ -17,7 +17,7 @@
                             </div>
                         </div>
                     {% else %}
-                        <form action="#TODO" class="CheckoutForm">
+                        <form action="#TODO" class="CheckoutForm JSCheckoutForm">
                             <section class="CheckoutForm__Section">
                                 <h2 class="CheckoutForm__SectionHeader">Billing</h2>
                                 <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
@@ -27,7 +27,7 @@
                                             type="text"
                                             name="phoneNumber"
                                             class="input CheckoutForm__Input"
-                                            placeholder="123-555-1212"
+                                            placeholder="i.e. 123-555-1212"
                                             required
                                         >
                                     </label>
@@ -36,7 +36,15 @@
                                         <select name="country" class="select CheckoutForm__Select" required>
                                             <option value="" disabled selected>Select Country...</option>
                                             {% for country in countries().all() %}
-                                                <option value="{{ country.alpha2 }}">{{ country.name }}</option>
+                                                <option
+                                                    value="{{ country.alpha2 }}"
+                                                    {# TODO: set selected correctly #}
+                                                    {% if country.alpha2 == 'US' %}
+                                                    selected
+                                                    {% endif %}
+                                                >
+                                                    {{ country.name }}
+                                                </option>
                                             {% endfor %}
                                         </select>
                                     </label>
@@ -48,7 +56,7 @@
                                             type="text"
                                             name="name"
                                             class="input CheckoutForm__Input"
-                                            placeholder="John Smith"
+                                            placeholder="i.e. John Smith"
                                             required
                                         >
                                     </label>
@@ -58,7 +66,7 @@
                                             type="text"
                                             name="company"
                                             class="input CheckoutForm__Input"
-                                            placeholder="BuzzingPixel, LLC"
+                                            placeholder="i.e. BuzzingPixel, LLC"
                                         >
                                     </label>
                                 </div>
@@ -68,7 +76,7 @@
                                         type="text"
                                         name="address"
                                         class="input CheckoutForm__Input"
-                                        placeholder="123 Some Street"
+                                        placeholder="i.e. 123 Some Street"
                                         required
                                     >
                                 </label>
@@ -78,7 +86,7 @@
                                         type="text"
                                         name="addressContinued"
                                         class="input CheckoutForm__Input"
-                                        placeholder="Suite 201"
+                                        placeholder="i.e. Suite 201"
                                     >
                                 </label>
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
@@ -87,27 +95,19 @@
                                         type="text"
                                         name="city"
                                         class="input CheckoutForm__Input"
-                                        placeholder="Metropolis"
+                                        placeholder="i.e. Metropolis"
                                         required
                                     >
                                 </label>
                                 <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
-                                    <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
-                                        State/Province
-                                        <select name="stateProvince" class="select CheckoutForm__Select" required>
-                                            <option value="" disabled selected>Select State...</option>
-                                            {% for stateAbbr,stateName in states() %}
-                                                <option value="{{ stateAbbr }}">{{ stateName }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </label>
+                                    {% include '_partials/CheckoutStateSelect.twig' only %}
                                     <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                         Postal Code
                                         <input
                                             type="text"
                                             name="postalCode"
                                             class="input CheckoutForm__Input"
-                                            placeholder="12345"
+                                            placeholder="i.e. 12345"
                                             required
                                         >
                                     </label>
@@ -126,7 +126,7 @@
                                             type="text"
                                             name="cardNumber"
                                             class="input CheckoutForm__Input JSCreditCardNumber"
-                                            placeholder="5530 8628 8440 9534"
+                                            placeholder="i.e. 5530 8628 8440 9534"
                                             required
                                         >
                                     </label>
@@ -136,7 +136,7 @@
                                             type="text"
                                             name="cvc"
                                             class="input CheckoutForm__Input "
-                                            placeholder="543"
+                                            placeholder="i.e. 543"
                                             required
                                         >
                                     </label>
@@ -231,4 +231,12 @@
             </div>
         </div>
     </div>
+
+    <script type="text/template" id="JSCheckout__StateSelect">
+        {% include '_partials/CheckoutStateSelect.twig' only %}
+    </script>
+
+    <script type="text/template" id="JSCheckout__StateProvince">
+        {% include '_partials/CheckoutStateProvince.twig' only %}
+    </script>
 {% endblock %}
