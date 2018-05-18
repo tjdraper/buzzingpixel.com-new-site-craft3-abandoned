@@ -70,6 +70,10 @@ function runMain(F) {
         F.controller.construct('CheckoutStateProvince', {
             el: this
         });
+
+        F.controller.construct('DetailsUpdate', {
+            el: this
+        });
     });
 }
 

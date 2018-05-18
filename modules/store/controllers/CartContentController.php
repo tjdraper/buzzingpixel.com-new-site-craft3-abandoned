@@ -104,6 +104,12 @@ class CartContentController extends Controller
 
         $cartService->updateCart();
 
+        if (Craft::$app->getRequest()->getIsAjax()) {
+            return $this->asJson([
+                'success' => true,
+            ]);
+        }
+
         return $this->redirect(
             Craft::$app->getRequest()->getParam('redirect', '/cart')
         );

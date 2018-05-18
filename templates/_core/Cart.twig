@@ -24,7 +24,7 @@
                             novalidate
                         >
                             {{ csrfInput() }}
-                            {#<input
+                            <input
                                 type="hidden"
                                 name="action"
                                 value="store/cart-content/checkout"
@@ -36,16 +36,6 @@
                                 type="hidden"
                                 name="redirect"
                                 value="/cart/order-success"
-                            >#}
-                            <input
-                                type="hidden"
-                                name="action"
-                                value="store/cart-content/update-cart-details"
-                            >
-                            <input
-                                type="hidden"
-                                name="redirect"
-                                value="/cart"
                             >
                             <section class="CheckoutForm__Section CheckoutForm__Section--FirstSection">
                                 <h2 class="CheckoutForm__SectionHeader">Billing</h2>
@@ -57,6 +47,7 @@
                                             name="phoneNumber"
                                             class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. 123-555-1212"
+                                            value="{{ cartModel.phoneNumber }}"
                                             required
                                         >
                                     </label>
@@ -71,8 +62,7 @@
                                             {% for country in countries().all() %}
                                                 <option
                                                     value="{{ country.alpha2 }}"
-                                                    {# TODO: set selected correctly #}
-                                                    {% if country.alpha2 == 'US' %}
+                                                    {% if cartModel.country == country.alpha2 or (not cartModel.country and country.alpha2 == 'US') %}
                                                     selected
                                                     {% endif %}
                                                 >
@@ -90,6 +80,7 @@
                                             name="name"
                                             class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. John Smith"
+                                            value="{{ cartModel.name }}"
                                             required
                                         >
                                     </label>
@@ -100,6 +91,7 @@
                                             name="company"
                                             class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. BuzzingPixel, LLC"
+                                            value="{{ cartModel.company }}"
                                         >
                                     </label>
                                 </div>
@@ -110,6 +102,7 @@
                                         name="address"
                                         class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                         placeholder="i.e. 123 Some Street"
+                                        value="{{ cartModel.address }}"
                                         required
                                     >
                                 </label>
@@ -120,6 +113,7 @@
                                         name="addressContinued"
                                         class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                         placeholder="i.e. Suite 201"
+                                        value="{{ cartModel.addressContinued }}"
                                     >
                                 </label>
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
@@ -129,11 +123,14 @@
                                         name="city"
                                         class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                         placeholder="i.e. Metropolis"
+                                        value="{{ cartModel.city }}"
                                         required
                                     >
                                 </label>
                                 <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
-                                    {% include '_partials/CheckoutStateSelect.twig' only %}
+                                    {% include '_partials/CheckoutStateSelect.twig' with {
+                                        value: cartModel.stateProvince
+                                    } only %}
                                     <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                         Postal Code
                                         <input
@@ -141,6 +138,7 @@
                                             name="postalCode"
                                             class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. 12345"
+                                            value="{{ cartModel.postalCode }}"
                                             required
                                         >
                                     </label>
@@ -151,6 +149,9 @@
                                         name="updateAccountInfo"
                                         type="checkbox"
                                         class="JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
+                                        {% if cartModel.updateAccountInfo %}
+                                        checked
+                                        {% endif %}
                                     >
                                 </label>
                             </section>
@@ -283,10 +284,14 @@
     </div>
 
     <script type="text/template" id="JSCheckoutForm__StateSelect">
-        {% include '_partials/CheckoutStateSelect.twig' only %}
+        {% include '_partials/CheckoutStateSelect.twig' with {
+            value: cartModel.stateProvince
+        } only %}
     </script>
 
     <script type="text/template" id="JSCheckoutForm__StateProvince">
-        {% include '_partials/CheckoutStateProvince.twig' only %}
+        {% include '_partials/CheckoutStateProvince.twig' with {
+            value: cartModel.stateProvince
+        } only %}
     </script>
 {% endblock %}
