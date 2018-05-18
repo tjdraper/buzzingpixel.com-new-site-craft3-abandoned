@@ -49,6 +49,9 @@ class CartModel
     /** @var string $postalCode */
     public $postalCode;
 
+    /** @var bool $updateAccountInfo */
+    public $updateAccountInfo;
+
     /** @var \DateTime $dateCreated */
     public $dateCreated;
 
@@ -76,9 +79,10 @@ class CartModel
     /**
      * Gets database save data
      * @param bool $includeId
+     * @param bool $userDetailsOnly
      * @return array
      */
-    public function getSaveData($includeId = true): array
+    public function getSaveData($includeId = true, $userDetailsOnly = false): array
     {
         $saveData = [
             'userId' => $this->userId,
@@ -93,10 +97,20 @@ class CartModel
             'city' => $this->city,
             'stateProvince' => $this->stateProvince,
             'postalCode' => $this->postalCode,
+            'updateAccountInfo' => $this->updateAccountInfo ? '1' : '0',
         ];
 
         if ($includeId && $this->id) {
             $saveData['id'] = $this->id;
+        }
+
+        if ($userDetailsOnly) {
+            unset(
+                $saveData['id'],
+                $saveData['userId'],
+                $saveData['sessionId'],
+                $saveData['cartData']
+            );
         }
 
         return $saveData;

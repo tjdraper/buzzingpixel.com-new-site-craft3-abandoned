@@ -17,7 +17,36 @@
                             </div>
                         </div>
                     {% else %}
-                        <form action="#TODO" class="CheckoutForm JSCheckoutForm">
+                        <form
+                            method="post"
+                            accept-charset="UTF-8"
+                            class="CheckoutForm JSCheckoutForm"
+                            novalidate
+                        >
+                            {{ csrfInput() }}
+                            {#<input
+                                type="hidden"
+                                name="action"
+                                value="store/cart-content/checkout"
+                                class="JSCheckoutForm__ActionInput"
+                                data-checkout-action="store/cart-content/checkout"
+                                data-update-cart-action="store/cart-content/update-cart-details"
+                            >
+                            <input
+                                type="hidden"
+                                name="redirect"
+                                value="/cart/order-success"
+                            >#}
+                            <input
+                                type="hidden"
+                                name="action"
+                                value="store/cart-content/update-cart-details"
+                            >
+                            <input
+                                type="hidden"
+                                name="redirect"
+                                value="/cart"
+                            >
                             <section class="CheckoutForm__Section">
                                 <h2 class="CheckoutForm__SectionHeader">Billing</h2>
                                 <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
@@ -26,14 +55,18 @@
                                         <input
                                             type="text"
                                             name="phoneNumber"
-                                            class="input CheckoutForm__Input"
+                                            class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. 123-555-1212"
                                             required
                                         >
                                     </label>
                                     <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                         Country
-                                        <select name="country" class="select CheckoutForm__Select JSCheckoutForm__CountryInput" required>
+                                        <select
+                                            name="country"
+                                            class="select CheckoutForm__Select JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch JSCheckoutForm__CountryInput"
+                                            required
+                                        >
                                             <option value="" disabled selected>Select Country...</option>
                                             {% for country in countries().all() %}
                                                 <option
@@ -55,7 +88,7 @@
                                         <input
                                             type="text"
                                             name="name"
-                                            class="input CheckoutForm__Input"
+                                            class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. John Smith"
                                             required
                                         >
@@ -65,7 +98,7 @@
                                         <input
                                             type="text"
                                             name="company"
-                                            class="input CheckoutForm__Input"
+                                            class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. BuzzingPixel, LLC"
                                         >
                                     </label>
@@ -75,7 +108,7 @@
                                     <input
                                         type="text"
                                         name="address"
-                                        class="input CheckoutForm__Input"
+                                        class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                         placeholder="i.e. 123 Some Street"
                                         required
                                     >
@@ -85,7 +118,7 @@
                                     <input
                                         type="text"
                                         name="addressContinued"
-                                        class="input CheckoutForm__Input"
+                                        class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                         placeholder="i.e. Suite 201"
                                     >
                                 </label>
@@ -94,7 +127,7 @@
                                     <input
                                         type="text"
                                         name="city"
-                                        class="input CheckoutForm__Input"
+                                        class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                         placeholder="i.e. Metropolis"
                                         required
                                     >
@@ -106,7 +139,7 @@
                                         <input
                                             type="text"
                                             name="postalCode"
-                                            class="input CheckoutForm__Input"
+                                            class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. 12345"
                                             required
                                         >
@@ -114,7 +147,11 @@
                                 </div>
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--AlignRight">
                                     Save Billing Info To Account?
-                                    <input name="updateAccountInfo" type="checkbox">
+                                    <input
+                                        name="updateAccountInfo"
+                                        type="checkbox"
+                                        class="JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
+                                    >
                                 </label>
                             </section>
                             <section class="CheckoutForm__Section">
@@ -125,7 +162,7 @@
                                         <input
                                             type="text"
                                             name="cardNumber"
-                                            class="input CheckoutForm__Input JSCreditCardNumber"
+                                            class="input CheckoutForm__Input JSCreditCardNumber JSCheckoutForm__Input"
                                             placeholder="i.e. 5530 8628 8440 9534"
                                             required
                                         >
@@ -135,7 +172,7 @@
                                         <input
                                             type="text"
                                             name="cvc"
-                                            class="input CheckoutForm__Input "
+                                            class="input CheckoutForm__Input JSCheckoutForm__Input"
                                             placeholder="i.e. 543"
                                             required
                                         >
@@ -144,14 +181,22 @@
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                     Expiration
                                     <span class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
-                                        <select name="expireMonth" class="select CheckoutForm__Select" required>
+                                        <select
+                                            name="expireMonth"
+                                            class="select CheckoutForm__Select JSCheckoutForm__Input"
+                                            required
+                                        >
                                             <option value="" disabled selected>Select Month...</option>
                                             {% for month in months() %}
                                                 <option value="{{ month.numeric }}">{{ month.name }}</option>
                                             {% endfor %}
                                         </select>
-                                        <select class="select CheckoutForm__Select" required>
-                                            <option name="expireYear" value="" disabled selected>Select Year...</option>
+                                        <select
+                                            name="expireYear"
+                                            class="select CheckoutForm__Select JSCheckoutForm__Input"
+                                            required
+                                        >
+                                            <option value="" disabled selected>Select Year...</option>
                                             {% for year in years() %}
                                                 <option value="{{ year }}">{{ year }}</option>
                                             {% endfor %}
@@ -159,7 +204,13 @@
                                     </span>
                                 </label>
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--PaySubmit">
-                                    <input class="button CheckoutForm__PaySubmit" type="submit" value="Pay ${{ cartModel.getTotal()|number_format(2) }}">
+                                    <noscript>You do not have JavaScript enabled. Without JavaScript enabled, the price reflected on the button might not be the final price.</noscript>
+                                    <input
+                                        class="button CheckoutForm__PaySubmit JSCheckoutForm__SubmitPayment"
+                                        type="submit"
+                                        value="Pay ${{ cartModel.getTotal()|number_format(2) }}"
+                                        data-value-template="Pay ${total}"
+                                    >
                                 </label>
                             </section>
                         </form>
@@ -174,7 +225,7 @@
                                 Subtotal
                             </span>
                             <span class="Cart__TotalsListItemValue">
-                                ${{ cartModel.getSubTotal()|number_format(2) }}
+                                $<span class="JSCheckoutForm__SubTotal">{{ cartModel.getSubTotal()|number_format(2) }}</span>
                             </span>
                         </li>
                         <li class="Cart__TotalsListItem">
@@ -182,7 +233,7 @@
                                 Tax
                             </span>
                             <span class="Cart__TotalsListItemValue">
-                                ${{ cartModel.getTax()|number_format(2) }}
+                                $<span class="JSCheckoutForm__Tax">{{ cartModel.getTax()|number_format(2) }}</span>
                             </span>
                         </li>
                         <li class="Cart__TotalsListItem Cart__TotalsListItem--IsEmphasized">
@@ -190,7 +241,7 @@
                                 Total
                             </span>
                             <span class="Cart__TotalsListItemValue">
-                                ${{ cartModel.getTotal()|number_format(2) }}
+                                $<span class="JSCheckoutForm__Total">{{ cartModel.getTotal()|number_format(2) }}</span>
                             </span>
                         </li>
                     </ul>
@@ -205,7 +256,6 @@
                                     </a>
                                     <form method="post" accept-charset="UTF-8" class="Cart__ItemMeta">
                                         {{ csrfInput() }}
-                                        <input type="hidden" name="action" value="/cart">
                                         <input type="hidden" name="action" value="store/cart-content/update-item">
                                         <input type="hidden" name="productKey" value="{{ productKey }}">
                                         <div class="Cart__ItemMetaPrice">${{ productModel.price|number_format(2) }}</div>

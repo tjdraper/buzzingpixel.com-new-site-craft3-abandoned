@@ -84,4 +84,28 @@ class CartContentController extends Controller
             Craft::$app->getRequest()->getParam('redirect', '/cart')
         );
     }
+
+    /**
+     * Updates cart details
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionUpdateCartDetails(): Response
+    {
+        $request = Craft::$app->getRequest();
+
+        $cartService = Store::cartService();
+
+        $cartModel = $cartService->getCartModel();
+
+        foreach (array_keys($cartModel->getSaveData(false, true)) as $key) {
+            $cartModel->{$key} = $request->getParam($key);
+        }
+
+        $cartService->updateCart();
+
+        return $this->redirect(
+            Craft::$app->getRequest()->getParam('redirect', '/cart')
+        );
+    }
 }

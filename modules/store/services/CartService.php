@@ -211,7 +211,7 @@ class CartService
      * Creates the cart
      * @throws \Exception
      */
-    private function updateCart()
+    public function updateCart()
     {
         $this->dbConnection->createCommand()->upsert(
             '{{%storeCart}}',
