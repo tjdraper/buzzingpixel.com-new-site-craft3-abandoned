@@ -159,7 +159,7 @@
                                     </span>
                                 </label>
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--PaySubmit">
-                                    <input class="button CheckoutForm__PaySubmit" type="submit" value="Pay $95.99">
+                                    <input class="button CheckoutForm__PaySubmit" type="submit" value="Pay ${{ cartModel.getTotal()|number_format(2) }}">
                                 </label>
                             </section>
                         </form>
@@ -174,7 +174,7 @@
                                 Subtotal
                             </span>
                             <span class="Cart__TotalsListItemValue">
-                                $123.09
+                                ${{ cartModel.getSubTotal()|number_format(2) }}
                             </span>
                         </li>
                         <li class="Cart__TotalsListItem">
@@ -182,7 +182,7 @@
                                 Tax
                             </span>
                             <span class="Cart__TotalsListItemValue">
-                                $0.00
+                                ${{ cartModel.getTax()|number_format(2) }}
                             </span>
                         </li>
                         <li class="Cart__TotalsListItem Cart__TotalsListItem--IsEmphasized">
@@ -190,7 +190,7 @@
                                 Total
                             </span>
                             <span class="Cart__TotalsListItemValue">
-                                $123.00
+                                ${{ cartModel.getTotal()|number_format(2) }}
                             </span>
                         </li>
                     </ul>

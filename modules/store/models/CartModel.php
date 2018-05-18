@@ -119,4 +119,63 @@ class CartModel
 
         return $models;
     }
+
+    /** @var float $subTotal */
+    private $subTotal;
+
+    /**
+     * Gets subtotal
+     * @return float
+     */
+    public function getSubTotal(): float
+    {
+        if ($this->subTotal === null) {
+            $productModels = $this->getProductModels();
+
+            $runningPrice = (float) 0;
+
+            foreach ($productModels as $model) {
+                $runningPrice += ((float) $model->price * $model->qty);
+            }
+
+            $this->subTotal = $runningPrice;
+        }
+
+        return $this->subTotal;
+    }
+
+    /** @var float $tax */
+    private $tax;
+
+    /**
+     * Gets tax
+     * @return float
+     */
+    public function getTax(): float
+    {
+        if ($this->tax === null) {
+            $settings = Store::settings();
+
+            $calcTax = $this->country === 'US' &&
+                $this->stateProvince === $settings->taxState;
+
+            $this->tax = (float) 0;
+
+            if ($calcTax) {
+                $multiplication = $this->getSubTotal() * $settings->taxPercent;
+                $this->tax = (float) $multiplication / 100;
+            }
+        }
+
+        return $this->tax;
+    }
+
+    /**
+     * Gets total
+     * @return float
+     */
+    public function getTotal(): float
+    {
+        return $this->getSubTotal() + $this->getTax();
+    }
 }
