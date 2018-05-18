@@ -15,6 +15,16 @@ function runMain(F) {
         return;
     }
 
+    var GlobalModelConstructor = F.model.make({
+        cartUpdated: 'int'
+    });
+
+    F.GlobalModel = new GlobalModelConstructor();
+
+    F.triggerCartUpdated = function() {
+        F.GlobalModel.set('cartUpdated', F.GlobalModel.get('cartUpdated') + 1);
+    };
+
     F.controller.construct('MobileMenu', {
         el: 'body'
     });
@@ -70,8 +80,10 @@ function runMain(F) {
         F.controller.construct('CheckoutStateProvince', {
             el: this
         });
-
         F.controller.construct('DetailsUpdate', {
+            el: this
+        });
+        F.controller.construct('CartPricingUpdate', {
             el: this
         });
     });

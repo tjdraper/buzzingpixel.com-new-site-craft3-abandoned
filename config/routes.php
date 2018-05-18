@@ -278,6 +278,10 @@ return [
     /** @see \modules\store\controllers\CartContentController::actionRemove() */
     'GET /cart/remove/<productKey:([^\/]+)>' => 'store/cart-content/remove',
 
+    // Pricing info AJAX endpoint
+    /** @see \modules\store\controllers\CartContentController::actionPricingInfo() */
+    'GET /cart/pricing-info' => 'store/cart-content/pricing-info',
+
 
 
 

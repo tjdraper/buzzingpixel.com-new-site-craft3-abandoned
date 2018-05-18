@@ -114,4 +114,20 @@ class CartContentController extends Controller
             Craft::$app->getRequest()->getParam('redirect', '/cart')
         );
     }
+
+    /**
+     * Returns an AJAX response for cart pricing info
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionPricingInfo(): Response
+    {
+        $cartModel = Store::cartService()->getCartModel();
+
+        return $this->asJson([
+            'subTotal' => number_format($cartModel->getSubTotal(), 2),
+            'tax' => number_format($cartModel->getTax(), 2),
+            'total' => number_format($cartModel->getTotal(), 2),
+        ]);
+    }
 }

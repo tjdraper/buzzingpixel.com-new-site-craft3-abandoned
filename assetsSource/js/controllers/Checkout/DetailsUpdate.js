@@ -26,7 +26,10 @@ function runDetailsUpdate(F) {
 
             $.ajax({
                 data: self.$el.serialize(),
-                method: 'POST'
+                method: 'POST',
+                success: function() {
+                    F.triggerCartUpdated();
+                }
             });
         }
     });
