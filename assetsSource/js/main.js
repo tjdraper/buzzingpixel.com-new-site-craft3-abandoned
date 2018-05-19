@@ -86,6 +86,9 @@ function runMain(F) {
         F.controller.construct('CartPricingUpdate', {
             el: this
         });
+        F.controller.construct('RemoveErrors', {
+            el: this
+        });
     });
 }
 

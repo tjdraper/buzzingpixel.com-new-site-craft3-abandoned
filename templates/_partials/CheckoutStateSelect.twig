@@ -8,7 +8,7 @@
     {% endif %}
 {% endfor %}
 
-<label class="label CheckoutForm__Label CheckoutForm__Label--Required JSCheckoutForm__StateProvinceLabel JSCheckoutForm__Input--UpdateWatch">
+<label class="label CheckoutForm__Label CheckoutForm__Label--Required JSCheckoutForm__StateProvinceLabel JSCheckoutForm__Input--UpdateWatch input-parent">
     State
     <select name="stateProvince" class="select{% if errors|length > 0 %} select--has-error{% endif %} CheckoutForm__Select" required>
         <option value="" disabled{% if not hasSelected %} selected{% endif %}>
