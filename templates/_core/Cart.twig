@@ -1,5 +1,6 @@
 {# @var \modules\store\models\CartModel cartModel #}
 {# @var bool isGuest #}
+{# @var array checkoutInputErrors #}
 
 {% extends '_layouts/Master.twig' %}
 
@@ -46,17 +47,26 @@
                                         <input
                                             type="text"
                                             name="phoneNumber"
-                                            class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
+                                            class="input{% if checkoutInputErrors['phoneNumber'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. 123-555-1212"
                                             value="{{ cartModel.phoneNumber }}"
                                             required
                                         >
+                                        {% if checkoutInputErrors['phoneNumber'] is defined %}
+                                            <ul class="CheckoutForm__InputErrors">
+                                                {% for error in checkoutInputErrors.phoneNumber %}
+                                                    <li class="CheckoutForm__InputErrorItem">
+                                                        {{ error|typeset }}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                     </label>
                                     <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                         Country
                                         <select
                                             name="country"
-                                            class="select CheckoutForm__Select JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch JSCheckoutForm__CountryInput"
+                                            class="select{% if checkoutInputErrors['country'] is defined %} select--has-error{% endif %} CheckoutForm__Select JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch JSCheckoutForm__CountryInput"
                                             required
                                         >
                                             <option value="" disabled selected>Select Country...</option>
@@ -71,6 +81,15 @@
                                                 </option>
                                             {% endfor %}
                                         </select>
+                                        {% if checkoutInputErrors['country'] is defined %}
+                                            <ul class="CheckoutForm__InputErrors">
+                                                {% for error in checkoutInputErrors.country %}
+                                                    <li class="CheckoutForm__InputErrorItem">
+                                                        {{ error|typeset }}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                     </label>
                                 </div>
                                 <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
@@ -79,21 +98,39 @@
                                         <input
                                             type="text"
                                             name="name"
-                                            class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
+                                            class="input{% if checkoutInputErrors['name'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. John Smith"
                                             value="{{ cartModel.name }}"
                                             required
                                         >
+                                        {% if checkoutInputErrors['name'] is defined %}
+                                            <ul class="CheckoutForm__InputErrors">
+                                                {% for error in checkoutInputErrors.name %}
+                                                    <li class="CheckoutForm__InputErrorItem">
+                                                        {{ error|typeset }}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                     </label>
                                     <label class="label CheckoutForm__Label">
                                         Company
                                         <input
                                             type="text"
                                             name="company"
-                                            class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
+                                            class="input{% if checkoutInputErrors['company'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. BuzzingPixel, LLC"
                                             value="{{ cartModel.company }}"
                                         >
+                                        {% if checkoutInputErrors['company'] is defined %}
+                                            <ul class="CheckoutForm__InputErrors">
+                                                {% for error in checkoutInputErrors.company %}
+                                                    <li class="CheckoutForm__InputErrorItem">
+                                                        {{ error|typeset }}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                     </label>
                                 </div>
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
@@ -101,47 +138,84 @@
                                     <input
                                         type="text"
                                         name="address"
-                                        class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
+                                        class="input{% if checkoutInputErrors['address'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                         placeholder="i.e. 123 Some Street"
                                         value="{{ cartModel.address }}"
                                         required
                                     >
+                                    {% if checkoutInputErrors['address'] is defined %}
+                                        <ul class="CheckoutForm__InputErrors">
+                                            {% for error in checkoutInputErrors.address %}
+                                                <li class="CheckoutForm__InputErrorItem">
+                                                    {{ error|typeset }}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
                                 </label>
                                 <label class="label CheckoutForm__Label">
                                     Address Line 2
                                     <input
                                         type="text"
                                         name="addressContinued"
-                                        class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
+                                        class="input{% if checkoutInputErrors['addressContinued'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                         placeholder="i.e. Suite 201"
                                         value="{{ cartModel.addressContinued }}"
                                     >
+                                    {% if checkoutInputErrors['addressContinued'] is defined %}
+                                        <ul class="CheckoutForm__InputErrors">
+                                            {% for error in checkoutInputErrors.addressContinued %}
+                                                <li class="CheckoutForm__InputErrorItem">
+                                                    {{ error|typeset }}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
                                 </label>
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                     City
                                     <input
                                         type="text"
                                         name="city"
-                                        class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
+                                        class="input{% if checkoutInputErrors['city'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                         placeholder="i.e. Metropolis"
                                         value="{{ cartModel.city }}"
                                         required
                                     >
+                                    {% if checkoutInputErrors['city'] is defined %}
+                                        <ul class="CheckoutForm__InputErrors">
+                                            {% for error in checkoutInputErrors.city %}
+                                                <li class="CheckoutForm__InputErrorItem">
+                                                    {{ error|typeset }}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
                                 </label>
                                 <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
                                     {% include '_partials/CheckoutStateSelect.twig' with {
-                                        value: cartModel.stateProvince
+                                        value: cartModel.stateProvince,
+                                        errors: checkoutInputErrors['stateProvince'] ?? {}
                                     } only %}
                                     <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
                                         Postal Code
                                         <input
                                             type="text"
                                             name="postalCode"
-                                            class="input CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
+                                            class="input{% if checkoutInputErrors['postalCode'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. 12345"
                                             value="{{ cartModel.postalCode }}"
                                             required
                                         >
+                                        {% if checkoutInputErrors['postalCode'] is defined %}
+                                            <ul class="CheckoutForm__InputErrors">
+                                                {% for error in checkoutInputErrors.postalCode %}
+                                                    <li class="CheckoutForm__InputErrorItem">
+                                                        {{ error|typeset }}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                     </label>
                                 </div>
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--AlignRight">
@@ -164,20 +238,38 @@
                                         <input
                                             type="text"
                                             name="cardNumber"
-                                            class="input CheckoutForm__Input JSCreditCardNumber JSCheckoutForm__Input"
+                                            class="input{% if checkoutInputErrors['cardNumber'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCreditCardNumber JSCheckoutForm__Input"
                                             placeholder="i.e. 5530 8628 8440 9534"
                                             required
                                         >
+                                        {% if checkoutInputErrors['cardNumber'] is defined %}
+                                            <ul class="CheckoutForm__InputErrors">
+                                                {% for error in checkoutInputErrors.cardNumber %}
+                                                    <li class="CheckoutForm__InputErrorItem">
+                                                        {{ error|typeset }}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                     </label>
                                     <label class="label CheckoutForm__Label CheckoutForm__Label--Required CheckoutForm__Label--OneThird">
                                         CVC
                                         <input
                                             type="text"
                                             name="cvc"
-                                            class="input CheckoutForm__Input JSCheckoutForm__Input"
+                                            class="input{% if checkoutInputErrors['cvc'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input"
                                             placeholder="i.e. 543"
                                             required
                                         >
+                                        {% if checkoutInputErrors['cvc'] is defined %}
+                                            <ul class="CheckoutForm__InputErrors">
+                                                {% for error in checkoutInputErrors.cvc %}
+                                                    <li class="CheckoutForm__InputErrorItem">
+                                                        {{ error|typeset }}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                     </label>
                                 </div>
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--Required">
@@ -185,7 +277,7 @@
                                     <span class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
                                         <select
                                             name="expireMonth"
-                                            class="select CheckoutForm__Select JSCheckoutForm__Input"
+                                            class="select{% if checkoutInputErrors['expiration'] is defined %} select--has-error{% endif %} CheckoutForm__Select JSCheckoutForm__Input"
                                             required
                                         >
                                             <option value="" disabled selected>Select Month...</option>
@@ -195,7 +287,7 @@
                                         </select>
                                         <select
                                             name="expireYear"
-                                            class="select CheckoutForm__Select JSCheckoutForm__Input"
+                                            class="select{% if checkoutInputErrors['expiration'] is defined %} select--has-error{% endif %} CheckoutForm__Select JSCheckoutForm__Input"
                                             required
                                         >
                                             <option value="" disabled selected>Select Year...</option>
@@ -204,6 +296,15 @@
                                             {% endfor %}
                                         </select>
                                     </span>
+                                    {% if checkoutInputErrors['expiration'] is defined %}
+                                        <ul class="CheckoutForm__InputErrors">
+                                            {% for error in checkoutInputErrors.expiration %}
+                                                <li class="CheckoutForm__InputErrorItem">
+                                                    {{ error|typeset }}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
                                 </label>
                                 <label class="label CheckoutForm__Label CheckoutForm__Label--PaySubmit">
                                     <noscript>You do not have JavaScript enabled. Without JavaScript enabled, the price reflected on the button might not be the final price.</noscript>

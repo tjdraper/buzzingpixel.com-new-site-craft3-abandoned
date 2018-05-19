@@ -1,13 +1,23 @@
 {% set value = value|default(null) %}
+{% set errors = errors|default([]) %}
 
 <label class="label CheckoutForm__Label CheckoutForm__Label--Required JSCheckoutForm__StateProvinceLabel">
     State/Province
     <input
         type="text"
         name="stateProvince"
-        class="input CheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
+        class="input{% if errors|length > 0 %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
         placeholder="i.e. Tennessee"
         value="{{ value }}"
         required
     >
+    {% if errors|length > 0 %}
+        <ul class="CheckoutForm__InputErrors">
+            {% for error in errors %}
+                <li class="CheckoutForm__InputErrorItem">
+                    {{ error|typeset }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </label>

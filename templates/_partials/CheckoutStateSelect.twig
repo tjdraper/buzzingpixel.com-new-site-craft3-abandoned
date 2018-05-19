@@ -1,4 +1,5 @@
 {% set value = value|default(null) %}
+{% set errors = errors|default([]) %}
 
 {% set hasSelected = false %}
 {% for stateAbbr,stateName in states() %}
@@ -9,7 +10,7 @@
 
 <label class="label CheckoutForm__Label CheckoutForm__Label--Required JSCheckoutForm__StateProvinceLabel JSCheckoutForm__Input--UpdateWatch">
     State
-    <select name="stateProvince" class="select CheckoutForm__Select" required>
+    <select name="stateProvince" class="select{% if errors|length > 0 %} select--has-error{% endif %} CheckoutForm__Select" required>
         <option value="" disabled{% if not hasSelected %} selected{% endif %}>
             Select State...
         </option>
@@ -24,4 +25,13 @@
             </option>
         {% endfor %}
     </select>
+    {% if errors|length > 0 %}
+        <ul class="CheckoutForm__InputErrors">
+            {% for error in errors %}
+                <li class="CheckoutForm__InputErrorItem">
+                    {{ error|typeset }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </label>

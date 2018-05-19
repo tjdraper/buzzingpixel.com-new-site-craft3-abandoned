@@ -7,7 +7,7 @@ use yii\web\Response;
 use modules\store\Store;
 use craft\web\Controller;
 use yii\web\HttpException;
-use craft\helpers\UrlHelper;
+use modules\store\models\PaymentModel;
 
 /**
  * Class CartContentController
@@ -129,5 +129,45 @@ class CartContentController extends Controller
             'tax' => number_format($cartModel->getTax(), 2),
             'total' => number_format($cartModel->getTotal(), 2),
         ]);
+    }
+
+    /**
+     * Checks user out
+     * @return Response|null
+     * @throws \Exception
+     */
+    public function actionCheckout()
+    {
+        $request = Craft::$app->getRequest();
+
+        $cartService = Store::cartService();
+
+        $cartModel = $cartService->getCartModel();
+
+        foreach (array_keys($cartModel->getSaveData(false, true)) as $key) {
+            $cartModel->{$key} = $request->getParam($key);
+        }
+
+        $paymentModel = new PaymentModel();
+
+        foreach ($paymentModel->getProperties() as $key) {
+            $paymentModel->{$key} = $request->getParam($key);
+        }
+
+        $cartValidationErrors = array_merge(
+            $cartModel->validateForCheckout(),
+            $paymentModel->validateForCheckout()
+        );
+
+        if (\count($cartValidationErrors) > 0) {
+            Craft::$app->getUrlManager()->setRouteParams([
+                'checkoutInputErrors' => $cartValidationErrors
+            ]);
+
+            return null;
+        }
+
+        var_dump($cartValidationErrors);
+        die;
     }
 }

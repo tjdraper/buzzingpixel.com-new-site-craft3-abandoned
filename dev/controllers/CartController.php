@@ -46,15 +46,19 @@ class CartController extends BaseController
 
         return $this->renderTemplate(
             '_core/Cart.twig',
-            [
-                'header' => [
-                    'meta' => [
-                        'heading' => 'Checkout',
+            array_merge(
+                [
+                    'header' => [
+                        'meta' => [
+                            'heading' => 'Checkout',
+                        ],
                     ],
+                    'cartModel' => Store::cartService()->getCartModel(),
+                    'isGuest' => Craft::$app->getUser()->isGuest,
+                    'checkoutInputErrors' => [],
                 ],
-                'cartModel' => Store::cartService()->getCartModel(),
-                'isGuest' => Craft::$app->getUser()->isGuest,
-            ],
+                Craft::$app->getUrlManager()->getRouteParams()
+            ),
             false
         );
     }
