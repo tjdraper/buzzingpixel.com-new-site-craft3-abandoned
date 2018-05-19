@@ -89,6 +89,9 @@ function runMain(F) {
         F.controller.construct('RemoveErrors', {
             el: this
         });
+        F.controller.construct('CartSubmission', {
+            el: this
+        });
     });
 }
 

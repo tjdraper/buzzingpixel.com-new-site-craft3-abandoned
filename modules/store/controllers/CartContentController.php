@@ -160,6 +160,14 @@ class CartContentController extends Controller
         );
 
         if (\count($cartValidationErrors) > 0) {
+            if (Craft::$app->getRequest()->getIsAjax()) {
+                return $this->asJson([
+                    'success' => false,
+                    'message' => '',
+                    'checkoutInputErrors' => $cartValidationErrors,
+                ]);
+            }
+
             Craft::$app->getUrlManager()->setRouteParams([
                 'checkoutInputErrors' => $cartValidationErrors
             ]);
