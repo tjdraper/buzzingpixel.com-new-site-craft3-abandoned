@@ -77,7 +77,21 @@ class CartContentController extends Controller
         );
 
         if (! $result) {
+            if (Craft::$app->getRequest()->getIsAjax()) {
+                return $this->asJson([
+                    'success' => false,
+                    'message' => 'Product not found',
+                ]);
+            }
+
             throw new HttpException(500, 'Product not found');
+        }
+
+        if (Craft::$app->getRequest()->getIsAjax()) {
+            return $this->asJson([
+                'success' => true,
+                'message' => '',
+            ]);
         }
 
         return $this->redirect(

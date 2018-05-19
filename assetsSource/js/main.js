@@ -93,6 +93,12 @@ function runMain(F) {
             el: this
         });
     });
+
+    $('.JSCartItemForm').each(function() {
+        F.controller.construct('CartItemForm', {
+            el: this
+        });
+    });
 }
 
 runMain(window.FAB);

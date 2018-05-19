@@ -1,7 +1,7 @@
-{# @var \modules\store\models\CartModel cartModel #}
 {# @var bool isGuest #}
 {# @var array checkoutInputErrors #}
 {# @var string checkoutErrorMessage #}
+{# @var \modules\store\models\CartModel cartModel #}
 
 {% extends '_layouts/Master.twig' %}
 
@@ -367,16 +367,25 @@
                         {% for productKey,productModel in cartModel.getProductModels() %}
                             <li class="Cart__Item">
                                 <div class="Cart__ItemPrimaryContent">
-                                    <a href="{{ productModel.url }}" class="Cart__ItemTitle">
+                                    <a href="{{ productModel.url }}" class="Cart__ItemTitle JSCartItemTitle">
                                         {{ productModel.title|smartypants }}
                                     </a>
-                                    <form method="post" accept-charset="UTF-8" class="Cart__ItemMeta">
+                                    <form method="post" accept-charset="UTF-8" class="Cart__ItemMeta JSCartItemForm">
                                         {{ csrfInput() }}
                                         <input type="hidden" name="action" value="store/cart-content/update-item">
                                         <input type="hidden" name="productKey" value="{{ productKey }}">
                                         <div class="Cart__ItemMetaPrice">${{ productModel.price|number_format(2) }}</div>
-                                        <input type="text" class="input Cart__ItemMetaQtyInput" name="qty" value="{{ productModel.qty }}">
-                                        <input class="button Cart__ItemMetaUpdateSubmit" type="submit" value="Update">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            class="input Cart__ItemMetaQtyInput JSCartItemForm__Input"
+                                            name="qty"
+                                            value="{{ productModel.qty }}"
+                                        >
+                                        <noscript>
+                                            <input class="button Cart__ItemMetaUpdateSubmit" type="submit" value="Update">
+                                        </noscript>
                                         <a
                                             href="/cart/remove/{{ productKey }}"
                                             class="button Cart__ItemMetaRemove"
