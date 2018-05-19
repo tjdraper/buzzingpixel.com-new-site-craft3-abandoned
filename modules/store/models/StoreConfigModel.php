@@ -7,6 +7,12 @@ namespace modules\store\models;
  */
 class StoreConfigModel
 {
+    /** @var string $stripePublishableKey */
+    public $stripePublishableKey;
+
+    /** @var string $stripeSecretKey */
+    public $stripeSecretKey;
+
     /** @var int $taxPercent */
     public $taxPercent;
 

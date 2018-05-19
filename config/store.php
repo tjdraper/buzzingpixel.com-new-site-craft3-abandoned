@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'stripePublishableKey' => getenv('stripePublishableKey'),
+    'stripeSecretKey' => getenv('stripeSecretKey'),
     'taxPercent' => 7,
     'taxState' => 'TN',
     'companyName' => 'BuzzingPixel, LLC',

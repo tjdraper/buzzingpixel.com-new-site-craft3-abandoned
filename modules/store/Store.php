@@ -3,6 +3,7 @@
 namespace modules\store;
 
 use Craft;
+use Stripe\Stripe;
 use yii\base\Module;
 use Ramsey\Uuid\Uuid;
 use modules\store\models\CartModel;
@@ -39,6 +40,12 @@ class Store extends Module
         if (Craft::$app instanceof ConsoleApplication) {
             $this->controllerNamespace = 'store\commands';
         }
+
+        // Set the stripe key
+        Stripe::setApiKey(self::settings()->stripeSecretKey);
+
+        // Set the stripe API version
+        Stripe::setApiVersion('2018-02-28');
 
         parent::init();
     }
