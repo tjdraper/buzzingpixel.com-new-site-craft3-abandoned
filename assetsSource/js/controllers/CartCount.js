@@ -15,6 +15,16 @@ function runCartCount(F) {
         init: function() {
             var self = this;
 
+            self.updateCartCount();
+
+            F.GlobalModel.onChange('cartUpdated', function() {
+                self.updateCartCount();
+            });
+        },
+
+        updateCartCount: function() {
+            var self = this;
+
             $.ajax({
                 url: '/ajax/cart/count',
                 success: function(resp) {
