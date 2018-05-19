@@ -16,7 +16,8 @@
         "timostamm/text-truncation": "dev-master",
         "cocur/slugify": "^3.1",
         "league/iso3166": "^2.1",
-        "ramsey/uuid": "^3.7"
+        "ramsey/uuid": "^3.7",
+        "stripe/stripe-php": "^6.7"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master"
