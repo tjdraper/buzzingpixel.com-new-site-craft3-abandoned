@@ -1,6 +1,7 @@
 {# @var \modules\store\models\CartModel cartModel #}
 {# @var bool isGuest #}
 {# @var array checkoutInputErrors #}
+{# @var string checkoutErrorMessage #}
 
 {% extends '_layouts/Master.twig' %}
 
@@ -18,6 +19,18 @@
                             </div>
                         </div>
                     {% else %}
+                        <div class="Cart__CheckoutNotice">
+                            {% if checkoutErrorMessage %}
+                                <div class="Cart__CheckoutNoticeInner">
+                                    {% embed '_embeds/Note.twig' with {
+                                        isError: true,
+                                    } %}
+                                        {% block noteTitle %}Error{% endblock %}
+                                        {% block noteContent %}{{ checkoutErrorMessage|typeset }}{% endblock %}
+                                    {% endembed %}
+                                </div>
+                            {% endif %}
+                        </div>
                         <form
                             method="post"
                             accept-charset="UTF-8"

@@ -56,6 +56,7 @@ class CartController extends BaseController
                     'cartModel' => Store::cartService()->getCartModel(),
                     'isGuest' => Craft::$app->getUser()->isGuest,
                     'checkoutInputErrors' => [],
+                    'checkoutErrorMessage' => '',
                 ],
                 Craft::$app->getUrlManager()->getRouteParams()
             ),

@@ -175,7 +175,28 @@ class CartContentController extends Controller
             return null;
         }
 
-        var_dump($cartValidationErrors);
+        try {
+            $charge = Store::chargeCardService()->charge(
+                $paymentModel,
+                $cartModel
+            );
+        } catch (\Exception $e) {
+            if (Craft::$app->getRequest()->getIsAjax()) {
+                return $this->asJson([
+                    'success' => false,
+                    'message' => $e->getMessage(),
+                    'checkoutInputErrors' => [],
+                ]);
+            }
+
+            Craft::$app->getUrlManager()->setRouteParams([
+                'checkoutErrorMessage' => $e->getMessage()
+            ]);
+
+            return null;
+        }
+
+        var_dump($charge);
         die;
     }
 }
