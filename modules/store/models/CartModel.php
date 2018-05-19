@@ -3,7 +3,8 @@
 namespace modules\store\models;
 
 use modules\store\Store;
-use modules\store\models\StoreProductModel;
+use League\ISO3166\ISO3166;
+use dev\twigextensions\StatesTwigExtension;
 
 /**
  * Class CartModel
@@ -191,5 +192,46 @@ class CartModel
     public function getTotal(): float
     {
         return $this->getSubTotal() + $this->getTax();
+    }
+
+    /**
+     * Validates the cart for checkout
+     */
+    public function validateForCheckout(): array
+    {
+        $requiredProperties = [
+            'phoneNumber',
+            'country',
+            'name',
+            'address',
+            'city',
+            'stateProvince',
+            'postalCode',
+        ];
+
+        $errors = [];
+
+        foreach ($requiredProperties as $prop) {
+            if (! $this->{$prop}) {
+                $errors[$prop][] = 'This field is required';
+            }
+        }
+
+        if ($this->country) {
+            try {
+                (new ISO3166())->alpha2($this->country);
+            } catch (\Exception $e) {
+                $errors['country'][] = 'You must specify a valid country';
+            }
+        }
+
+        if ($this->country === 'US' &&
+            $this->stateProvince &&
+            ! isset((new StatesTwigExtension)->getStates()[$this->stateProvince])
+        ) {
+            $errors['stateProvince'][] = 'You must specify a valid U.S. state';
+        }
+
+        return $errors;
     }
 }
