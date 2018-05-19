@@ -6,6 +6,7 @@ use Craft;
 use Stripe\Stripe;
 use yii\base\Module;
 use Ramsey\Uuid\Uuid;
+use Stripe\Charge as StripeCharge;
 use modules\store\models\CartModel;
 use modules\store\services\CartService;
 use modules\store\factories\QueryFactory;
@@ -13,6 +14,7 @@ use modules\store\services\CookieService;
 use modules\store\factories\ConfigFactory;
 use modules\store\models\StoreConfigModel;
 use modules\store\factories\CookieFactory;
+use modules\store\services\ChargeCardService;
 use craft\console\Application as ConsoleApplication;
 
 /**
@@ -109,5 +111,14 @@ class Store extends Module
         }
 
         return self::$plugin->storage['CookieService'];
+    }
+
+    /**
+     * Gets the Charge Card Service
+     * @return ChargeCardService
+     */
+    public static function chargeCardService() :ChargeCardService
+    {
+        return new ChargeCardService(new StripeCharge());
     }
 }

@@ -2,7 +2,9 @@
 
 namespace modules\store\models;
 
+use Craft;
 use modules\store\Store;
+use craft\elements\User;
 use League\ISO3166\ISO3166;
 use dev\twigextensions\StatesTwigExtension;
 
@@ -61,6 +63,24 @@ class CartModel
 
     /** @var string $uid */
     public $uid;
+
+    /** @var User $user */
+    private $user;
+
+    /**
+     * Gets the user specified by the model's userId property
+     * @return User|null
+     */
+    public function getUserModel()
+    {
+        if ($this->user === null) {
+            $this->user = Craft::$app->getUsers()->getUserById(
+                (int) $this->userId
+            );
+        }
+
+        return $this->user;
+    }
 
     /**
      * Gets the cart count

@@ -2,12 +2,10 @@
 
 namespace modules\store\services;
 
-use yii\web\CookieCollection;
 use modules\store\models\CartModel;
 use \Ramsey\Uuid\UuidFactoryInterface;
 use craft\db\Connection as DBConnection;
 use modules\store\factories\QueryFactory;
-use modules\store\services\CookieService;
 use modules\store\models\StoreConfigModel;
 
 /**
