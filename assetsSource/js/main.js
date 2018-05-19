@@ -99,6 +99,12 @@ function runMain(F) {
             el: this
         });
     });
+
+    $('.JSCartItem').each(function() {
+        F.controller.construct('CartItemRemove', {
+            el: this
+        });
+    });
 }
 
 runMain(window.FAB);

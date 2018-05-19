@@ -365,7 +365,7 @@
                 <div class="Cart__ItemsContainer">
                     <ul class="Cart__Items">
                         {% for productKey,productModel in cartModel.getProductModels() %}
-                            <li class="Cart__Item">
+                            <li class="Cart__Item JSCartItem">
                                 <div class="Cart__ItemPrimaryContent">
                                     <a href="{{ productModel.url }}" class="Cart__ItemTitle JSCartItemTitle">
                                         {{ productModel.title|smartypants }}
@@ -388,7 +388,7 @@
                                         </noscript>
                                         <a
                                             href="/cart/remove/{{ productKey }}"
-                                            class="button Cart__ItemMetaRemove"
+                                            class="button Cart__ItemMetaRemove JSCartItem__Remove"
                                         >
                                             X
                                         </a>

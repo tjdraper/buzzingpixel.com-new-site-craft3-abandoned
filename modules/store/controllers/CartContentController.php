@@ -42,7 +42,21 @@ class CartContentController extends Controller
     public function actionRemove(string $productKey): Response
     {
         if (! Store::cartService()->remove($productKey)) {
+            if (Craft::$app->getRequest()->getIsAjax()) {
+                return $this->asJson([
+                    'success' => false,
+                    'message' => 'Product not found',
+                ]);
+            }
+
             throw new HttpException(500, 'Product not found');
+        }
+
+        if (Craft::$app->getRequest()->getIsAjax()) {
+            return $this->asJson([
+                'success' => true,
+                'message' => '',
+            ]);
         }
 
         return $this->redirect(
