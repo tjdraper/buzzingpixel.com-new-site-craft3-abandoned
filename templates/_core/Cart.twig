@@ -328,6 +328,14 @@
                                         data-value-template="Pay ${total}"
                                     >
                                 </label>
+                                <div class="JSAjaxCartSubmissionNotice" style="display: none;">
+                                    {% embed '_embeds/Note.twig' with {
+                                        isError: true,
+                                    } %}
+                                        {% block noteTitle %}Error{% endblock %}
+                                        {% block noteContent %}{% endblock %}
+                                    {% endembed %}
+                                </div>
                             </section>
                         </form>
                     {% endif %}

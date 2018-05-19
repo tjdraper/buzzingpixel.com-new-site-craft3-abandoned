@@ -21,15 +21,27 @@ function runCartSubmission(F) {
 
         handleSubmission: function() {
             var self = this;
+            var $actionInput = self.$el.find('.JSCheckoutForm__ActionInput');
 
             self.disableSubmitButton();
+            self.hideErrorMessage();
+
+            $actionInput.val($actionInput.data('checkoutAction'));
 
             $.ajax({
                 data: self.$el.serialize(),
                 method: 'POST',
                 success: function(resp) {
                     if (! resp.success) {
+                        if (! resp.message) {
+                            resp.message = 'We had a problem with your submission';
+                        }
+
+                        self.showErrorMessage(resp.message);
+
                         self.handleSubmissionErrors(resp.checkoutInputErrors);
+
+                        return;
                     }
 
                     console.log(resp);
@@ -49,6 +61,17 @@ function runCartSubmission(F) {
         enableSubmitButton: function() {
             this.$el.find('.JSCheckoutForm__SubmitPayment')
                 .prop('disabled', false);
+        },
+
+        showErrorMessage: function(msg) {
+            var $submissionNotice = $('.JSAjaxCartSubmissionNotice');
+
+            $submissionNotice.show();
+            $submissionNotice.find('.JSNote__Body').text(msg);
+        },
+
+        hideErrorMessage: function() {
+            $('.JSAjaxCartSubmissionNotice').hide();
         },
 
         handleSubmissionErrors: function(inputErrors) {
