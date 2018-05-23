@@ -36,6 +36,9 @@ class m180519_191402_AddStoreOrderItems extends Migration
             'notes' => $this->string(255),
             'authorizedDomains' => $this->json(),
             'disabled' => $this->boolean(),
+            'dateCreated' => $this->dateTime()->notNull(),
+            'dateUpdated' => $this->dateTime()->notNull(),
+            'uid' => $this->uid(),
         ]);
 
         $this->addForeignKey(

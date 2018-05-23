@@ -40,6 +40,9 @@ class m180519_185711_AddStoreOrdersTable extends Migration
             'city' => $this->string(255),
             'stateProvince' => $this->string(255),
             'postalCode' => $this->string(255),
+            'dateCreated' => $this->dateTime()->notNull(),
+            'dateUpdated' => $this->dateTime()->notNull(),
+            'uid' => $this->uid(),
         ]);
 
         $this->addForeignKey(
