@@ -29,6 +29,8 @@ class ConfigFactory
         foreach ($products as $key => $val) {
             $model = new StoreProductModel();
 
+            $model->key = $key;
+
             foreach ($val as $k => $v) {
                 $model->{$k} = $v;
             }

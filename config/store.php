@@ -23,6 +23,7 @@ return [
             'versions' => [
                 1 => null, // major version => upgrade price (use null for full price, 0 to auto update)
             ],
+            'currentVersion' => '1.0.7',
             'publicDownload' => true,
             'downloadFileLocations' => [
                 1 => [
@@ -40,6 +41,7 @@ return [
                 1 => null,
                 2 => 29, // major version => upgrade price (use null for full price, 0 to auto update)
             ],
+            'currentVersion' => '2.1.4',
             'publicDownload' => true,
             'downloadFileLocations' => [
                 1 => [
@@ -57,6 +59,7 @@ return [
             'versions' => [
                 1 => null,
             ],
+            'currentVersion' => '1.1.1',
             'publicDownload' => false,
             'downloadFileLocations' => [
                 1 => [
@@ -71,6 +74,7 @@ return [
             'versions' => [
                 1 => null,
             ],
+            'currentVersion' => '2.1.4--1.1.1',
             'publicDownload' => false,
             'downloadFileLocations' => [
                 1 => [
@@ -87,6 +91,7 @@ return [
                 1 => null,
                 2 => null,
             ],
+            'currentVersion' => '2.1.0',
             'downloadFileLocations' => [
                 2 => [
                     '2.1.0' => 'softwareDownloads/construct/construct-2.1.0.zip',
@@ -101,6 +106,7 @@ return [
                 1 => null,
                 2 => null,
             ],
+            'currentVersion' => '2.2.0',
             'downloadFileLocations' => [
                 2 => [
                     '2.2.0' => 'softwareDownloads/category-construct/category-construct-2.2.0.zip',
@@ -115,6 +121,7 @@ return [
                 1 => null,
                 2 => null,
             ],
+            'currentVersion' => '2.2.1',
             'downloadFileLocations' => [
                 2 => [
                     '2.2.1' => 'softwareDownloads/collective/collective-2.2.1.zip',

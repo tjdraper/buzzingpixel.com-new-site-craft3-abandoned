@@ -7,6 +7,9 @@ namespace modules\store\models;
  */
 class StoreProductModel
 {
+    /** @var string $key */
+    public $key;
+
     /** @var string $title */
     public $title;
 
@@ -27,6 +30,12 @@ class StoreProductModel
 
     /** @var array $versions */
     public $versions = [];
+
+    /** @var string $currentVersion */
+    public $currentVersion;
+
+    /** @var bool $isUpgrade */
+    public $isUpgrade = false;
 
     /** @var bool $publicDownload */
     public $publicDownload = false;

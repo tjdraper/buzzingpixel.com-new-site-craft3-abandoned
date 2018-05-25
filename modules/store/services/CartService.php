@@ -3,7 +3,7 @@
 namespace modules\store\services;
 
 use modules\store\models\CartModel;
-use \Ramsey\Uuid\UuidFactoryInterface;
+use Ramsey\Uuid\UuidFactoryInterface;
 use craft\db\Connection as DBConnection;
 use modules\store\factories\QueryFactory;
 use modules\store\models\StoreConfigModel;
