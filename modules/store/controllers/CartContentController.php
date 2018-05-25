@@ -163,8 +163,26 @@ class CartContentController extends Controller
      * Checks user out
      * @return Response|null
      * @throws \Exception
+     * @throws \Throwable
      */
     public function actionCheckout()
+    {
+        try {
+            return $this->checkout();
+        } catch (\Exception $e) {
+            return $this->catchRespond($e);
+        } catch (\Throwable $e) {
+            return $this->catchRespond($e);
+        }
+    }
+
+    /**
+     * Inner checkout method so we can do a single try/catch
+     * @return null|Response
+     * @throws \Exception
+     * @throws \Throwable
+     */
+    private function checkout()
     {
         $request = Craft::$app->getRequest();
 
@@ -203,28 +221,39 @@ class CartContentController extends Controller
             return null;
         }
 
-        try {
-            $charge = Store::chargeCardService()->charge(
-                $paymentModel,
-                $cartModel
-            );
-        } catch (\Exception $e) {
-            if (Craft::$app->getRequest()->getIsAjax()) {
-                return $this->asJson([
-                    'success' => false,
-                    'message' => $e->getMessage(),
-                    'checkoutInputErrors' => [],
-                ]);
-            }
+        $charge = Store::chargeCardService()->charge(
+            $paymentModel,
+            $cartModel
+        );
 
-            Craft::$app->getUrlManager()->setRouteParams([
-                'checkoutErrorMessage' => $e->getMessage()
+        $orderId = Store::orderService()->createOrderFromCharge(
+            $charge,
+            $cartModel
+        );
+
+        var_dump($orderId);
+        die;
+    }
+
+    /**
+     * Responds to catch
+     * @param \Throwable|\Exception $e
+     * @return null|Response
+     */
+    private function catchRespond($e)
+    {
+        if (Craft::$app->getRequest()->getIsAjax()) {
+            return $this->asJson([
+                'success' => false,
+                'message' => $e->getMessage(),
+                'checkoutInputErrors' => [],
             ]);
-
-            return null;
         }
 
-        var_dump($charge);
-        die;
+        Craft::$app->getUrlManager()->setRouteParams([
+            'checkoutErrorMessage' => $e->getMessage()
+        ]);
+
+        return null;
     }
 }

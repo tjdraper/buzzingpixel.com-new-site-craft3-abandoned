@@ -9,6 +9,7 @@ use Ramsey\Uuid\Uuid;
 use Stripe\Charge as StripeCharge;
 use modules\store\models\CartModel;
 use modules\store\services\CartService;
+use modules\store\services\OrderService;
 use modules\store\factories\QueryFactory;
 use modules\store\services\CookieService;
 use modules\store\factories\ConfigFactory;
@@ -117,8 +118,17 @@ class Store extends Module
      * Gets the Charge Card Service
      * @return ChargeCardService
      */
-    public static function chargeCardService() :ChargeCardService
+    public static function chargeCardService(): ChargeCardService
     {
         return new ChargeCardService(new StripeCharge());
+    }
+
+    /**
+     * Gets the order service
+     * @return OrderService
+     */
+    public static function orderService(): OrderService
+    {
+        return new OrderService(Craft::$app->getDb(), Uuid::getFactory());
     }
 }
