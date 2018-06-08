@@ -6,8 +6,11 @@ use Craft;
 use Stripe\Stripe;
 use yii\base\Module;
 use Ramsey\Uuid\Uuid;
+use dev\Module as DevModule;
 use Stripe\Charge as StripeCharge;
 use modules\store\models\CartModel;
+use yii\db\Exception as DbException;
+use Stripe\Customer as StripeCustomer;
 use modules\store\services\CartService;
 use modules\store\services\OrderService;
 use modules\store\factories\QueryFactory;
@@ -16,6 +19,7 @@ use modules\store\factories\ConfigFactory;
 use modules\store\models\StoreConfigModel;
 use modules\store\factories\CookieFactory;
 use modules\store\services\ChargeCardService;
+use modules\store\services\StripeUserService;
 use craft\console\Application as ConsoleApplication;
 
 /**
@@ -124,11 +128,25 @@ class Store extends Module
     }
 
     /**
-     * Gets the order service
+     * Gets the Order Service
      * @return OrderService
      */
     public static function orderService(): OrderService
     {
         return new OrderService(Craft::$app->getDb(), Uuid::getFactory());
+    }
+
+    /**
+     * Gets the Stripe User Service
+     * @return StripeUserService
+     * @throws DbException
+     * @throws \ReflectionException
+     */
+    public static function stripeUserService(): StripeUserService
+    {
+        return new StripeUserService(
+            new StripeCustomer(),
+            DevModule::userService()
+        );
     }
 }

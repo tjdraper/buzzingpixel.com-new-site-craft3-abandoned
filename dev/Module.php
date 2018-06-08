@@ -4,10 +4,13 @@ namespace dev;
 
 use Craft;
 use yii\base\Event;
+use yii\db\Exception;
 use Michelf\SmartyPants;
+use dev\models\UserModel;
 use craft\elements\Entry;
 use Hyn\Frontmatter\Parser;
 use dev\models\ListingsModel;
+use dev\services\UserService;
 use dev\services\CacheService;
 use dev\models\ListingMetaModel;
 use dev\services\GlobalsService;
@@ -19,6 +22,7 @@ use dev\services\EntryRoutingService;
 use craft\events\SetElementRouteEvent;
 use dev\variables\FileContentVariable;
 use dev\services\FileOperationsService;
+use modules\store\factories\QueryFactory;
 use craft\web\twig\variables\CraftVariable;
 use dev\twigextensions\StatesTwigExtension;
 use dev\twigextensions\TypesetTwigExtension;
@@ -176,5 +180,21 @@ class Module extends ModuleBase
     public static function typesetService(): TypesetService
     {
         return new TypesetService(new SmartyPants());
+    }
+
+    /**
+     * Gets the User Service
+     * @return UserService
+     * @throws Exception
+     * @throws \ReflectionException
+     */
+    public static function userService(): UserService
+    {
+        return new UserService(
+            Craft::$app->getUser(),
+            new QueryFactory(),
+            new UserModel(),
+            Craft::$app->getDb()
+        );
     }
 }
