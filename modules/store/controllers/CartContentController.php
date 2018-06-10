@@ -3,6 +3,7 @@
 namespace modules\store\controllers;
 
 use Craft;
+use dev\Module;
 use yii\web\Response;
 use modules\store\Store;
 use craft\web\Controller;
@@ -170,8 +171,12 @@ class CartContentController extends Controller
         try {
             return $this->checkout();
         } catch (\Exception $e) {
+            var_dump($e);
+            die;
             return $this->catchRespond($e);
         } catch (\Throwable $e) {
+            var_dump($e);
+            die;
             return $this->catchRespond($e);
         }
     }
@@ -184,6 +189,10 @@ class CartContentController extends Controller
      */
     private function checkout()
     {
+        $userService = Module::userService();
+
+        $userModel = $userService->getUserModel();
+
         $request = Craft::$app->getRequest();
 
         $cartService = Store::cartService();
@@ -223,16 +232,30 @@ class CartContentController extends Controller
 
         $charge = Store::chargeCardService()->charge(
             $paymentModel,
-            $cartModel
+            $cartModel,
+            $userModel
         );
+
+        //     \dirname(__DIR__) . '/serialized_charge',
+        //     serialize($charge)
+        // );
+        // file_put_contents(
+        //     \dirname(__DIR__) . '/serialized_cart',
+        //     serialize($cartModel)
+        // );
+        // die;
+
+        // $charge = unserialize(file_get_contents(\dirname(__DIR__) . '/serialized_charge'));
 
         $orderId = Store::orderService()->createOrderFromCharge(
             $charge,
             $cartModel
         );
 
-        var_dump($orderId);
+        var_dump($charge, $orderId);
         die;
+
+        // $userService->populateUserModelFromCartModel($userModel, $cartModel);
     }
 
     /**

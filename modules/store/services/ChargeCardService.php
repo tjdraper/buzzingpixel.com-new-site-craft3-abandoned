@@ -3,6 +3,7 @@
 namespace modules\store\services;
 
 use Stripe\ApiResource;
+use dev\models\UserModel;
 use Stripe\Charge as StripeCharge;
 use modules\store\models\CartModel;
 use modules\store\models\PaymentModel;
@@ -28,13 +29,15 @@ class ChargeCardService
     /**
      * Charges the card
      * @param PaymentModel $paymentModel
-     * @return ApiResource
      * @param CartModel $cartModel
+     * @param UserModel $userModel
+     * @return ApiResource
      * @throws \LogicException
      */
     public function charge(
         PaymentModel $paymentModel,
-        CartModel $cartModel
+        CartModel $cartModel,
+        UserModel $userModel
     ): ApiResource {
         $validationErrors = array_merge(
             $paymentModel->validateForCheckout(),
@@ -64,20 +67,13 @@ class ChargeCardService
             $first = false;
         }
 
-        $user = $cartModel->getUserModel();
-
-        if (! $user) {
-            throw new \LogicException(
-                'User not found. A valid user must be specified for checkout'
-            );
-        }
-
         return $this->stripeCharge::create([
             'amount' => $cartModel->getTotal() * 100,
             'currency' => 'usd',
             'description' => $description,
-            'receipt_email' => $user->email,
-            'statement_descriptor' => "BuzzingPixel, LLC",
+            'receipt_email' => $userModel->emailAddress,
+            'statement_descriptor' => 'BuzzingPixel, LLC',
+            'customer' => $userModel->stripeCustomerId,
             'source' => [
                 'exp_month' => $paymentModel->expireMonth,
                 'exp_year' => $paymentModel->expireYear,
