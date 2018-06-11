@@ -67,7 +67,12 @@
                                         >
                                             <option value="" disabled selected>Select Payment Method...</option>
                                             {% for card in userCards %}
-                                                <option value="{{ card.id }}">
+                                                <option
+                                                    value="{{ card.id }}"
+                                                    {% if cartModel.paymentMethod == card.id %}
+                                                    selected
+                                                    {% endif %}
+                                                >
                                                     {% if card.cardNickName %}
                                                         {{ card.cardNickName }} (&hellip;{{ card.last4 }})
                                                     {% else %}
@@ -75,7 +80,14 @@
                                                     {% endif %}
                                                 </option>
                                             {% endfor %}
-                                            <option value="addNew">Add a new card...</option>
+                                            <option
+                                                value="addNew"
+                                                {% if cartModel.paymentMethod == 'addNew' %}
+                                                selected
+                                                {% endif %}
+                                            >
+                                                Add a new card...
+                                            </option>
                                         </select>
                                         {% if checkoutInputErrors['country'] is defined %}
                                             <ul class="CheckoutForm__InputErrors">
@@ -88,7 +100,12 @@
                                         {% endif %}
                                     </label>
                                 </div>
-                                <div class="CheckoutForm__ExistingCardItems JSCheckoutForm__ExistingCardItems">
+                                <div
+                                    class="CheckoutForm__ExistingCardItems JSCheckoutForm__ExistingCardItems"
+                                    {% if cartModel.paymentMethod == 'addNew' %}
+                                    style="display: none;"
+                                    {% endif %}
+                                >
                                     <label class="label CheckoutForm__Label">
                                         <noscript>You do not have JavaScript enabled. Without JavaScript enabled, the price reflected on the button might not be the final price.</noscript>
                                         <input
@@ -109,7 +126,9 @@
                                 </div>
                                 <div
                                     class="CheckoutForm__NewCardItems JSCheckoutForm__NewCardItems"
+                                    {% if cartModel.paymentMethod != 'addNew' %}
                                     style="display: none;"
+                                    {% endif %}
                                 >
                                     <h2 class="CheckoutForm__SectionHeader">Billing</h2>
                                     <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
@@ -305,7 +324,9 @@
                             <section class="CheckoutForm__Section CheckoutForm__Section--SecondSection">
                                 <div
                                     class="CheckoutForm__NewCardItems JSCheckoutForm__NewCardItems"
+                                    {% if cartModel.paymentMethod != 'addNew' %}
                                     style="display: none;"
+                                    {% endif %}
                                 >
                                     <h2 class="CheckoutForm__SectionHeader">Card Details</h2>
                                     <div class="CheckoutForm__LabelGroupWrapper">
