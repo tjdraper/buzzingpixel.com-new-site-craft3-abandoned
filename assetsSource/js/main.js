@@ -77,6 +77,9 @@ function runMain(F) {
     });
 
     $('.JSCheckoutForm').each(function() {
+        F.controller.construct('PaymentMethod', {
+            el: this
+        });
         F.controller.construct('CheckoutStateProvince', {
             el: this
         });
@@ -89,9 +92,9 @@ function runMain(F) {
         F.controller.construct('RemoveErrors', {
             el: this
         });
-        F.controller.construct('CartSubmission', {
-            el: this
-        });
+        // F.controller.construct('CartSubmission', {
+        //     el: this
+        // });
     });
 
     $('.JSCartItemForm').each(function() {
