@@ -3,6 +3,7 @@
 namespace dev\controllers;
 
 use Craft;
+use dev\Module;
 use yii\web\Response;
 use modules\store\Store;
 
@@ -57,6 +58,9 @@ class CartController extends BaseController
                     'isGuest' => Craft::$app->getUser()->isGuest,
                     'checkoutInputErrors' => [],
                     'checkoutErrorMessage' => '',
+                    'userCards' => Store::stripeUserService()->getUserCards(
+                        Module::userService()->getUserModel()
+                    ),
                 ],
                 Craft::$app->getUrlManager()->getRouteParams()
             ),

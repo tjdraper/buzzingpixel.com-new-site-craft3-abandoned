@@ -6,6 +6,7 @@ use dev\models\UserModel;
 use dev\services\UserService;
 use yii\db\Exception as DbException;
 use Stripe\Customer as StripeCustomer;
+use modules\store\factories\QueryFactory;
 
 /**
  * Class StripeUserService
@@ -18,17 +19,23 @@ class StripeUserService
     /** @var UserService $userService */
     private $userService;
 
+    /** @var QueryFactory $queryFactory */
+    public $queryFactory;
+
     /**
      * StripeUserService constructor
      * @param StripeCustomer $stripeCustomer
      * @param UserService $userService
+     * @param QueryFactory $queryFactory
      */
     public function __construct(
         StripeCustomer $stripeCustomer,
-        UserService $userService
+        UserService $userService,
+        QueryFactory $queryFactory
     ) {
         $this->stripeCustomer = $stripeCustomer;
         $this->userService = $userService;
+        $this->queryFactory = $queryFactory;
     }
 
     /**
@@ -76,5 +83,26 @@ class StripeUserService
         $customer->email = $userModel->emailAddress;
         $customer->metadata = $metaData;
         $customer->save();
+    }
+
+    /**
+     * Gets user cards
+     * @param UserModel $userModel
+     * @throws \ReflectionException
+     * @return array
+     */
+    public function getUserCards(UserModel $userModel): array
+    {
+        $query = $this->queryFactory->getQuery()->from('{{%storeCards}}')
+            ->where("`userId` = '{$userModel->getProperty('userId')}'")
+            ->all();
+
+        if (! $query) {
+            return [];
+        }
+
+        // TODO: build card models array
+        var_dump($query);
+        die;
     }
 }

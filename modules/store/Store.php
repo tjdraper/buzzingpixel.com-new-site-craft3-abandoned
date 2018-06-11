@@ -146,7 +146,8 @@ class Store extends Module
     {
         return new StripeUserService(
             new StripeCustomer(),
-            DevModule::userService()
+            DevModule::userService(),
+            new QueryFactory()
         );
     }
 }

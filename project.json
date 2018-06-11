@@ -4,6 +4,7 @@
         "config/**",
         "content/**",
         "dev/**",
+        "modules/**",
         "templates/**"
     ],
     "jsBuild": [
