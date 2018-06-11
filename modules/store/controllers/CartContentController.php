@@ -203,6 +203,34 @@ class CartContentController extends Controller
             $cartModel->{$key} = $request->getParam($key);
         }
 
+        if (! $cartModel->paymentMethod) {
+            if (Craft::$app->getRequest()->getIsAjax()) {
+                return $this->asJson([
+                    'success' => false,
+                    'message' => '',
+                    'checkoutInputErrors' => [
+                        'paymentMethod' => [
+                            'This field is required',
+                        ],
+                    ],
+                ]);
+            }
+
+            Craft::$app->getUrlManager()->setRouteParams([
+                'checkoutInputErrors' => [
+                    'paymentMethod' => [
+                        'This field is required',
+                    ],
+                ],
+            ]);
+
+            return null;
+        }
+
+        // TODO: Figure out what to do based on the payment method
+        var_dump($cartModel->paymentMethod);
+        die;
+
         $paymentModel = new PaymentModel();
 
         foreach ($paymentModel->getProperties() as $key) {

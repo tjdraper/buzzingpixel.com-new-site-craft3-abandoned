@@ -54,7 +54,7 @@
                                 value="/cart/order-success"
                             >
                             <section
-                                class="CheckoutForm__Section CheckoutForm__Section--FirstSection JSCheckoutForm__Section--FirstSection"
+                                class="CheckoutForm__Section CheckoutForm__Section--FirstSection JSCheckoutForm__Section--FirstSection{% if cartModel.paymentMethod == 'addNew' %} CheckoutForm__Section--FirstSection--HasAddNewCard{% endif %}"
                                 data-add-new-card-class="CheckoutForm__Section--FirstSection--HasAddNewCard"
                             >
                                 <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
@@ -65,7 +65,7 @@
                                             class="select{% if checkoutInputErrors['paymentMethod'] is defined %} select--has-error{% endif %} CheckoutForm__Select JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch JSCheckoutForm__PaymentMethod"
                                             required
                                         >
-                                            <option value="" disabled selected>Select Payment Method...</option>
+                                            <option value="">Select Payment Method...</option>
                                             {% for card in userCards %}
                                                 <option
                                                     value="{{ card.id }}"
@@ -89,9 +89,9 @@
                                                 Add a new card...
                                             </option>
                                         </select>
-                                        {% if checkoutInputErrors['country'] is defined %}
+                                        {% if checkoutInputErrors['paymentMethod'] is defined %}
                                             <ul class="CheckoutForm__InputErrors">
-                                                {% for error in checkoutInputErrors.country %}
+                                                {% for error in checkoutInputErrors.paymentMethod %}
                                                     <li class="CheckoutForm__InputErrorItem">
                                                         {{ error|typeset }}
                                                     </li>
