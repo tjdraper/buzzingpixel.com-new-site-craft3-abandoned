@@ -5,9 +5,9 @@ namespace craft\contentmigrations;
 use craft\db\Migration;
 
 /**
- * m180517_023424_AddUpdateAcctInfoColToCartTable migration.
+ * m180611_220314_AddPaymentMethodToCartTable migration.
  */
-class m180517_023424_AddUpdateAcctInfoColToCartTable extends Migration
+class m180611_220314_AddPaymentMethodToCartTable extends Migration
 {
     /**
      * @inheritdoc
@@ -16,8 +16,8 @@ class m180517_023424_AddUpdateAcctInfoColToCartTable extends Migration
     {
         $this->addColumn(
             '{{%storeCart}}',
-            'updateAccountInfo',
-            $this->boolean()->after('postalCode')
+            'paymentMethod',
+            $this->string()->after('cartData')
         );
 
         return true;
@@ -28,7 +28,7 @@ class m180517_023424_AddUpdateAcctInfoColToCartTable extends Migration
      */
     public function safeDown(): bool
     {
-        $this->dropColumn('{{%storeCart}}', 'phoneNumber');
+        $this->dropColumn('{{%storeCart}}', 'paymentMethod');
 
         return true;
     }
