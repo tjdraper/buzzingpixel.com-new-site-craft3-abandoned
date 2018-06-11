@@ -25,6 +25,9 @@ class CartModel
     /** @var array $cartData */
     public $cartData = [];
 
+    /** @var string $paymentMethod */
+    public $paymentMethod;
+
     /** @var string $phoneNumber */
     public $phoneNumber;
 
@@ -109,6 +112,7 @@ class CartModel
             'userId' => $this->userId,
             'sessionId' => $this->sessionId,
             'cartData' => json_encode($this->cartData),
+            'paymentMethod' => $this->paymentMethod,
             'phoneNumber' => $this->phoneNumber,
             'country' => $this->country,
             'name' => $this->name,

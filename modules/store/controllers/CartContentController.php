@@ -236,17 +236,6 @@ class CartContentController extends Controller
             $userModel
         );
 
-        //     \dirname(__DIR__) . '/serialized_charge',
-        //     serialize($charge)
-        // );
-        // file_put_contents(
-        //     \dirname(__DIR__) . '/serialized_cart',
-        //     serialize($cartModel)
-        // );
-        // die;
-
-        // $charge = unserialize(file_get_contents(\dirname(__DIR__) . '/serialized_charge'));
-
         $orderId = Store::orderService()->createOrderFromCharge(
             $charge,
             $cartModel
