@@ -113,6 +113,9 @@
                                             type="submit"
                                             value="Pay ${{ cartModel.getTotal()|number_format(2) }}"
                                             data-value-template="Pay ${total}"
+                                            {% if not cartModel.paymentMethod %}
+                                            disabled
+                                            {% endif %}
                                         >
                                     </label>
                                     <div class="JSAjaxCartSubmissionNotice" style="display: none;">
@@ -429,6 +432,9 @@
                                             type="submit"
                                             value="Pay ${{ cartModel.getTotal()|number_format(2) }}"
                                             data-value-template="Pay ${total}"
+                                            {% if not cartModel.paymentMethod %}
+                                            disabled
+                                            {% endif %}
                                         >
                                     </label>
                                     <div class="JSAjaxCartSubmissionNotice" style="display: none;">

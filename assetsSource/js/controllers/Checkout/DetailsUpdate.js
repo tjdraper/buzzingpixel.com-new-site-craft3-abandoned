@@ -33,9 +33,13 @@ function runDetailsUpdate(F) {
                 success: function() {
                     F.triggerCartUpdated();
 
-                    $submitButton.prop('disabled', false);
-
                     $actionInput.val($actionInput.data('checkoutAction'));
+
+                    if (! self.$el.find('.JSCheckoutForm__PaymentMethod').val()) {
+                        return;
+                    }
+
+                    $submitButton.prop('disabled', false);
                 }
             });
         }
