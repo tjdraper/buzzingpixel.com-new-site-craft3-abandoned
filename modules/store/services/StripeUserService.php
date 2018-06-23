@@ -92,11 +92,18 @@ class StripeUserService
     /**
      * Gets user cards
      * @param UserModel $userModel
+     * @throws \LogicException
      * @throws \ReflectionException
-     * @return array
+     * @return CardModel[]
      */
     public function getUserCards(UserModel $userModel): array
     {
+        if (! $userModel->getProperty('userId') ||
+            ! $userModel->getProperty('stripeCustomerId')
+        ) {
+            throw new \LogicException('No user id found');
+        }
+
         $query = $this->queryFactory->getQuery()->from('{{%storeCards}}')
             ->where("`userId` = '{$userModel->getProperty('userId')}'")
             ->all();
@@ -105,9 +112,50 @@ class StripeUserService
             return [];
         }
 
-        // TODO: build card models array
-        var_dump($query);
-        die;
+        $cards = [];
+
+        foreach ($query as $item) {
+            $cardModel = new CardModel();
+
+            $cardModel->id = $item['id'];
+            $cardModel->userId = $item['userId'];
+            $cardModel->stripeCardId = $item['stripeCardId'];
+            $cardModel->cardNickName = $item['cardNickName'];
+
+            $cards[] = $cardModel;
+        }
+
+        /** @var CardModel[] $cards */
+
+        /** @var StripeCustomer $customer */
+        $customer = $this->stripeCustomer::retrieve(
+            $userModel->getProperty('stripeCustomerId')
+        );
+
+        $userCards = $customer->sources->all(['object' => 'card'])->data;
+
+        foreach ($cards as $key => $card) {
+            $stripeCard = null;
+
+            foreach ($userCards as $userCard) {
+                if ($card->stripeCardId !== $userCard->id) {
+                    continue;
+                }
+
+                $stripeCard = $userCard;
+
+                break;
+            }
+
+            if (! $stripeCard) {
+                unset($cards[$key]);
+                continue;
+            }
+
+            $card->populateFromStripeCardObject($stripeCard);
+        }
+
+        return array_values($cards);
     }
 
     /**
@@ -125,7 +173,7 @@ class StripeUserService
     ): CardModel {
         /** @var StripeCustomer $customer */
         $customer = $this->stripeCustomer::retrieve(
-            $userModel->stripeCustomerId
+            $userModel->getProperty('stripeCustomerId')
         );
 
         $resp = $customer->sources->create([
