@@ -46,6 +46,7 @@ class UserService
         $this->dbConnection = $dbConnection;
 
         if (! $this->craftUser->getId()) {
+            $this->userModel = $userModel;
             return;
         }
 
