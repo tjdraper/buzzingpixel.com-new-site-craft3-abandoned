@@ -191,6 +191,8 @@ class CartContentController extends Controller
     {
         $userService = Module::userService();
 
+        $stripeUserService = Store::stripeUserService();
+
         $userModel = $userService->getUserModel();
 
         $request = Craft::$app->getRequest();
@@ -227,36 +229,52 @@ class CartContentController extends Controller
             return null;
         }
 
-        // TODO: Figure out what to do based on the payment method
-        var_dump($cartModel->paymentMethod);
-        die;
+        $cardModel = null;
 
-        $paymentModel = new PaymentModel();
+        if ($cartModel->paymentMethod === 'addNew') {
+            $paymentModel = new PaymentModel();
 
-        foreach ($paymentModel->getProperties() as $key) {
-            $paymentModel->{$key} = $request->getParam($key);
+            foreach ($paymentModel->getProperties() as $key) {
+                $paymentModel->{$key} = $request->getParam($key);
+            }
+
+            $cartValidationErrors = array_merge(
+                $cartModel->validateForCheckout(),
+                $paymentModel->validateForCheckout()
+            );
+
+            if (\count($cartValidationErrors) > 0) {
+                if (Craft::$app->getRequest()->getIsAjax()) {
+                    return $this->asJson([
+                        'success' => false,
+                        'message' => '',
+                        'checkoutInputErrors' => $cartValidationErrors,
+                    ]);
+                }
+
+                Craft::$app->getUrlManager()->setRouteParams([
+                    'checkoutInputErrors' => $cartValidationErrors
+                ]);
+
+                return null;
+            }
+
+            $stripeUserService->touchStripeUser($userModel);
+
+            $cardModel = $stripeUserService->addUserCard(
+                $userModel,
+                $paymentModel,
+                $cartModel
+            );
         }
+
+        var_dump($cardModel);
+        die;
 
         $cartValidationErrors = array_merge(
             $cartModel->validateForCheckout(),
             $paymentModel->validateForCheckout()
         );
-
-        if (\count($cartValidationErrors) > 0) {
-            if (Craft::$app->getRequest()->getIsAjax()) {
-                return $this->asJson([
-                    'success' => false,
-                    'message' => '',
-                    'checkoutInputErrors' => $cartValidationErrors,
-                ]);
-            }
-
-            Craft::$app->getUrlManager()->setRouteParams([
-                'checkoutInputErrors' => $cartValidationErrors
-            ]);
-
-            return null;
-        }
 
         $charge = Store::chargeCardService()->charge(
             $paymentModel,

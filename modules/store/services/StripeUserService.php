@@ -4,8 +4,11 @@ namespace modules\store\services;
 
 use dev\models\UserModel;
 use dev\services\UserService;
+use modules\store\models\CardModel;
+use modules\store\models\CartModel;
 use yii\db\Exception as DbException;
 use Stripe\Customer as StripeCustomer;
+use \modules\store\models\PaymentModel;
 use modules\store\factories\QueryFactory;
 
 /**
@@ -68,13 +71,14 @@ class StripeUserService
                 'metadata' => $metaData,
             ]);
 
-            if ($createResponse || ! isset($createResponse->id)) {
+            if (! $createResponse || ! isset($createResponse->id)) {
                 throw new \LogicException('Unable to create customer on Stripe');
             }
 
             $userModel->stripeCustomerId = $createResponse->id;
 
             $this->userService->saveUser($userModel);
+
             return;
         }
 
@@ -104,5 +108,54 @@ class StripeUserService
         // TODO: build card models array
         var_dump($query);
         die;
+    }
+
+    /**
+     * Add user card
+     * @param UserModel $userModel
+     * @param PaymentModel $paymentModel
+     * @param CartModel $cartModel
+     * @return CardModel
+     * @throws \Exception
+     */
+    public function addUserCard(
+        UserModel $userModel,
+        PaymentModel $paymentModel,
+        CartModel $cartModel
+    ): CardModel {
+        /** @var StripeCustomer $customer */
+        $customer = $this->stripeCustomer::retrieve(
+            $userModel->stripeCustomerId
+        );
+
+        $resp = $customer->sources->create([
+            'source' => [
+                'object' => 'card',
+                'number' => $paymentModel->getCleanedCardNumber(),
+                'exp_month' => $paymentModel->expireMonth,
+                'exp_year' => $paymentModel->expireYear,
+                'cvc' => $paymentModel->cvc,
+                'name' => $cartModel->name,
+                'address_line1' => $cartModel->address,
+                'address_line2' => $cartModel->addressContinued,
+                'address_city' => $cartModel->city,
+                'address_state' => $cartModel->stateProvince,
+                'address_zip' => $cartModel->postalCode,
+                'address_country' => $cartModel->country,
+                'metadata' => [
+                    'cardNickName' => $paymentModel->getCardNickName(),
+                ],
+            ]
+        ]);
+
+        if (! $resp || ! isset($resp->id) || ! $resp->id) {
+            throw new \LogicException('Unable to attach card to customer on Stripe');
+        }
+
+        $cardModel = new CardModel($resp, $userModel);
+
+        $this->userService->saveUserCard($cardModel);
+
+        return $cardModel;
     }
 }
