@@ -21,6 +21,9 @@ function runDetailsUpdate(F) {
         changeRespond: function() {
             var self = this;
             var $actionInput = self.$el.find('.JSCheckoutForm__ActionInput');
+            var $submitButton = self.$el.find('.JSCheckoutForm__SubmitPayment');
+
+            $submitButton.prop('disabled', true);
 
             $actionInput.val($actionInput.data('updateCartAction'));
 
@@ -29,6 +32,10 @@ function runDetailsUpdate(F) {
                 method: 'POST',
                 success: function() {
                     F.triggerCartUpdated();
+
+                    $submitButton.prop('disabled', false);
+
+                    $actionInput.val($actionInput.data('checkoutAction'));
                 }
             });
         }
