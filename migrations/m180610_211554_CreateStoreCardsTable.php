@@ -23,6 +23,9 @@ class m180610_211554_CreateStoreCardsTable extends Migration
             'userId' => $this->integer(11),
             'stripeCardId' => $this->string(),
             'cardNickName' => $this->string(),
+            'dateCreated' => $this->dateTime()->notNull(),
+            'dateUpdated' => $this->dateTime()->notNull(),
+            'uid' => $this->uid(),
         ]);
 
         $this->addForeignKey(
