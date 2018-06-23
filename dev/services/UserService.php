@@ -4,6 +4,7 @@ namespace dev\services;
 
 use craft\web\User;
 use dev\models\UserModel;
+use modules\store\models\CardModel;
 use modules\store\models\CartModel;
 use yii\db\Exception as DbException;
 use craft\db\Connection as DBConnection;
@@ -136,6 +137,20 @@ class UserService
         $this->dbConnection->createCommand()->upsert(
             '{{%userData}}',
             $userModel->getSaveData()
+        )
+        ->execute();
+    }
+
+    /**
+     * Adds a card to a user
+     * @param CardModel $cardModel
+     * @throws DbException
+     */
+    public function saveUserCard(CardModel $cardModel)
+    {
+        $this->dbConnection->createCommand()->upsert(
+            '{{%storeCards}}',
+            $cardModel->getSaveData()
         )
         ->execute();
     }

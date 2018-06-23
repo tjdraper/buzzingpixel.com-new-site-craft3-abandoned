@@ -2,6 +2,9 @@
 
 namespace modules\store\models;
 
+use dev\models\UserModel;
+use Stripe\Card as StripeCard;
+
 /**
  * Class CardModel
  */
@@ -78,4 +81,66 @@ class CardModel
 
     /** @var string $name */
     public $name;
+
+    /**
+     * CardModel constructor
+     * @param StripeCard|null $stripeCard
+     * @param UserModel $userModel
+     */
+    public function __construct(
+        StripeCard $stripeCard = null,
+        UserModel $userModel = null
+    ) {
+        if ($stripeCard) {
+            $this->populateFromStripeCardObject($stripeCard);
+        }
+
+        if ($userModel) {
+            $this->userId = $userModel->userId;
+        }
+    }
+
+    /**
+     * Populates the model from the stripe object
+     * @param StripeCard $stripeCard
+     */
+    public function populateFromStripeCardObject(StripeCard $stripeCard)
+    {
+        $this->stripeCardId = $stripeCard->id;
+        $this->cardNickName = $stripeCard->metadata->cardNickName;
+
+        foreach ($stripeCard->keys() as $key) {
+            if ($key === 'id' ||
+                $key === 'userId' ||
+                $key === 'stripeCardId' ||
+                $key === 'cardNickName' ||
+                ! property_exists($this, $key)
+            ) {
+                continue;
+            }
+
+            $this->{$key} = $stripeCard->{$key};
+        }
+    }
+
+    /**
+     * Gets database save data
+     * @param bool $includeId
+     * @return array
+     */
+    public function getSaveData($includeId = true): array
+    {
+        $saveData = [
+            'id' => $this->id,
+            'userId' => $this->userId,
+            'stripeCardId' => $this->stripeCardId,
+            'cardNickName' => $this->cardNickName,
+        ];
+
+        if (! $includeId) {
+            unset($saveData['id']);
+        }
+
+        return $saveData;
+    }
 }
