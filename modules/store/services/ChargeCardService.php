@@ -6,7 +6,7 @@ use Stripe\ApiResource;
 use dev\models\UserModel;
 use Stripe\Charge as StripeCharge;
 use modules\store\models\CartModel;
-use modules\store\models\PaymentModel;
+use modules\store\models\CardModel;
 
 /**
  * Class ChargeCardService
@@ -28,29 +28,17 @@ class ChargeCardService
 
     /**
      * Charges the card
-     * @param PaymentModel $paymentModel
+     * @param CardModel $cardModel
      * @param CartModel $cartModel
      * @param UserModel $userModel
      * @return ApiResource
      * @throws \LogicException
      */
     public function charge(
-        PaymentModel $paymentModel,
+        CardModel $cardModel,
         CartModel $cartModel,
         UserModel $userModel
     ): ApiResource {
-        $validationErrors = array_merge(
-            $paymentModel->validateForCheckout(),
-            $cartModel->validateForCheckout()
-        );
-
-        if (\count($validationErrors) > 0) {
-            throw new \LogicException(
-                'Charge requires valid payment and cart models. ' .
-                'Please validate these models before running this method'
-            );
-        }
-
         $description = 'BuzzingPixel.com Order:';
 
         $first = true;
@@ -74,20 +62,7 @@ class ChargeCardService
             'receipt_email' => $userModel->emailAddress,
             'statement_descriptor' => 'BuzzingPixel, LLC',
             'customer' => $userModel->stripeCustomerId,
-            'source' => [
-                'exp_month' => $paymentModel->expireMonth,
-                'exp_year' => $paymentModel->expireYear,
-                'number' => $paymentModel->cardNumber,
-                'object' => 'card',
-                'cvc' => $paymentModel-> cvc,
-                'address_city' => $cartModel->city,
-                'address_country' => $cartModel->country,
-                'address_line1' => $cartModel->address,
-                'address_line2' => $cartModel->addressContinued,
-                'name' => $cartModel->name,
-                'address_state' => $cartModel->stateProvince,
-                'address_zip' => $cartModel->postalCode,
-            ],
+            'source' => $cardModel->stripeCardId,
         ]);
     }
 }

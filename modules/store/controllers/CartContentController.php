@@ -275,11 +275,8 @@ class CartContentController extends Controller
             );
         }
 
-        var_dump($cardModel);
-        die;
-
         $charge = Store::chargeCardService()->charge(
-            $paymentModel,
+            $cardModel,
             $cartModel,
             $userModel
         );
