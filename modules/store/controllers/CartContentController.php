@@ -268,13 +268,15 @@ class CartContentController extends Controller
             );
         }
 
+        if (! $cardModel) {
+            $cardModel = $stripeUserService->getCardByLocalId(
+                $cartModel->paymentMethod,
+                $userModel
+            );
+        }
+
         var_dump($cardModel);
         die;
-
-        $cartValidationErrors = array_merge(
-            $cartModel->validateForCheckout(),
-            $paymentModel->validateForCheckout()
-        );
 
         $charge = Store::chargeCardService()->charge(
             $paymentModel,
