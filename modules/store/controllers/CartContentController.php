@@ -201,6 +201,26 @@ class CartContentController extends Controller
 
         $cartModel = $cartService->getCartModel();
 
+        $orderService = Store::orderService();
+
+        // TEMP ################################################################
+        $orderId = 3;
+        // ENDTEMP #############################################################
+
+        // MOVE TO BOTTOM OF METHOD ############################################
+
+        $orderItems = $orderService->getOrderItemsByOrderId($orderId);
+
+        $subscriptionService->startSubscriptionsForOrderItems(
+            $orderService->getOrderItemsByOrderId($orderId)
+        );
+
+        var_dump($orderItems);
+        die;
+
+        // END MOVE TO BOTTOM OF METHOD ########################################
+
+
         foreach (array_keys($cartModel->getSaveData(false, true)) as $key) {
             $cartModel->{$key} = $request->getParam($key);
         }
@@ -281,12 +301,12 @@ class CartContentController extends Controller
             $userModel
         );
 
-        $orderId = Store::orderService()->createOrderFromCharge(
+        $orderId = $orderService->createOrderFromCharge(
             $charge,
             $cartModel
         );
 
-        var_dump($charge, $orderId);
+        var_dump($orderId);
         die;
 
         // $userService->populateUserModelFromCartModel($userModel, $cartModel);

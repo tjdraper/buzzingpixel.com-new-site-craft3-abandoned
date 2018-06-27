@@ -121,6 +121,7 @@ class Store extends Module
     /**
      * Gets the Charge Card Service
      * @return ChargeCardService
+     * @throws \LogicException
      */
     public static function chargeCardService(): ChargeCardService
     {
@@ -133,7 +134,11 @@ class Store extends Module
      */
     public static function orderService(): OrderService
     {
-        return new OrderService(Craft::$app->getDb(), Uuid::getFactory());
+        return new OrderService(
+            Craft::$app->getDb(),
+            new QueryFactory(),
+            Uuid::getFactory()
+        );
     }
 
     /**

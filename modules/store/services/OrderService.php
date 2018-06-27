@@ -7,6 +7,8 @@ use modules\store\models\CartModel;
 use Ramsey\Uuid\UuidFactoryInterface;
 use yii\db\Exception as YiiDbException;
 use craft\db\Connection as DBConnection;
+use modules\store\factories\QueryFactory;
+use \modules\store\models\OrderItemModel;
 use modules\store\models\StoreProductModel;
 
 /**
@@ -17,19 +19,25 @@ class OrderService
     /** @var DBConnection $dbConnection */
     private $dbConnection;
 
+    /** @var QueryFactory $queryFactory */
+    public $queryFactory;
+
     /** @var UuidFactoryInterface $uuidFactory */
     private $uuidFactory;
 
     /**
      * OrderService constructor
      * @param DBConnection $dbConnection
+     * @param QueryFactory $queryFactory
      * @param UuidFactoryInterface $uuidFactory
      */
     public function __construct(
         DBConnection $dbConnection,
+        QueryFactory $queryFactory,
         UuidFactoryInterface $uuidFactory
     ) {
         $this->dbConnection = $dbConnection;
+        $this->queryFactory = $queryFactory;
         $this->uuidFactory = $uuidFactory;
     }
 
@@ -130,7 +138,7 @@ class OrderService
                     'isUpgrade' => $productModel->isUpgrade ? 1 : 0,
                     'hasBeenUpgraded' => 0,
                     'requiresSubscription' => $productModel->subscriptionPrice > 0 ? 1 : 0,
-                    'isSubscribed' => 1,
+                    'isSubscribed' => 0,
                     'licenseKey' => $this->uuidFactory->uuid4()->toString(),
                     'notes' => '',
                     'authorizedDomains' => '',
@@ -142,5 +150,52 @@ class OrderService
         if ($numRows < 1) {
             throw new YiiDbException('Unable to create order');
         }
+    }
+
+    /**
+     * Gets order items by order ID
+     * @param int $orderId
+     * @return OrderItemModel[]
+     */
+    public function getOrderItemsByOrderId(int $orderId): array
+    {
+        $query = $this->queryFactory->getQuery()->from('{{%storeOrderItems}}')
+            ->where("`orderId` = '{$orderId}'")
+            ->all();
+
+        if (! $query) {
+            return [];
+        }
+
+        $models = [];
+
+        foreach ($query as $item) {
+            $model = new OrderItemModel();
+
+            $model->id = (int) $item['id'];
+            $model->userId = (int) $item['userId'];
+            $model->orderId = (int) $item['orderId'];
+            $model->key = (string) $item['key'];
+            $model->title = (string) $item['title'];
+            $model->version = (string) $item['version'];
+            $model->price = (int) $item['price'];
+            $model->originalPrice = (int) $item['originalPrice'];
+            $model->isUpgrade = (bool) ((int) $item['isUpgrade']);
+            $model->hasBeenUpgraded = (bool) ((int) $item['hasBeenUpgraded']);
+            $model->requiresSubscription = (bool) ((int) $item['requiresSubscription']);
+            $model->isSubscribed = (bool) ((int) $item['isSubscribed']);
+            $model->licenseKey = (string) $item['licenseKey'];
+            $model->notes = (string) $item['notes'];
+            $model->authorizedDomains = json_decode($item['authorizedDomains'], true);
+            $model->disabled = (bool) ((int) $item['disabled']);
+
+            if (! \is_array($model->authorizedDomains)) {
+                $model->authorizedDomains = [];
+            }
+
+            $models[] = $model;
+        }
+
+        return $models;
     }
 }
