@@ -20,6 +20,7 @@ use modules\store\models\StoreConfigModel;
 use modules\store\factories\CookieFactory;
 use modules\store\services\ChargeCardService;
 use modules\store\services\StripeUserService;
+use modules\store\services\SubscriptionService;
 use craft\console\Application as ConsoleApplication;
 
 /**
@@ -139,6 +140,15 @@ class Store extends Module
             new QueryFactory(),
             Uuid::getFactory()
         );
+    }
+
+    /**
+     * Gets the Subscription Service
+     * @return SubscriptionService
+     */
+    public static function subscriptionService(): SubscriptionService
+    {
+        return new SubscriptionService();
     }
 
     /**

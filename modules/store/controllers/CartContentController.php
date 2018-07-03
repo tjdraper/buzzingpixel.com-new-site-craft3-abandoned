@@ -203,6 +203,8 @@ class CartContentController extends Controller
 
         $orderService = Store::orderService();
 
+        $subscriptionService = Store::subscriptionService();
+
         // TEMP ################################################################
         $orderId = 3;
         // ENDTEMP #############################################################
