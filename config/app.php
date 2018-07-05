@@ -23,7 +23,7 @@ use modules\store\Store;
 return [
     'modules' => [
         'dev' => Module::class,
-        'store' => Store::class
+        'store' => Store::class,
     ],
     'bootstrap' => [
         'dev',

@@ -7,8 +7,10 @@ use Stripe\Stripe;
 use yii\base\Module;
 use Ramsey\Uuid\Uuid;
 use dev\Module as DevModule;
+use Stripe\Plan as StripePlan;
 use Stripe\Charge as StripeCharge;
 use modules\store\models\CartModel;
+use Stripe\Product as StripeProduct;
 use yii\db\Exception as DbException;
 use Stripe\Customer as StripeCustomer;
 use modules\store\services\CartService;
@@ -22,6 +24,8 @@ use modules\store\services\ChargeCardService;
 use modules\store\services\StripeUserService;
 use modules\store\services\SubscriptionService;
 use craft\console\Application as ConsoleApplication;
+use modules\store\commands\SyncStripeProductsCommand;
+use modules\store\services\SyncStripeProductsService;
 
 /**
  * Class Store
@@ -47,6 +51,7 @@ class Store extends Module
         // Add in our console commands
         if (Craft::$app instanceof ConsoleApplication) {
             $this->controllerNamespace = 'store\commands';
+            Craft::$app->controllerMap['sync-stripe-products'] = SyncStripeProductsCommand::class;
         }
 
         // Set the stripe key
@@ -163,6 +168,19 @@ class Store extends Module
             new StripeCustomer(),
             DevModule::userService(),
             new QueryFactory()
+        );
+    }
+
+    /**
+     * Gets the Sync Stripe Products service
+     * @return SyncStripeProductsService
+     */
+    public static function syncStripeProductsService(): SyncStripeProductsService
+    {
+        return new SyncStripeProductsService(
+            self::settings(),
+            new StripeProduct(),
+            new StripePlan()
         );
     }
 }

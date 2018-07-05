@@ -16,10 +16,10 @@ class StoreProductModel
     /** @var string $url */
     public $url;
 
-    /** @var int $price */
+    /** @var float $price */
     public $price;
 
-    /** @var int $price */
+    /** @var float $price */
     public $subscriptionPrice = 0;
 
     /** @var string $price */
@@ -42,4 +42,14 @@ class StoreProductModel
 
     /** @var array $downloadFileLocations */
     public $downloadFileLocations = [];
+
+    /**
+     * Gets the plan key
+     * @return string
+     */
+    public function getPlanKey(): string
+    {
+        $price = $this->subscriptionPrice * 100;
+        return $this->key . '__subscription-plan__' . $price;
+    }
 }
