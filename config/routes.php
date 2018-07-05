@@ -98,6 +98,10 @@ return [
     /** @see \dev\controllers\PagesController::actionCookies() */
     'GET /cookies' => 'dev/pages/cookies',
 
+    // Privacy policy page
+    /** @see \dev\controllers\PagesController::actionPrivacy() */
+    'GET /privacy' => 'dev/pages/privacy',
+
 
 
 

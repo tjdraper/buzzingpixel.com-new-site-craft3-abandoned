@@ -171,6 +171,16 @@ class PagesController extends BaseController
     }
 
     /**
+     * Displays Cookie Policy page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionPrivacy(): Response
+    {
+        return $this->parsePage('Privacy');
+    }
+
+    /**
      * Display registration intermediate page
      * @return Response
      * @throws \Exception
