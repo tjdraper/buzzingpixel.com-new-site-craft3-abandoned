@@ -171,13 +171,23 @@ class PagesController extends BaseController
     }
 
     /**
-     * Displays Cookie Policy page
+     * Displays Privacy Policy page
      * @return Response
      * @throws \Exception
      */
     public function actionPrivacy(): Response
     {
         return $this->parsePage('Privacy');
+    }
+
+    /**
+     * Displays Terms of Service page
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionTerms(): Response
+    {
+        return $this->parsePage('Terms');
     }
 
     /**

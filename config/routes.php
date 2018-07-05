@@ -102,6 +102,10 @@ return [
     /** @see \dev\controllers\PagesController::actionPrivacy() */
     'GET /privacy' => 'dev/pages/privacy',
 
+    // Privacy policy page
+    /** @see \dev\controllers\PagesController::actionTerms() */
+    'GET /terms' => 'dev/pages/terms',
+
 
 
 
