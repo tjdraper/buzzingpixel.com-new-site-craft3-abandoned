@@ -4,6 +4,7 @@ namespace modules\store\services;
 
 use Stripe\ApiResource;
 use modules\store\models\CartModel;
+use modules\store\models\OrderModel;
 use Ramsey\Uuid\UuidFactoryInterface;
 use yii\db\Exception as YiiDbException;
 use craft\db\Connection as DBConnection;
@@ -197,5 +198,51 @@ class OrderService
         }
 
         return $models;
+    }
+
+    /**
+     * Gets most recent order for user
+     * @param int $userId
+     * @return OrderModel
+     */
+    public function getMostRecentUserOrder(int $userId): OrderModel
+    {
+        $query = $this->queryFactory->getQuery()->from('{{%storeOrders}}')
+            ->where("`userId` = '{$userId}'")
+            ->orderBy('`dateCreated` desc')
+            ->one();
+
+        $model = new OrderModel();
+
+        if (! $query) {
+            return $model;
+        }
+
+        $model->id = (int) $query['id'];
+        $model->userId = (int) $query['userId'];
+        $model->transactionId = $query['transactionId'];
+        $model->transactionAmount = (int) $query['transactionAmount'];
+        $model->balanceTransactionId = $query['balanceTransactionId'];
+        $model->transactionCaptured = $query['transactionCaptured'] === '1' ||
+            $query['transactionCaptured'] === 1;
+        $model->transactionCreated = (new \DateTime())->setTimestamp(
+            $query['transactionCreated']
+        );
+        $model->transactionCurrency = $query['transactionCurrency'];
+        $model->transactionDescription = $query['transactionDescription'];
+        $model->subTotal = (float) $query['subTotal'];
+        $model->total = (float) $query['total'];
+        $model->tax = (float) $query['tax'];
+        $model->name = $query['name'];
+        $model->company = $query['company'];
+        $model->phoneNumber = $query['phoneNumber'];
+        $model->country = $query['country'];
+        $model->address = $query['address'];
+        $model->addressContinued = $query['addressContinued'];
+        $model->city = $query['city'];
+        $model->stateProvince = $query['stateProvince'];
+        $model->postalCode = $query['postalCode'];
+
+        return $model;
     }
 }

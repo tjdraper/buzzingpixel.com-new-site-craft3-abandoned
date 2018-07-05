@@ -174,12 +174,12 @@ class CartContentController extends Controller
         try {
             return $this->checkout();
         } catch (\Exception $e) {
-            var_dump($e);
-            die;
+            // var_dump($e);
+            // die;
             return $this->catchRespond($e);
         } catch (\Throwable $e) {
-            var_dump($e);
-            die;
+            // var_dump($e);
+            // die;
             return $this->catchRespond($e);
         }
     }

@@ -73,4 +73,50 @@ class CartController extends BaseController
             false
         );
     }
+
+    /**
+     * Displays the order success page
+     * @return Response
+     * @throws \HttpException
+     */
+    public function actionOrderSuccess(): Response
+    {
+        if (Craft::$app->getUser()->isGuest) {
+            throw new \HttpException(404);
+        }
+
+        $orderService = Store::orderService();
+
+        $orderModel = $orderService->getMostRecentUserOrder(
+            Craft::$app->getUser()->getId()
+        );
+
+        return $this->renderTemplate(
+            '_core/PageStandard.twig',
+            [
+                'contentModel' => null,
+                'content' => null,
+                'contentMeta' => null,
+                'metaTitle' => 'Your Order',
+                'metaDescription' => null,
+                'header' => [
+                    'meta' => [
+                        'heading' => 'Your Order',
+                    ],
+                ],
+                'contentBlocks' => [[
+                    'meta' => [
+                        'blockType' => 'standard',
+                        'ctaGroup' => [[
+                            'style' => 'orangeOutline',
+                            'content' => 'View your account &raquo;',
+                            'link' => '/account',
+                        ]],
+                    ],
+                    'html' => '<p>Your order has been placed successfully! We&rsquo;ve sent the order details to your email address. The order number of your order is <strong>' . $orderModel->id . '</strong>. To see more details about your order, access downloads, print the invoice for your records and more, visit your account page.</p>',
+                ]],
+            ],
+            false
+        );
+    }
 }

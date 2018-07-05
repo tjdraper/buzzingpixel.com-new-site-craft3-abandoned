@@ -266,6 +266,10 @@ return [
     'GET /cart' => 'dev/cart/index',
     'POST /cart' => 'dev/cart/index',
 
+    // Order Success page
+    /** @see \dev\controllers\CartController::actionOrderSuccess() */
+    'GET /cart/order-success' => 'dev/cart/order-success',
+
     // Get cart count
     /** @see \modules\store\controllers\CartContentController::actionAjaxCount() */
     'GET /ajax/cart/count' => 'store/cart-content/ajax-count',
