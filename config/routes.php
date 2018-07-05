@@ -94,6 +94,10 @@ return [
     /** @see \dev\controllers\PagesController::actionFreeSoftware() */
     'GET /software/free' => 'dev/pages/free-software',
 
+    // Cookie policy page
+    /** @see \dev\controllers\PagesController::actionCookies() */
+    'GET /cookies' => 'dev/pages/cookies',
+
 
 
 
