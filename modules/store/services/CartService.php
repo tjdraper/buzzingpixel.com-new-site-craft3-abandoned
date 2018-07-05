@@ -286,6 +286,27 @@ class CartService
     }
 
     /**
+     * Clears the cart
+     * @throws \Exception
+     */
+    public function clearCart()
+    {
+        $this->cartModel->cartData = [];
+        $this->cartModel->paymentMethod = null;
+        $this->cartModel->phoneNumber = null;
+        $this->cartModel->country = null;
+        $this->cartModel->name = null;
+        $this->cartModel->company = null;
+        $this->cartModel->address = null;
+        $this->cartModel->addressContinued = null;
+        $this->cartModel->city = null;
+        $this->cartModel->stateProvince = null;
+        $this->cartModel->postalCode = null;
+        $this->cartModel->updateAccountInfo = 0;
+        $this->updateCart();
+    }
+
+    /**
      * Gets the cart count
      * @return int
      */

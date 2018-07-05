@@ -4,6 +4,7 @@ namespace modules\store\controllers;
 
 use Craft;
 use dev\Module;
+use modules\store\models\CardModel;
 use yii\web\Response;
 use modules\store\Store;
 use craft\web\Controller;
@@ -168,6 +169,8 @@ class CartContentController extends Controller
      */
     public function actionCheckout()
     {
+        $this->requirePostRequest();
+
         try {
             return $this->checkout();
         } catch (\Exception $e) {
@@ -205,30 +208,12 @@ class CartContentController extends Controller
 
         $subscriptionService = Store::subscriptionService();
 
-        // TEMP ################################################################
-        $orderId = 3;
-        // ENDTEMP #############################################################
-
-        // MOVE TO BOTTOM OF METHOD ############################################
-
-        $orderItems = $orderService->getOrderItemsByOrderId($orderId);
-
-        $subscriptionService->startSubscriptionsForOrderItems(
-            $orderService->getOrderItemsByOrderId($orderId)
-        );
-
-        var_dump($orderItems);
-        die;
-
-        // END MOVE TO BOTTOM OF METHOD ########################################
-
-
         foreach (array_keys($cartModel->getSaveData(false, true)) as $key) {
             $cartModel->{$key} = $request->getParam($key);
         }
 
         if (! $cartModel->paymentMethod) {
-            if (Craft::$app->getRequest()->getIsAjax()) {
+            if ($request->getIsAjax()) {
                 return $this->asJson([
                     'success' => false,
                     'message' => '',
@@ -266,7 +251,7 @@ class CartContentController extends Controller
             );
 
             if (\count($cartValidationErrors) > 0) {
-                if (Craft::$app->getRequest()->getIsAjax()) {
+                if ($request->getIsAjax()) {
                     return $this->asJson([
                         'success' => false,
                         'message' => '',
@@ -308,10 +293,41 @@ class CartContentController extends Controller
             $cartModel
         );
 
-        var_dump($orderId);
-        die;
+        $subscriptionService->startSubscriptionsForOrderItems(
+            $orderService->getOrderItemsByOrderId($orderId),
+            $userModel,
+            $cardModel
+        );
 
-        // $userService->populateUserModelFromCartModel($userModel, $cartModel);
+        $updateAcctInfo = $cartModel->updateAccountInfo &&
+            $cartModel->paymentMethod === 'addNew';
+
+        $redirect = $request->post('redirect');
+
+        if (! $updateAcctInfo) {
+            $cartService->clearCart();
+
+            if ($redirect) {
+                return $this->redirect($redirect);
+            }
+
+            return null;
+        }
+
+        $userModel = $userService->populateUserModelFromCartModel(
+            $userModel,
+            $cartModel
+        );
+
+        $userService->saveUser($userModel);
+
+        $cartService->clearCart();
+
+        if ($redirect) {
+            return $this->redirect($redirect);
+        }
+
+        return null;
     }
 
     /**

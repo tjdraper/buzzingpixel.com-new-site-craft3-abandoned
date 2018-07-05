@@ -22,6 +22,7 @@ use modules\store\models\StoreConfigModel;
 use modules\store\factories\CookieFactory;
 use modules\store\services\ChargeCardService;
 use modules\store\services\StripeUserService;
+use Stripe\Subscription as StripeSubscription;
 use modules\store\services\SubscriptionService;
 use craft\console\Application as ConsoleApplication;
 use modules\store\commands\SyncStripeProductsCommand;
@@ -153,7 +154,7 @@ class Store extends Module
      */
     public static function subscriptionService(): SubscriptionService
     {
-        return new SubscriptionService();
+        return new SubscriptionService(new StripeSubscription());
     }
 
     /**

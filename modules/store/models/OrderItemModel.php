@@ -2,6 +2,8 @@
 
 namespace modules\store\models;
 
+use modules\store\Store;
+
 /**
  * Class OrderItemModel
  */
@@ -54,4 +56,13 @@ class OrderItemModel
 
     /** @var bool $disabled */
     public $disabled;
+
+    /**
+     * Gets the related store product model
+     * @return StoreProductModel
+     */
+    public function getStoreProductModel(): StoreProductModel
+    {
+        return Store::settings()->products[$this->key];
+    }
 }
