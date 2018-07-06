@@ -4,9 +4,9 @@ namespace dev\controllers;
 
 use Craft;
 use yii\web\Response;
-use craft\elements\User;
 use yii\web\HttpException;
-use craft\helpers\DateTimeHelper;
+use dev\services\PaginationGeneratorService;
+use modules\store\factories\OrderItemsQueryFactory;
 
 /**
  * Class AccountController
@@ -36,13 +36,25 @@ class AccountController extends BaseController
         ],
     ];
 
+    /** @var int $pageLimit */
+    private static $pageLimit = 6;
+
     /**
      * Displays user account page
+     * @param int $pageNum
+     * @return Response
+     * @throws \Exception
      */
-    public function actionIndex()
+    public function actionIndex(int $pageNum = null): Response
     {
+        if ($pageNum === 1) {
+            throw new HttpException(404);
+        }
+
+        $craftUser = Craft::$app->getUser();
+
         // If the user is a guest, we need for them to log in
-        if (Craft::$app->getUser()->getIsGuest()) {
+        if ($craftUser->getIsGuest()) {
             return $this->renderTemplate(
                 '_core/StandAloneLoginForm.twig',
                 array_merge(Craft::$app->getUrlManager()->getRouteParams(), [
@@ -53,6 +65,86 @@ class AccountController extends BaseController
             );
         }
 
+        $request = Craft::$app->getRequest();
+
+        $filter = $request->get('filter');
+
+        $licensesQuery = OrderItemsQueryFactory::getFactory()
+            ->where('userId', $craftUser->getId())
+            ->where('disabled', 0)
+            ->orderBy('dateCreated');
+
+        if ($filter) {
+            $licensesQuery->like('key', $filter)
+                ->like('title', $filter, true)
+                ->like('licenseKey', $filter, true)
+                ->like('notes', $filter, true)
+                ->like('authorizedDomains', $filter, true);
+        }
+
+        $pageNum = $pageNum ?: 1;
+        $limit = self::$pageLimit;
+        $total = $licensesQuery->count();
+        $offset = ($limit * $pageNum) - $limit;
+        $maxPages = ((int) ceil($total / $limit)) ?: 1;
+
+        if ($pageNum > $maxPages) {
+            throw new HttpException(404);
+        }
+
+        $licenses = $licensesQuery->limit($limit)
+            ->offset($offset)
+            ->all();
+
+        $metaTitle = 'Your Licenses';
+
+        $segmentsArray = Craft::$app->getRequest()->getSegments();
+
+        if ($pageNum > 1) {
+            $metaTitle .= " | Page {$pageNum}";
+            array_pop($segmentsArray);
+            array_pop($segmentsArray);
+        }
+
+        $listingBase = '/' . implode('/', $segmentsArray);
+
+        $pagination = PaginationGeneratorService::getPagination([
+            'currentPage' => $pageNum,
+            'perPage' => $limit,
+            'totalResults' => $total,
+            'base' => $listingBase,
+        ]);
+
+        $breadcrumbs = [];
+
+        if ($pageNum > 1 || $filter) {
+            $breadcrumbs = [
+                [
+                    'link' => $listingBase,
+                    'content' => 'Your Licenses',
+                ],
+            ];
+
+            if ($pageNum > 1 && $filter) {
+                $breadcrumbs[] = [
+                    'link' => $listingBase . '?' . $request->getQueryString(),
+                    'content' => 'Filtering by Keyword',
+                ];
+            } elseif ($filter) {
+                $breadcrumbs[] = [
+                    'link' => false,
+                    'content' => 'Filtering by Keyword',
+                ];
+            }
+
+            if ($pageNum > 1) {
+                $breadcrumbs[] = [
+                    'link' => false,
+                    'content' => "Page {$pageNum}",
+                ];
+            }
+        }
+
         $sectionNav = self::$secionNav;
 
         $sectionNav['licenses']['isActive'] = true;
@@ -60,10 +152,11 @@ class AccountController extends BaseController
         return $this->renderTemplate(
             '_core/PageStandard.twig',
             [
+                'breadcrumbs' => $breadcrumbs,
                 'contentModel' => null,
                 'content' => null,
                 'contentMeta' => null,
-                'metaTitle' => 'Your Licenses',
+                'metaTitle' => $metaTitle,
                 'metaDescription' => null,
                 'header' => [
                     'meta' => [
@@ -79,9 +172,11 @@ class AccountController extends BaseController
                     ],
                     [
                         'meta' => [
-                            'blockType' => 'standard',
+                            'blockType' => 'licenses',
+                            'baseUrl' => $listingBase,
+                            'items' => $licenses,
+                            'pagination' => $pagination,
                         ],
-                        'html' => '<p>TODO: Build out licenses page</p>'
                     ],
                 ],
             ],

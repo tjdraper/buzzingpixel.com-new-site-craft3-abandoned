@@ -309,6 +309,7 @@ return [
     // Displays user account page
     /** @see \dev\controllers\AccountController::actionIndex() */
     'GET /account' => 'dev/account/index',
+    'GET /account/page/<pageNum:\d+>' => 'dev/account/index',
 
     // Post credentials to this endpoint to log in
     /** @see \dev\controllers\AccountActionController::actionLogin() */
