@@ -4,6 +4,8 @@
 {% set noticeIsError = noticeIsError|default(false) %}
 {% set noticeContainerClass = noticeContainerClass|default(false) %}
 
+{% set footerContent = block('footerContent') ?? null %}
+
 <div class="LayoutTwoColumn JSTwoColumnContainer">
     <div class="LayoutTwoColumn__NoticeContainer{% if noticeContainerClass %} {{ noticeContainerClass }}{% endif %}">
         {% if noticeContent %}
@@ -31,4 +33,11 @@
             </div>
         </div>
     </div>
+    {% if footerContent %}
+        <footer class="LayoutTwoColumn__Footer">
+            <div class="LayoutTwoColumn__FooterInner{% if standardPad %} LayoutTwoColumn__FooterInner--IsPadded{% endif %}">
+                {{ footerContent|raw }}
+            </div>
+        </footer>
+    {% endif %}
 </div>
