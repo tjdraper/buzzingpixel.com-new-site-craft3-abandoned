@@ -2,9 +2,7 @@
 
 namespace modules\store\factories;
 
-use modules\store\services\CookieService;
 use yii\web\Cookie;
-use yii\web\CookieCollection;
 
 /**
  * Class CookieFactory
