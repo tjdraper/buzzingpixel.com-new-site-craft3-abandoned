@@ -13,6 +13,29 @@ use craft\helpers\DateTimeHelper;
  */
 class AccountController extends BaseController
 {
+    private static $secionNav = [
+        'licenses' => [
+            'content' => 'Licenses',
+            'url' => '/account',
+            'isActive' => false,
+        ],
+        'payment' => [
+            'content' => 'Payment Methods',
+            'url' => '/account/payment',
+            'isActive' => false,
+        ],
+        'subscriptions' => [
+            'content' => 'Subscriptions',
+            'url' => '/account/subscriptions',
+            'isActive' => false,
+        ],
+        'profile' => [
+            'content' => 'Profile',
+            'url' => '/account/profile',
+            'isActive' => false,
+        ],
+    ];
+
     /**
      * Displays user account page
      */
@@ -30,9 +53,40 @@ class AccountController extends BaseController
             );
         }
 
-        // TODO: Display account page
-        var_dump('TODO: Display account page');
-        die;
+        $sectionNav = self::$secionNav;
+
+        $sectionNav['licenses']['isActive'] = true;
+
+        return $this->renderTemplate(
+            '_core/PageStandard.twig',
+            [
+                'contentModel' => null,
+                'content' => null,
+                'contentMeta' => null,
+                'metaTitle' => 'Your Licenses',
+                'metaDescription' => null,
+                'header' => [
+                    'meta' => [
+                        'heading' => 'Your Licenses',
+                    ],
+                ],
+                'contentBlocks' => [
+                    [
+                        'meta' => [
+                            'blockType' => 'navBar',
+                            'navItems' => $sectionNav
+                        ],
+                    ],
+                    [
+                        'meta' => [
+                            'blockType' => 'standard',
+                        ],
+                        'html' => '<p>TODO: Build out licenses page</p>'
+                    ],
+                ],
+            ],
+            false
+        );
     }
 
     /**
