@@ -1,0 +1,17 @@
+{# @var array block #}
+
+<nav class="BlockNavBar">
+    <ul class="BlockNavBar__Inner">
+        {% for navItem in block.meta.navItems %}
+            {% set isActive = navItem['isActive'] is defined and navItem['isActive'] == true %}
+            <li class="BlockNavBar__Item">
+                <a
+                    href="{{ navItem.url }}"
+                    class="BlockNavBar__Link{% if isActive %} BlockNavBar__Link--IsActive{% endif %}"
+                >
+                    {{ navItem.content|smartypants }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>

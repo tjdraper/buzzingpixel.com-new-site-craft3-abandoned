@@ -1,0 +1,35 @@
+.BlockNavBar {
+    display: block;
+    text-align: center;
+}
+
+.BlockNavBar__Inner {
+    border: 2px solid var(--orange);
+    display: inline-block;
+    list-style: none;
+    margin: 16px auto;
+}
+
+.BlockNavBar__Item {
+    display: block;
+    margin: 0;
+}
+
+.BlockNavBar__Link {
+    border-top: 2px solid var(--orange);
+    display: block;
+    line-height: 1em;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.BlockNavBar__Item:first-child .BlockNavBar__Link {
+    border-top: 0;
+}
+
+.BlockNavBar__Link:hover,
+.BlockNavBar__Link--IsActive {
+    background-color: var(--orange);
+    color: #fff;
+    text-decoration: none;
+}
