@@ -191,4 +191,34 @@ class OrderService
             ->orderBy('dateCreated', 'desc')
             ->one();
     }
+
+    /**
+     * Save an order item from the order item model
+     * @param OrderItemModel $orderItem
+     * @throws \Exception
+     * @throws \Throwable
+     */
+    public function saveOrderItem(OrderItemModel $orderItem)
+    {
+        $transaction = $this->dbConnection->beginTransaction();
+
+        try {
+            $numRows = $this->dbConnection->createCommand()
+                ->upsert('{{%storeOrderItems}}', $orderItem->getSaveData())
+                ->execute();
+
+            if ($numRows < 1) {
+                $transaction->rollBack();
+                throw new YiiDbException('Unable to save order item');
+            }
+
+            $transaction->commit();
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            throw $e;
+        } catch (\Throwable $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+    }
 }

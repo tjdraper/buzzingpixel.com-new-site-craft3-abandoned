@@ -128,7 +128,7 @@ class CardModel
      * @param bool $includeId
      * @return array
      */
-    public function getSaveData($includeId = true): array
+    public function getSaveData(bool $includeId = true): array
     {
         $saveData = [
             'id' => $this->id,

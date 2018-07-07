@@ -65,4 +65,52 @@ class OrderItemModel
     {
         return Store::settings()->products[$this->key];
     }
+
+    /**
+     * Adds an authorized domain
+     * @param string $domain
+     */
+    public function addAuthorizedDomain(string $domain)
+    {
+        $this->authorizedDomains[uniqid('', false)] = $domain;
+    }
+
+    /**
+     * Gets database save data
+     * @param bool $includeId
+     * @return array
+     */
+    public function getSaveData(bool $includeId = true): array
+    {
+        $authorizedDomains = $this->authorizedDomains;
+
+        if (! \is_array($authorizedDomains)) {
+            $authorizedDomains = [];
+        }
+
+        $saveData = [
+            'id' => $this->id,
+            'userId' => $this->userId,
+            'orderId' => $this->orderId,
+            'key' => $this->key,
+            'title' => $this->title,
+            'version' => $this->version,
+            'price' => $this->price,
+            'originalPrice' => $this->originalPrice,
+            'isUpgrade' => $this->isUpgrade ? '1' : '0',
+            'hasBeenUpgraded' => $this->hasBeenUpgraded ? '1' : '0',
+            'requiresSubscription' => $this->requiresSubscription ? '1' : '0',
+            'isSubscribed' => $this->isSubscribed ? '1' : '0',
+            'licenseKey' => $this->licenseKey,
+            'notes' => $this->notes,
+            'authorizedDomains' => json_encode($authorizedDomains),
+            'disabled' => $this->disabled ? '1' : '0',
+        ];
+
+        if (! $includeId) {
+            unset($saveData['id']);
+        }
+
+        return $saveData;
+    }
 }

@@ -106,8 +106,10 @@ class CartModel
      * @param bool $userDetailsOnly
      * @return array
      */
-    public function getSaveData($includeId = true, $userDetailsOnly = false): array
-    {
+    public function getSaveData(
+        bool $includeId = true,
+        bool $userDetailsOnly = false
+    ): array {
         $saveData = [
             'userId' => $this->userId,
             'sessionId' => $this->sessionId,
