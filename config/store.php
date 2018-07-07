@@ -30,6 +30,7 @@ return [
                     '1.0.7' => 'softwareDownloads/ansel-craft/ansel-craft-1.0.7.zip',
                 ]
             ],
+            'licenseAgreementMarkdownFile' => 'licenseAgreements/anselCraft.md',
         ],
         'ansel-ee' => [
             'title' => 'Ansel for ExpressionEngine',
@@ -51,6 +52,7 @@ return [
                     '2.1.4' => 'softwareDownloads/ansel-ee/ansel-2.1.4.zip',
                 ],
             ],
+            'licenseAgreementMarkdownFile' => 'licenseAgreements/anselEE.md',
         ],
         'treasury' => [
             'title' => 'Treasury',
@@ -66,6 +68,7 @@ return [
                     '1.1.1' => 'softwareDownloads/treasury/treasury-1.1.1.zip',
                 ],
             ],
+            'licenseAgreementMarkdownFile' => 'licenseAgreements/treasury.md',
         ],
         'ansel-treasury-ee' => [
             'title' => 'Ansel + Treasury',
@@ -97,6 +100,7 @@ return [
                     '2.1.0' => 'softwareDownloads/construct/construct-2.1.0.zip',
                 ],
             ],
+            'licenseAgreementMarkdownFile' => 'licenseAgreements/construct.md',
         ],
         'category-construct' => [
             'title' => 'Category Construct',
@@ -112,6 +116,7 @@ return [
                     '2.2.0' => 'softwareDownloads/category-construct/category-construct-2.2.0.zip',
                 ],
             ],
+            'licenseAgreementMarkdownFile' => 'licenseAgreements/categoryConstruct.md',
         ],
         'collective' => [
             'title' => 'Collective',
@@ -127,6 +132,7 @@ return [
                     '2.2.1' => 'softwareDownloads/collective/collective-2.2.1.zip',
                 ],
             ],
+            'licenseAgreementMarkdownFile' => 'licenseAgreements/collective.md',
         ],
     ],
 ];

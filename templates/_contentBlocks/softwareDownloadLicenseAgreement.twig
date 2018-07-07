@@ -1,0 +1,12 @@
+<div class="BlockLicenseAgreement">
+    <div class="BlockLicenseAgreement__Inner">
+        <div class="BlockLicenseAgreement__Body">
+            {{ block.meta.licenseContent|markdown|typeset }}
+        </div>
+        <div class="BlockLicenseAgreement__Link">
+            <a href="{{ block.meta.downloadUrl }}" class="button button--colored">
+                I Agree, Begin Download
+            </a>
+        </div>
+    </div>
+</div>

@@ -328,4 +328,8 @@ return [
     /** @see \dev\controllers\PagesController::actionAccountActivationError() */
     'GET /account/activation-error' => 'dev/pages/account-activation-error',
 
+    // Software downloading
+    /** @see \dev\controllers\SoftwareDownloadsController::actionIndex() */
+    'GET /software/download' => 'dev/software-downloads/index'
+
 ];

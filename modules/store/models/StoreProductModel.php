@@ -43,6 +43,9 @@ class StoreProductModel
     /** @var array $downloadFileLocations */
     public $downloadFileLocations = [];
 
+    /** @var string $licenseAgreementMarkdownFile */
+    public $licenseAgreementMarkdownFile;
+
     /**
      * Gets the plan key
      * @return string
