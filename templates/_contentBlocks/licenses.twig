@@ -34,9 +34,16 @@
                             <div class="BlockCards__AuthorizedDomains">
                                 <div class="BlockCards__AuthorizedDomainsTitle">Authorized Domains</div>
                                 <ul class="BlockCards__AuthorizedDomainsList">
-                                    {% for domain in orderItemModel.authorizedDomains %}
+                                    {% for domainId,domain in orderItemModel.authorizedDomains %}
                                         <li class="BlockCards__AuthorizedDomainsListItem">
-                                            {{ domain|typeset }} <small>(<a href="#">remove</a>)</small>
+                                            <form method="post" accept-charset="UTF-8" class="JSFormClickSubmit">
+                                                {{ csrfInput() }}
+                                                <input type="hidden" name="action" value="store/license/remove-domain">
+                                                <input type="hidden" name="redirect" value="{{ vars.redirectUrl }}">
+                                                <input type="hidden" name="licenseId" value="{{ orderItemModel.id }}">
+                                                <input type="hidden" name="domainId" value="{{ domainId }}">
+                                                {{ domain|typeset }} <small>(<a href="#" class="JSFormClickSubmit__Trigger">remove</a>)</small>
+                                            </form>
                                         </li>
                                     {% endfor %}
                                 </ul>

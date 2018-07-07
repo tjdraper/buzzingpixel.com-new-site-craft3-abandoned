@@ -76,6 +76,15 @@ class OrderItemModel
     }
 
     /**
+     * Removes an authorized domain
+     * @param string $domainId
+     */
+    public function removeAuthorizedDomain(string $domainId)
+    {
+        unset($this->authorizedDomains[$domainId]);
+    }
+
+    /**
      * Gets database save data
      * @param bool $includeId
      * @return array

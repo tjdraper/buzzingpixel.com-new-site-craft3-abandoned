@@ -114,6 +114,12 @@ function runMain(F) {
             el: '.JSSiteWrapper'
         });
     }
+
+    $('.JSFormClickSubmit').each(function() {
+        F.controller.construct('FormClickSubmit', {
+            el: this
+        });
+    });
 }
 
 runMain(window.FAB);
