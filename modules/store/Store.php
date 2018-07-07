@@ -23,7 +23,9 @@ use modules\store\factories\CookieFactory;
 use modules\store\services\ChargeCardService;
 use modules\store\services\StripeUserService;
 use Stripe\Subscription as StripeSubscription;
+use modules\store\factories\OrderQueryFactory;
 use modules\store\services\SubscriptionService;
+use modules\store\factories\OrderItemsQueryFactory;
 use craft\console\Application as ConsoleApplication;
 use modules\store\commands\SyncStripeProductsCommand;
 use modules\store\services\SyncStripeProductsService;
@@ -144,7 +146,9 @@ class Store extends Module
         return new OrderService(
             Craft::$app->getDb(),
             new QueryFactory(),
-            Uuid::getFactory()
+            Uuid::getFactory(),
+            new OrderItemsQueryFactory(),
+            new OrderQueryFactory()
         );
     }
 

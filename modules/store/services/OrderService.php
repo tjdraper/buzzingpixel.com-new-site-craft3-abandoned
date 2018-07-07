@@ -11,6 +11,8 @@ use craft\db\Connection as DBConnection;
 use modules\store\factories\QueryFactory;
 use \modules\store\models\OrderItemModel;
 use modules\store\models\StoreProductModel;
+use modules\store\factories\OrderQueryFactory;
+use modules\store\factories\OrderItemsQueryFactory;
 
 /**
  * Class OrderService
@@ -26,20 +28,32 @@ class OrderService
     /** @var UuidFactoryInterface $uuidFactory */
     private $uuidFactory;
 
+    /** @var OrderItemsQueryFactory $orderItemsQueryFactory */
+    private $orderItemsQueryFactory;
+
+    /** @var OrderQueryFactory $orderQueryFactory */
+    private $orderQueryFactory;
+
     /**
      * OrderService constructor
      * @param DBConnection $dbConnection
      * @param QueryFactory $queryFactory
      * @param UuidFactoryInterface $uuidFactory
+     * @param OrderItemsQueryFactory $orderItemsQueryFactory
+     * @param OrderQueryFactory $orderQueryFactory
      */
     public function __construct(
         DBConnection $dbConnection,
         QueryFactory $queryFactory,
-        UuidFactoryInterface $uuidFactory
+        UuidFactoryInterface $uuidFactory,
+        OrderItemsQueryFactory $orderItemsQueryFactory,
+        OrderQueryFactory $orderQueryFactory
     ) {
         $this->dbConnection = $dbConnection;
         $this->queryFactory = $queryFactory;
         $this->uuidFactory = $uuidFactory;
+        $this->orderItemsQueryFactory = $orderItemsQueryFactory;
+        $this->orderQueryFactory = $orderQueryFactory;
     }
 
     /**
@@ -160,44 +174,9 @@ class OrderService
      */
     public function getOrderItemsByOrderId(int $orderId): array
     {
-        $query = $this->queryFactory->getQuery()->from('{{%storeOrderItems}}')
-            ->where("`orderId` = '{$orderId}'")
+        return $this->orderItemsQueryFactory->getNewFactory()
+            ->where('orderId', $orderId)
             ->all();
-
-        if (! $query) {
-            return [];
-        }
-
-        $models = [];
-
-        foreach ($query as $item) {
-            $model = new OrderItemModel();
-
-            $model->id = (int) $item['id'];
-            $model->userId = (int) $item['userId'];
-            $model->orderId = (int) $item['orderId'];
-            $model->key = (string) $item['key'];
-            $model->title = (string) $item['title'];
-            $model->version = (string) $item['version'];
-            $model->price = (int) $item['price'];
-            $model->originalPrice = (int) $item['originalPrice'];
-            $model->isUpgrade = (bool) ((int) $item['isUpgrade']);
-            $model->hasBeenUpgraded = (bool) ((int) $item['hasBeenUpgraded']);
-            $model->requiresSubscription = (bool) ((int) $item['requiresSubscription']);
-            $model->isSubscribed = (bool) ((int) $item['isSubscribed']);
-            $model->licenseKey = (string) $item['licenseKey'];
-            $model->notes = (string) $item['notes'];
-            $model->authorizedDomains = json_decode($item['authorizedDomains'], true);
-            $model->disabled = (bool) ((int) $item['disabled']);
-
-            if (! \is_array($model->authorizedDomains)) {
-                $model->authorizedDomains = [];
-            }
-
-            $models[] = $model;
-        }
-
-        return $models;
     }
 
     /**
@@ -207,42 +186,9 @@ class OrderService
      */
     public function getMostRecentUserOrder(int $userId): OrderModel
     {
-        $query = $this->queryFactory->getQuery()->from('{{%storeOrders}}')
-            ->where("`userId` = '{$userId}'")
-            ->orderBy('`dateCreated` desc')
+        return $this->orderQueryFactory->getNewFactory()
+            ->where('userId', $userId)
+            ->orderBy('dateCreated', 'desc')
             ->one();
-
-        $model = new OrderModel();
-
-        if (! $query) {
-            return $model;
-        }
-
-        $model->id = (int) $query['id'];
-        $model->userId = (int) $query['userId'];
-        $model->transactionId = $query['transactionId'];
-        $model->transactionAmount = (int) $query['transactionAmount'];
-        $model->balanceTransactionId = $query['balanceTransactionId'];
-        $model->transactionCaptured = $query['transactionCaptured'] === '1' ||
-            $query['transactionCaptured'] === 1;
-        $model->transactionCreated = (new \DateTime())->setTimestamp(
-            $query['transactionCreated']
-        );
-        $model->transactionCurrency = $query['transactionCurrency'];
-        $model->transactionDescription = $query['transactionDescription'];
-        $model->subTotal = (float) $query['subTotal'];
-        $model->total = (float) $query['total'];
-        $model->tax = (float) $query['tax'];
-        $model->name = $query['name'];
-        $model->company = $query['company'];
-        $model->phoneNumber = $query['phoneNumber'];
-        $model->country = $query['country'];
-        $model->address = $query['address'];
-        $model->addressContinued = $query['addressContinued'];
-        $model->city = $query['city'];
-        $model->stateProvince = $query['stateProvince'];
-        $model->postalCode = $query['postalCode'];
-
-        return $model;
     }
 }
