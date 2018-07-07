@@ -1,9 +1,10 @@
 {% extends '_layouts/Master.twig' %}
+{% set redirectUrl = redirectUrl ?? '/account' %}
 
 {% block content %}
     <div class="StandAloneLoginForm">
         {% include '_partials/LogInForm.twig' with {
-            redirectUrl: '/account'
+            redirectUrl: redirectUrl
         } %}
     </div>
 {% endblock %}

@@ -1,0 +1,66 @@
+{% set vars = block.meta %}
+
+<div class="BlockCards">
+    <div class="BlockCards__Inner">
+        <ul class="BlockCards__Cards">
+            {% for cardModel in vars.items %}
+                {# @var \modules\store\models\CardModel cardModel #}
+
+                <li class="BlockCards__Card">
+                    {% embed '_embeds/Card.twig' with {
+                        inBlockGrid: true,
+                    } %}
+                        {% block headerPrimaryContent %}Nickname: {{ cardModel.cardNickName }}{% endblock %}
+                        {% block headerSecondaryContent %}Last Four: {{ cardModel.last4 }}{% endblock %}
+                        {% block primaryContent %}
+                            <dl class="BlockCards__DefinitionList">
+                                <dt class="BlockCards__DefinitionTerm">Address</dt>
+                                <dd class="BlockCards__DefinitionDefinition">{{ cardModel.address_line1|escape|typeset }}</dd>
+
+                                {% if cardModel.address_line2 %}
+                                    <dt class="BlockCards__DefinitionTerm">Address Continued</dt>
+                                    <dd class="BlockCards__DefinitionDefinition">{{ cardModel.address_line2|escape|typeset }}</dd>
+                                {% endif %}
+
+                                <dt class="BlockCards__DefinitionTerm">City</dt>
+                                <dd class="BlockCards__DefinitionDefinition">{{ cardModel.address_city|escape|typeset }}</dd>
+
+                                <dt class="BlockCards__DefinitionTerm">State/Province</dt>
+                                <dd class="BlockCards__DefinitionDefinition">{{ cardModel.address_state|escape|typeset }}</dd>
+
+                                <dt class="BlockCards__DefinitionTerm">Postal Code</dt>
+                                <dd class="BlockCards__DefinitionDefinition">{{ cardModel.address_zip|escape|typeset }}</dd>
+                            </dl>
+                        {% endblock %}
+                        {% block secondaryContent %}
+                            <dl class="BlockCards__DefinitionList">
+                                <dt class="BlockCards__DefinitionTerm">Name on Card</dt>
+                                <dd class="BlockCards__DefinitionDefinition">{{ cardModel.name|escape|typeset }}</dd>
+
+                                <dt class="BlockCards__DefinitionTerm">Expiration Month</dt>
+                                <dd class="BlockCards__DefinitionDefinition">{{ cardModel.getExpMonthLong()|escape|typeset }}</dd>
+
+                                <dt class="BlockCards__DefinitionTerm">Expiration Year</dt>
+                                <dd class="BlockCards__DefinitionDefinition">{{ cardModel.exp_year|escape|typeset }}</dd>
+                            </dl>
+                        {% endblock %}
+                        {% block footerPrimaryContent %}
+                            {#<a href="#" class="button">Make Default</a>#}
+                            <a href="#" class="button button--danger">
+                                Remove
+                            </a>
+                        {% endblock %}
+                        {% block footerSecondaryContent %}
+                            {#<a href="#" class="button button--colored button--outlined">#}
+                                {#Remove#}
+                            {#</a>#}
+                            <a href="#" class="button button--colored button--outlined">
+                                Edit
+                            </a>
+                        {% endblock %}
+                    {% endembed %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

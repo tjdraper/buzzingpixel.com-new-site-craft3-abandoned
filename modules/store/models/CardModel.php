@@ -143,4 +143,18 @@ class CardModel
 
         return $saveData;
     }
+
+    /**
+     * Gets a full textual representation of the expiration month
+     * @return string
+     */
+    public function getExpMonthLong(): string
+    {
+        $date = \DateTime::createFromFormat(
+            'n-j-Y',
+            $this->exp_month . '-15-' . $this->exp_year
+        );
+
+        return $date->format('F');
+    }
 }

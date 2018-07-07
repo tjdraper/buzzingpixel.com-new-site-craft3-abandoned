@@ -311,6 +311,9 @@ return [
     'GET /account' => 'dev/account/index',
     'GET /account/page/<pageNum:\d+>' => 'dev/account/index',
 
+    // Displays user's cards
+    'GET /account/payment' => 'dev/account/payment',
+
     // Post credentials to this endpoint to log in
     /** @see \dev\controllers\AccountActionController::actionLogin() */
     'POST /account/login' => 'dev/account-action/login',

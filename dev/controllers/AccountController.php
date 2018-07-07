@@ -3,6 +3,8 @@
 namespace dev\controllers;
 
 use Craft;
+use dev\Module;
+use modules\store\Store;
 use yii\web\Response;
 use yii\web\HttpException;
 use dev\services\PaginationGeneratorService;
@@ -72,7 +74,7 @@ class AccountController extends BaseController
         $licensesQuery = OrderItemsQueryFactory::getFactory()
             ->where('userId', $craftUser->getId())
             ->where('disabled', 0)
-            ->orderBy('dateCreated');
+            ->orderBy('id');
 
         if ($filter) {
             $licensesQuery->like('key', $filter)
@@ -152,7 +154,6 @@ class AccountController extends BaseController
         }
 
         $sectionNav = self::$secionNav;
-
         $sectionNav['licenses']['isActive'] = true;
 
         return $this->renderTemplate(
@@ -185,6 +186,67 @@ class AccountController extends BaseController
                             'items' => $licenses,
                             'pagination' => $pagination,
                         ],
+                    ],
+                ],
+            ],
+            false
+        );
+    }
+
+    /**
+     * Displays user's cards
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionPayment(): Response
+    {
+        $craftUser = Craft::$app->getUser();
+
+        // If the user is a guest, we need for them to log in
+        if ($craftUser->getIsGuest()) {
+            return $this->renderTemplate(
+                '_core/StandAloneLoginForm.twig',
+                array_merge(Craft::$app->getUrlManager()->getRouteParams(), [
+                    'metaTitle' => 'Log in to your account',
+                    'metaDescription' => null,
+                    'redirectUrl' => '/account/payment'
+                ]),
+                false
+            );
+        }
+
+        $userCards = Store::stripeUserService()->getUserCards(
+            Module::userService()->getUserModel()
+        );
+
+        $sectionNav = self::$secionNav;
+        $sectionNav['payment']['isActive'] = true;
+
+        return $this->renderTemplate(
+            '_core/PageStandard.twig',
+            [
+                'contentModel' => null,
+                'content' => null,
+                'contentMeta' => null,
+                'metaTitle' => 'Your Payment Methods',
+                'metaDescription' => null,
+                'header' => [
+                    'meta' => [
+                        'heading' => 'Your Payment Methods',
+                    ],
+                ],
+                'contentBlocks' => [
+                    [
+                        'meta' => [
+                            'blockType' => 'navBar',
+                            'navItems' => $sectionNav
+                        ],
+                    ],
+                    [
+                        'meta' => [
+                            'blockType' => 'paymentMethods',
+                            'items' => $userCards,
+                        ]
                     ],
                 ],
             ],
