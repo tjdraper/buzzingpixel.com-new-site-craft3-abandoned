@@ -43,9 +43,18 @@ abstract class AbstractQueryFactory
     }
 
     /**
+     * Gets an instance of the factory
+     * @return static
+     */
+    public function getNewFactory(): self
+    {
+        return new static();
+    }
+
+    /**
      * Sets limit on the query
      * @param int $limit
-     * @return self
+     * @return static
      */
     public function limit(int $limit): self
     {
@@ -56,7 +65,7 @@ abstract class AbstractQueryFactory
     /**
      * Sets offset on the query
      * @param int $offset
-     * @return self
+     * @return static
      */
     public function offset(int $offset): self
     {
@@ -69,7 +78,7 @@ abstract class AbstractQueryFactory
      * @param string $property
      * @param string $value
      * @param bool $groupAsOrWithLast Defaults to false
-     * @return self
+     * @return static
      */
     public function where(
         string $property,
@@ -89,7 +98,7 @@ abstract class AbstractQueryFactory
      * @param string $property
      * @param string $value
      * @param bool $groupAsOrWithLast Defaults to false
-     * @return self
+     * @return static
      */
     public function like(
         string $property,
@@ -109,7 +118,7 @@ abstract class AbstractQueryFactory
      * Adds an order by parameter
      * @param string $prop
      * @param string $dir
-     * @return self
+     * @return static
      */
     public function orderBy(string $prop, $dir = 'desc'): self
     {

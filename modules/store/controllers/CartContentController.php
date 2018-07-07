@@ -4,7 +4,6 @@ namespace modules\store\controllers;
 
 use Craft;
 use dev\Module;
-use modules\store\models\CardModel;
 use yii\web\Response;
 use modules\store\Store;
 use craft\web\Controller;
