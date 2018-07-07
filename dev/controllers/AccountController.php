@@ -174,6 +174,7 @@ class AccountController extends BaseController
                         'meta' => [
                             'blockType' => 'licenses',
                             'baseUrl' => $listingBase,
+                            'currentFilter' => $filter,
                             'items' => $licenses,
                             'pagination' => $pagination,
                         ],

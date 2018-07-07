@@ -1,0 +1,49 @@
+{% set headerPrimaryContent =  block('headerPrimaryContent') ?? '' %}
+{% set headerSecondaryContent = block('headerSecondaryContent') ?? '' %}
+{% set primaryContent = block('primaryContent') ?? '' %}
+{% set secondaryContent = block('secondaryContent') ?? '' %}
+{% set footerPrimaryContent = block('footerPrimaryContent') ?? '' %}
+{% set footerSecondaryContent = block('footerSecondaryContent') ?? '' %}
+
+<div class="Card">
+    <div class="Card__Inner">
+        {% if headerPrimaryContent or headerSecondaryContent %}
+            <header class="Card__Header">
+                {% if headerPrimaryContent %}
+                    <div class="Card__HeaderPrimaryContent">
+                        {{ headerPrimaryContent|typeset }}
+                    </div>
+                {% endif %}
+                {% if headerSecondaryContent %}
+                    <div class="Card__HeaderSecondaryContent">
+                        {{ headerSecondaryContent|typeset }}
+                    </div>
+                {% endif %}
+            </header>
+        {% endif %}
+        <div class="Card__Content">
+            <div class="Card__ContentPrimary">
+                {{ primaryContent|typeset }}
+            </div>
+            {% if secondaryContent %}
+                <div class="Card__ContentSecondary">
+                    {{ secondaryContent|typeset }}
+                </div>
+            {% endif %}
+        </div>
+        {% if footerPrimaryContent or footerSecondaryContent %}
+            <footer class="Card__Footer">
+                {% if footerPrimaryContent %}
+                    <div class="Card__FooterPrimaryContent">
+                        {{ footerPrimaryContent|typeset }}
+                    </div>
+                {% endif %}
+                {% if footerSecondaryContent %}
+                    <div class="Card__FooterSecondaryContent">
+                        {{ footerSecondaryContent|typeset }}
+                    </div>
+                {% endif %}
+            </footer>
+        {% endif %}
+    </div>
+</div>

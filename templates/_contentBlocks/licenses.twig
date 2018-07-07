@@ -1,3 +1,81 @@
 {% set vars = block.meta %}
 
-{{ dump(vars) }}
+<div class="BlockLicenses">
+    <div class="BlockLicenses__Inner">
+        <form action="{{ vars.baseUrl }}" class="BlockLicenses__Search">
+            <div class="BlockLicenses__SearchInputWrapper">
+                <input
+                    type="text"
+                    name="filter"
+                    placeholder="Filter by keyword..."
+                    class="input BlockLicenses__SearchInput"
+                    value="{{ vars.currentFilter }}"
+                >
+            </div>
+            <div class="BlockLicenses__SearchSubmitWrapper">
+                <input
+                    type="submit"
+                    value="Filter"
+                    class="button BlockLicenses__SearchSubmit"
+                >
+            </div>
+        </form>
+    </div>
+    <ul class="BlockLicenses__Cards">
+        {% for orderItemModel in vars.items %}
+            {# @var \modules\store\models\OrderItemModel orderItemModel #}
+            {% set productModel = orderItemModel.getStoreProductModel() %}
+            <li class="BlockLicenses__Card">
+                {% embed '_embeds/Card.twig' %}
+                    {% block headerPrimaryContent %}{{ productModel.title }}{% endblock %}
+                    {% block headerSecondaryContent %}{{ orderItemModel.licenseKey }}{% endblock %}
+                    {% block primaryContent %}
+                        <div class="BlockLicenses__AuthorizedDomains">
+                            <div class="BlockLicenses__AuthorizedDomainsTitle">Authorized Domains</div>
+                            <ul class="BlockLicenses__AuthorizedDomainsList">
+                                <li class="BlockLicenses__AuthorizedDomainsListItem">
+                                    buzzingpixel.com <small>(<a href="#">remove</a>)</small>
+                                </li>
+                                <li class="BlockLicenses__AuthorizedDomainsListItem">
+                                    moviebyte.com <small>(<a href="#">remove</a>)</small>
+                                </li>
+                            </ul>
+                            <div class="BlockLicenses__AuthorizedDomainsAdd">
+                                <a href="#">Add Domain</a>
+                            </div>
+                        </div>
+                        <a href="{{ productModel.url }}" class="button button--colored button--outlined">
+                            Product Page &raquo;
+                        </a>
+                    {% endblock %}
+                    {% block secondaryContent %}
+                        <div class="BlockLicenses__Notes">
+                            <div class="BlockLicenses__NotesTitle">
+                                Notes <small><a href="#">edit</a></small>
+                            </div>
+                            <div class="BlockLicenses__NotesBody">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, iste, voluptatem? Autem, dolor doloremque facere fugiat id iure magnam neque nihil pariatur possimus quas quo similique tempora temporibus totam vero?</p>
+                                <ul><li>things</li><li>stuff</li></ul>
+                            </div>
+                        </div>
+                    {% endblock %}
+                    {% block footerPrimaryContent %}
+                        <a href="#" class="button">Upgrade to V2 = $29.00</a>
+                    {% endblock %}
+                    {% block footerSecondaryContent %}
+                        <a href="#" class="button button--colored button--outlined">
+                            Download 1.4.4
+                        </a>
+                    {% endblock %}
+                {% endembed %}
+            </li>
+        {% endfor %}
+    </ul>
+    {% if vars.pagination %}
+        <div class="PaginationWrapper">
+            {% include '_partials/Pagination.twig' with {
+                pagination: vars.pagination
+            } %}
+        </div>
+    {% endif %}
+</div>
