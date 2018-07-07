@@ -25,7 +25,9 @@
                 {# @var \modules\store\models\OrderItemModel orderItemModel #}
                 {% set productModel = orderItemModel.getStoreProductModel() %}
                 <li class="BlockCards__Card">
-                    {% embed '_embeds/Card.twig' %}
+                    {% embed '_embeds/Card.twig' with {
+                        inBlockGrid: true,
+                    } %}
                         {% block headerPrimaryContent %}{{ productModel.title }}{% endblock %}
                         {% block headerSecondaryContent %}{{ orderItemModel.licenseKey }}{% endblock %}
                         {% block primaryContent %}

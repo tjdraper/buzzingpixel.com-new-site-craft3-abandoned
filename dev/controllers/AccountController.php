@@ -37,7 +37,7 @@ class AccountController extends BaseController
     ];
 
     /** @var int $pageLimit */
-    private static $pageLimit = 6;
+    private static $pageLimit = 12;
 
     /**
      * Displays user account page

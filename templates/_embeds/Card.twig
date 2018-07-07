@@ -4,29 +4,31 @@
 {% set secondaryContent = block('secondaryContent') ?? '' %}
 {% set footerPrimaryContent = block('footerPrimaryContent') ?? '' %}
 {% set footerSecondaryContent = block('footerSecondaryContent') ?? '' %}
+{% set inBlockGrid = inBlockGrid ?? false %}
+{% set inBlockGrid = inBlockGrid == true %}
 
-<div class="Card">
+<div class="Card{% if inBlockGrid %} Card--IsInBlockGrid{% endif %}">
     <div class="Card__Inner">
         {% if headerPrimaryContent or headerSecondaryContent %}
             <header class="Card__Header">
                 {% if headerPrimaryContent %}
-                    <div class="Card__HeaderPrimaryContent">
+                    <div class="Card__HeaderPrimaryContent{% if headerPrimaryContent and headerSecondaryContent %} Card__HeaderPrimaryContent--HasBoth{% endif %}">
                         {{ headerPrimaryContent|typeset }}
                     </div>
                 {% endif %}
                 {% if headerSecondaryContent %}
-                    <div class="Card__HeaderSecondaryContent">
+                    <div class="Card__HeaderSecondaryContent{% if headerPrimaryContent and headerSecondaryContent %} Card__HeaderSecondaryContent--HasBoth{% endif %}">
                         {{ headerSecondaryContent|typeset }}
                     </div>
                 {% endif %}
             </header>
         {% endif %}
         <div class="Card__Content">
-            <div class="Card__ContentPrimary">
+            <div class="Card__ContentPrimary{% if secondaryContent %} Card__ContentPrimary--HasBoth{% endif %}">
                 {{ primaryContent|typeset }}
             </div>
             {% if secondaryContent %}
-                <div class="Card__ContentSecondary">
+                <div class="Card__ContentSecondary Card__ContentSecondary--HasBoth">
                     {{ secondaryContent|typeset }}
                 </div>
             {% endif %}
@@ -34,12 +36,12 @@
         {% if footerPrimaryContent or footerSecondaryContent %}
             <footer class="Card__Footer">
                 {% if footerPrimaryContent %}
-                    <div class="Card__FooterPrimaryContent">
+                    <div class="Card__FooterPrimaryContent{% if footerPrimaryContent and footerSecondaryContent %} Card__FooterPrimaryContent--HasBoth{% endif %}">
                         {{ footerPrimaryContent|typeset }}
                     </div>
                 {% endif %}
                 {% if footerSecondaryContent %}
-                    <div class="Card__FooterSecondaryContent">
+                    <div class="Card__FooterSecondaryContent{% if footerPrimaryContent and footerSecondaryContent %} Card__FooterSecondaryContent--HasBoth{% endif %}">
                         {{ footerSecondaryContent|typeset }}
                     </div>
                 {% endif %}
