@@ -40,8 +40,28 @@
                                         </li>
                                     {% endfor %}
                                 </ul>
-                                <div class="BlockCards__AuthorizedDomainsAdd">
-                                    <a href="#">Add Domain</a>
+                                <div class="BlockCards__AuthorizedDomainsAdd JSOverlayContainer">
+                                    <a href="#" class="JSOverlayContainer__Trigger">Add Domain</a>
+                                    <script type="text/template" class="JSOverlayContainer__Template">
+                                        {% embed '_embeds/Overlay.twig' %}
+                                            {% block overlayContent %}
+                                                <form method="post" accept-charset="UTF-8" class="Overlay__Form">
+                                                    {{ csrfInput() }}
+                                                    <input type="hidden" name="action" value="store/license/add-domain">
+                                                    <input type="hidden" name="licenseId" value="{{ orderItemModel.id }}">
+                                                    <div class="Overlay__Title">Add Domain to Ansel for ExpressionEngine</div>
+                                                    <div class="Overlay__SubTitle">License Number: 10e65778-d9c0-457e-9f68-784169f2ec89</div>
+                                                    <div class="Overlay__SubTitle2">(format: &ldquo;domain.com&rdquo;, do not include &ldquo;http://&rdquo;)</div>
+                                                    <label class="label Overlay__FormLabel">
+                                                        <input type="text" name="domain" class="input Overlay__FormInput" placeholder="domain.com">
+                                                    </label>
+                                                    <div class="Overlay__FormSubmitGroup">
+                                                        <button class="button" type="submit">Submit</button>
+                                                    </div>
+                                                </form>
+                                            {% endblock %}
+                                        {% endembed %}
+                                    </script>
                                 </div>
                             </div>
                             <a href="{{ productModel.url }}" class="button button--colored button--outlined">

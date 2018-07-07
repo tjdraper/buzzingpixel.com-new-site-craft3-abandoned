@@ -3,7 +3,10 @@
 {% extends '_layouts/HtmlWrapper.twig' %}
 
 {% block layoutContent %}
-    <div class="SiteWrapper SiteWrapper--HasOverlay">
+    <div
+        class="SiteWrapper JSSiteWrapper"
+        data-has-overlay-class="SiteWrapper--HasOverlay"
+    >
         {% include '_partials/SiteHeader.twig' %}
 
         <main class="SiteMain">

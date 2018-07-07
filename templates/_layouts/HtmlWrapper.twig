@@ -94,12 +94,6 @@
     {# Get the content #}
     {{ block('layoutContent') ?? '' }}
 
-    {% embed '_embeds/Overlay.twig' %}
-        {% block content %}
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, commodi culpa deserunt, excepturi ipsum, laudantium minima quaerat quisquam quo repellat tempore vero. Ad ipsum maiores mollitia optio recusandae, voluptates! Blanditiis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, commodi culpa deserunt, excepturi ipsum, laudantium minima quaerat quisquam quo repellat tempore vero. Ad ipsum maiores mollitia optio recusandae, voluptates! Blanditiis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, commodi culpa deserunt, excepturi ipsum, laudantium minima quaerat quisquam quo repellat tempore vero. Ad ipsum maiores mollitia optio recusandae, voluptates! Blanditiis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, commodi culpa deserunt, excepturi ipsum, laudantium minima quaerat quisquam quo repellat tempore vero. Ad ipsum maiores mollitia optio recusandae, voluptates! Blanditiis.</p>
-        {% endblock %}
-    {% endembed %}
-
     {# Include jQuery #}
     <script async src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
