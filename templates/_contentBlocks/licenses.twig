@@ -23,7 +23,11 @@
         <ul class="BlockCards__Cards">
             {% for orderItemModel in vars.items %}
                 {# @var \modules\store\models\OrderItemModel orderItemModel #}
+
                 {% set productModel = orderItemModel.getStoreProductModel() %}
+
+                {# @var \modules\store\models\StoreProductModel productModel #}
+
                 <li class="BlockCards__Card">
                     {% embed '_embeds/Card.twig' with {
                         inBlockGrid: true,
@@ -112,11 +116,21 @@
                             </div>
                         {% endblock %}
                         {% block footerPrimaryContent %}
-                            {#<a href="#" class="button">Upgrade to V2 = $29.00</a>#}
+                            {% if productModel.subscriptionPrice > 0 %}
+                                {% if orderItemModel.isSubscribed %}
+                                    <a href="/account/cancel/{{ orderItemModel.id }}" class="button">
+                                        Cancel Updates and Support Subscription
+                                    </a>
+                                {% elseif not orderItemModel.isSubscribed %}
+                                    <a href="/account/renew/{{ orderItemModel.id }}" class="button">
+                                        Renew Updates and Support (${{ productModel.subscriptionPrice|number_format }})
+                                    </a>
+                                {% endif %}
+                            {% endif %}
                         {% endblock %}
                         {% block footerSecondaryContent %}
-                            <a href="#" class="button button--colored button--outlined">
-                                Download 1.4.4
+                            <a href="{{ orderItemModel.getDownloadUrl() }}" class="button button--colored button--outlined">
+                                Download {{ orderItemModel.version }}
                             </a>
                         {% endblock %}
                     {% endembed %}

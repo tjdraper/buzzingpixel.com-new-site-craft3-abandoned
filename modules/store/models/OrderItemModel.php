@@ -122,4 +122,18 @@ class OrderItemModel
 
         return $saveData;
     }
+
+    /**
+     * Gets the download URL
+     * @return string
+     */
+    public function getDownloadUrl(): string
+    {
+        $queryParams = [
+            'key' => $this->key,
+            'version' => $this->version,
+        ];
+
+        return '/software/download?' . http_build_query($queryParams);
+    }
 }

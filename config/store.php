@@ -39,7 +39,7 @@ return [
             'subscriptionFrequency' => 'yearly',
             'versions' => [
                 1 => null,
-                2 => 29, // major version => upgrade price (use null for full price, 0 to auto update)
+                2 => 29, // major version => upgrade price (use null for full price, 0 to auto update) (DEPRECATED, DOES NOT WORK WITH THIS VERSIO OF THE SITE)
             ],
             'currentVersion' => '2.1.4',
             'publicDownload' => true,
