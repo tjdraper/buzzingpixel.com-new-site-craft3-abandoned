@@ -100,6 +100,12 @@ class AccountController extends BaseController
 
         $segmentsArray = Craft::$app->getRequest()->getSegments();
 
+        $redirectUrl = '/' . implode('/', $segmentsArray);
+
+        if ($filter) {
+            $redirectUrl .= '?filter=' . $filter;
+        }
+
         if ($pageNum > 1) {
             $metaTitle .= " | Page {$pageNum}";
             array_pop($segmentsArray);
@@ -174,6 +180,7 @@ class AccountController extends BaseController
                         'meta' => [
                             'blockType' => 'licenses',
                             'baseUrl' => $listingBase,
+                            'redirectUrl' => $redirectUrl,
                             'currentFilter' => $filter,
                             'items' => $licenses,
                             'pagination' => $pagination,

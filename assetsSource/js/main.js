@@ -92,9 +92,9 @@ function runMain(F) {
         F.controller.construct('RemoveErrors', {
             el: this
         });
-        // F.controller.construct('CartSubmission', {
-        //     el: this
-        // });
+        F.controller.construct('CartSubmission', {
+            el: this
+        });
     });
 
     $('.JSCartItemForm').each(function() {
@@ -108,6 +108,12 @@ function runMain(F) {
             el: this
         });
     });
+
+    if ($('.JSOverlayTriggerContainer').length > 0) {
+        F.controller.construct('OverlayTriggerContainerWatch', {
+            el: '.JSSiteWrapper'
+        });
+    }
 }
 
 runMain(window.FAB);
