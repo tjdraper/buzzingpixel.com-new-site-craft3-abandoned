@@ -34,12 +34,11 @@
                             <div class="BlockCards__AuthorizedDomains">
                                 <div class="BlockCards__AuthorizedDomainsTitle">Authorized Domains</div>
                                 <ul class="BlockCards__AuthorizedDomainsList">
-                                    <li class="BlockCards__AuthorizedDomainsListItem">
-                                        buzzingpixel.com <small>(<a href="#">remove</a>)</small>
-                                    </li>
-                                    <li class="BlockCards__AuthorizedDomainsListItem">
-                                        moviebyte.com <small>(<a href="#">remove</a>)</small>
-                                    </li>
+                                    {% for domain in orderItemModel.authorizedDomains %}
+                                        <li class="BlockCards__AuthorizedDomainsListItem">
+                                            {{ domain|typeset }} <small>(<a href="#">remove</a>)</small>
+                                        </li>
+                                    {% endfor %}
                                 </ul>
                                 <div class="BlockCards__AuthorizedDomainsAdd">
                                     <a href="#">Add Domain</a>
@@ -55,13 +54,12 @@
                                     Notes <small><a href="#">edit</a></small>
                                 </div>
                                 <div class="BlockCards__NotesBody">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, iste, voluptatem? Autem, dolor doloremque facere fugiat id iure magnam neque nihil pariatur possimus quas quo similique tempora temporibus totam vero?</p>
-                                    <ul><li>things</li><li>stuff</li></ul>
+                                    {{ orderItemModel.notes|markdown|typeset }}
                                 </div>
                             </div>
                         {% endblock %}
                         {% block footerPrimaryContent %}
-                            <a href="#" class="button">Upgrade to V2 = $29.00</a>
+                            {#<a href="#" class="button">Upgrade to V2 = $29.00</a>#}
                         {% endblock %}
                         {% block footerSecondaryContent %}
                             <a href="#" class="button button--colored button--outlined">
