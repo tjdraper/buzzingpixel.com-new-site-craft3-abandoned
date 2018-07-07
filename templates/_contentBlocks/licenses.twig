@@ -9,7 +9,7 @@
                     name="filter"
                     placeholder="Filter by keyword..."
                     class="input BlockCards__SearchInput"
-                    value="{{ vars.currentFilter }}"
+                    value="{{ vars.currentFilter|escape }}"
                 >
             </div>
             <div class="BlockCards__SearchSubmitWrapper">
@@ -42,14 +42,14 @@
                                                 <input type="hidden" name="redirect" value="{{ vars.redirectUrl }}">
                                                 <input type="hidden" name="licenseId" value="{{ orderItemModel.id }}">
                                                 <input type="hidden" name="domainId" value="{{ domainId }}">
-                                                {{ domain|typeset }} <small>(<a href="#" class="JSFormClickSubmit__Trigger">remove</a>)</small>
+                                                {{ domain|escape|typeset }} <small>(<a href="#" class="JSFormClickSubmit__Trigger">remove</a>)</small>
                                             </form>
                                         </li>
                                     {% endfor %}
                                 </ul>
                                 <div class="BlockCards__AuthorizedDomainsAdd JSOverlayTriggerContainer">
                                     <a href="#" class="JSOverlayTriggerContainer__Trigger">Add Domain</a>
-                                    <script type="text/template" class="JSOverlayTriggerContainer__Template">
+                                    <div type="text/template" class="JSOverlayTriggerContainer__Template" style="display: none;">
                                         {% embed '_embeds/Overlay.twig' %}
                                             {% block overlayContent %}
                                                 <form method="post" accept-charset="UTF-8" class="Overlay__Form">
@@ -69,7 +69,7 @@
                                                 </form>
                                             {% endblock %}
                                         {% endembed %}
-                                    </script>
+                                    </div>
                                 </div>
                             </div>
                             <a href="{{ productModel.url }}" class="button button--colored button--outlined">
@@ -78,11 +78,36 @@
                         {% endblock %}
                         {% block secondaryContent %}
                             <div class="BlockCards__Notes">
-                                <div class="BlockCards__NotesTitle">
-                                    Notes <small><a href="#">edit</a></small>
+                                <div class="BlockCards__NotesTitle JSOverlayTriggerContainer">
+                                    Notes <small><a href="#" class="JSOverlayTriggerContainer__Trigger">edit</a></small>
+                                    <div type="text/template" class="JSOverlayTriggerContainer__Template" style="display: none;">
+                                        {% embed '_embeds/Overlay.twig' %}
+                                            {% block overlayContent %}
+                                                <form method="post" accept-charset="UTF-8" class="Overlay__Form">
+                                                    {{ csrfInput() }}
+                                                    <input type="hidden" name="action" value="store/license/update-notes">
+                                                    <input type="hidden" name="licenseId" value="{{ orderItemModel.id }}">
+                                                    <input type="hidden" name="redirect" value="{{ vars.redirectUrl }}">
+                                                    <div class="Overlay__Title">Notes for {{ productModel.title|typeset }}</div>
+                                                    <div class="Overlay__SubTitle">License Number:&nbsp;{{ orderItemModel.licenseKey }}</div>
+                                                    <div class="Overlay__SubTitle2">(use markdown for formatting)</div>
+                                                    <label class="label Overlay__FormLabel">
+                                                        <textarea
+                                                            name="notes"
+                                                            rows="8"
+                                                            class="textarea Overlay__FormInput"
+                                                        >{{ orderItemModel.notes|escape }}</textarea>
+                                                    </label>
+                                                    <div class="Overlay__FormSubmitGroup">
+                                                        <button class="button" type="submit">Submit</button>
+                                                    </div>
+                                                </form>
+                                            {% endblock %}
+                                        {% endembed %}
+                                    </div>
                                 </div>
                                 <div class="BlockCards__NotesBody">
-                                    {{ orderItemModel.notes|markdown|typeset }}
+                                    {{ orderItemModel.notes|escape|markdown|typeset }}
                                 </div>
                             </div>
                         {% endblock %}

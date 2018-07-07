@@ -7,6 +7,8 @@ use yii\web\Response;
 use modules\store\Store;
 use craft\web\Controller;
 use yii\web\BadRequestHttpException;
+use modules\store\models\OrderItemModel;
+use craft\web\Request as RequestService;
 use modules\store\factories\OrderItemsQueryFactory;
 
 /**
@@ -14,6 +16,12 @@ use modules\store\factories\OrderItemsQueryFactory;
  */
 class LicenseController extends Controller
 {
+    /** @var OrderItemModel $license */
+    private $license;
+
+    /** @var RequestService $requestService */
+    private $requestService;
+
     /**
      * Initialize controller request
      * @throws BadRequestHttpException
@@ -22,11 +30,27 @@ class LicenseController extends Controller
     {
         parent::init();
 
+        $this->requirePostRequest();
+
         if (Craft::$app->getUser()->isGuest) {
             throw new BadRequestHttpException(
                 'You must be logged in to perform this action.'
             );
         }
+
+        $this->requestService = Craft::$app->getRequest();
+
+        $this->license = OrderItemsQueryFactory::getFactory()
+            ->where('userId', Craft::$app->getUser()->getId())
+            ->where('disabled', 0)
+            ->where('id', (int) $this->requestService->post('licenseId'))
+            ->one();
+
+        if (! $this->license) {
+            throw new BadRequestHttpException(
+                'The specified license was not found.'
+            );
+        }
     }
 
     /**
@@ -34,31 +58,18 @@ class LicenseController extends Controller
      * @return Response
      * @throws \Exception
      * @throws \Throwable
-     * @throws BadRequestHttpException
      */
     public function actionAddDomain(): Response
     {
-        $this->requirePostRequest();
+        $this->license->addAuthorizedDomain(
+            $this->requestService->post('domain')
+        );
 
-        $requestService = Craft::$app->getRequest();
+        Store::orderService()->saveOrderItem($this->license);
 
-        $license = OrderItemsQueryFactory::getFactory()
-            ->where('userId', Craft::$app->getUser()->getId())
-            ->where('disabled', 0)
-            ->where('id', (int) $requestService->post('licenseId'))
-            ->one();
-
-        if (! $license) {
-            throw new BadRequestHttpException(
-                'The license specified was not found.'
-            );
-        }
-
-        $license->addAuthorizedDomain($requestService->post('domain'));
-
-        Store::orderService()->saveOrderItem($license);
-
-        return $this->redirect($requestService->post('redirect', '/account'));
+        return $this->redirect(
+            $this->requestService->post('redirect', '/account')
+        );
     }
 
     /**
@@ -66,30 +77,33 @@ class LicenseController extends Controller
      * @return Response
      * @throws \Exception
      * @throws \Throwable
-     * @throws BadRequestHttpException
      */
     public function actionRemoveDomain(): Response
     {
-        $this->requirePostRequest();
+        $this->license->removeAuthorizedDomain(
+            $this->requestService->post('domainId')
+        );
 
-        $requestService = Craft::$app->getRequest();
+        Store::orderService()->saveOrderItem($this->license);
 
-        $license = OrderItemsQueryFactory::getFactory()
-            ->where('userId', Craft::$app->getUser()->getId())
-            ->where('disabled', 0)
-            ->where('id', (int) $requestService->post('licenseId'))
-            ->one();
+        return $this->redirect(
+            $this->requestService->post('redirect', '/account')
+        );
+    }
 
-        if (! $license) {
-            throw new BadRequestHttpException(
-                'The license specified was not found.'
-            );
-        }
+    /**
+     * Edits the notes on a license
+     * @throws \Exception
+     * @throws \Throwable
+     */
+    public function actionUpdateNotes()
+    {
+        $this->license->notes = $this->requestService->post('notes');
 
-        $license->removeAuthorizedDomain($requestService->post('domainId'));
+        Store::orderService()->saveOrderItem($this->license);
 
-        Store::orderService()->saveOrderItem($license);
-
-        return $this->redirect($requestService->post('redirect', '/account'));
+        return $this->redirect(
+            $this->requestService->post('redirect', '/account')
+        );
     }
 }
