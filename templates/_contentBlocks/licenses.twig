@@ -1,46 +1,46 @@
 {% set vars = block.meta %}
 
-<div class="BlockLicenses">
-    <div class="BlockLicenses__Inner">
-        <form action="{{ vars.baseUrl }}" class="BlockLicenses__Search">
-            <div class="BlockLicenses__SearchInputWrapper">
+<div class="BlockCards">
+    <div class="BlockCards__Inner">
+        <form action="{{ vars.baseUrl }}" class="BlockCards__Search">
+            <div class="BlockCards__SearchInputWrapper">
                 <input
                     type="text"
                     name="filter"
                     placeholder="Filter by keyword..."
-                    class="input BlockLicenses__SearchInput"
+                    class="input BlockCards__SearchInput"
                     value="{{ vars.currentFilter }}"
                 >
             </div>
-            <div class="BlockLicenses__SearchSubmitWrapper">
+            <div class="BlockCards__SearchSubmitWrapper">
                 <input
                     type="submit"
                     value="Filter"
-                    class="button BlockLicenses__SearchSubmit"
+                    class="button BlockCards__SearchSubmit"
                 >
             </div>
         </form>
     </div>
-    <ul class="BlockLicenses__Cards">
+    <ul class="BlockCards__Cards">
         {% for orderItemModel in vars.items %}
             {# @var \modules\store\models\OrderItemModel orderItemModel #}
             {% set productModel = orderItemModel.getStoreProductModel() %}
-            <li class="BlockLicenses__Card">
+            <li class="BlockCards__Card">
                 {% embed '_embeds/Card.twig' %}
                     {% block headerPrimaryContent %}{{ productModel.title }}{% endblock %}
                     {% block headerSecondaryContent %}{{ orderItemModel.licenseKey }}{% endblock %}
                     {% block primaryContent %}
-                        <div class="BlockLicenses__AuthorizedDomains">
-                            <div class="BlockLicenses__AuthorizedDomainsTitle">Authorized Domains</div>
-                            <ul class="BlockLicenses__AuthorizedDomainsList">
-                                <li class="BlockLicenses__AuthorizedDomainsListItem">
+                        <div class="BlockCards__AuthorizedDomains">
+                            <div class="BlockCards__AuthorizedDomainsTitle">Authorized Domains</div>
+                            <ul class="BlockCards__AuthorizedDomainsList">
+                                <li class="BlockCards__AuthorizedDomainsListItem">
                                     buzzingpixel.com <small>(<a href="#">remove</a>)</small>
                                 </li>
-                                <li class="BlockLicenses__AuthorizedDomainsListItem">
+                                <li class="BlockCards__AuthorizedDomainsListItem">
                                     moviebyte.com <small>(<a href="#">remove</a>)</small>
                                 </li>
                             </ul>
-                            <div class="BlockLicenses__AuthorizedDomainsAdd">
+                            <div class="BlockCards__AuthorizedDomainsAdd">
                                 <a href="#">Add Domain</a>
                             </div>
                         </div>
@@ -49,11 +49,11 @@
                         </a>
                     {% endblock %}
                     {% block secondaryContent %}
-                        <div class="BlockLicenses__Notes">
-                            <div class="BlockLicenses__NotesTitle">
+                        <div class="BlockCards__Notes">
+                            <div class="BlockCards__NotesTitle">
                                 Notes <small><a href="#">edit</a></small>
                             </div>
-                            <div class="BlockLicenses__NotesBody">
+                            <div class="BlockCards__NotesBody">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, iste, voluptatem? Autem, dolor doloremque facere fugiat id iure magnam neque nihil pariatur possimus quas quo similique tempora temporibus totam vero?</p>
                                 <ul><li>things</li><li>stuff</li></ul>
                             </div>
