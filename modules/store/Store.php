@@ -172,7 +172,8 @@ class Store extends Module
         return new StripeUserService(
             new StripeCustomer(),
             DevModule::userService(),
-            new QueryFactory()
+            new QueryFactory(),
+            Craft::$app->getDb()
         );
     }
 

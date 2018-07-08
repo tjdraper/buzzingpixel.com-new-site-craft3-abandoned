@@ -23,7 +23,7 @@ class LicenseController extends Controller
     private $requestService;
 
     /**
-     * Initialize controller request
+     * Initializes controller request
      * @throws BadRequestHttpException
      */
     public function init()

@@ -4,8 +4,8 @@ namespace dev\controllers;
 
 use Craft;
 use dev\Module;
-use modules\store\Store;
 use yii\web\Response;
+use modules\store\Store;
 use yii\web\HttpException;
 use dev\services\PaginationGeneratorService;
 use modules\store\factories\OrderItemsQueryFactory;
@@ -246,6 +246,7 @@ class AccountController extends BaseController
                         'meta' => [
                             'blockType' => 'paymentMethods',
                             'items' => $userCards,
+                            'redirectUrl' => '/account/payment',
                         ]
                     ],
                 ],

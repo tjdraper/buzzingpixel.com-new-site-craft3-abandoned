@@ -46,9 +46,15 @@
                         {% endblock %}
                         {% block footerPrimaryContent %}
                             {#<a href="#" class="button">Make Default</a>#}
-                            <a href="#" class="button button--danger">
-                                Remove
-                            </a>
+                            <form method="post" accept-charset="UTF-8" class="Overlay__Form">
+                                {{ csrfInput() }}
+                                <input type="hidden" name="action" value="store/payment/delete">
+                                <input type="hidden" name="localCardId" value="{{ cardModel.id }}">
+                                <input type="hidden" name="redirect" value="{{ vars.redirectUrl }}">
+                                <button type="submit" class="button button--danger">
+                                    Remove
+                                </button>
+                            </form>
                         {% endblock %}
                         {% block footerSecondaryContent %}
                             {#<a href="#" class="button button--colored button--outlined">#}

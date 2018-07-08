@@ -9,6 +9,7 @@ use modules\store\models\CartModel;
 use yii\db\Exception as DbException;
 use Stripe\Customer as StripeCustomer;
 use \modules\store\models\PaymentModel;
+use craft\db\Connection as DbConnection;
 use modules\store\factories\QueryFactory;
 
 /**
@@ -23,22 +24,28 @@ class StripeUserService
     private $userService;
 
     /** @var QueryFactory $queryFactory */
-    public $queryFactory;
+    private $queryFactory;
+
+    /** @var DbConnection $dbConnection */
+    private $dbConnection;
 
     /**
      * StripeUserService constructor
      * @param StripeCustomer $stripeCustomer
      * @param UserService $userService
      * @param QueryFactory $queryFactory
+     * @param DbConnection $dbConnection
      */
     public function __construct(
         StripeCustomer $stripeCustomer,
         UserService $userService,
-        QueryFactory $queryFactory
+        QueryFactory $queryFactory,
+        DbConnection $dbConnection
     ) {
         $this->stripeCustomer = $stripeCustomer;
         $this->userService = $userService;
         $this->queryFactory = $queryFactory;
+        $this->dbConnection = $dbConnection;
     }
 
     /**
@@ -243,5 +250,31 @@ class StripeUserService
         );
 
         return $cardModel;
+    }
+
+    /**
+     * Deletes a card
+     * @param CardModel $card
+     * @throws \ReflectionException
+     * @throws DbException
+     */
+    public function deleteCard(CardModel $card)
+    {
+        $userModel = $this->userService->getUserModel();
+
+        /** @var StripeCustomer $customer */
+        $customer = $this->stripeCustomer::retrieve(
+            $userModel->getProperty('stripeCustomerId')
+        );
+
+        $customer->sources->retrieve($card->stripeCardId)->delete();
+
+        $this->dbConnection->createCommand()
+            ->delete(
+                '{{%storeCards}}',
+                '`id` = :id',
+                [':id' => $card->id]
+            )
+        ->execute();
     }
 }
