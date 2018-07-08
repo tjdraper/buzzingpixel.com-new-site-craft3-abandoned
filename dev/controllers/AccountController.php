@@ -7,6 +7,7 @@ use dev\Module;
 use yii\web\Response;
 use modules\store\Store;
 use yii\web\HttpException;
+use \yii\db\Exception as DbException;
 use dev\services\PaginationGeneratorService;
 use modules\store\factories\OrderItemsQueryFactory;
 
@@ -209,7 +210,7 @@ class AccountController extends BaseController
                 array_merge(Craft::$app->getUrlManager()->getRouteParams(), [
                     'metaTitle' => 'Log in to your account',
                     'metaDescription' => null,
-                    'redirectUrl' => '/account/payment'
+                    'redirectUrl' => '/account/payment',
                 ]),
                 false
             );
@@ -246,6 +247,84 @@ class AccountController extends BaseController
                         'meta' => [
                             'blockType' => 'paymentMethods',
                             'items' => $userCards,
+                            'redirectUrl' => '/account/payment',
+                        ]
+                    ],
+                ],
+            ],
+            false
+        );
+    }
+
+    /**
+     * Displays the form for editing a user's specific card
+     * @param int $cardId
+     * @return Response
+     * @throws \ReflectionException
+     * @throws DbException
+     * @throws \LogicException
+     */
+    public function actionEditPayment(int $cardId): Response
+    {
+        $craftUser = Craft::$app->getUser();
+
+        // If the user is a guest, we need for them to log in
+        if ($craftUser->getIsGuest()) {
+            return $this->renderTemplate(
+                '_core/StandAloneLoginForm.twig',
+                array_merge(Craft::$app->getUrlManager()->getRouteParams(), [
+                    'metaTitle' => 'Log in to your account',
+                    'metaDescription' => null,
+                    'redirectUrl' => '/account/payment/edit/' . $cardId,
+                ]),
+                false
+            );
+        }
+
+        $card = Store::stripeUserService()->getCardByLocalId(
+            $cardId,
+            Module::userService()->getUserModel()
+        );
+
+        $sectionNav = self::$secionNav;
+        $sectionNav['payment']['isActive'] = true;
+
+        $breadcrumbs = [
+            [
+                'link' => '/account/payment',
+                'content' => 'Payment Methods',
+            ],
+            [
+                'link' => false,
+                'content' => 'Editing Method...',
+            ]
+        ];
+
+        return $this->renderTemplate(
+            '_core/PageStandard.twig',
+            [
+                'breadcrumbs' => $breadcrumbs,
+                'contentModel' => null,
+                'content' => null,
+                'contentMeta' => null,
+                'metaTitle' => 'Edit Payment Method',
+                'metaDescription' => null,
+                'header' => [
+                    'meta' => [
+                        'heading' => 'Edit Payment Method',
+                    ],
+                ],
+                'contentBlocks' => [
+                    [
+                        'meta' => [
+                            'blockType' => 'navBar',
+                            'navItems' => $sectionNav
+                        ],
+                    ],
+                    [
+                        'meta' => [
+                            'blockType' => 'editPaymentMethod',
+                            'cardModel' => $card,
                             'redirectUrl' => '/account/payment',
                         ]
                     ],

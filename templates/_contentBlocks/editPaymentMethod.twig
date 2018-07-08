@@ -1,0 +1,132 @@
+{# @var \modules\store\models\CardModel cardModel #}
+{% set cardModel = block.meta.cardModel %}
+
+<div class="BlockEditPaymentMethod">
+    <div class="BlockEditPaymentMethod__Inner">
+        <div class="BlockEditPaymentMethod__TitleArea">
+            <span class="BlockEditPaymentMethod__MobileBreak">Editing Card:</span> <span class="BlockEditPaymentMethod__MobileBreak">{{ cardModel.cardNickName|escape|typeset }}</span> <span class="BlockEditPaymentMethod__MobileBreak">(...{{ cardModel.last4 }})</span>
+        </div>
+        <form method="post" accept-charset="UTF-8" class="BlockEditPaymentMethod__Form">
+            {% embed '_embeds/LayoutTwoColumns.twig' %}
+                {% block leftColumnContent %}
+                    <label class="label BlockEditPaymentMethod__InputLabel">
+                        Address
+                        <input type="text" name="address_line1" class="input BlockEditPaymentMethod__Input" value="{{ cardModel.address_line1|escape|typeset }}" required>
+                    </label>
+                    <label class="label BlockEditPaymentMethod__InputLabel">
+                        Address Continued
+                        <input type="text" name="address_line2" class="input BlockEditPaymentMethod__Input" value="{{ cardModel.address_line2|escape|typeset }}">
+                    </label>
+                    <label class="label BlockEditPaymentMethod__InputLabel">
+                        City
+                        <input type="text" name="address_city" class="input BlockEditPaymentMethod__Input" value="{{ cardModel.address_city|escape|typeset }}" required>
+                    </label>
+                    <label class="label BlockEditPaymentMethod__InputLabel">
+                        State/Province
+                        {% if cardModel.address_country == 'US' %}
+                            <select name="address_state" class="select BlockEditPaymentMethod__Select" required>
+                                <option value="" disabled>
+                                    Select State...
+                                </option>
+                                {% for stateAbbr,stateName in states() %}
+                                    <option
+                                        value="{{ stateAbbr }}"
+                                        {% if stateAbbr == cardModel.address_state %}
+                                        selected
+                                        {% endif %}
+                                    >
+                                        {{ stateName }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        {% else %}
+                            <input type="text" name="address_state" class="input BlockEditPaymentMethod__Input" value="{{ cardModel.address_state|escape|typeset }}" required>
+                        {% endif %}
+                    </label>
+                    <label class="label BlockEditPaymentMethod__InputLabel">
+                        Postal Code
+                        <input type="text" name="address_zip" class="input BlockEditPaymentMethod__Input" value="{{ cardModel.address_zip|escape|typeset }}" required>
+                    </label>
+                    <label class="label BlockEditPaymentMethod__InputLabel">
+                        Country
+                        <select
+                            name="address_country"
+                            class="select BlockEditPaymentMethod__Select"
+                            required
+                        >
+                            <option value="" disabled>Select Country...</option>
+                            {% for country in countries().all() %}
+                                <option
+                                    value="{{ country.alpha2 }}"
+                                    {% if cardModel.address_country == country.alpha2 %}
+                                    selected
+                                    {% endif %}
+                                >
+                                    {{ country.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                {% endblock %}
+                {% block rightColumnContent %}
+                    <label class="label BlockEditPaymentMethod__InputLabel">
+                        Name on Card
+                        <input type="text" name="name" class="input BlockEditPaymentMethod__Input" value="{{ cardModel.name|escape|typeset }}" required>
+                    </label>
+                    <label class="label BlockEditPaymentMethod__InputLabel">
+                        Expiration Month
+                        <select
+                            name="exp_month"
+                            class="select BlockEditPaymentMethod__Select"
+                            required
+                        >
+                            <option value="" disabled>Select Month...</option>
+                            {% for month in months() %}
+                                <option
+                                    value="{{ month.numeric }}"
+                                    {% if cardModel.exp_month == month.num %}
+                                    selected
+                                    {% endif %}
+                                >
+                                    {{ month.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                    <label class="label BlockEditPaymentMethod__InputLabel">
+                        Expiration Year
+                        <select
+                            name="exp_year"
+                            class="select BlockEditPaymentMethod__Select"
+                            required
+                        >
+                            <option value="" disabled>Select Month...</option>
+                            {% for year in years() %}
+                                <option
+                                    value="{{ year }}"
+                                    {% if cardModel.exp_year == year %}
+                                    selected
+                                    {% endif %}
+                                >
+                                    {{ year }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                    <label class="label BlockEditPaymentMethod__InputLabel">
+                        Card Nickname
+                        <input type="text" name="cardNickName" class="input BlockEditPaymentMethod__Input" value="{{ cardModel.cardNickName|escape|typeset }}" required>
+                    </label>
+                    <div class="BlockEditPaymentMethod__SubmitWrapper">
+                        <button
+                            type="submit"
+                            class="button"
+                        >
+                            Update Card
+                        </button>
+                    </div>
+                {% endblock %}
+            {% endembed %}
+        </form>
+    </div>
+</div>

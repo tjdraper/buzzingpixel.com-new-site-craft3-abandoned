@@ -26,10 +26,21 @@
                                 <dd class="BlockCards__DefinitionDefinition">{{ cardModel.address_city|escape|typeset }}</dd>
 
                                 <dt class="BlockCards__DefinitionTerm">State/Province</dt>
-                                <dd class="BlockCards__DefinitionDefinition">{{ cardModel.address_state|escape|typeset }}</dd>
+                                <dd class="BlockCards__DefinitionDefinition">
+                                    {% if cardModel.address_country == 'US' and states()[cardModel.address_state] is defined %}
+                                        {{ states()[cardModel.address_state]|escape|typeset }}
+                                    {% else %}
+                                        {{ cardModel.address_state|escape|typeset }}
+                                    {% endif %}
+                                </dd>
 
                                 <dt class="BlockCards__DefinitionTerm">Postal Code</dt>
                                 <dd class="BlockCards__DefinitionDefinition">{{ cardModel.address_zip|escape|typeset }}</dd>
+
+                                <dt class="BlockCards__DefinitionTerm">Country</dt>
+                                <dd class="BlockCards__DefinitionDefinition">
+                                    {{ countries().alpha2(cardModel.address_country).name|escape|typeset }}
+                                </dd>
                             </dl>
                         {% endblock %}
                         {% block secondaryContent %}
@@ -60,7 +71,7 @@
                             {#<a href="#" class="button button--colored button--outlined">#}
                                 {#Remove#}
                             {#</a>#}
-                            <a href="#" class="button button--colored button--outlined">
+                            <a href="/account/payment/edit/{{ cardModel.id }}" class="button button--colored button--outlined">
                                 Edit
                             </a>
                         {% endblock %}
