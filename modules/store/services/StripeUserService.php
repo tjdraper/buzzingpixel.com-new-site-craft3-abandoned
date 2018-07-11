@@ -60,7 +60,6 @@ class StripeUserService
     {
         $metaData = [
             'displayName' => $userModel->displayName,
-            'billingPhoneNumber' => $userModel->billingPhoneNumber,
             'billingCountry' => $userModel->billingCountry,
             'billingName' => $userModel->billingName,
             'billingCompany' => $userModel->billingCompany,

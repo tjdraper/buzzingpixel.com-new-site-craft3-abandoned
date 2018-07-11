@@ -28,9 +28,6 @@ class UserModel extends Model
     /** @var string $displayName */
     public $displayName;
 
-    /** @var string $billingPhoneNumber */
-    public $billingPhoneNumber;
-
     /** @var string $billingCountry */
     public $billingCountry;
 
@@ -75,7 +72,6 @@ class UserModel extends Model
             'emailAddress' => EmailHandler::class,
             'stripeCustomerId' => StringHandler::class,
             'displayName' => StringHandler::class,
-            'billingPhoneNumber' => StringHandler::class,
             'billingCountry' => StringHandler::class,
             'billingName' => StringHandler::class,
             'billingCompany' => StringHandler::class,
@@ -103,7 +99,6 @@ class UserModel extends Model
             'userId' => $this->getProperty('userId'),
             'stripeCustomerId' => $this->getProperty('stripeCustomerId'),
             'displayName' => $this->getProperty('displayName'),
-            'billingPhoneNumber' => $this->getProperty('billingPhoneNumber'),
             'billingCountry' => $this->getProperty('billingCountry'),
             'billingName' => $this->getProperty('billingName'),
             'billingCompany' => $this->getProperty('billingCompany'),

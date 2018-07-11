@@ -293,7 +293,6 @@ class CartService
     {
         $this->cartModel->cartData = [];
         $this->cartModel->paymentMethod = null;
-        $this->cartModel->phoneNumber = null;
         $this->cartModel->country = null;
         $this->cartModel->name = null;
         $this->cartModel->company = null;

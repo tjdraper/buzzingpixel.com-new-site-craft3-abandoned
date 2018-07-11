@@ -28,9 +28,6 @@ class CartModel
     /** @var string $paymentMethod */
     public $paymentMethod;
 
-    /** @var string $phoneNumber */
-    public $phoneNumber;
-
     /** @var string $country */
     public $country;
 
@@ -115,7 +112,6 @@ class CartModel
             'sessionId' => $this->sessionId,
             'cartData' => json_encode($this->cartData),
             'paymentMethod' => $this->paymentMethod,
-            'phoneNumber' => $this->phoneNumber,
             'country' => $this->country,
             'name' => $this->name,
             'company' => $this->company,
@@ -226,7 +222,6 @@ class CartModel
     public function validateForCheckout(): array
     {
         $requiredProperties = [
-            'phoneNumber',
             'country',
             'name',
             'address',

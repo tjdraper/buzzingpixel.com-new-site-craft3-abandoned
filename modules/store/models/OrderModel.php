@@ -49,9 +49,6 @@ class OrderModel
     /** @var string $company */
     public $company;
 
-    /** @var string $phoneNumber */
-    public $phoneNumber;
-
     /** @var string $country */
     public $country;
 

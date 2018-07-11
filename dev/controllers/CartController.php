@@ -47,16 +47,17 @@ class CartController extends BaseController
 
         $userCards = [];
 
+        $userModel = Module::userService()->getUserModel();
+
         if (! Craft::$app->getUser()->isGuest) {
-            $userCards = Store::stripeUserService()->getUserCards(
-                Module::userService()->getUserModel()
-            );
+            $userCards = Store::stripeUserService()->getUserCards($userModel);
         }
 
         return $this->renderTemplate(
             '_core/Cart.twig',
             array_merge(
                 [
+                    'metaTitle' => 'Your Cart',
                     'header' => [
                         'meta' => [
                             'heading' => 'Checkout',
@@ -67,6 +68,7 @@ class CartController extends BaseController
                     'checkoutInputErrors' => [],
                     'checkoutErrorMessage' => '',
                     'userCards' => $userCards,
+                    'userModel' => $userModel,
                 ],
                 Craft::$app->getUrlManager()->getRouteParams()
             ),

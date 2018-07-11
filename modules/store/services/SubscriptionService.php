@@ -3,7 +3,6 @@
 namespace modules\store\services;
 
 use dev\models\UserModel;
-use modules\store\models\CardModel;
 use modules\store\models\OrderItemModel;
 use Stripe\Subscription as StripeSubscription;
 
@@ -28,13 +27,11 @@ class SubscriptionService
      * Start subscriptions for order items
      * @param OrderItemModel[] $orderItems
      * @param UserModel $userModel
-     * @param CardModel $cardModel
      * @throws \Exception
      */
     public function startSubscriptionsForOrderItems(
         array $orderItems,
-        UserModel $userModel,
-        CardModel $cardModel
+        UserModel $userModel
     ) {
         $date = new \DateTime();
         $date->add(new \DateInterval('P1Y'));
@@ -66,7 +63,6 @@ class SubscriptionService
                     'licenseKey' => $orderItem->licenseKey,
                 ],
                 'prorate' => false,
-                'source' => $cardModel->stripeCardId,
             ]);
         }
     }

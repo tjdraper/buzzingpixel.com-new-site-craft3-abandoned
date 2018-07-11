@@ -32,6 +32,8 @@ function runCartSubmission(F) {
                 data: self.$el.serialize(),
                 method: 'POST',
                 success: function(resp) {
+                    var redirect;
+
                     if (! resp.success) {
                         if (! resp.message) {
                             resp.message = 'We had a problem with your submission';
@@ -44,7 +46,9 @@ function runCartSubmission(F) {
                         return;
                     }
 
-                    console.log(resp);
+                    redirect = resp.redirect || '/cart/order-success';
+
+                    location.href = redirect;
                 },
                 error: function() {
                     alert('An unknown error occurred while submitting your information. This page will refresh so you can try again.');

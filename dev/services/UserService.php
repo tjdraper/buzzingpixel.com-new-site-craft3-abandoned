@@ -114,7 +114,6 @@ class UserService
         UserModel $userModel,
         CartModel $cartModel
     ): UserModel {
-        $userModel->setProperty('billingPhoneNumber', $cartModel->phoneNumber);
         $userModel->setProperty('billingCountry', $cartModel->country);
         $userModel->setProperty('billingName', $cartModel->name);
         $userModel->setProperty('billingCompany', $cartModel->company);

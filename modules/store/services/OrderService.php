@@ -88,7 +88,6 @@ class OrderService
                         'total' => $cartModel->getTotal(),
                         'name' => $cartModel->name,
                         'company' => $cartModel->company,
-                        'phoneNumber' => $cartModel->phoneNumber,
                         'country' => $cartModel->country,
                         'address' => $cartModel->address,
                         'addressContinued' => $cartModel->addressContinued,

@@ -294,8 +294,7 @@ class CartContentController extends Controller
 
         $subscriptionService->startSubscriptionsForOrderItems(
             $orderService->getOrderItemsByOrderId($orderId),
-            $userModel,
-            $cardModel
+            $userModel
         );
 
         $updateAcctInfo = $cartModel->updateAccountInfo &&
@@ -307,7 +306,22 @@ class CartContentController extends Controller
             $cartService->clearCart();
 
             if ($redirect) {
+                if ($request->getIsAjax()) {
+                    return $this->asJson([
+                        'success' => true,
+                        'message' => '',
+                        'redirect' => $redirect,
+                    ]);
+                }
+
                 return $this->redirect($redirect);
+            }
+
+            if ($request->getIsAjax()) {
+                return $this->asJson([
+                    'success' => true,
+                    'message' => '',
+                ]);
             }
 
             return null;
@@ -323,7 +337,22 @@ class CartContentController extends Controller
         $cartService->clearCart();
 
         if ($redirect) {
+            if ($request->getIsAjax()) {
+                return $this->asJson([
+                    'success' => true,
+                    'message' => '',
+                    'redirect' => $redirect,
+                ]);
+            }
+
             return $this->redirect($redirect);
+        }
+
+        if ($request->getIsAjax()) {
+            return $this->asJson([
+                'success' => true,
+                'message' => '',
+            ]);
         }
 
         return null;

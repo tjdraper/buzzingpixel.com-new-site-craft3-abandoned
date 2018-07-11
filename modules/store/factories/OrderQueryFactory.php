@@ -74,7 +74,6 @@ class OrderQueryFactory extends AbstractQueryFactory
         $model->tax = (float) $queryResult['tax'];
         $model->name = $queryResult['name'];
         $model->company = $queryResult['company'];
-        $model->phoneNumber = $queryResult['phoneNumber'];
         $model->country = $queryResult['country'];
         $model->address = $queryResult['address'];
         $model->addressContinued = $queryResult['addressContinued'];

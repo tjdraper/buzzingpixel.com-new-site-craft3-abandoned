@@ -3,6 +3,7 @@
 {# @var string checkoutErrorMessage #}
 {# @var \modules\store\models\CartModel cartModel #}
 {# @var \modules\store\models\CardModel[] userCards #}
+{# @var \dev\models\UserModel userModel #}
 
 {% extends '_layouts/Master.twig' %}
 
@@ -74,9 +75,9 @@
                                                     {% endif %}
                                                 >
                                                     {% if card.cardNickName %}
-                                                        {{ card.cardNickName }} (&hellip;{{ card.last4 }})
+                                                        {{ card.cardNickName|escape }} (&hellip;{{ card.last4|escape }})
                                                     {% else %}
-                                                        xxxxxxxxxxxx{{ card.last4 }}
+                                                        xxxxxxxxxxxx{{ card.last4|escape }}
                                                     {% endif %}
                                                 </option>
                                             {% endfor %}
@@ -141,26 +142,6 @@
                                     <h2 class="CheckoutForm__SectionHeader">Billing</h2>
                                     <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
                                         <label class="label CheckoutForm__Label CheckoutForm__Label--Required input-parent">
-                                            Phone Number
-                                            <input
-                                                type="text"
-                                                name="phoneNumber"
-                                                class="input{% if checkoutInputErrors['phoneNumber'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
-                                                placeholder="i.e. 123-555-1212"
-                                                value="{{ cartModel.phoneNumber }}"
-                                                required
-                                            >
-                                            {% if checkoutInputErrors['phoneNumber'] is defined %}
-                                                <ul class="CheckoutForm__InputErrors">
-                                                    {% for error in checkoutInputErrors.phoneNumber %}
-                                                        <li class="CheckoutForm__InputErrorItem">
-                                                            {{ error|typeset }}
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            {% endif %}
-                                        </label>
-                                        <label class="label CheckoutForm__Label CheckoutForm__Label--Required input-parent">
                                             Country
                                             <select
                                                 name="country"
@@ -171,7 +152,8 @@
                                                 {% for country in countries().all() %}
                                                     <option
                                                         value="{{ country.alpha2 }}"
-                                                        {% if cartModel.country == country.alpha2 or (not cartModel.country and country.alpha2 == 'US') %}
+                                                        {% set countrySet = cartModel.country ?: userModel.billingCountry %}
+                                                        {% if countrySet == country.alpha2 or (not countrySet and country.alpha2 == 'US') %}
                                                         selected
                                                         {% endif %}
                                                     >
@@ -198,7 +180,7 @@
                                                 name="name"
                                                 class="input{% if checkoutInputErrors['name'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                                 placeholder="i.e. John Smith"
-                                                value="{{ cartModel.name }}"
+                                                value="{{ cartModel.name|escape ?: userModel.billingName|escape }}"
                                                 required
                                             >
                                             {% if checkoutInputErrors['name'] is defined %}
@@ -218,7 +200,7 @@
                                                 name="company"
                                                 class="input{% if checkoutInputErrors['company'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                                 placeholder="i.e. BuzzingPixel, LLC"
-                                                value="{{ cartModel.company }}"
+                                                value="{{ cartModel.company|escape ?: userModel.billingCompany|escape }}"
                                             >
                                             {% if checkoutInputErrors['company'] is defined %}
                                                 <ul class="CheckoutForm__InputErrors">
@@ -238,7 +220,7 @@
                                             name="address"
                                             class="input{% if checkoutInputErrors['address'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. 123 Some Street"
-                                            value="{{ cartModel.address }}"
+                                            value="{{ cartModel.address|escape ?: userModel.billingAddress|escape }}"
                                             required
                                         >
                                         {% if checkoutInputErrors['address'] is defined %}
@@ -258,7 +240,7 @@
                                             name="addressContinued"
                                             class="input{% if checkoutInputErrors['addressContinued'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. Suite 201"
-                                            value="{{ cartModel.addressContinued }}"
+                                            value="{{ cartModel.addressContinued|escape ?: userModel.billingAddressContinued|escape }}"
                                         >
                                         {% if checkoutInputErrors['addressContinued'] is defined %}
                                             <ul class="CheckoutForm__InputErrors">
@@ -277,7 +259,7 @@
                                             name="city"
                                             class="input{% if checkoutInputErrors['city'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                             placeholder="i.e. Metropolis"
-                                            value="{{ cartModel.city }}"
+                                            value="{{ cartModel.city|escape ?: userModel.billingCity|escape }}"
                                             required
                                         >
                                         {% if checkoutInputErrors['city'] is defined %}
@@ -291,10 +273,17 @@
                                         {% endif %}
                                     </label>
                                     <div class="CheckoutForm__LabelGroupWrapper CheckoutForm__LabelGroupWrapper--Dual">
-                                        {% include '_partials/CheckoutStateSelect.twig' with {
-                                            value: cartModel.stateProvince,
-                                            errors: checkoutInputErrors['stateProvince'] ?? {}
-                                        } only %}
+                                        {% set countrySet = cartModel.country ?: userModel.billingCountry %}
+                                        {% if countrySet == 'US' %}
+                                            {% include '_partials/CheckoutStateSelect.twig' with {
+                                                value: cartModel.stateProvince ?: userModel.billingStateProvince,
+                                                errors: checkoutInputErrors['stateProvince'] ?? {}
+                                            } only %}
+                                        {% else %}
+                                            {% include '_partials/CheckoutStateProvince.twig' with {
+                                                value: cartModel.stateProvince ?: userModel.billingStateProvince
+                                            } only %}
+                                        {% endif %}
                                         <label class="label CheckoutForm__Label CheckoutForm__Label--Required input-parent">
                                             Postal Code
                                             <input
@@ -302,7 +291,7 @@
                                                 name="postalCode"
                                                 class="input{% if checkoutInputErrors['postalCode'] is defined %} input--has-error{% endif %} CheckoutForm__Input JSCheckoutForm__Input JSCheckoutForm__Input--UpdateWatch"
                                                 placeholder="i.e. 12345"
-                                                value="{{ cartModel.postalCode }}"
+                                                value="{{ cartModel.postalCode|escape ?: userModel.billingPostalCode|escape }}"
                                                 required
                                             >
                                             {% if checkoutInputErrors['postalCode'] is defined %}
