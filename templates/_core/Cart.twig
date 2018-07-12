@@ -107,7 +107,7 @@
                                     style="display: none;"
                                     {% endif %}
                                 >
-                                    <label class="label CheckoutForm__Label">
+                                    <div class="label CheckoutForm__Label">
                                         <noscript>You do not have JavaScript enabled. Without JavaScript enabled, the price reflected on the button might not be the final price.</noscript>
                                         <input
                                             class="button CheckoutForm__PaySubmit JSCheckoutForm__SubmitPayment"
@@ -123,7 +123,7 @@
                                         <small class="Block Gray">
                                             By submitting your payment, you agree to abide by the <a href="/terms">terms of service</a>, <a href="/privacy">privacy policy</a>, and&nbsp;<a href="/cookies">cookie&nbsp;policy</a>.
                                         </small>
-                                    </label>
+                                    </div>
                                     <div class="JSAjaxCartSubmissionNotice" style="display: none;">
                                         {% embed '_embeds/Note.twig' with {
                                             isError: true,
@@ -419,7 +419,7 @@
                                             </ul>
                                         {% endif %}
                                     </label>
-                                    <label class="label CheckoutForm__Label CheckoutForm__Label--PaySubmit">
+                                    <div class="label CheckoutForm__Label CheckoutForm__Label--PaySubmit">
                                         <noscript>You do not have JavaScript enabled. Without JavaScript enabled, the price reflected on the button might not be the final price.</noscript>
                                         <input
                                             class="button CheckoutForm__PaySubmit JSCheckoutForm__SubmitPayment"
@@ -435,7 +435,7 @@
                                         <small class="Block Gray">
                                             By submitting your payment, you agree to abide by the <a href="/terms">terms of service</a>, <a href="/privacy">privacy policy</a>, and&nbsp;<a href="/cookies">cookie&nbsp;policy</a>.
                                         </small>
-                                    </label>
+                                    </div>
                                     <div class="JSAjaxCartSubmissionNotice" style="display: none;">
                                         {% embed '_embeds/Note.twig' with {
                                             isError: true,
