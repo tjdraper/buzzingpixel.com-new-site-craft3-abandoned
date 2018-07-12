@@ -1,0 +1,35 @@
+.Spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+
+    position: relative;
+}
+
+.Spinner__Bounce1,
+.Spinner__Bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--orange);
+    opacity: 0.85;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    animation: SKBounce 2.0s infinite ease-in-out;
+}
+
+.Spinner__Bounce2 {
+    animation-delay: -1.0s;
+}
+
+@keyframes SKBounce {
+    0%,
+    100% {
+        transform: scale(0.0);
+    }
+    50% {
+        transform: scale(1.0);
+    }
+}

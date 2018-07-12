@@ -1,9 +1,29 @@
+{% set closeable = closeable ?? true %}
+{% set waiting = waiting ?? false %}
+{% set waitingContent = block('waitingContent') ?? false %}
 <div class="Overlay JSOverlay">
     <div class="Overlay__Inner">
         <div class="Overlay__Box">
             <div class="Overlay__BoxInner">
-                <span class="Overlay__CloseButton JSOverlay__CloseButton">{% include '_icons/icon-close.svg' %}</span>
-                {{ block('overlayContent') }}
+                {% if closeable %}
+                    <span class="Overlay__CloseButton JSOverlay__CloseButton">{% include '_icons/icon-close.svg' %}</span>
+                {% endif %}
+                {% if waiting %}
+                    <div class="Overlay__Waiting">
+                        <div class="Overlay__WaitingSpinner">
+                            <div class="Spinner">
+                                <div class="Spinner__Bounce1"></div>
+                                <div class="Spinner__Bounce2"></div>
+                            </div>
+                        </div>
+                        {% if waitingContent %}
+                            <div class="Overlay__WaitingContent">
+                                {{ waitingContent|typeset }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {{ block('overlayContent') ?? '' }}
             </div>
         </div>
     </div>

@@ -22,11 +22,16 @@ function runCartSubmission(F) {
         handleSubmission: function() {
             var self = this;
             var $actionInput = self.$el.find('.JSCheckoutForm__ActionInput');
+            var $overlay = $($('#JSCheckoutForm__SubmissionOverlay').html());
+            var $siteWrapper = $('.JSSiteWrapper');
 
             self.disableSubmitButton();
             self.hideErrorMessage();
 
             $actionInput.val($actionInput.data('checkoutAction'));
+
+            $siteWrapper.addClass($siteWrapper.data('hasOverlayClass'));
+            $siteWrapper.after($overlay);
 
             $.ajax({
                 data: self.$el.serialize(),
@@ -42,6 +47,12 @@ function runCartSubmission(F) {
                         self.showErrorMessage(resp.message);
 
                         self.handleSubmissionErrors(resp.checkoutInputErrors);
+
+                        $overlay.remove();
+
+                        $siteWrapper.removeClass(
+                            $siteWrapper.data('hasOverlayClass')
+                        );
 
                         return;
                     }

@@ -535,4 +535,15 @@
             value: cartModel.stateProvince
         } only %}
     </script>
+
+    <script type="text/template" id="JSCheckoutForm__SubmissionOverlay">
+        {% embed '_embeds/Overlay.twig' with {
+            closeable: false,
+            waiting: true,
+        } %}
+            {% block waitingContent %}
+                Wait just a moment,&nbsp;we're processing your order&hellip;
+            {% endblock %}
+        {% endembed %}
+    </script>
 {% endblock %}
