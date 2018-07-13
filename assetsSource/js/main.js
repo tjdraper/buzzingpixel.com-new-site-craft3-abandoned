@@ -120,6 +120,12 @@ function runMain(F) {
             el: this
         });
     });
+
+    $('.JSFormShowWaitingOnSubmit').each(function() {
+        F.controller.construct('FormWaitingOnSubmit', {
+            el: this
+        });
+    });
 }
 
 runMain(window.FAB);

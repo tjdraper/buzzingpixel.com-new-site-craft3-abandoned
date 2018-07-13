@@ -40,7 +40,17 @@
                                 <ul class="BlockCards__AuthorizedDomainsList">
                                     {% for domainId,domain in orderItemModel.authorizedDomains %}
                                         <li class="BlockCards__AuthorizedDomainsListItem">
-                                            <form method="post" accept-charset="UTF-8" class="JSFormClickSubmit">
+                                            <form method="post" accept-charset="UTF-8" class="JSFormClickSubmit JSFormShowWaitingOnSubmit">
+                                                <div class="JSFormShowWaitingOnSubmit__Overlay" style="display: none;">
+                                                    {% embed '_embeds/Overlay.twig' with {
+                                                        waiting: true,
+                                                        closeable: false,
+                                                    } %}
+                                                        {% block waitingContent %}
+                                                            One moment while we remove that domain&hellip;
+                                                        {% endblock %}
+                                                    {% endembed %}
+                                                </div>
                                                 {{ csrfInput() }}
                                                 <input type="hidden" name="action" value="store/license/remove-domain">
                                                 <input type="hidden" name="redirect" value="{{ vars.redirectUrl }}">
