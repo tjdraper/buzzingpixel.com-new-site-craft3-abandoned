@@ -2,7 +2,17 @@
 
 <div class="BlockCards">
     <div class="BlockCards__Inner">
-        <form action="{{ vars.baseUrl }}" class="BlockCards__Search">
+        <form action="{{ vars.baseUrl }}" class="BlockCards__Search JSFormShowWaitingOnSubmit">
+            <div class="JSFormShowWaitingOnSubmit__Overlay" style="display: none;">
+                {% embed '_embeds/Overlay.twig' with {
+                    waiting: true,
+                    closeable: false,
+                } %}
+                    {% block waitingContent %}
+                        We're looking up your results&hellip;
+                    {% endblock %}
+                {% endembed %}
+            </div>
             <div class="BlockCards__SearchInputWrapper">
                 <input
                     type="text"
