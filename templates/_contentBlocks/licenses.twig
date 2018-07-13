@@ -54,9 +54,15 @@
                                 <div class="BlockCards__AuthorizedDomainsAdd JSOverlayTriggerContainer">
                                     <a href="#" class="JSOverlayTriggerContainer__Trigger">Add Domain</a>
                                     <div type="text/template" class="JSOverlayTriggerContainer__Template" style="display: none;">
-                                        {% embed '_embeds/Overlay.twig' %}
+                                        {% embed '_embeds/Overlay.twig' with {
+                                            waiting: true,
+                                            waitingIsHidden: true,
+                                        } %}
+                                            {% block waitingContent %}
+                                                One sec, we're adding the domain&hellip;
+                                            {% endblock %}
                                             {% block overlayContent %}
-                                                <form method="post" accept-charset="UTF-8" class="Overlay__Form">
+                                                <form method="post" accept-charset="UTF-8" class="Overlay__Form JSOverlayForm__OnSubmitWait">
                                                     {{ csrfInput() }}
                                                     <input type="hidden" name="action" value="store/license/add-domain">
                                                     <input type="hidden" name="licenseId" value="{{ orderItemModel.id }}">

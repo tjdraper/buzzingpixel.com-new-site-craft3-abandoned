@@ -1,6 +1,7 @@
 {% set closeable = closeable ?? true %}
 {% set waiting = waiting ?? false %}
 {% set waitingContent = block('waitingContent') ?? false %}
+{% set waitingIsHidden = waitingIsHidden ?? false %}
 <div class="Overlay JSOverlay">
     <div class="Overlay__Inner">
         <div class="Overlay__Box">
@@ -9,7 +10,7 @@
                     <span class="Overlay__CloseButton JSOverlay__CloseButton">{% include '_icons/icon-close.svg' %}</span>
                 {% endif %}
                 {% if waiting %}
-                    <div class="Overlay__Waiting">
+                    <div class="Overlay__Waiting JSOverlay__Waiting"{% if waitingIsHidden %} style="display: none;"{% endif %}>
                         <div class="Overlay__WaitingSpinner">
                             <div class="Spinner">
                                 <div class="Spinner__Bounce1"></div>

@@ -43,6 +43,18 @@ function runOverlayTriggerContainer(F, W) {
 
                 self.removeOverlay();
             });
+
+            self.$overlay.on(
+                'submit.' + self.model.guid,
+                '.JSOverlayForm__OnSubmitWait',
+                function() {
+                    var $form = $(this);
+
+                    $form.hide();
+
+                    self.$overlay.find('.JSOverlay__Waiting').show();
+                }
+            );
         },
 
         removeOverlay: function() {
@@ -55,6 +67,8 @@ function runOverlayTriggerContainer(F, W) {
             );
 
             $('body').off('keyup.' + self.model.guid);
+
+            self.$overlay.off('submit.' + self.model.guid);
         }
     });
 }
