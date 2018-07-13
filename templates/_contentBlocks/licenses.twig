@@ -91,9 +91,15 @@
                                 <div class="BlockCards__NotesTitle JSOverlayTriggerContainer">
                                     Notes <small><a href="#" class="JSOverlayTriggerContainer__Trigger">edit</a></small>
                                     <div type="text/template" class="JSOverlayTriggerContainer__Template" style="display: none;">
-                                        {% embed '_embeds/Overlay.twig' %}
+                                        {% embed '_embeds/Overlay.twig' with {
+                                            waiting: true,
+                                            waitingIsHidden: true,
+                                        } %}
+                                            {% block waitingContent %}
+                                                Hold tight, we're updating your notes&hellip;
+                                            {% endblock %}
                                             {% block overlayContent %}
-                                                <form method="post" accept-charset="UTF-8" class="Overlay__Form">
+                                                <form method="post" accept-charset="UTF-8" class="Overlay__Form JSOverlayForm__OnSubmitWait">
                                                     {{ csrfInput() }}
                                                     <input type="hidden" name="action" value="store/license/update-notes">
                                                     <input type="hidden" name="licenseId" value="{{ orderItemModel.id }}">
